@@ -19,10 +19,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
   const { i18n } = useTranslation();
 
   let theme = createTheme({
-    spacing: [0, 4, 8, 16, 32, 42, 48, 64],
     typography: {
-      fontSize: 14,
-      htmlFontSize: 18.3,
+      fontSize: 16,
       fontFamily: [
         (i18n.language === 'ar' ? 'Cairo' : 'Poppins'),
         'sans-serif',
@@ -96,14 +94,15 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         light: '#29D2FC',
       },
       background: {
-        paper: '#fff',
-        default: '#fff',
-        light: '#F8FDF4',
+        paper: '#FFFFFF',
+        default: '#FFFFFF',
+        light: '#FFFFFF',
         grayDisabled: '#F6F6F6',
       },
       text: {
         primary: '#252B42',
         secondary: '#737373',
+        grey: '#858585',
         disabled: '#BDBDBD',
       },
       grey: {
@@ -116,17 +115,28 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         1200: '#ECECF2',
         1400: '#F5F5FA',
       },
+
     },
-
-
-    shadows: Array(25).fill('none') as Shadows,
   } as ThemeOptions);
+
+  theme = createTheme(theme, {
+    components: {
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            textDecoration: 'none',
+          },
+        },
+      },
+    },
+  });
 
   
   const cacheRtl = createCache({
     key: `mui${i18n.dir()}`,
     stylisPlugins: i18n.dir() === 'rtl' ? [prefixer, rtlPlugin] : [],
   });
+
 
   return (
     <ThemeProvider theme={{ ...theme, direction: i18n.dir() }}>
