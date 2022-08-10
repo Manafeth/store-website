@@ -8,6 +8,7 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import MuiLink from '@mui/material/Link';
+import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -53,7 +54,7 @@ const Header = () => {
 
   return (
     <AppBar position="static" color='inherit' sx={{ boxShadow: '0' }}>
-      <Box px={7.5}>
+      <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: { xs: 64, sm: 91 } }}>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Link href='/'>
@@ -268,7 +269,7 @@ const Header = () => {
             </Box>
           </Box>
         </Toolbar>
-      </Box>
+      </Container>
     </AppBar>
   );
 };
