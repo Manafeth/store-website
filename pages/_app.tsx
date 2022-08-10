@@ -28,7 +28,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <title>Store website</title>
           <meta name="description" content="Store website" />
-          <link rel="icon" href="/favicon.ico" />
         </Head>
         <Component {...pageProps} />
       </ThemeProvider>
