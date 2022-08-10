@@ -64,11 +64,11 @@ const Header = () => {
             </Link>
 
             <Box px={4}>
-              <Box onClick={handleOpenStoreMenu} sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box onClick={handleOpenStoreMenu} sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                 <Avatar alt="Remy Sharp" src="" sx={{ width: 34, height: 34, mr: 1 }}>
                   S
                 </Avatar>
-                <Box component='span' sx={{ mr: 2, fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px', cursor: 'pointer' }}>
+                <Box component='span' sx={{ mr: 2, fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
                   Welcome to, <br />
                   Olivia store
                 </Box>
@@ -77,7 +77,7 @@ const Header = () => {
                 </Box>
               </Box>
               <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: '69px' }}
                 id="menu-appbar"
                 anchorEl={anchorElStore}
                 anchorOrigin={{

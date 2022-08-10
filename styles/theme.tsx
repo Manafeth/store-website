@@ -1,7 +1,6 @@
 /* eslint-disable quote-props */
 import React, { FC, ReactNode } from 'react';
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
-import { Shadows } from '@mui/material/styles/shadows';
 import Box from '@mui/material/Box';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
@@ -17,12 +16,12 @@ interface Props {
 
 const CustomThemeProvider: FC<Props> = ({ children }) => {
   const { i18n } = useTranslation();
-
   let theme = createTheme({
     typography: {
       fontSize: 16,
       fontFamily: [
         (i18n.language === 'ar' ? 'Cairo' : 'Poppins'),
+        'Poppins',
         'sans-serif',
         'BlinkMacSystemFont',
         '"Segoe UI"',
@@ -115,7 +114,6 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         1200: '#ECECF2',
         1400: '#F5F5FA',
       },
-
     },
   } as ThemeOptions);
 
@@ -128,6 +126,22 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
           },
         },
       },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            padding: '15px',
+            borderRadius: '5px',
+            fontWeight: 700,
+            fontSize: '14px',
+            lineHeight: '22px',
+            letterSpacing: '0.2px',
+            boxShadow: 'none',
+            '&:hover': {
+              boxShadow: 'none',
+            }
+          }
+        }
+      }
     },
   });
 
@@ -141,7 +155,15 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
   return (
     <ThemeProvider theme={{ ...theme, direction: i18n.dir() }}>
       <CacheProvider value={cacheRtl}>
-        <Box sx={{ color: 'text.primary' }} dir={i18n.dir()}>
+        <Box
+          sx={{
+            color: 'text.primary',
+            '& *': {
+              fontFamily: theme.typography.fontFamily
+            }
+          }}
+          dir={i18n.dir()}
+        >
           {children}
         </Box>
       </CacheProvider>
