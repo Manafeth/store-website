@@ -5,6 +5,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
 import arLang from '../translations/ar.json';
 import enLang from '../translations/en.json';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -23,9 +24,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <I18nextProvider i18n={i18next}>
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+      <ThemeProvider>
+        <Head>
+          <title>Store website</title>
+          <meta name="description" content="Store website" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </I18nextProvider>
   )
 }
