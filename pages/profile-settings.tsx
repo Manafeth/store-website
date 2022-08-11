@@ -1,21 +1,20 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import AcccoutSettingForm from "../components/AccountSettingForm";
+import SideMenuItem from "../components/SideMenuItem";
 import MainLayout from "../layouts/MainLayout";
 
 const profileSettings = () => {
   return (
     <MainLayout>
-      <Box>
-        <Container>
+      <Box sx={{mt:5}}>
+        <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing="40px">
             <Grid item xs={6}>
-              test1
+             <SideMenuItem/>
             </Grid>
             <Grid item xs={6}>
               <Box>

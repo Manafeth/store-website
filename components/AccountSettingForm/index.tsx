@@ -8,9 +8,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+
+
 
 const AcccoutSettingForm = () => {
+  function handleInput(ev: ChangeEvent<HTMLInputElement>) {
+    // setState((prevState: any) => ({
+    //   ...prevState,
+    //   [ev.target.name]: ev.target.value,
+    // }));
+    console.log(ev.target.name)
+  }
   return (
     <Box
       sx={{
@@ -45,55 +54,48 @@ const AcccoutSettingForm = () => {
         invites to events & exclusive competitions related to Beuand,
       </Typography>
       <Divider sx={{ mb: 5, width: '80%' }} />
-      <Box>
-        <Box sx={{ display: 'flex', mb:5 }}>
-          <Typography variant='h3' component='span' sx={{ flex: '0.79' }}>
-          Shipping Address
-          </Typography>
-          <Typography  component='span' sx={{ fontSize:'16px'}}>
-            Edit
-          </Typography>
-        </Box>
-        <Typography
-        sx={{
-          width: '76%',
-          color: 'text.secondary',
-          fontSize: '16px',
-          mb: 5,
+    
+      <TextField
+        variant="standard"
+        fullWidth
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end" sx={{ mb: '48px', position: 'absolute', right: '0', top: -6 }}>
+              Edit
+            </InputAdornment>
+          ),
         }}
-      >
-       Street name goes here, District name, City name, Country name, P.O12345
-      </Typography>
-      </Box>
-      
-      <Divider sx={{ mb: 5, width: '80%' }} />
-      <Box>
-        <Box sx={{ display: 'flex', mb:5 }}>
-          <Typography variant='h3' component='span' sx={{ flex: '0.79' }}>
-            Payment
-          </Typography>
-          <Typography  component='span' sx={{ fontSize:'16px'}}>
-            Edit
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex' }}>
-          <Box sx={{    
-            lineHeight: '1.8',
-            width: '56px',
-            height:' 32px',
-            background:'#000',
-            borderRadius: '7px',
-            color:'warning.contrastText',
-            textAlign: 'center',}}>VISA</Box>
-          <Typography sx={{mx:2}}>5168 **** **** 1932</Typography>
-        </Box>
-      </Box>
+        label='Shipping Address'
+        placeholder='Street name goes here, District name, City name, Country name, P.O12345'
+        InputLabelProps={{ shrink: true,style: {fontSize: '24px', color:'#000', fontWeight: 'bold',} }}
+        onChange={handleInput}
+        sx={{ mb: 4 , width:'80%'}}
+        name="shippingAddress"
+      />
+          <TextField
+        variant="standard"
+        fullWidth
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end" sx={{ mb: '48px', position: 'absolute', right: '0', top: -6 }}>
+              Edit
+            </InputAdornment>
+          ),
+        }}
+        label='Payment'
+        placeholder='VISA 5168 **** **** 1932'
+        InputLabelProps={{ shrink: true, style: {fontSize: '24px', color:'#000', fontWeight: 'bold',}}}
+        onChange={handleInput}
+        sx={{ mb: 4 , width:'80%'}}
+        name="Payment"
+      />
       <TextField
         select
         label='Currency'
         variant='standard'
         margin='normal'
         sx={{ mb: 5, width: '80%' }}
+        InputLabelProps={{ shrink: true, style: {fontSize: '24px', color:'#000', fontWeight: 'bold',}}}
         InputProps={{
           endAdornment: (
             <InputAdornment
