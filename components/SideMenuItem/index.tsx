@@ -3,16 +3,17 @@ import { Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
+import paths from '../constants/paths';
 import ListMenuItem from './components/ListMenuItem';
 
 
 const SideMenuItem = () => {
   const listItemSideBar = [
-    { id: 1, name: 'Edit Account' },
-    { id: 2, name: 'Orders' },
-    { id: 3, name: 'Wishlist' },
-    { id: 4, name: 'Setting' },
-    { id: 5, name: 'Logout' },
+    { id: 1, name: 'Edit Account',link: '/wishListProduct' },
+    { id: 2, name: 'Orders',link: '/wishListProduct'},
+    { id: 3, name: 'Wishlist',link: '/wishListProduct'},
+    { id: 4, name: 'Setting',link: '/wishListProduct' },
+    { id: 5, name: 'Logout',link: '/wishListProduct'},
   ];
   return (
     <Box sx={{ minHeight: '100%' }}>

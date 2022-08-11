@@ -16,10 +16,12 @@ interface Props {
   data: {
     id: number;
     name: string;
+    link: string;
   };
 }
 const settings = [
   {title: 'Test', link: '/test'},
+  {title: 'whishlist', link: '/wishListProduct'},
 ];
 
 const ListMenuItem: FC<Props> = ({ data }) => {

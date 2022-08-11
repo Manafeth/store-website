@@ -103,6 +103,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         secondary: '#737373',
         grey: '#858585',
         disabled: '#BDBDBD',
+        light:'#f3f3f3'
       },
       grey: {
         0: '#ffffff',
