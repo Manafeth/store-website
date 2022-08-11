@@ -123,14 +123,15 @@ const AcccoutSettingForm = () => {
 
       <Box sx={{ display: 'flex' }}>
         <FormControlLabel
-          control={<Checkbox defaultChecked />}
+          control={<Checkbox defaultChecked   color="success"/>}
           label='English'
-          sx={{ flex: '0.77' }}
+          sx={{ flex: '0.77',color:'success.main', }}
         />
         <FormControlLabel
-          control={<Checkbox />}
+          control={<Checkbox color="success"/>}
           label='العربية'
           sx={{
+            color:'success',
             '& .MuiSvgIcon-root': {
               borderRadius: 10,
             },
