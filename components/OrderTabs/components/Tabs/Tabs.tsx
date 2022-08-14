@@ -20,6 +20,7 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
     'width': { xs: '100%', sm: 'auto' },
     'mb': { xs: 3, sm: 0 },
     'backgroundColor':'transparent',
+    'borderRadius':'0px'
   };
   const tabStyle = {
     ...sharedStyle,

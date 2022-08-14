@@ -1,8 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import carIcon from '../../assets/images/icons/car-icon.png';
-import clockIcon from '../../assets/images/icons/clock-icon.png';
+import carIcon from '../../../../assets/images/icons/car-icon.png';
+import clockIcon from '../../../../assets/images/icons/clock-icon.png';
 import Image from 'next/image';
 import Divider from '@mui/material/Divider';
 

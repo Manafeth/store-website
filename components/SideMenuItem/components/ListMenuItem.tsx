@@ -18,8 +18,6 @@ interface Props {
   };
 }
 const ListMenuItem: FC<Props> = ({ data }) => {
-
-
   return (
     <ListItem
       disablePadding

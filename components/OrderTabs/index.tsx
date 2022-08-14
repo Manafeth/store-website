@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React, { useState, MouseEvent } from "react";
-import ActiveOrders from "../ActiveOrders";
-import Tabs from "../Tabs/Tabs";
+import ActiveOrders from "./components/ActiveOrders";
+import Tabs from "./components/Tabs/Tabs";
 
 const OrderTabs = () => {
   const [activeTab, setActiveTab] = useState(1);
