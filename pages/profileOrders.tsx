@@ -1,11 +1,11 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import ProductItem from "../components/ProductItem";
+import OrderTabs from "../components/OrderTabs";
 import MainLayout from "../layouts/MainLayout";
 import SettingLayout from "../layouts/SettingLayout";
 
-const WishListProduct = () => {
+const ProfileOrders = () => {
   return (
     <MainLayout>
        <SettingLayout>
@@ -15,9 +15,10 @@ const WishListProduct = () => {
                   component="h1"
                   sx={{ mb: 5, fontWeight: "bold" }}
                 >
-                  Wishlist Product
+               My Orders
                 </Typography>
-                <ProductItem/>
+                <OrderTabs/>
+                
               </Box>
        </SettingLayout>
 
@@ -25,4 +26,4 @@ const WishListProduct = () => {
   );
 };
 
-export default WishListProduct;
+export default ProfileOrders;

@@ -114,6 +114,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         1000: '#EFEFF4',
         1200: '#ECECF2',
         1400: '#F5F5FA',
+        1600:'#F3F3F3',
+        1800:'#262D33'
       },
     },
   } as ThemeOptions);

@@ -10,7 +10,7 @@ import ListMenuItem from './components/ListMenuItem';
 const SideMenuItem = () => {
   const listItemSideBar = [
     { id: 1, name: 'Edit Account',link: '/wishListProduct' },
-    { id: 2, name: 'Orders',link: '/wishListProduct'},
+    { id: 2, name: 'Orders',link: paths.profileOrders},
     { id: 3, name: 'Wishlist',link: '/wishListProduct'},
     { id: 4, name: 'Setting',link: paths.setting },
     { id: 5, name: 'Logout',link: paths.whishList},
