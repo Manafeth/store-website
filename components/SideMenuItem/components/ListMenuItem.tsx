@@ -19,24 +19,24 @@ interface Props {
 const ListMenuItem: FC<Props> = ({ data }) => {
   const router = useRouter();
   return (
-    <ListItem
-      disablePadding
-      sx={{
-        backgroundColor: router.pathname === data.link ? 'grey.1600' : '',
-        borderColor: 'primary.main',
-        width: '350px',
-        height: '67px',
-        borderRadius: '8px',
-      }}
-      key={data.id}
-    >
-        <Link href={data.link}>
-      <ListItemButton disableRipple>
+    <Link href={data.link}>
+      <ListItemButton
+        sx={{
+          backgroundColor: router.pathname === data.link ? 'grey.1600' : '',
+          borderColor: 'primary.main',
+          width: '350px',
+          height: '67px',
+          borderRadius: '8px',
+          px: router.pathname === data.link ? 2.5 : 0,
+          '&:hover': {
+            px:  2.5,
+          }
+        }}
+      >
         <ListItemText primary={data.name} sx={{ opacity: 1 }} />
-          <Image src={ArrowRight} alt='Arrow right' />
+        <Image src={ArrowRight} alt='Arrow right' />
       </ListItemButton>
-      </Link>
-    </ListItem>
+    </Link>
   );
 };
 
