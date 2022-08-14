@@ -33,34 +33,25 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         '"Segoe UI Symbol"',
       ].join(','),
       h1: {
-        fontSize: '32px',
-        fontWeight: 'bold',
-        lineHeight: 1.313,
+
       },
       h2: {
-        fontSize: '26px',
-        fontWeight: 'bold',
-        lineHeight: 1.313,
+
       },
       h3: {
-        fontSize: '20px',
-        fontWeight: 'bold',
-        lineHeight: 1.313,
+        fontSize: '12px',
+        lineHeight: '16px',
+        fontWeight: 400,
+        letterSpacing: '0.2px'
       },
       h4: {
-        fontSize: '18px',
-        fontWeight: 'bold',
-        lineHeight: 1.313,
+
       },
       h5: {
-        fontSize: '16px',
-        fontWeight: 'bold',
-        lineHeight: 1.313,
+
       },
       h6: {
-        fontSize: '14px',
-        fontWeight: 'bold',
-        lineHeight: 1.313,
+
       },
     },
     palette: {
