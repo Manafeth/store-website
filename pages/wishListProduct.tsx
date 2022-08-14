@@ -4,20 +4,14 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import ProductItem from "../components/ProductItem";
-import SideMenuItem from "../components/SideMenuItem";
 import MainLayout from "../layouts/MainLayout";
+import SettingLayout from "../layouts/SettingLayout";
 
-const wishListProduct = () => {
+const WishListProduct = () => {
   return (
     <MainLayout>
-      <Box sx={{ mt: 5 }}>
-        <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
-          <Grid container spacing="40px">
-            <Grid item xs={6}>
-              <SideMenuItem />
-            </Grid>
-            <Grid item xs={6}>
-              <Box>
+       <SettingLayout>
+       <Box>
                 <Typography
                   variant="h1"
                   component="h1"
@@ -27,12 +21,10 @@ const wishListProduct = () => {
                 </Typography>
                 <ProductItem/>
               </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+       </SettingLayout>
+
     </MainLayout>
   );
 };
 
-export default wishListProduct;
+export default WishListProduct;

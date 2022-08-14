@@ -29,6 +29,13 @@ const AcccoutSettingForm = () => {
         justifyContent: 'left',
       }}
     >
+                <Typography
+                  variant="h1"
+                  component="h1"
+                  sx={{ mb: 5 }}
+                >
+                  Account Setting
+                </Typography>
       <Box
         sx={{
           pb: 4,
