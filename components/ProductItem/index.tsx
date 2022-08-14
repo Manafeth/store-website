@@ -32,13 +32,13 @@ const ProductItem = () => {
       </Box>
       <Box>
         <Typography
-          variant="h3"
+          variant="h2"
           component="h1"
           sx={{ mb: 2, fontWeight: "400" }}
         >
           Modern Yellow sofa
         </Typography>
-        <Box sx={{ display: "flex", gap: "20px" }}>
+        <Box sx={{ display: "flex", justifyContent:'space-between' }}>
           <Typography
             variant="h5"
             component="h1"

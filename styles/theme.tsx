@@ -33,9 +33,13 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         '"Segoe UI Symbol"',
       ].join(','),
       h1: {
+        fontSize: '32px',
+        fontWeight: 700,
 
       },
       h2: {
+        fontSize: '24px',
+        fontWeight: 700,
 
       },
       h3: {
@@ -48,9 +52,12 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
 
       },
       h5: {
-
+        fontSize: '16px',
+        fontWeight: 400,
       },
       h6: {
+        fontSize: '14px',
+        fontWeight: 400,
 
       },
     },
@@ -106,7 +113,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         1200: '#ECECF2',
         1400: '#F5F5FA',
         1600:'#F3F3F3',
-        1800:'#262D33'
+        1800:'#262D33',
+        2000:'#B9B9B9',
       },
     },
   } as ThemeOptions);

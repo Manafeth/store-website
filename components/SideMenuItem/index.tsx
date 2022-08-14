@@ -9,11 +9,11 @@ import ListMenuItem from './components/ListMenuItem';
 
 const SideMenuItem = () => {
   const listItemSideBar = [
-    { id: 1, name: 'Edit Account',link: '/wishListProduct' },
+    { id: 1, name: 'Edit Account',link: paths.editAccount },
     { id: 2, name: 'Orders',link: paths.profileOrders},
-    { id: 3, name: 'Wishlist',link: '/wishListProduct'},
+    { id: 3, name: 'Wishlist',link: paths.whishList},
     { id: 4, name: 'Setting',link: paths.setting },
-    { id: 5, name: 'Logout',link: paths.whishList},
+    { id: 5, name: 'Logout',link: ''},
   ];
   return (
     <Box sx={{ minHeight: '100%' }}>
@@ -28,7 +28,7 @@ const SideMenuItem = () => {
       >
         <Avatar>A</Avatar>
         <Typography
-                  variant="h3"
+                  variant="h2"
                   component="h1"
                   sx={{ fontWeight: "bold" }}
                 >

@@ -43,7 +43,7 @@ const AcccoutSettingForm = () => {
           flexWrap: 'wrap',
         }}
       >
-        <Typography variant='h3' component='span' sx={{ flex: '0.75' }}>
+        <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
           Email Notification
         </Typography>
         <Switch color='success' />
@@ -119,7 +119,7 @@ const AcccoutSettingForm = () => {
         </MenuItem>
       </TextField>
       <Box sx={{ display: 'flex' }}>
-        <Typography variant='h3' component='span' sx={{ flex: '0.75' }}>
+        <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
           Language
         </Typography>
         <Typography component='span' sx={{ fontSize:'16px'}}>
