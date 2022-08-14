@@ -20,11 +20,12 @@ import CartIcon from '../../assets/images/icons/cart.png'
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import paths from '../../constants/paths';
 
 const pages = [
-  {page: 'Home', link: '/'},
-  {page: 'Categories', link: '/categories'},
-  {page: 'Contact us', link: '/contact-us'}
+  {page: 'Home', link: paths.home},
+  {page: 'Categories', link: paths.categories},
+  {page: 'Contact us', link: paths.contactUs}
 ];
 
 const settings = [
@@ -253,20 +254,23 @@ const Header = () => {
                 1
               </Box>
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                fontWeight: 400,
-                fontSize: '12px',
-                lineHeight: '16px',
-                letterSpacing: '0.2px',
-                color: '#323940',
-              }}
-            >
-              <Avatar alt="Remy Sharp" src="" sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
-              Ahmed K.
-            </Box>
+            <Link href={paths.editAccount}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: 400,
+                  fontSize: '12px',
+                  lineHeight: '16px',
+                  letterSpacing: '0.2px',
+                  color: '#323940',
+                  cursor: 'pointer'
+                }}
+              >
+                <Avatar alt="Remy Sharp" src="" sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
+                Ahmed K.
+              </Box>
+            </Link>
           </Box>
         </Toolbar>
       </Container>
