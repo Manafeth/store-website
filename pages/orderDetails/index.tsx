@@ -18,7 +18,7 @@ const OrderDetails = () => {
         <Box component='section'>
           <Container
             maxWidth={false}
-            sx={{ maxWidth: 1050, px: { xs: 2, lg: 7.5 }, mt: 5 }}
+            sx={{ maxWidth: 1050, mt: 5 }}
           >
             <Typography
               variant='h2'
