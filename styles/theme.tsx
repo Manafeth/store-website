@@ -40,7 +40,6 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
       h2: {
         fontSize: '24px',
         fontWeight: 700,
-
       },
       h3: {
         fontSize: '12px',
@@ -58,7 +57,6 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
       h6: {
         fontSize: '14px',
         fontWeight: 400,
-
       },
     },
     palette: {
@@ -140,6 +138,58 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
             boxShadow: 'none',
             '&:hover': {
               boxShadow: 'none',
+            }
+          }
+        }
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          standard: {
+            fontWeight: '600',
+            fontSize: '19px',
+            lineHeight: '20px',
+            letterSpacing: '0.4px',
+            color: '#242424',
+          }
+        }
+      },
+      MuiInput: {
+        styleOverrides: {
+          input: {     
+            '&::placeholder': {
+              fontWeight: 400,
+              fontSize: '14px',
+              lineHeight: '20px',
+              letterSpacing: '0.4px',
+              color: '#838383',
+              opacity: 1
+            },
+          },
+          root: {
+            '&:before': {
+              borderBottom: '1px solid #C6C6C6',
+            },
+            '&:hover:not(.Mui-disabled):before': {
+              borderBottom: '1px solid #C6C6C6',
+            },
+            '&:after': {
+              borderBottom: '1px solid #C6C6C6',
+            },
+            '&:hover:not(.Mui-disabled):after': {
+              borderBottom: '1px solid #C6C6C6',
+            },
+          },
+        }
+      },
+      MuiInputAdornment: {
+        styleOverrides: {
+          standard: {
+            p: {
+              fontWeight: '600',
+              fontSize: '14px',
+              lineHeight: '20px',
+              letterSpacing: '0.4px',
+              color: '#242424',
             }
           }
         }

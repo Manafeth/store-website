@@ -6,6 +6,7 @@ import i18next from 'i18next';
 import arLang from '../translations/ar.json';
 import enLang from '../translations/en.json';
 import Head from 'next/head';
+import AuthModal from '../components/AuthModal';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -30,6 +31,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="description" content="Store website" />
         </Head>
         <Component {...pageProps} />
+        <AuthModal
+          open
+          onClose={() => null}
+        />
       </ThemeProvider>
     </I18nextProvider>
   )
