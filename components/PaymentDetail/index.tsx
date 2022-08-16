@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import React from 'react';
+import React, { FC } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,8 +7,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+interface Props {
+  handleNext?: () => void;
+  handleBack: () => void;
+}
 
-const PaymentDetail = () => {
+const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
   return (
     <Box
       sx={{
@@ -108,6 +112,7 @@ const PaymentDetail = () => {
             backgroundColor: ' background.grayDisabled',
             mr: '20px',
           }}
+          onClick={handleBack}
         >
           Back
         </Button>
@@ -115,6 +120,7 @@ const PaymentDetail = () => {
           variant='contained'
           sx={{ width: '219px', height: '44px' }}
           type='submit'
+          onClick={handleNext}
         >
           Next
         </Button>

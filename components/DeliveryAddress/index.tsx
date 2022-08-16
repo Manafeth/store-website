@@ -5,9 +5,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 interface Props {
   handleNext: () => void;
+  handleBack: () => void;
 }
 
-const DeliveryAddress: FC<Props> = ({ handleNext }) => {
+const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
   return (
     <Box
       sx={{
@@ -95,6 +96,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext }) => {
             backgroundColor: ' background.grayDisabled',
             mr: '20px',
           }}
+          onClick={handleBack}
         >
           Back
         </Button>

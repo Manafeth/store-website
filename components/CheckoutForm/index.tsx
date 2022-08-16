@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
 interface Props {
-  handleNext?: () => void;
+  handleNext: () => void;
 }
 
 const CheckoutForm: FC<Props> = ({ handleNext }) => {
@@ -184,6 +184,7 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
           variant='contained'
           sx={{ width: '219px', height: '44px' }}
           type='submit'
+          onClick={handleNext}
         >
           Next
         </Button>
