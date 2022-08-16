@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-key */
-import { Typography } from '@mui/material';
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
 import paths from '../../constants/paths';
 import ListMenuItem from './components/ListMenuItem';
 
@@ -28,9 +29,9 @@ const SideMenuItem = () => {
       >
         <Avatar>A</Avatar>
         <Typography
-          variant="h2"
-          component="h1"
-          sx={{ fontWeight: "bold" }}
+          variant='h2'
+          component='h1'
+          sx={{ fontWeight: 'bold' }}
         >
           Ahmed Shalayel
         </Typography>
