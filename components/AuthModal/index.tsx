@@ -14,6 +14,7 @@ import closeIcon from '../../assets/images/icons/close-icon.png';
 import { CodeData, LoginData, ProfileData } from '../../types/auth';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import isEmail from 'validator/lib/isEmail';
+import { LoadingButton } from '@mui/lab';
 
 interface Props {
 
@@ -26,6 +27,9 @@ const AuthModal: FC<Props> = () => {
         sendPhoneNumber,
         verifyPhoneNumber,
         updateAccountData,
+        loginLoading,
+        verifyLoading,
+        updateProfileLoading
     } = useAuthModal();
     const [tab, setTab] = useState(1);
     const [isInvalid, setIsInvalid] = useState(false);
@@ -140,15 +144,16 @@ const AuthModal: FC<Props> = () => {
                         isInvalid={isInvalid}
                     />
                 )}
-                <Button
+                <LoadingButton
                     variant='contained'
                     endIcon={<Image src={rightArrow} width='16' height='10' alt='right arrow' />}
                     fullWidth
                     sx={{ borderRadius: 2 }}
                     type="submit"
+                    loading={[loginLoading, verifyLoading, updateProfileLoading].includes(true)}
                 >
                     Next
-                </Button>
+                </LoadingButton>
             </Box>
         </Drawer>
     )
