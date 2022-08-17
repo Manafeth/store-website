@@ -246,7 +246,8 @@ const Header = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                mr: 2.5
+                mr: 2.5,
+                cursor: 'pointer'
               }}
               onClick={onOpen}
             >

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import CheckoutLayout from '../../layouts/CheckoutLayout';
+import Divider from '@mui/material/Divider';
 import CheckoutForm from '../../components/CheckoutForm';
 import DeliveryAddress from '../../components/DeliveryAddress';
 import PaymentDetail from '../../components/PaymentDetail';
@@ -16,14 +18,17 @@ import StepLabel from '@mui/material/StepLabel';
 import { StepIconProps } from '@mui/material/StepIcon';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
+import CartItem from '../../components/CartItem';
+import OrderSummary from '../../components/OrderSummary';
 
 
 const steps = [
-{id:1, name:'FIRST STEP',info:'Information'},
-{id:2, name:'SECOND STEP',info:'Delivery'},
-{id:3, name:'THIRD STEP',info:'Billing'},
-{id:4, name:'FOURTH STEP',info:'Payment'},
+  {id:1, name:'FIRST STEP',info:'Information'},
+  {id:2, name:'SECOND STEP',info:'Delivery'},
+  {id:3, name:'THIRD STEP',info:'Billing'},
+  {id:4, name:'FOURTH STEP',info:'Payment'},
 ];
+
 const ColorlibStepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
@@ -91,33 +96,39 @@ const Checkout = () => {
               </Step>
             ))}
           </Stepper>
+          <Grid container spacing='40px' mt={5}>
+            <Grid item xs={6}>
+            {activeStep === 0 && (
+                <CheckoutForm handleNext={handleNext} />
+            )}
 
-          {activeStep === 0 && (
-            <CheckoutLayout>
-              <CheckoutForm handleNext={handleNext} />
-            </CheckoutLayout>
-          )}
+            {activeStep === 1 && (
+                <DeliveryAddress
+                  handleNext={handleNext}
+                  handleBack={handleBack}
+                />
+            )}
 
-          {activeStep === 1 && (
-            <CheckoutLayout>
-              <DeliveryAddress
-                handleNext={handleNext}
-                handleBack={handleBack}
-              />
-            </CheckoutLayout>
-          )}
+            {activeStep === 2 && (
+                <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
+            )}
 
-          {activeStep === 2 && (
-            <CheckoutLayout>
-              <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
-            </CheckoutLayout>
-          )}
-
-          {activeStep === 3 && (
-            <CheckoutLayout>
-              <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
-            </CheckoutLayout>
-          )}
+            {activeStep === 3 && (
+                <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
+            )}
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
+                Order summery
+              </Typography>
+              <OrderSummary />
+              <Divider />
+              <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
+                Items
+              </Typography>
+              <CartItem />
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </MainLayout>
