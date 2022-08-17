@@ -5,7 +5,8 @@ const paths = {
   profileOrders: '/orders',
   categories: '/categories',
   home: '/',
-  contactUs: '/contactUs'
+  contactUs: '/contactUs',
+  checkout:'/checkout'
 };
   
 

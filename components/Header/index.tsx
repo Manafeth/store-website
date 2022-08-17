@@ -23,6 +23,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
+import { useState } from 'react';
+import CartDrawer from '../CartDrawer';
 
 const pages = [
   {page: 'Home', link: paths.home},
@@ -37,6 +39,7 @@ const settings = [
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElStore, setAnchorElStore] = React.useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const { isloggedIn, handleOpenAuthModal } = useAuthModal();
 
@@ -55,7 +58,13 @@ const Header = () => {
   const handleCloseStoreMenu = () => {
     setAnchorElStore(null);
   };
-
+  function onOpen() {
+    setOpen(true);
+  }
+  function onClose() {
+    setOpen(false);
+  }
+  
   return (
     <AppBar position="static" color='inherit' sx={{ boxShadow: '0' }}>
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
@@ -240,8 +249,10 @@ const Header = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                mr: 2.5
+                mr: 2.5,
+                cursor: 'pointer'
               }}
+              onClick={onOpen}
             >
               <Image src={CartIcon} alt='cart icon' width='15' height='15' />
               <Box
@@ -286,6 +297,10 @@ const Header = () => {
           </Box>
         </Toolbar>
       </Container>
+      <CartDrawer
+        onClose={onClose}
+        open={open}
+      />
     </AppBar>
   );
 };
