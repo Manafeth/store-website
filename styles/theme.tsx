@@ -71,6 +71,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
       secondary: {
         main: '#D9D9D9',
         contrastText: '#1E1E1E',
+        light:' #FAFAFA',
       },
       warning: {
         main: '#F4BE5E',
@@ -115,6 +116,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         1600:'#F3F3F3',
         1800:'#262D33',
         2000:'#B9B9B9',
+        2200:' #737373'
       },
     },
   } as ThemeOptions);

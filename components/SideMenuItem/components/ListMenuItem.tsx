@@ -4,7 +4,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Image from 'next/image';
 import ArrowRight from '../../../assets/images/icons/arrow-right.png';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
