@@ -46,10 +46,10 @@ const CodeInput: FC<CodeInputProps> = ({ error, ...props }) => (
 interface Props {
     setCode: Dispatch<SetStateAction<CodeData>>;
     code: CodeData;
-    isSubmited: boolean;
+    isInvalid: boolean;
 }
 
-const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isSubmited }) => {
+const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
     function handleCodeInput(ev: ChangeEvent<HTMLInputElement>) {
         const { value, name } = ev.target;
         if (validator.isNumeric(value) || !value) {
@@ -138,7 +138,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isSubmited }) => {
                     name="field-1"
                     value={code['field-1']}
                     onFocus={handleInputFocus}
-                    error={isSubmited && !code['field-1']}
+                    error={isInvalid && !code['field-1']}
                 />
 
                 <CodeInput
@@ -147,7 +147,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isSubmited }) => {
                     name="field-2"
                     value={code['field-2']}
                     onFocus={handleInputFocus}
-                    error={isSubmited && !code['field-2']}
+                    error={isInvalid && !code['field-2']}
                 />
 
                 <CodeInput
@@ -156,7 +156,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isSubmited }) => {
                     name="field-3"
                     value={code['field-3']}
                     onFocus={handleInputFocus}
-                    error={isSubmited && !code['field-3']}
+                    error={isInvalid && !code['field-3']}
                 />
 
                 <CodeInput
@@ -165,7 +165,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isSubmited }) => {
                     name="field-4"
                     value={code['field-4']}
                     onFocus={handleInputFocus}
-                    error={isSubmited && !code['field-4']}
+                    error={isInvalid && !code['field-4']}
                 />
             </Box>
             <Typography variant='h5' component='p' sx={{ mb: 5.25, letterSpacing: '0.1px' }}>

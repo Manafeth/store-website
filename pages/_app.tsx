@@ -7,6 +7,7 @@ import arLang from '../translations/ar.json';
 import enLang from '../translations/en.json';
 import Head from 'next/head';
 import AuthModal from '../components/AuthModal';
+import { AuthModalProvider } from '../contexts/AuthModalContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -30,11 +31,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Store website</title>
           <meta name="description" content="Store website" />
         </Head>
-        <Component {...pageProps} />
-        <AuthModal
-          open
-          onClose={() => null}
-        />
+        <AuthModalProvider>
+          <>
+            <Component {...pageProps} />
+            <AuthModal />
+          </>
+        </AuthModalProvider>
       </ThemeProvider>
     </I18nextProvider>
   )

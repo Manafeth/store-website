@@ -136,6 +136,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
             lineHeight: '22px',
             letterSpacing: '0.2px',
             boxShadow: 'none',
+            testTransform: 'none',
             '&:hover': {
               boxShadow: 'none',
             }
@@ -164,6 +165,10 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
               color: '#838383',
               opacity: 1
             },
+            fontWeight: 400,
+            fontSize: '14px',
+            lineHeight: '20px',
+            letterSpacing: '0.4px',
           },
           root: {
             '&:before': {
@@ -176,7 +181,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
               borderBottom: '1px solid #C6C6C6',
             },
             '&:hover:not(.Mui-disabled):after': {
-              borderBottom: '1px solid #C6C6C6',
+              borderWidth: '1px'
             },
           },
         }

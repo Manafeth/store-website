@@ -13,14 +13,19 @@ interface Props {
   data: {
     id: number;
     name: string;
-    link: string;
+    link?: string;
+    onClick?: () => void;
   };
 }
 const ListMenuItem: FC<Props> = ({ data }) => {
   const router = useRouter();
-  return (
-    <Link href={data.link}>
-      <ListItemButton
+  
+  function handleClick() {
+    if (data.onClick)
+      data.onClick();
+  }
+  const listButton = (
+    <ListItemButton
         sx={{
           backgroundColor: router.pathname === data.link ? 'grey.1600' : '',
           borderColor: 'primary.main',
@@ -32,11 +37,21 @@ const ListMenuItem: FC<Props> = ({ data }) => {
             px:  2.5,
           }
         }}
+        onClick={handleClick}
       >
         <ListItemText primary={data.name} sx={{ opacity: 1 }} />
         <Image src={ArrowRight} alt='Arrow right' />
       </ListItemButton>
-    </Link>
+  )
+  return (
+    data.link ? (
+      <Link href={data.link}>
+        {listButton}
+      </Link>
+    ) : (
+      listButton
+    )
+    
   );
 };
 

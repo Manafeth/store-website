@@ -10,7 +10,6 @@ interface Props {
 
 const SettingLayout: FC<Props> = ({ children }) => {
   return (
-   
       <Box sx={{mt:5}}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing="40px">
@@ -18,10 +17,7 @@ const SettingLayout: FC<Props> = ({ children }) => {
              <SideMenuItem/>
             </Grid>
             <Grid item xs={6}>
-            
-            {children}
-               
-             
+              {children}
             </Grid>
           </Grid>
         </Container>
