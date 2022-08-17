@@ -5,16 +5,19 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import paths from '../../constants/paths';
+import { useAuthModal } from '../../contexts/AuthModalContext';
 import ListMenuItem from './components/ListMenuItem';
 
 
 const SideMenuItem = () => {
+  const { logout } = useAuthModal();
+
   const listItemSideBar = [
-    { id: 1, name: 'Edit Account',link: paths.editAccount },
-    { id: 2, name: 'Orders',link: paths.profileOrders},
-    { id: 3, name: 'Wishlist',link: paths.whishList},
-    { id: 4, name: 'Setting',link: paths.addressSettings },
-    { id: 5, name: 'Logout',link: ''},
+    { id: 1, name: 'Edit Account', link: paths.editAccount },
+    { id: 2, name: 'Orders', link: paths.profileOrders},
+    { id: 3, name: 'Wishlist', link: paths.whishList},
+    { id: 4, name: 'Setting', link: paths.addressSettings },
+    { id: 5, name: 'Logout', onClick: logout},
   ];
   return (
     <Box sx={{ minHeight: '100%' }}>

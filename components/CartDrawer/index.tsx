@@ -7,6 +7,7 @@ import closeIcon from '../../assets/images/icons/close-icon.png';
 import CartItem from '../CartItem';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import OrderSummary from '../OrderSummary';
 
@@ -40,9 +41,9 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         <Typography variant='h1' component='h2'>
           My bag (2)
         </Typography>
-        <Box onClick={onClose}>
+        <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
-        </Box>
+        </IconButton>
       </Box>
       <Box>
         <CartItem />
