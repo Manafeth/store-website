@@ -1,15 +1,15 @@
 import React from 'react';
-import MainLayout from '../../layouts/MainLayout';
 import Box from '@mui/material/Box';
-import Breadcrumb from '../../components/BreadCrumb';
+import Breadcrumb from '../../../components/BreadCrumb';
 import Container from '@mui/material/Container';
-import ProductTabs from '../../components/ProductTabs';
+import ProductTabs from '../../../components/ProductTabs';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import RelatedProductCard from '../../components/RelatedProducts';
-import ProductGallery from '../../components/ImageGallery';
-import ProductDetailsInformation from '../../components/ProductDetailsInformation';
+import RelatedProductCard from '../../../components/RelatedProducts';
+import ProductGallery from '../../../components/ImageGallery';
+import ProductDetailsInformation from '../../../components/ProductDetailsInformation';
+import MainLayout from '../../../layouts/MainLayout';
 
 const ProductDetails = () => {
   return (
