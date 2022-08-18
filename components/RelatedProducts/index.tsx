@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import MuiLink from '@mui/material/Link';
 import Image from 'next/image';
 import ProductImage from '../../assets/images/product-one.jpg';
 import StarIcon from '../../assets/images/icons/star-icon.png';
 import EmptyStarIcon from '../../assets/images/icons/emptyStar-icon.png';
 import Link from 'next/link';
+import HeartIcon from '../../assets/images/icons/heart-icon.svg';
+import CartIcon from '../../assets/images/icons/cart-icon.svg';
+import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 
 const RelatedProductCard = () => {
+  const [hover, setHover] = useState(false);
+  const onHover = () => {
+    setHover(true);
+  };
+
+  const onLeave = () => {
+    setHover(false);
+  };
   return (
     <Box sx={{ textAlign: 'center' }}>
-      <Link href='/'>
-        <MuiLink>
-          <Image src={ProductImage} width={235} height={300} alt='product' />
-        </MuiLink>
-      </Link>
+      <Box sx={{ position: 'relative' }}>
+        <Image
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+          src={ProductImage}
+          width={235}
+          height={300}
+          alt='product'
+        />
+        {hover ? (
+          <Box sx={{ position: 'absolute', left: '50px', bottom: '20px' }}>
+            <Image src={HeartIcon} alt='heart icon' width={40} height={40} />
+            <Image src={CartIcon} alt='cart icon' width={40} height={40} />
+            <Image src={EyeIcon} alt='eye icon' width={40} height={40} />
+          </Box>
+        ) : (
+          ''
+        )}
+      </Box>
       <Box sx={{ pb: 4.25, pt: 3 }}>
         <Link href='/'>
           <Typography

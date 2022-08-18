@@ -7,7 +7,7 @@ import ProductTabs from '../../components/ProductTabs';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import RelatedProductCard from '../../components/RelatesProducts';
+import RelatedProductCard from '../../components/RelatedProducts';
 import ProductGallery from '../../components/ImageGallery';
 import ProductDetailsInformation from '../../components/ProductDetailsInformation';
 

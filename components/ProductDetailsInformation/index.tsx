@@ -5,9 +5,9 @@ import Image from 'next/image';
 import StarIcon from '../../assets/images/icons/gold-star.png';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import HeartIcon from '../../assets/images/icons/heart-icon.png';
-import CartIcon from '../../assets/images/icons/cart-icon.png';
-import EyeIcon from '../../assets/images/icons/eye-icon.png';
+import HeartIcon from '../../assets/images/icons/heart-icon.svg';
+import CartIcon from '../../assets/images/icons/cart-icon.svg';
+import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 
 const ProductDetailsInformation = () => {
   return (
@@ -15,7 +15,7 @@ const ProductDetailsInformation = () => {
       <Typography
         variant='h2'
         component='h1'
-        sx={{ mb: 2, fontWeight: '400', fontSize: '20px' }}
+        sx={{ mb: 1, fontWeight: '400', fontSize: '20px' }}
       >
         Modern Yellow sofa
       </Typography>
@@ -24,26 +24,26 @@ const ProductDetailsInformation = () => {
         <Typography
           variant='h6'
           component='h1'
-          sx={{ mb: 2, fontWeight: '700', color: 'text.secondary' }}
+          sx={{ mb: 1, fontWeight: '700', color: 'text.secondary' }}
         >
           4.9 Reviews
         </Typography>
       </Box>
-      <Typography variant='h2' component='h1' sx={{ mb: 2 }}>
+      <Typography variant='h2' component='h1' sx={{ mb: 1 }}>
         SAR 1,139.33
       </Typography>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', gap:'10px' }}>
         <Typography
           variant='h6'
           component='h1'
-          sx={{ mb: 3, color: 'text.secondary', fontWeight: '700' }}
+          sx={{ mb: 1, color: 'text.secondary', fontWeight: '700' }}
         >
           Availability :
         </Typography>
         <Typography
           variant='h6'
           component='h1'
-          sx={{ mb: 3, color: '#23A6F0', fontWeight: '700' }}
+          sx={{ mb: 1, color: '#23A6F0', fontWeight: '700' }}
         >
           In Stock
         </Typography>
@@ -57,8 +57,8 @@ const ProductDetailsInformation = () => {
         RELIT official consequent door ENIM RELIT Mollie. Excitation venial
         consequent sent nostrum met.
       </Typography>
-      <Divider sx={{ mb: 3 }} />
-      <Box sx={{ display: 'flex', mb: 2 }}>
+      <Divider sx={{ mb: 1 }} />
+      <Box sx={{ display: 'flex', mb: 1 }}>
         <Box
           sx={{
             backgroundColor: '#F6D44B',
@@ -103,10 +103,10 @@ const ProductDetailsInformation = () => {
         >
           Select Options
         </Button>
-        <Box>
-          <Image src={HeartIcon} alt='heart icon' />
-          <Image src={CartIcon} alt='cart icon' />
-          <Image src={EyeIcon} alt='eye icon' />
+        <Box sx={{display:'flex',gap:'5px'}}>
+          <Image src={HeartIcon} alt='heart icon' width={40} height={40}/>
+          <Image src={CartIcon} alt='cart icon' width={40} height={40} />
+          <Image src={EyeIcon} alt='eye icon' width={40} height={40} />
         </Box>
       </Box>
     </Box>

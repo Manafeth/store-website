@@ -11,10 +11,10 @@ const ProductDescription = () => {
     <Box sx={{ pt: 3 }}>
       <Container>
         <Grid container spacing='40px'>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Image src={frame} alt='product' />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Box>
               <Typography variant='h2'>the quick fox jumps over</Typography>
               <Typography
@@ -42,9 +42,6 @@ const ProductDescription = () => {
                 Excitation venial consequent sent nostrum met.
               </Typography>
             </Box>
-          </Grid>
-          <Grid item xs={4}>
-            test3
           </Grid>
         </Grid>
       </Container>
