@@ -1,13 +1,13 @@
 import React from 'react';
-import MainLayout from '../../layouts/MainLayout';
+import MainLayout from '../../../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
-import aramexIcon from '../../assets/images/icons/aramex-icon.png';
-import OrderTimeline from '../../components/OrderTimeline';
+import aramexIcon from '../../../assets/images/icons/aramex-icon.png';
+import OrderTimeline from '../../../components/OrderTimeline';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 
