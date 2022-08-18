@@ -11,6 +11,7 @@ import MuiLink from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+import Button from '@mui/material/Button';
 
 import logoImage from '../../assets/images/logo.png'
 import ArrowDown from '../../assets/images/icons/arrow-down.png'
@@ -21,6 +22,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import paths from '../../constants/paths';
+import { useAuthModal } from '../../contexts/AuthModalContext';
+import { useState } from 'react';
+import CartDrawer from '../CartDrawer';
 
 const pages = [
   {page: 'Home', link: paths.home},
@@ -35,7 +39,9 @@ const settings = [
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElStore, setAnchorElStore] = React.useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
+  const { isloggedIn, handleOpenAuthModal } = useAuthModal();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -52,7 +58,13 @@ const Header = () => {
   const handleCloseStoreMenu = () => {
     setAnchorElStore(null);
   };
-
+  function onOpen() {
+    setOpen(true);
+  }
+  function onClose() {
+    setOpen(false);
+  }
+  
   return (
     <AppBar position="static" color='inherit' sx={{ boxShadow: '0' }}>
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
@@ -237,8 +249,10 @@ const Header = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                mr: 2.5
+                mr: 2.5,
+                cursor: 'pointer'
               }}
+              onClick={onOpen}
             >
               <Image src={CartIcon} alt='cart icon' width='15' height='15' />
               <Box
@@ -254,26 +268,39 @@ const Header = () => {
                 1
               </Box>
             </Box>
-            <Link href={paths.editAccount}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontWeight: 400,
-                  fontSize: '12px',
-                  lineHeight: '16px',
-                  letterSpacing: '0.2px',
-                  color: '#323940',
-                  cursor: 'pointer'
-                }}
+            {isloggedIn ? (
+              <Link href={paths.editAccount}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontWeight: 400,
+                    fontSize: '12px',
+                    lineHeight: '16px',
+                    letterSpacing: '0.2px',
+                    color: '#323940',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Avatar alt="Remy Sharp" src="" sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
+                  Ahmed K.
+                </Box>
+              </Link>
+            ) : (
+              <Button
+                onClick={handleOpenAuthModal}
               >
-                <Avatar alt="Remy Sharp" src="" sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
-                Ahmed K.
-              </Box>
-            </Link>
+                Login
+              </Button>
+            )}
+            
           </Box>
         </Toolbar>
       </Container>
+      <CartDrawer
+        onClose={onClose}
+        open={open}
+      />
     </AppBar>
   );
 };
