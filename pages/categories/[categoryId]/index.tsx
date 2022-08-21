@@ -9,14 +9,8 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import CategoryHeroSection from '../../../components/CategoryHeroSection';
 import RelatedProductCard from '../../../components/RelatedProducts';
-import Divider from '@mui/material/Divider';
-import FilterUtils from '../../../components/Filter';
-import RadioButtonFilter from '../../../components/Filter/components/RadioButtonFilter';
-import CheckboxFilter from '../../../components/Filter/components/CheckboxFilter';
+import Filters from '../../../components/Filters';
 import ProductPagination from '../../../components/Pagination';
-import ColorFilter from '../../../components/Filter/components/ColorFilter';
-import MenuItemFilter from '../../../components/Filter/components/MenuItemFilter';
-import FilterByPrice from '../../../components/Filter/components/FilterPrice';
 
 
 const CategoryDetails = () => {
@@ -28,25 +22,7 @@ const CategoryDetails = () => {
           <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
             <Grid container spacing={3} rowSpacing={3.75}>
               <Grid item xs={3}>
-                <Box sx={{ display: 'flex' , flexDirection:'column' }}>
-                  <Typography
-                    variant='h5'
-                    component='h1'
-                    sx={{ fontWeight: '700' }}
-                  >
-                    Filter :
-                  </Typography>
-                  <FilterUtils />
-                </Box>
-                <MenuItemFilter/>
-                <Divider sx={{ mb: 3 }} />
-                <CheckboxFilter />
-                <Divider sx={{ mb: 3, mt: 3 }} />
-                <ColorFilter/>
-                <Divider sx={{ mb: 3, mt: 3 }} />
-                <RadioButtonFilter />
-                <Divider sx={{ mb: 3, mt: 3 }} />
-                <FilterByPrice/>
+                <Filters/>
               </Grid>
               <Grid item xs={9}>
                 <Box

@@ -4,7 +4,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
 import InputAdornment from '@mui/material/InputAdornment';
 import Image from 'next/image';
-import SearchIcon from '../../assets/images/icons/search-icon.svg';
+import SearchIcon from '../../../../assets/images/icons/search-icon.svg';
 
 interface Props {
   onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void;
