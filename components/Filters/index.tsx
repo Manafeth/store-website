@@ -6,8 +6,9 @@ import MenuItemFilter from './components/MenuItemFilter';
 import CheckboxFilter from './components/CheckboxFilter';
 import ColorFilter from './components/ColorFilter';
 import RadioButtonFilter from './components/RadioButtonFilter';
-import FilterByPrice from './components/FilterPrice';
+import FilterByPrice from './components/PriceFilter';
 import Divider from '@mui/material/Divider';
+import TagFilter from './components/TagFilter';
 
 
 
@@ -32,6 +33,8 @@ const Filters = () => {
                 <ColorFilter/>
                 <Divider sx={{ mb: 3, mt: 3 }} />
                 <RadioButtonFilter />
+                <Divider sx={{ mb: 3, mt: 3 }} />
+                <TagFilter/>     
                 <Divider sx={{ mb: 3, mt: 3 }} />
                 <FilterByPrice/>
                 </>
