@@ -7,13 +7,12 @@ import Image from 'next/image';
 import closeIcon from '../../../../assets/images/icons/close-icon.png';
 
 const TagFilter = () => {
-  const [tags, setTags] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [tags, setTags] = useState<string[]>([]);
   const addTags = (
     event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     if (event.key === 'Enter' && event.target.value !== '') {
-      // setTags([...tags, event.target.value]);
+      setTags([...tags, event.target.value]);
       event.target.value = '';
     }
   };
