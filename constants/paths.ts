@@ -6,7 +6,9 @@ const paths = {
   categories: '/categories',
   home: '/',
   contactUs: '/contactUs',
-  checkout:'/checkout'
+  checkout:'/checkout',
+  productDetails: (id: string | number) => `/products/${id}`,
+  categoryDetails: (id: string | number) => `/categories/${id}`,
 };
   
 
