@@ -18,29 +18,26 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ productsList, categories }) => {
-  console.log('productsList', productsList)
   return (
     <MainLayout>
-      <>
-        <HeroSection />
-        <Box pt={22.25} pb={11.25}>
-          <FeaturedCategoriesSection categories={categories} />
-        </Box>
-        <Box component='section' >
-          <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-            <Divider />
-            <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }}>
-              {productsList.map((item) => {
-                return (
-                  <Grid item xs={2.4} key={item.id}>
-                    <VerticalProductCard data={item} />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Container>
-        </Box>
-      </>
+      <HeroSection />
+      <Box pt={22.25} pb={11.25}>
+        <FeaturedCategoriesSection categories={categories} />
+      </Box>
+      <Box component='section' >
+        <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
+          <Divider />
+          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }}>
+            {productsList.map((item) => {
+              return (
+                <Grid item xs={2.4} key={item.id}>
+                  <VerticalProductCard data={item} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Container>
+      </Box>
     </MainLayout>
   )
 }

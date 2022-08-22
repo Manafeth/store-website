@@ -14,33 +14,23 @@ interface Props {
     id: number;
     name: string;
     link?: string;
-    onClick?: () => void;
   };
 }
-const ListMenuItem: FC<Props> = ({ data }) => {
+const FilterMenuItem: FC<Props> = ({ data }) => {
   const router = useRouter();
   
-  function handleClick() {
-    if (data.onClick)
-      data.onClick();
-  }
   const listButton = (
     <ListItemButton
         sx={{
-          backgroundColor: router.pathname === data.link ? 'grey.1600' : '',
-          borderColor: 'primary.main',
-          width: '350px',
-          height: '67px',
-          borderRadius: '8px',
-          px: router.pathname === data.link ? 2.5 : 0,
-          '&:hover': {
-            px:  2.5,
-          }
+          fontSize:'14px',
+          fontWeight:'700',
+          color:'grey.2200',
         }}
-        onClick={handleClick}
       >
-        <ListItemText primary={data.name} sx={{ opacity: 1 }} />
-        <Image src={ArrowRight} alt='Arrow right' />
+        <ListItemText primary={data.name} sx={{ opacity: 1, 
+         fontSize:'14px',
+          fontWeight:'bold',
+          color:'grey.2200', }} />
       </ListItemButton>
   )
   return (
@@ -55,4 +45,4 @@ const ListMenuItem: FC<Props> = ({ data }) => {
   );
 };
 
-export default ListMenuItem;
+export default FilterMenuItem;

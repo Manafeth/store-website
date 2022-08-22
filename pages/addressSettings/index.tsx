@@ -10,8 +10,8 @@ const Setting = () => {
   return (
     <MainLayout>
       <ProfileLayout>
-        {/* <AcccoutSettingForm/> */}
-        <AddressManagment/>
+        <AcccoutSettingForm/>
+        {/* <AddressManagment/> */}
       </ProfileLayout>
     </MainLayout>
   );

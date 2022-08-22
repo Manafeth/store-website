@@ -4,7 +4,7 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 
 interface Props {
-    children: ReactElement
+    children: ReactElement | ReactElement[]
 }
 
 const MainLayout: FC<Props> = ({ children }) => {
