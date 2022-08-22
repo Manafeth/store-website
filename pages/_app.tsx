@@ -33,12 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="description" content="Store website" />
         </Head>
         <AuthModalProvider>
-          <ProfileModalProvider>
           <>
             <Component {...pageProps} />
             <AuthModal />
           </>
-          </ProfileModalProvider>
         </AuthModalProvider>
       </ThemeProvider>
     </I18nextProvider>
