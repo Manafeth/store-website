@@ -11,64 +11,62 @@ import VerticalProductCard from '../components/VerticalProductCard';
 const Home: NextPage = () => {
   return (
     <MainLayout>
-      <>
-        <HeroSection />
-        <Box pt={22.25} pb={11.25}>
-          <FeaturedCategoriesSection />
-        </Box>
-        <Box component='section' >
-          <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-            <Divider />
-            <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }}>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
-              <Grid item xs={2.4}>
-                <VerticalProductCard />
-              </Grid>
+      <HeroSection />
+      <Box pt={22.25} pb={11.25}>
+        <FeaturedCategoriesSection />
+      </Box>
+      <Box component='section' >
+        <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
+          <Divider />
+          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }}>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
             </Grid>
-          </Container>
-        </Box>
-      </>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+            <Grid item xs={2.4}>
+              <VerticalProductCard />
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </MainLayout>
   )
 }
