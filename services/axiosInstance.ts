@@ -22,7 +22,7 @@ export const axiosInstance = (() => {
           }
         }
 
-        updatedConfig.headers.common['Accept-Language'] = localStorage.userLanguage || 'en';
+        // updatedConfig.headers.common['Accept-Language'] = localStorage.userLanguage || 'en';
 
         return updatedConfig;
       } catch (err) {
