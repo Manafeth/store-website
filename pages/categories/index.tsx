@@ -19,26 +19,24 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
 
   return (
     <MainLayout>
-        <>
-            <HeroSection />
-            <Box pt={2.25} pb={5}>
-                <FeaturedCategoriesSection categories={categories} />
-            </Box>
+        <HeroSection />
+        <Box pt={2.25} pb={5}>
+            <FeaturedCategoriesSection categories={categories} />
+        </Box>
 
-            <Box component='section' pb={6}>
-                <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-                    <Grid container spacing={3} rowSpacing={3.75}>
-                        {allCategories.map((item) => {
-                            return (
-                                <Grid item xs={3} key={item.id}>
-                                    <CategoryCard data={item} />
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </Container>
-            </Box>
-        </>
+        <Box component='section' pb={6}>
+            <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
+                <Grid container spacing={3} rowSpacing={3.75}>
+                    {allCategories.map((item) => {
+                        return (
+                            <Grid item xs={3} key={item.id}>
+                                <CategoryCard data={item} />
+                            </Grid>
+                        )
+                    })}
+                </Grid>
+            </Container>
+        </Box>
     </MainLayout>
   )
 }
@@ -46,7 +44,7 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
 export async function getStaticProps() {
     const categories = await getFeaturedCategories();
     const allCategories = await getAllCategories();
-    console.log('allCategories', allCategories)
+    
     return {
       props: {
         categories: categories.data.data,
