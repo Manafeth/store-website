@@ -6,8 +6,9 @@ import i18next from 'i18next';
 import arLang from '../translations/ar.json';
 import enLang from '../translations/en.json';
 import Head from 'next/head';
-import AuthModal from '../components/AuthModal';
 import { AuthModalProvider } from '../contexts/AuthModalContext';
+import AuthModal from '../components/AuthModal';
+import { ProfileModalProvider } from '../contexts/ProfileModalContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -32,10 +33,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="description" content="Store website" />
         </Head>
         <AuthModalProvider>
+          <ProfileModalProvider>
           <>
             <Component {...pageProps} />
             <AuthModal />
           </>
+          </ProfileModalProvider>
         </AuthModalProvider>
       </ThemeProvider>
     </I18nextProvider>
