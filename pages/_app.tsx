@@ -32,10 +32,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="description" content="Store website" />
         </Head>
         <AuthModalProvider>
-          <>
-            <Component {...pageProps} />
-            <AuthModal />
-          </>
+          <Component {...pageProps} />
+          <AuthModal />
         </AuthModalProvider>
       </ThemeProvider>
     </I18nextProvider>

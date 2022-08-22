@@ -1,18 +1,20 @@
 import React, { FC } from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
 
 import Link from 'next/link';
-import Image from 'next/image';
 
-import cardCover from '../../assets/images/card-cover.jpg';
+import { CategoryData } from '../../types/categories';
+import paths from '../../constants/paths';
 
 interface Props {
+    data: CategoryData
 }
 
-const CategoryCard: FC<Props> = () => {
+const CategoryCard: FC<Props> = ({ data }) => {
   return (
-    <Link href='/'>
+    <Link href={paths.categoryDetails(data.id)}>
         <Box
             sx={{
             position: 'relative',
@@ -20,7 +22,9 @@ const CategoryCard: FC<Props> = () => {
             cursor: 'pointer',
             }}
         >
-            <Image src={cardCover} layout='fill' alt='category' />
+            <Avatar src={data.imageFilePath?.orignialUrl || ''} alt='product' sx={{ width: '100%', height: '100%', borderRadius: 0 }}>
+                P
+            </Avatar>
             <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', p: 4 }}>
                 <Typography
                     variant='h3'
@@ -32,7 +36,7 @@ const CategoryCard: FC<Props> = () => {
                         letterSpacing: '0.1px'
                     }}
                 >
-                    LIGHTING
+                    {data.name}
                 </Typography>
                 <Typography
                     variant='h3'
@@ -42,7 +46,7 @@ const CategoryCard: FC<Props> = () => {
                         lineHeight: '20px',
                     }}
                 >
-                    5 items
+                    {data.itemsCount} items
                 </Typography>
             </Box>
         </Box>

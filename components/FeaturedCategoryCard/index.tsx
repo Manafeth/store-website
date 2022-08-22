@@ -3,22 +3,26 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import Link from 'next/link';
+import { CategoryData } from '../../types/categories';
+import paths from '../../constants/paths';
 
 interface Props {
-  isVertical?: boolean
+  isVertical?: boolean,
+  data: CategoryData
 }
 
-const FeaturedCategoryCard: FC<Props> = ({ isVertical}) => {
+const FeaturedCategoryCard: FC<Props> = ({ isVertical, data }) => {
   return (
-    <Link href='/'>
+    <Link href={paths.categoryDetails(data.id)}>
       <Box
         sx={{
           position: 'relative',
           height: isVertical ? 559 : 274.5,
           cursor: 'pointer',
-          backgroundImage: `url(https://via.placeholder.com/408X559.png/09f/fff)`,
-          backgroundSize: '100% auto',
-          backgroundPositionY: 'center'
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(${data.bannerFilePath?.orignialUrl})`,
+          backgroundSize: isVertical ? 'auto 100%' : '100% auto',
+          backgroundPosition: 'center',
         }}
       >
           <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', p: 4 }}>
@@ -28,13 +32,13 @@ const FeaturedCategoryCard: FC<Props> = ({ isVertical}) => {
                   mb: 2.75
                 }}
               >
-                Category name
+                {data.name}
               </Typography>
             <Typography
               variant='h3'
               component='span'
             >
-              1500 items
+              {data.itemsCount} items
             </Typography>
           </Box>
       </Box>

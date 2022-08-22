@@ -6,7 +6,7 @@ import { AuthModalState, LoginData, ProfileData, VerifyOtpData } from '../types/
 import getAccessToken from '../utils/getToken';
 
 interface Props {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }
 
 const AuthModalContext = createContext({} as AuthModalState);
