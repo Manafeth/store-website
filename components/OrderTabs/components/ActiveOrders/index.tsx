@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import carIcon from '../../../../assets/images/icons/car-icon.png';
 import clockIcon from '../../../../assets/images/icons/clock-icon.png';
 import Image from 'next/image';
 import Divider from '@mui/material/Divider';
+import { activeOrderData } from '../../../../types/profile';
+import moment from 'moment';
 
-const ActiveOrders = () => {
+
+interface Props {
+  data: activeOrderData;
+}
+
+const ActiveOrders: FC<Props> = ({ data }) => {
   return (
     <Box
       sx={{
@@ -17,7 +24,7 @@ const ActiveOrders = () => {
       }}
     >
       <Typography variant='h2' component='h1' sx={{ mb: 5 }}>
-        No Order : #123456
+        No Order : #{data.id}
       </Typography>
       <Box
         sx={{
@@ -29,51 +36,27 @@ const ActiveOrders = () => {
           width: '400px',
           height: '47px',
           backgroundColor: 'grey.1600',
-          justifyContent:'space-between',
-          mb:2
+          justifyContent: 'space-between',
+          mb: 2,
         }}
       >
-        <Typography>
-        On Delivery
-        </Typography>
-        <Image src={carIcon}  alt='car iocn' />
+        <Typography>{data.status}</Typography>
+        {data.status === 5 ? (
+          <Image src={carIcon} alt='car iocn' />
+        ) : (
+          <Image src={clockIcon} alt='clock iocn' width='24' height='24' />
+        )}
       </Box>
-      <Typography variant='h5' sx={{ mb:2, fontWeight: '400', color:'text.secondary' }}>
-      20 July 2022, 05:00 PM
-      </Typography>
-      <Typography variant='h3' sx={{ mb: 5, fontWeight: '600' }}>
-      SAR  1,139.33
-      </Typography>
-      <Divider/>
-      <Typography variant='h2' component='h1' sx={{ mb: 5, mt:4 }}>
-      No Order : #123456
-      </Typography>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: '10px 20px',
-          gap: '10px',
-          width: '400px',
-          height: '47px',
-          backgroundColor: 'grey.1600',
-          justifyContent:'space-between',
-          mb:2
-        }}
+      <Typography
+        variant='h5'
+        sx={{ mb: 2, fontWeight: '400', color: 'text.secondary' }}
       >
-        <Typography>
-        On Process
-        </Typography>
-        <Image src={clockIcon}  alt='clock iocn' width='24' height='24' />
-      </Box>
-      <Typography variant='h5' sx={{ mb:2, fontWeight: '400', color:'text.secondary' }}>
-      20 July 2022, 05:00 PM
+       {moment(data.createdAt).format('DD MMMM  YYYY hh:MM A')}
       </Typography>
       <Typography variant='h3' sx={{ mb: 5, fontWeight: '600' }}>
-      SAR  59,66
+        SAR {data.total}
       </Typography>
-     
+      <Divider sx={{ mb: 3 }} />
     </Box>
   );
 };

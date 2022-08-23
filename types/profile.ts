@@ -10,8 +10,20 @@ export type wishListData = {
   category: string;
   attributes: null;
 };
+export type activeOrderData = {
+  id: number;
+  fromAddress:string;
+  toAddress:string;
+  products:string;
+  total:number;
+  status:number;
+  createdAt:string;
+
+}
 
 export type ProfileModalState = {
   fetchWishListData: () => Promise<void>;
+  fetchActiveOrderData: () => Promise<void>;
   wishListData: wishListData[];
+  activeOrderData:activeOrderData[];
 };

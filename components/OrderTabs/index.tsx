@@ -1,11 +1,17 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import React, { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent, useEffect } from "react";
+import { useProfileModal } from "../../contexts/ProfileModalContext";
 import ActiveOrders from "./components/ActiveOrders";
 import Tabs from "./components/Tabs/Tabs";
 
 const OrderTabs = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const { fetchActiveOrderData, activeOrderData } = useProfileModal();
+  useEffect(() => {
+    fetchActiveOrderData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleTabs(ev: MouseEvent<HTMLButtonElement>) {
     // @ts-ignore
@@ -23,7 +29,11 @@ const OrderTabs = () => {
             mb: 2,
           }}
         >
-          <ActiveOrders/>
+           {activeOrderData?.map((item) => {
+            return(
+          <ActiveOrders data={item} key={item.id}/>
+          );
+        })}
         </Typography>
       )}
 

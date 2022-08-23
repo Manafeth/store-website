@@ -6,8 +6,8 @@ import React, {
   FC,
   useState,
 } from 'react';
-import { getProfileWishListData } from '../services/profile.services';
-import { ProfileModalState, wishListData } from '../types/profile';
+import { getAllActiveOrders, getProfileWishListData } from '../services/profile.services';
+import { activeOrderData, ProfileModalState, wishListData } from '../types/profile';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -17,6 +17,7 @@ const ProfileModalContext = createContext({} as ProfileModalState);
 
 export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [wishListData, setwishListData] = useState<wishListData[]>([]);
+  const [activeOrderData, setActiveOrderData] = useState<activeOrderData[]>([]);
 
   const router = useRouter();
 
@@ -28,10 +29,20 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
       Promise.reject(error);
     }
   }
+  async function fetchActiveOrderData() {
+    try {
+      const response = await getAllActiveOrders({page: 1, pageSize: 10});
+      setActiveOrderData(response.data.data.data);
+    } catch (error) {
+      Promise.reject(error);
+    }
+  }
 
   const state: ProfileModalState = {
     fetchWishListData,
     wishListData,
+    activeOrderData,
+    fetchActiveOrderData
   };
 
   return (

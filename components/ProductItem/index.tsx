@@ -49,7 +49,7 @@ const ProductItem: FC<Props> = ({ data }) => {
             component='h1'
             sx={{ mb: 2, fontWeight: '400' }}
           >
-            Home decore
+           {data.category}
           </Typography>
           {/* <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <Image src={goldStar} alt='instagram' width='22' height='22' />
