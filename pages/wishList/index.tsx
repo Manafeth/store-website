@@ -23,9 +23,11 @@ const WishListProduct = () => {
           >
             Wishlist Product
           </Typography>
-          {wishListData?.map((item) => (
+          {wishListData?.map((item) => {
+            return(
             <ProductItem data={item} key={item.id} />
-          ))}
+          );
+          })}
         </Box>
       </ProfileLayout>
     </MainLayout>

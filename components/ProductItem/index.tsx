@@ -4,19 +4,9 @@ import Image from 'next/image';
 import { FC } from 'react';
 import blackHeart from '../../assets/images/icons/fill-heart.png';
 import goldStar from '../../assets/images/icons/gold-star.png';
+import { wishListData } from '../../types/profile';
 interface Props {
-  data: {
-    id: number;
-    name: string;
-    salePrice: number;
-    imagesFilePath?: {
-      orignialUrl: string;
-      thumbUrl: string;
-    };
-    type: number;
-    category: string;
-    attributes: null;
-  };
+  data: wishListData
 }
 
 const ProductItem: FC<Props> = ({ data }) => {
@@ -61,7 +51,7 @@ const ProductItem: FC<Props> = ({ data }) => {
           >
             Home decore
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+          {/* <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <Image src={goldStar} alt='instagram' width='22' height='22' />
             <Typography
               variant='h5'
@@ -70,10 +60,10 @@ const ProductItem: FC<Props> = ({ data }) => {
             >
               4.8
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
         <Typography variant='h2' component='h1' sx={{ fontWeight: 'bold' }}>
-          {data.salePrice}
+        SAR {data.salePrice}
         </Typography>
       </Box>
     </Box>
