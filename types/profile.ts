@@ -24,6 +24,8 @@ export type activeOrderData = {
 export type ProfileModalState = {
   fetchWishListData: () => Promise<void>;
   fetchActiveOrderData: () => Promise<void>;
+  fetchArchiveedOrderData:() => Promise<void>;
   wishListData: wishListData[];
   activeOrderData:activeOrderData[];
+  archiveedOrderData:activeOrderData[];
 };

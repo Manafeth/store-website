@@ -12,8 +12,15 @@ function getAllActiveOrders (params?: { page: number, pageSize: number }) {
     {params},
   );
 }
+function getAllArchiveed (params?: { page: number, pageSize: number }) {
+  return axiosInstance.get(
+    'Order/GetAllArchiveed',
+    {params},
+  );
+}
 
 export {
     getProfileWishListData,
     getAllActiveOrders,
+    getAllArchiveed
 }

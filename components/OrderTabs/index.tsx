@@ -8,8 +8,13 @@ import Tabs from "./components/Tabs/Tabs";
 const OrderTabs = () => {
   const [activeTab, setActiveTab] = useState(1);
   const { fetchActiveOrderData, activeOrderData } = useProfileModal();
+  const { fetchArchiveedOrderData,  archiveedOrderData } = useProfileModal();
   useEffect(() => {
     fetchActiveOrderData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    fetchArchiveedOrderData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -46,7 +51,11 @@ const OrderTabs = () => {
             mb: 2,
           }}
         >
-          history
+           {archiveedOrderData?.map((item) => {
+            return(
+          <ActiveOrders data={item} key={item.id}/>
+          );
+        })}
         </Typography>
       )}
     </Box>
