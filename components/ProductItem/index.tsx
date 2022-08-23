@@ -1,3 +1,4 @@
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
@@ -6,7 +7,7 @@ import blackHeart from '../../assets/images/icons/fill-heart.png';
 import goldStar from '../../assets/images/icons/gold-star.png';
 import { wishListData } from '../../types/profile';
 interface Props {
-  data: wishListData
+  data: wishListData;
 }
 
 const ProductItem: FC<Props> = ({ data }) => {
@@ -14,12 +15,16 @@ const ProductItem: FC<Props> = ({ data }) => {
     <Box sx={{ display: 'flex', gap: '25px' }}>
       <Box
         sx={{
-          width: '120px',
-          height: '134px',
-          backgroundColor: 'text.light',
           position: 'relative',
         }}
       >
+        <Avatar
+          src={data.imagesFilePath?.orignialUrl || ''}
+          alt='product'
+          sx={{ width: '120px', height: '134px', borderRadius: 0 }}
+        >
+          P
+        </Avatar>
         <Box
           sx={{
             width: '44px',
@@ -49,7 +54,7 @@ const ProductItem: FC<Props> = ({ data }) => {
             component='h1'
             sx={{ mb: 2, fontWeight: '400' }}
           >
-           {data.category}
+            {data.category}
           </Typography>
           {/* <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <Image src={goldStar} alt='instagram' width='22' height='22' />
@@ -63,7 +68,7 @@ const ProductItem: FC<Props> = ({ data }) => {
           </Box> */}
         </Box>
         <Typography variant='h2' component='h1' sx={{ fontWeight: 'bold' }}>
-        SAR {data.salePrice}
+          SAR {data.salePrice}
         </Typography>
       </Box>
     </Box>
