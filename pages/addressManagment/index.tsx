@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import AddressManagment from '../../components/AddressManagment';
-import { useProfileModal } from '../../contexts/ProfileModalContext';
+import { useProfileModal } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import Box from '@mui/material/Box';
@@ -9,6 +9,7 @@ import { addressDetailsData } from '../../types/profile';
 const Setting = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { triggerCreateAddress } = useProfileModal();
+  const [isEditMode, setIsEditMode] = useState(false);
   const [accountAddressData, setAccountAddressData] =
     useState<addressDetailsData>({
       id: 0,
@@ -39,8 +40,12 @@ const Setting = () => {
         //     setIsSubmitted(false);
         // })
 
-    if (!isFormValid()) {
-      triggerCreateAddress(accountAddressData)
+    if (isFormValid()) {
+      const payload = {
+        ...accountAddressData
+      }
+      delete payload.id
+      triggerCreateAddress(payload)
         .then((response) => {
           console.log(response);
           setIsSubmitted(false);
@@ -59,6 +64,7 @@ const Setting = () => {
             isSubmitted={isSubmitted}
             accountAddressData={accountAddressData}
             setAccountAddressData={setAccountAddressData}
+            isEditMode={isEditMode}
           />
         </Box>
       </ProfileLayout>

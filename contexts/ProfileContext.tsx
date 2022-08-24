@@ -91,6 +91,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
     try {
       await createAddress(data);
       setAddressLoading(false);
+      fetchAllAddressData();
     } catch(error) {
       setAddressLoading(false);
       Promise.reject(error);

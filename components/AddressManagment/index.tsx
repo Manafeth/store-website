@@ -14,7 +14,7 @@ import Divider from '@mui/material/Divider';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import { addressData, addressDetailsData } from '../../types/profile';
-import { useProfileModal } from '../../contexts/ProfileModalContext';
+import { useProfileModal } from '../../contexts/ProfileContext';
 import MenuItem from '@mui/material/MenuItem';
 interface Props {
   // data: addressData;
@@ -23,6 +23,7 @@ interface Props {
   isSubmitted: boolean;
   accountAddressData: addressDetailsData;
   setAccountAddressData: Dispatch<SetStateAction<addressDetailsData>>;
+  isEditMode: boolean;
 }
 
 const AddressManagment: FC<Props> = ({
@@ -30,6 +31,7 @@ const AddressManagment: FC<Props> = ({
   isSubmitted,
   accountAddressData,
   setAccountAddressData,
+  isEditMode,
 }) => {
   const {
     fetchAllAddressData,
@@ -148,7 +150,7 @@ const AddressManagment: FC<Props> = ({
         value={accountAddressData.cityId}
         // eslint-disable-next-line react/jsx-no-bind
         onChange={handleInput}
-        name='city'
+        name='cityId'
       >
         <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
           Select Item
@@ -164,7 +166,6 @@ const AddressManagment: FC<Props> = ({
             </MenuItem>
           ))}
       </TextField>
-
       <label
         style={{ color: 'primary.dark', fontWeight: '500', marginTop: '16px' }}
       >
@@ -202,20 +203,8 @@ const AddressManagment: FC<Props> = ({
           pt: 7,
           pb: 5,
         }}
-      >
-        <Button
-          variant='contained'
-          color='secondary'
-          sx={{
-            color: 'secondary.contrastText',
-            width: '92px',
-            height: '44px',
-            backgroundColor: ' background.grayDisabled',
-            mr: '20px',
-          }}
-        >
-          Cancel
-        </Button>
+      > {!isEditMode ? (
+        <>
         <Button
           variant='contained'
           sx={{ width: 'auto', height: '44px' }}
@@ -223,6 +212,17 @@ const AddressManagment: FC<Props> = ({
         >
           Add new address
         </Button>
+        </>
+         ) : (
+          <>
+            <Button color="secondary" variant="contained" sx={{ minWidth: 135, mr: '20px' }}>
+            Cancel
+            </Button>
+            <Button variant="contained" sx={{ minWidth: 135, }} type="submit">
+              update
+            </Button>
+          </>
+        )}
       </Box>
     </Box>
   );

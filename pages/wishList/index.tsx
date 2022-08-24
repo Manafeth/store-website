@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useEffect } from 'react';
 import ProductItem from '../../components/ProductItem';
-import { useProfileModal } from '../../contexts/ProfileModalContext';
+import { useProfileModal } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
 

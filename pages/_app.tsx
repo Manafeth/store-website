@@ -8,7 +8,7 @@ import enLang from '../translations/en.json';
 import Head from 'next/head';
 import { AuthModalProvider } from '../contexts/AuthModalContext';
 import AuthModal from '../components/AuthModal';
-import { ProfileModalProvider } from '../contexts/ProfileModalContext';
+import { ProfileModalProvider } from '../contexts/ProfileContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
 

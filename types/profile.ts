@@ -26,7 +26,7 @@ export type addressData = {
   cityId:number,
 }
 export type addressDetailsData = {
-  id: number
+  id?: number
   cityId: number,
   address: string,
   street: string,
