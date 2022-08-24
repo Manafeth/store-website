@@ -24,6 +24,8 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   
   const [addressData,setaddressData] = useState<addressData[]>([]);
   const [addressLoading, setAddressLoading] = useState(false);
+  const [updateAddressLoading, setUpdateAddressLoading] = useState(false);
+  
   const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
     id: 0,
     cityId: 0,
@@ -95,10 +97,13 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
     }
   }
   async function updateAddressData(data: addressDetailsData) {
+    setUpdateAddressLoading(true);
     try {
       await updateAddress(data);
+      setUpdateAddressLoading(false);
       fetchAllAddressData();
     } catch(error) {
+      setUpdateAddressLoading(false);
       Promise.reject(error);
     }
   }
@@ -109,6 +114,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
     archiveedOrderData,
     addressData,
     addressLoading,
+    updateAddressLoading,
     addressDetailsData,
     cityData,
     countryData,

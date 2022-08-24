@@ -62,6 +62,7 @@ export type ProfileModalState = {
   archiveedOrderData:activeOrderData[],
   addressData:addressData[],
   addressLoading: boolean,
+  updateAddressLoading: boolean,
   addressDetailsData:addressDetailsData,
   cityData: cityData[],
   countryData:countryData[],
