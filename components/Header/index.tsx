@@ -12,7 +12,6 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
-
 import logoImage from '../../assets/images/logo.png'
 import ArrowDown from '../../assets/images/icons/arrow-down.png'
 import SearchIcon from '../../assets/images/icons/search.png'

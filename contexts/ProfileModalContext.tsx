@@ -6,8 +6,8 @@ import React, {
   FC,
   useState,
 } from 'react';
-import { getAllActiveOrders, getAllArchiveed, getProfileWishListData } from '../services/profile.services';
-import { activeOrderData, ProfileModalState, wishListData } from '../types/profile';
+import { createAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getAllCities, getAllCountries, getProfileWishListData, updateAddress } from '../services/profile.services';
+import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData} from '../types/profile';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -19,6 +19,20 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [wishListData, setwishListData] = useState<wishListData[]>([]);
   const [activeOrderData, setActiveOrderData] = useState<activeOrderData[]>([]);
   const [archiveedOrderData,setArchiveedOrderData] = useState<activeOrderData[]>([]);
+  const [cityData, setCityData] = useState<cityData[]>([]);
+  const [countryData, setCountryData] = useState<countryData[]>([]);
+  
+  const [addressData,setaddressData] = useState<addressData[]>([]);
+  const [addressLoading, setAddressLoading] = useState(false);
+  const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
+    id: 0,
+    cityId: 0,
+    address: '',
+    street: '',
+    type: 0,
+    latitude:0,
+    longitude:0,
+})
 
   const router = useRouter();
 
@@ -46,14 +60,66 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
       Promise.reject(error);
     }
   }
+  async function fetchAllAddressData() {
+    try {
+      const response = await getAllAddress({page: 1, pageSize: 10});
+      setaddressData(response.data.data.data);
+    } catch (error) {
+      Promise.reject(error);
+    }
+  }
+  async function  fetchAllCityData() {
+    try {
+      const response = await getAllCities();
+      setCityData(response.data.data);
+    } catch (error) {
+      Promise.reject(error);
+    }
+  }
+  async function fetchAllCountryData() {
+    try {
+      const response = await  getAllCountries();
+      setCountryData(response.data.data);
+    } catch (error) {
+      Promise.reject(error);
+    }
+  }
+  async function triggerCreateAddress(data:addressDetailsData) {
+    setAddressLoading(true);
+    try {
+      await createAddress(data);
+      setAddressLoading(false);
+    } catch(error) {
+      setAddressLoading(false);
+      Promise.reject(error);
+    }
+  }
+  async function updateAddressData(data: addressDetailsData) {
+    try {
+      await updateAddress(data);
+      fetchAllAddressData();
+    } catch(error) {
+      Promise.reject(error);
+    }
+  }
 
   const state: ProfileModalState = {
     wishListData,
     activeOrderData,
     archiveedOrderData,
+    addressData,
+    addressLoading,
+    addressDetailsData,
+    cityData,
+    countryData,
     fetchWishListData,
     fetchActiveOrderData,
-    fetchArchiveedOrderData
+    fetchArchiveedOrderData,
+    fetchAllAddressData,
+    updateAddressData,
+    fetchAllCityData,
+    fetchAllCountryData,
+    triggerCreateAddress,
   };
 
   return (

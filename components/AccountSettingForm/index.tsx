@@ -8,6 +8,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { ChangeEvent } from 'react';
+import Link from 'next/link';
 
 const AcccoutSettingForm = () => {
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
@@ -54,18 +55,20 @@ const AcccoutSettingForm = () => {
         invites to events & exclusive competitions related to Beuand,
       </Typography>
       <Divider sx={{ mb: 5, width: '80%' }} />
-
+     
       <TextField
         variant='standard'
         fullWidth
         InputProps={{
           endAdornment: (
+            <Link href='/addressManagment'>
             <InputAdornment
               position='end'
               sx={{ mb: '48px', position: 'absolute', right: '0', top: -6 }}
             >
               Edit
             </InputAdornment>
+            </Link>
           ),
         }}
         label='Shipping Address'
@@ -78,6 +81,7 @@ const AcccoutSettingForm = () => {
         sx={{ mb: 4, width: '80%' }}
         name='shippingAddress'
       />
+      
       <TextField
         variant='standard'
         fullWidth
