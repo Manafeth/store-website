@@ -38,16 +38,14 @@ function updateAddress(data:addressDetailsData) {
     data
   );
 }
-function getAllCities(countryId?: number) {
-  return axiosInstance.get('City/GetAll', {
-    params: {
-      countryId,
-    },
-  });
-}
-function getAllCountries() {
-  return axiosInstance.get(
-    'Country/GetAll',
+
+
+function deleteAddress(params?: {id: number}) {
+  return axiosInstance.delete(
+    'Address/Delete',
+    {
+      params,
+    }
   );
 }
 export {
@@ -57,6 +55,5 @@ export {
     getAllAddress,
     createAddress,
     updateAddress,
-    getAllCities,
-    getAllCountries
+    deleteAddress,
 }

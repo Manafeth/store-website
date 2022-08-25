@@ -6,7 +6,8 @@ import React, {
   FC,
   useState,
 } from 'react';
-import { createAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getAllCities, getAllCountries, getProfileWishListData, updateAddress } from '../services/profile.services';
+import { getAllCities, getCountries } from '../services/common.services';
+import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getProfileWishListData, updateAddress } from '../services/profile.services';
 import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData} from '../types/profile';
 
 interface Props {
@@ -80,7 +81,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   }
   async function fetchAllCountryData() {
     try {
-      const response = await  getAllCountries();
+      const response = await  getCountries();
       setCountryData(response.data.data);
     } catch (error) {
       Promise.reject(error);
@@ -108,7 +109,14 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
       Promise.reject(error);
     }
   }
-
+  async function deleteAddressData() {
+    setUpdateAddressLoading(true);
+    try {
+      await deleteAddress();
+    } catch(error) {
+      Promise.reject(error);
+    }
+  }
   const state: ProfileModalState = {
     wishListData,
     activeOrderData,
@@ -127,6 +135,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
     fetchAllCityData,
     fetchAllCountryData,
     triggerCreateAddress,
+    deleteAddressData
   };
 
   return (

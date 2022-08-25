@@ -57,6 +57,7 @@ export type ProfileModalState = {
   fetchAllCityData:() => Promise<void>,
   fetchAllCountryData:() => Promise<void>,
   triggerCreateAddress: (data:addressDetailsData) => Promise<void>,
+  deleteAddressData: (id:number) => Promise<void>,
   wishListData: wishListData[],
   activeOrderData:activeOrderData[],
   archiveedOrderData:activeOrderData[],

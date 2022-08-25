@@ -16,6 +16,9 @@ import Button from '@mui/material/Button';
 import { addressData, addressDetailsData } from '../../types/profile';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import Image from 'next/image';
+import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 interface Props {
   // data: addressData;
   // eslint-disable-next-line no-unused-vars
@@ -41,6 +44,7 @@ const AddressManagment: FC<Props> = ({
     fetchAllCountryData,
     countryData,
     addressData,
+    deleteAddressData
   } = useProfileModal();
   useEffect(() => {
     fetchAllAddressData();
@@ -68,6 +72,15 @@ const AddressManagment: FC<Props> = ({
       [ev.target.name]: ev.target.value,
     }));
   }
+  function handleDelete() {
+    console.log('delete')
+    deleteAddressData(60).then((response)=>{
+      console.log('deleted',response)
+
+    }).catch((error)=>{
+
+    })   
+}
   return (
     <Box
       component='form'
@@ -97,7 +110,16 @@ const AddressManagment: FC<Props> = ({
       </Box>
 
       {addressData?.map((item) => {
-        return <Typography key={item.id}>{item.address}</Typography>;
+        return( 
+          // eslint-disable-next-line react/jsx-key
+          <Box sx={{display:'flex', justifyContent: 'space-between',
+          alignItems: 'center'}}>
+        <Typography key={item.id}>{item.address}</Typography>
+        <IconButton onClick={handleDelete}>
+        <Image src={deleteIcon} width='14' height='14' alt='close icon' />
+        </IconButton> 
+        </Box>
+        );
       })}
 
       <Divider sx={{ mb: 5, width: '80%' }} />
