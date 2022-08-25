@@ -7,6 +7,22 @@ function getMostPurchasedProducts (params?: { page: number, pageSize: number, ge
   );
 }
 
+function getProductDetails(id: string) {
+  return axiosInstance.get(
+    'Product/Get',
+    {params: {id}},
+  );
+}
+
+function getRelatedProductDetails(productId: string) {
+  return axiosInstance.get(
+    'Product/GetRelatedProduct',
+    {params: {productId}},
+  );
+}
+
 export {
-    getMostPurchasedProducts
+    getMostPurchasedProducts,
+    getProductDetails,
+    getRelatedProductDetails
 }
