@@ -50,6 +50,7 @@ export async function getStaticProps() {
         categories: categories.data.data,
         allCategories: allCategories.data.data
       },
+      revalidate: 10,
     }
 }
   
