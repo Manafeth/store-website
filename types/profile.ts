@@ -63,6 +63,13 @@ export type customerData = {
     dateOfBirth: null
   }
 
+  export type emailNotificationData = {
+    reminderEmail: boolean,
+    reminderPush: boolean,
+    activityEmail: boolean,
+    activityPush: boolean
+  }
+
 export type ProfileModalState = {
   fetchWishListData: () => Promise<void>,
   fetchActiveOrderData: () => Promise<void>,
@@ -74,14 +81,18 @@ export type ProfileModalState = {
   triggerCreateAddress: (data:addressDetailsData) => Promise<void>,
   deleteAddressData: (id:number) => Promise<void>,
   fetchCustomerProfileData: () => Promise<void>,
+  fetchEmailNotificationData:() => Promise<void>,
+  triggerUpdateEmailNotification: (data:emailNotificationData) => Promise<void>,
   wishListData: wishListData[],
   activeOrderData:activeOrderData[],
   archiveedOrderData:activeOrderData[],
   addressData:addressData[],
   addressLoading: boolean,
   updateAddressLoading: boolean,
+  updateEmailLoading:boolean,
   addressDetailsData:addressDetailsData,
   cityData: cityData[],
   countryData:countryData[],
   customerData:customerData,
+  emailNotificationData:emailNotificationData,
 }

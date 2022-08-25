@@ -13,7 +13,7 @@ import Switch from '@mui/material/Switch';
 import Divider from '@mui/material/Divider';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-import { addressData, addressDetailsData } from '../../types/profile';
+import { addressDetailsData } from '../../types/profile';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';

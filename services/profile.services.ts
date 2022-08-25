@@ -1,4 +1,4 @@
-import { addressDetailsData } from "../types/profile";
+import { addressDetailsData, emailNotificationData } from "../types/profile";
 import { axiosInstance } from "./axiosInstance";
 
 function getProfileWishListData() {
@@ -40,17 +40,30 @@ function updateAddress(data:addressDetailsData) {
 }
 
 
-function deleteAddress(params?: {id: number}) {
+function deleteAddress(id: number) {
   return axiosInstance.delete(
     'Address/Delete',
     {
-      params,
+      params:{
+        id
+      },
     }
   );
 }
 function getCustomerProfileData() {
   return axiosInstance.get(
     'Auth/GetCustomerProfile',
+  );
+}
+function getEmailNotificationData() {
+  return axiosInstance.get(
+    'NotificationSetting/Get',
+  );
+}
+function updateEmailNotification(data:emailNotificationData) {
+  return axiosInstance.put(
+    'NotificationSetting/Update',
+    data
   );
 }
 export {
@@ -61,5 +74,7 @@ export {
     createAddress,
     updateAddress,
     deleteAddress,
-    getCustomerProfileData
+    getCustomerProfileData,
+    getEmailNotificationData,
+    updateEmailNotification
 }

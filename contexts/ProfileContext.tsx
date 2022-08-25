@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react';
 import { getAllCities, getCountries } from '../services/common.services';
-import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getProfileWishListData, updateAddress } from '../services/profile.services';
-import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData, customerData} from '../types/profile';
+import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateEmailNotification } from '../services/profile.services';
+import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -26,6 +26,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [addressData,setaddressData] = useState<addressData[]>([]);
   const [addressLoading, setAddressLoading] = useState(false);
   const [updateAddressLoading, setUpdateAddressLoading] = useState(false);
+  const [updateEmailLoading, setUpdateEmailLoading] = useState(false);
   
   const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
     id: 0,
@@ -49,6 +50,12 @@ const [customerData, setCustomerData] = useState<customerData>({
   cityId: null,
   gender: null,
   dateOfBirth: null
+})
+const [emailNotificationData, setEmailNotificationData] = useState<emailNotificationData>({
+  reminderEmail: false,
+  reminderPush: false,
+  activityEmail: false,
+  activityPush: false
 })
 
   const router = useRouter();
@@ -123,10 +130,10 @@ const [customerData, setCustomerData] = useState<customerData>({
       Promise.reject(error);
     }
   }
-  async function deleteAddressData() {
+  async function deleteAddressData(id:number) {
     setUpdateAddressLoading(true);
     try {
-      await deleteAddress();
+      await deleteAddress(id);
     } catch(error) {
       Promise.reject(error);
     }
@@ -136,6 +143,25 @@ const [customerData, setCustomerData] = useState<customerData>({
       const response = await getCustomerProfileData();
       setCustomerData(response.data.data);
     } catch (error) {
+      Promise.reject(error);
+    }
+  }
+  async function fetchEmailNotificationData() {
+    try {
+      const response = await getEmailNotificationData();
+      setEmailNotificationData(response.data.data);
+    } catch (error) {
+      Promise.reject(error);
+    }
+  }
+  async function triggerUpdateEmailNotification(data:emailNotificationData) {
+    setUpdateEmailLoading(true);
+    try {
+      await  updateEmailNotification(data);
+      setUpdateEmailLoading(false);
+      fetchEmailNotificationData();
+    } catch(error) {
+      setUpdateEmailLoading(false);
       Promise.reject(error);
     }
   }
@@ -150,6 +176,8 @@ const [customerData, setCustomerData] = useState<customerData>({
     cityData,
     countryData,
     customerData,
+    emailNotificationData,
+    updateEmailLoading,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,
@@ -159,7 +187,9 @@ const [customerData, setCustomerData] = useState<customerData>({
     fetchAllCountryData,
     triggerCreateAddress,
     deleteAddressData,
-    fetchCustomerProfileData
+    fetchCustomerProfileData,
+    fetchEmailNotificationData,
+    triggerUpdateEmailNotification
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import uploadIcon from '../../assets/images/icons/upload-icon.png';
@@ -6,19 +6,19 @@ import Image from 'next/image';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-import { useProfileModal } from '../../contexts/ProfileContext';
 import Avatar from '@mui/material/Avatar';
 import PhoneNumberInput from '../PhoneNumberInput';
 import { customerData } from '../../types/profile';
 
-const EditAccount = () => {
-  const { fetchCustomerProfileData, customerData } = useProfileModal();
-  // const [state, setState] = useState<customerData>();
 
-  useEffect(() => {
-    fetchCustomerProfileData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+interface Props {
+  customerData :customerData
+}
+
+
+const EditAccount: FC<Props> = ({customerData}) => {
+
+
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
     // setState((prevState: any) => ({
@@ -76,6 +76,13 @@ const EditAccount = () => {
         variant='outlined'
         placeholder={customerData.fullName}
         name='firstName'
+        InputProps={{
+         style:{
+          fontSize:'14px',
+          fontWeight:'400',
+          color:'grey.1800'
+         }
+        }}
       />
       <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
         Contact
@@ -93,13 +100,20 @@ const EditAccount = () => {
         placeholder={customerData.email}
         name='email'
         sx={{ mb: 3 }}
+        InputProps={{
+          style:{
+           fontSize:'14px',
+           fontWeight:'400',
+           color:'grey.1800'
+          }
+         }}
       />
       <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500', mt:1 }}>
         Phone Number
       </InputLabel>
    
          <PhoneNumberInput
-          sx={{ mb: 3 }}
+          sx={{ mb: 3, fontSize:'14px', fontWeight:'400', color:'grey.1800'}}
           onChange={handlePhoneInput}
           value={{ countryId: customerData.countryId,phoneNumber: customerData.phoneNumber }}
         />
