@@ -1,15 +1,25 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import profileImage from '../../assets/images/icons/placeHolder-icon.png';
 import uploadIcon from '../../assets/images/icons/upload-icon.png';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
+import { useProfileModal } from '../../contexts/ProfileContext';
+import Avatar from '@mui/material/Avatar';
+import PhoneNumberInput from '../PhoneNumberInput';
+import { customerData } from '../../types/profile';
 
 const EditAccount = () => {
+  const { fetchCustomerProfileData, customerData } = useProfileModal();
+  // const [state, setState] = useState<customerData>();
+
+  useEffect(() => {
+    fetchCustomerProfileData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
     // setState((prevState: any) => ({
     //   ...prevState,
@@ -17,6 +27,10 @@ const EditAccount = () => {
     // }));
     console.log(ev.target.name);
   }
+  function handlePhoneInput(data: { countryId: number; phoneNumber: string }) {
+   
+  }
+
   return (
     <Box
       sx={{
@@ -38,7 +52,12 @@ const EditAccount = () => {
           mb: 4,
         }}
       >
-        <Image src={profileImage} alt='profileimage' width='100' height='100' />
+        <Avatar
+          src={customerData.imageFilePath?.orignialUrl || ''}
+          alt='product'
+          sx={{ width: '100', height: '100' }}
+        >
+        </Avatar>
         <Button
           variant='outlined'
           component='label'
@@ -49,31 +68,15 @@ const EditAccount = () => {
           <input hidden accept='image/*' multiple type='file' />
         </Button>
       </Box>
-      <Grid container spacing='40px'>
-        <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
-            First Name
-          </InputLabel>
-          <TextField
-            id='outlined-basic'
-            variant='outlined'
-            placeholder='Ahmed'
-            name='firstName'
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
-            Last Name
-          </InputLabel>
-
-          <TextField
-            id='outlined-basic'
-            variant='outlined'
-            placeholder='Mahmoud'
-            name='lastName'
-          />
-        </Grid>
-      </Grid>
+      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+        Full Name
+      </InputLabel>
+      <TextField
+        id='outlined-basic'
+        variant='outlined'
+        placeholder={customerData.fullName}
+        name='firstName'
+      />
       <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
         Contact
       </Typography>
@@ -87,21 +90,19 @@ const EditAccount = () => {
       <TextField
         id='outlined-basic'
         variant='outlined'
-        placeholder='mall@example.com'
+        placeholder={customerData.email}
         name='email'
         sx={{ mb: 3 }}
       />
-      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500', mt:1 }}>
         Phone Number
       </InputLabel>
-
-      <TextField
-        id='outlined-basic'
-        variant='outlined'
-        placeholder='+966123456789'
-        name='phoneNumber'
-        sx={{ mb: 3 }}
-      />
+   
+         <PhoneNumberInput
+          sx={{ mb: 3 }}
+          onChange={handlePhoneInput}
+          value={{ countryId: customerData.countryId,phoneNumber: customerData.phoneNumber }}
+        />
       <Box
         sx={{
           display: 'flex',
@@ -123,8 +124,11 @@ const EditAccount = () => {
         >
           Cancel
         </Button>
-        <Button variant='contained' sx={{  width: 'auto',
-            height: '44px',}} type='submit'>
+        <Button
+          variant='contained'
+          sx={{ width: 'auto', height: '44px' }}
+          type='submit'
+        >
           save Changes
         </Button>
       </Box>

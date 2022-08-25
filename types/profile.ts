@@ -48,6 +48,21 @@ export type countryData = {
   countryPrefix:string,
 };
 
+export type customerData = {
+  imageFilePath: {
+    orignialUrl: string,
+    thumbUrl: string,
+  },
+    fullName: string,
+    email: string,
+    countryId: number,
+    phoneNumber: string,
+    countryForLocationId: null,
+    cityId: null,
+    gender: null,
+    dateOfBirth: null
+  }
+
 export type ProfileModalState = {
   fetchWishListData: () => Promise<void>,
   fetchActiveOrderData: () => Promise<void>,
@@ -58,6 +73,7 @@ export type ProfileModalState = {
   fetchAllCountryData:() => Promise<void>,
   triggerCreateAddress: (data:addressDetailsData) => Promise<void>,
   deleteAddressData: (id:number) => Promise<void>,
+  fetchCustomerProfileData: () => Promise<void>,
   wishListData: wishListData[],
   activeOrderData:activeOrderData[],
   archiveedOrderData:activeOrderData[],
@@ -67,4 +83,5 @@ export type ProfileModalState = {
   addressDetailsData:addressDetailsData,
   cityData: cityData[],
   countryData:countryData[],
+  customerData:customerData,
 }

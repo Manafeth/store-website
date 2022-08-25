@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react';
 import { getAllCities, getCountries } from '../services/common.services';
-import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getProfileWishListData, updateAddress } from '../services/profile.services';
-import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData} from '../types/profile';
+import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getProfileWishListData, updateAddress } from '../services/profile.services';
+import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData, customerData} from '../types/profile';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -35,6 +35,20 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
     type: 0,
     latitude:0,
     longitude:0,
+})
+const [customerData, setCustomerData] = useState<customerData>({
+  imageFilePath: {
+    orignialUrl: '',
+    thumbUrl: '',
+  },
+  fullName: '',
+  email: '',
+  countryId: 0,
+  phoneNumber:'',
+  countryForLocationId: null,
+  cityId: null,
+  gender: null,
+  dateOfBirth: null
 })
 
   const router = useRouter();
@@ -117,6 +131,14 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
       Promise.reject(error);
     }
   }
+  async function fetchCustomerProfileData() {
+    try {
+      const response = await getCustomerProfileData();
+      setCustomerData(response.data.data);
+    } catch (error) {
+      Promise.reject(error);
+    }
+  }
   const state: ProfileModalState = {
     wishListData,
     activeOrderData,
@@ -127,6 +149,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
     addressDetailsData,
     cityData,
     countryData,
+    customerData,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,
@@ -135,7 +158,8 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
     fetchAllCityData,
     fetchAllCountryData,
     triggerCreateAddress,
-    deleteAddressData
+    deleteAddressData,
+    fetchCustomerProfileData
   };
 
   return (

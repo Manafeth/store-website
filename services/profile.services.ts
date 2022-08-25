@@ -48,6 +48,11 @@ function deleteAddress(params?: {id: number}) {
     }
   );
 }
+function getCustomerProfileData() {
+  return axiosInstance.get(
+    'Auth/GetCustomerProfile',
+  );
+}
 export {
     getProfileWishListData,
     getAllActiveOrders,
@@ -56,4 +61,5 @@ export {
     createAddress,
     updateAddress,
     deleteAddress,
+    getCustomerProfileData
 }
