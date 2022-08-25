@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
@@ -8,8 +8,14 @@ import Button from '@mui/material/Button';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
 import CartIcon from '../../assets/images/icons/cart-icon.svg';
 import EyeIcon from '../../assets/images/icons/eye-icon.svg';
+import { IconButton } from '@mui/material';
+import { ProductData } from '../../types/products';
 
-const ProductDetailsInformation = () => {
+interface Props {
+  productDetials: ProductData
+}
+
+const ProductDetailsInformation: FC<Props> = ({ productDetials }) => {
   return (
     <Box>
       <Typography
@@ -17,9 +23,9 @@ const ProductDetailsInformation = () => {
         component='h1'
         sx={{ mb: 1, fontWeight: '400', fontSize: '20px' }}
       >
-        Modern Yellow sofa
+        {productDetials.name}
       </Typography>
-      <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+      {/* <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
         <Image src={StarIcon} alt='instagram' />
         <Typography
           variant='h6'
@@ -28,9 +34,9 @@ const ProductDetailsInformation = () => {
         >
           4.9 Reviews
         </Typography>
-      </Box>
+      </Box> */}
       <Typography variant='h2' component='h1' sx={{ mb: 1 }}>
-        SAR 1,139.33
+        SAR {productDetials.salePrice}
       </Typography>
       <Box sx={{ display: 'flex', gap:'10px' }}>
         <Typography
@@ -45,7 +51,7 @@ const ProductDetailsInformation = () => {
           component='h1'
           sx={{ mb: 1, color: '#23A6F0', fontWeight: '700' }}
         >
-          In Stock
+          {productDetials.quantity > 0 ? 'In Stock' : 'Out Stock'}
         </Typography>
       </Box>
       <Typography
@@ -53,9 +59,7 @@ const ProductDetailsInformation = () => {
         component='h1'
         sx={{ mb: 2, color: 'text.secondary' }}
       >
-        Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
-        RELIT official consequent door ENIM RELIT Mollie. Excitation venial
-        consequent sent nostrum met.
+        {productDetials.shortDescription}
       </Typography>
       <Divider sx={{ mb: 1 }} />
       <Box sx={{ display: 'flex', mb: 1 }}>
@@ -95,7 +99,7 @@ const ProductDetailsInformation = () => {
           }}
         />
       </Box>
-      <Box sx={{ display: 'flex', gap: '10px' }}>
+      <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
         <Button
           variant='contained'
           sx={{ width: 'auto', height: '44px' }}
@@ -104,9 +108,12 @@ const ProductDetailsInformation = () => {
           Select Options
         </Button>
         <Box sx={{display:'flex',gap:'5px'}}>
-          <Image src={HeartIcon} alt='heart icon' width={40} height={40}/>
-          <Image src={CartIcon} alt='cart icon' width={40} height={40} />
-          <Image src={EyeIcon} alt='eye icon' width={40} height={40} />
+          <IconButton>
+            <Image src={HeartIcon} alt='heart icon' width={40} height={40}/>
+          </IconButton>
+          <IconButton>
+            <Image src={CartIcon} alt='cart icon' width={40} height={40} />
+          </IconButton>
         </Box>
       </Box>
     </Box>
