@@ -35,7 +35,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials }) => {
           4.9 Reviews
         </Typography>
       </Box> */}
-      <Typography variant='h2' component='h1' sx={{ mb: 1 }}>
+      <Typography variant='h2' component='span' sx={{ mb: 1 }}>
         SAR {productDetials.salePrice}
       </Typography>
       <Box sx={{ display: 'flex', gap:'10px' }}>

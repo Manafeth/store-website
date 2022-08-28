@@ -16,28 +16,28 @@ const Filters = () => {
 
   return (
     <>
-    <Box sx={{ display: 'flex' , flexDirection:'column' }}>
-                  <Typography
-                    variant='h5'
-                    component='h1'
-                    sx={{ fontWeight: '700' }}
-                  >
-                    Filter :
-                  </Typography>
-                  <FilterUtils />
-                </Box>
+      <Box sx={{ display: 'flex' , flexDirection:'column' }}>
+        <Typography
+          variant='h5'
+          component='h1'
+          sx={{ fontWeight: '700' }}
+        >
+          Filter :
+        </Typography>
+        <FilterUtils />
+      </Box>
                 <MenuItemFilter/>
-                <Divider sx={{ mb: 3 }} />
-                <CheckboxFilter />
+                {/* <Divider sx={{ mb: 3 }} /> */}
+                {/* <CheckboxFilter /> */}
                 <Divider sx={{ mb: 3, mt: 3 }} />
                 <ColorFilter/>
-                <Divider sx={{ mb: 3, mt: 3 }} />
-                <RadioButtonFilter />
-                <Divider sx={{ mb: 3, mt: 3 }} />
-                <TagFilter/>     
+                {/* <Divider sx={{ mb: 3, mt: 3 }} /> */}
+                {/* <RadioButtonFilter /> */}
+                {/* <Divider sx={{ mb: 3, mt: 3 }} /> */}
+                {/* <TagFilter/>      */}
                 <Divider sx={{ mb: 3, mt: 3 }} />
                 <FilterByPrice/>
-                </>
+      </>
     
   );
 };

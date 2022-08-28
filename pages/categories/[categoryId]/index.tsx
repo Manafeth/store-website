@@ -8,12 +8,28 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import CategoryHeroSection from '../../../components/CategoryHeroSection';
-import RelatedProductCard from '../../../components/RelatedProducts';
+import ProductVerticalItem from '../../../components/ProductVerticalItem';
 import Filters from '../../../components/Filters';
 import ProductPagination from '../../../components/Pagination';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { CategoryData } from '../../../types/categories';
+import { getAllCategories, getCategoryDetails } from '../../../services/categories.services';
+import { getProductsByCategory } from '../../../services/products.services';
+import { ProductData } from '../../../types/products';
 
+interface Props {
+  categoryDetials: CategoryData,
+  categoryProducts: {
+    products: ProductData[],
+    itemsCount: number
+  }
+}
 
-const CategoryDetails = () => {
+const CategoryDetails: NextPage<Props> = ({ categoryDetials, categoryProducts }) => {
+
+  console.log('categoryDetials', categoryDetials)
+  console.log('categoryProducts', categoryProducts)
   return (
     <MainLayout>
       <HeroSection />
@@ -54,26 +70,13 @@ const CategoryDetails = () => {
               </Box>
               <CategoryHeroSection />
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }}>
-                <Grid item xs={4}>
-                  <RelatedProductCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <RelatedProductCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <RelatedProductCard />
-                </Grid>
-              </Grid>
-              <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 2 }}>
-                <Grid item xs={4}>
-                  <RelatedProductCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <RelatedProductCard />
-                </Grid>
-                <Grid item xs={4}>
-                  <RelatedProductCard />
-                </Grid>
+                {categoryProducts.products.map((item) => {
+                  return (
+                    <Grid item xs={4} key={item.id}>
+                      <ProductVerticalItem data={item} />
+                    </Grid>
+                  )
+                })}
               </Grid>
             </Grid>
           </Grid>
@@ -83,5 +86,42 @@ const CategoryDetails = () => {
     </MainLayout>
   );
 };
+
+
+interface IParams extends ParsedUrlQuery {
+  categoryId: string
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const categorys = await getAllCategories();
+  const paths = categorys.data.data.map((category: CategoryData) => ({
+    params: {
+      categoryId: JSON.stringify(category.id)
+    }
+  }))
+  return {
+    paths,
+    fallback: 'blocking'
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  try {
+    const { categoryId } = context.params as IParams;
+    const category = await getCategoryDetails(categoryId);
+    const categoryProducts = await getProductsByCategory({ categoryId });
+    return {
+      props: {
+        categoryDetials: category.data.data,
+        categoryProducts: categoryProducts.data.data
+      },
+      revalidate: 10,
+    }
+  } catch(err) {
+    return {
+      notFound: true,
+    }
+  }
+}
 
 export default CategoryDetails;

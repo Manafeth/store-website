@@ -6,11 +6,11 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import VerticalProductCard from '../components/VerticalProductCard';
 import { getMostPurchasedProducts } from '../services/products.services';
 import { getFeaturedCategories } from '../services/categories.services';
 import { ProductData } from '../types/products';
 import { CategoryData } from '../types/categories';
+import ProductVerticalItem from '../components/ProductVerticalItem';
 
 interface Props {
   productsList: ProductData[],
@@ -31,7 +31,7 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
             {productsList.map((item) => {
               return (
                 <Grid item xs={2.4} key={item.id}>
-                  <VerticalProductCard data={item} />
+                  <ProductVerticalItem data={item} />
                 </Grid>
               );
             })}
