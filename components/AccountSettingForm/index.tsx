@@ -18,7 +18,6 @@ interface Props {
 }
 
 const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
-  const [isChecked, setIsChecked] = useState(false);
   const { i18n } = useTranslation();
   const {triggerUpdateEmailNotification} = useProfileModal();
   const [notification, setNotification] = useState<emailNotificationData>({
@@ -29,12 +28,10 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
 })
 
   const setLangaugeToEnglish = () => {
-    setIsChecked(!isChecked);
-    i18n.changeLanguage('ar');
-    localStorage.setItem('userLanguage', 'ar');
+    i18n.changeLanguage('en');
+    localStorage.setItem('userLanguage', 'en');
   };
   function setLangaugeToArabic() {
-    setIsChecked(!isChecked);
     i18n.changeLanguage('ar');
     localStorage.setItem('userLanguage', 'ar');
   }
