@@ -1,4 +1,5 @@
-import { addressDetailsData, emailNotificationData } from "../types/profile";
+import { addressDetailsData, customerData, emailNotificationData } from "../types/profile";
+import convertToFormData from "../utils/convertToFormData";
 import { axiosInstance } from "./axiosInstance";
 
 function getProfileWishListData() {
@@ -66,6 +67,13 @@ function updateEmailNotification(data:emailNotificationData) {
     data
   );
 }
+function updateCustomerProfile(customerData: customerData) {
+  const data = convertToFormData(customerData)
+  return axiosInstance.put(
+    'Auth/UpdateProfile',
+    data
+  );
+}
 export {
     getProfileWishListData,
     getAllActiveOrders,
@@ -76,5 +84,6 @@ export {
     deleteAddress,
     getCustomerProfileData,
     getEmailNotificationData,
-    updateEmailNotification
+    updateEmailNotification,
+    updateCustomerProfile
 }

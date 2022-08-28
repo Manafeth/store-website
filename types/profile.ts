@@ -49,10 +49,11 @@ export type countryData = {
 };
 
 export type customerData = {
-  imageFilePath: {
+  imageFilePath?:{
     orignialUrl: string,
     thumbUrl: string,
   },
+  imageFile?: File|null,
     fullName: string,
     email: string,
     countryId: number,
@@ -83,6 +84,7 @@ export type ProfileModalState = {
   fetchCustomerProfileData: () => Promise<void>,
   fetchEmailNotificationData:() => Promise<void>,
   triggerUpdateEmailNotification: (data:emailNotificationData) => Promise<void>,
+  updateProfileData: (data: customerData) => Promise<void>,
   wishListData: wishListData[],
   activeOrderData:activeOrderData[],
   archiveedOrderData:activeOrderData[],
@@ -95,5 +97,7 @@ export type ProfileModalState = {
   countryData:countryData[],
   customerData:customerData,
   emailNotificationData:emailNotificationData,
-  createStatus: string;
+  createStatus: string,
+  updateCustomerLoading: boolean,
+  updateStatus:string,
 }

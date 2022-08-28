@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
 import { getAllCities, getCountries } from '../services/common.services';
-import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateEmailNotification } from '../services/profile.services';
+import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
 import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
 
 interface Props {
@@ -28,7 +28,9 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [addressLoading, setAddressLoading] = useState(false);
   const [updateAddressLoading, setUpdateAddressLoading] = useState(false);
   const [updateEmailLoading, setUpdateEmailLoading] = useState(false);
+  const [updateCustomerLoading, setUpdateCustomerLoading] = useState(false);
   const [createStatus, setCreateStatus] = useState('');
+  const [updateStatus, setupdateStatus] = useState('');
   
   const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
     id: 0,
@@ -44,6 +46,7 @@ const [customerData, setCustomerData] = useState<customerData>({
     orignialUrl: '',
     thumbUrl: '',
   },
+  imageFile:null,
   fullName: '',
   email: '',
   countryId: 0,
@@ -170,6 +173,20 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
       Promise.reject(error);
     }
   }
+  async function updateProfileData(data: customerData) {
+    setUpdateCustomerLoading(true);
+    setupdateStatus(LOADING)
+    try {
+      await updateCustomerProfile(data);
+      setupdateStatus(SUCCESS);
+      setUpdateCustomerLoading(false);
+      fetchCustomerProfileData();
+    } catch(error) {
+      setupdateStatus(ERROR);
+      setUpdateCustomerLoading(false);
+      Promise.reject(error);
+    }
+  }
   const state: ProfileModalState = {
     wishListData,
     activeOrderData,
@@ -184,6 +201,8 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     emailNotificationData,
     updateEmailLoading,
     createStatus,
+    updateCustomerLoading,
+    updateStatus,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,
@@ -195,7 +214,8 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     deleteAddressData,
     fetchCustomerProfileData,
     fetchEmailNotificationData,
-    triggerUpdateEmailNotification
+    triggerUpdateEmailNotification,
+    updateProfileData
   };
 
   return (

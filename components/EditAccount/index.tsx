@@ -1,4 +1,12 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import uploadIcon from '../../assets/images/icons/upload-icon.png';
@@ -9,27 +17,67 @@ import InputLabel from '@mui/material/InputLabel';
 import Avatar from '@mui/material/Avatar';
 import PhoneNumberInput from '../PhoneNumberInput';
 import { customerData } from '../../types/profile';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface Props {
-  customerData :customerData
+  customerData: customerData;
+  // eslint-disable-next-line no-unused-vars
+  handleSubmit: (ev: FormEvent<HTMLFormElement>) => void;
+  setState: Dispatch<SetStateAction<customerData>>;
+  state: customerData;
+  loading: boolean;
 }
 
+const EditAccount: FC<Props> = ({
+  customerData,
+  handleSubmit,
+  setState,
+  state,
+  loading,
+}) => {
+  const [image, setImage] = useState('');
 
-const EditAccount: FC<Props> = ({customerData}) => {
-
-
+  function handlePhoneInput({
+    countryId,
+    phoneNumber,
+  }: {
+    countryId: number;
+    phoneNumber: string;
+  }) {
+    setState((prevState) => ({
+      ...prevState,
+      countryId: +countryId,
+      phoneNumber: phoneNumber,
+    }));
+  }
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
-    // setState((prevState: any) => ({
-    //   ...prevState,
-    //   [ev.target.name]: ev.target.value,
-    // }));
+    setState((prevState: any) => ({
+      ...prevState,
+      [ev.target.name]: ev.target.value,
+    }));
     console.log(ev.target.name);
   }
-  function handlePhoneInput(data: { countryId: number; phoneNumber: string }) {
-   
-  }
+
+  const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setState((prevState) => ({
+        ...prevState,
+        imageFile: event.target.files && event.target.files[0],
+      }));
+    }
+  };
+
+  useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      fullName: customerData.fullName,
+      email: customerData.email,
+      phoneNumber: customerData.phoneNumber,
+      countryId: customerData.countryId || 0,
+    }));
+    setImage(customerData.imageFilePath?.thumbUrl || '');
+  }, [customerData, setState]);
 
   return (
     <Box
@@ -39,6 +87,8 @@ const EditAccount: FC<Props> = ({customerData}) => {
         flexDirection: 'column',
         justifyContent: 'left',
       }}
+      component='form'
+      onSubmit={handleSubmit}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
         Edit Account
@@ -53,11 +103,14 @@ const EditAccount: FC<Props> = ({customerData}) => {
         }}
       >
         <Avatar
-          src={customerData.imageFilePath?.orignialUrl || ''}
+          src={
+            state.imageFile
+              ? URL.createObjectURL(state.imageFile)
+              : customerData?.imageFilePath?.thumbUrl || ''
+          }
           alt='product'
           sx={{ width: '100', height: '100' }}
-        >
-        </Avatar>
+        ></Avatar>
         <Button
           variant='outlined'
           component='label'
@@ -65,7 +118,13 @@ const EditAccount: FC<Props> = ({customerData}) => {
           endIcon={<Image src={uploadIcon} alt='upload Iocn' />}
         >
           Upload Photo (Max 1 Mb)
-          <input hidden accept='image/*' multiple type='file' />
+          <input
+            hidden
+            accept='image/*'
+            multiple
+            type='file'
+            onChange={onImageChange}
+          />
         </Button>
       </Box>
       <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
@@ -75,13 +134,14 @@ const EditAccount: FC<Props> = ({customerData}) => {
         id='outlined-basic'
         variant='outlined'
         placeholder={customerData.fullName}
-        name='firstName'
+        name='fullName'
+        onChange={handleInput}
         InputProps={{
-         style:{
-          fontSize:'14px',
-          fontWeight:'400',
-          color:'grey.1800'
-         }
+          style: {
+            fontSize: '14px',
+            fontWeight: '400',
+            color: 'grey.1800',
+          },
         }}
       />
       <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
@@ -99,24 +159,28 @@ const EditAccount: FC<Props> = ({customerData}) => {
         variant='outlined'
         placeholder={customerData.email}
         name='email'
+        onChange={handleInput}
         sx={{ mb: 3 }}
         InputProps={{
-          style:{
-           fontSize:'14px',
-           fontWeight:'400',
-           color:'grey.1800'
-          }
-         }}
+          style: {
+            fontSize: '14px',
+            fontWeight: '400',
+            color: 'grey.1800',
+          },
+        }}
       />
-      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500', mt:1 }}>
+      <InputLabel
+        shrink
+        sx={{ color: 'primary.dark', fontWeight: '500', mt: 1 }}
+      >
         Phone Number
       </InputLabel>
-   
-         <PhoneNumberInput
-          sx={{ mb: 3, fontSize:'14px', fontWeight:'400', color:'grey.1800'}}
-          onChange={handlePhoneInput}
-          value={{ countryId: customerData.countryId,phoneNumber: customerData.phoneNumber }}
-        />
+
+      <PhoneNumberInput
+        sx={{ mb: 3, fontSize: '14px', fontWeight: '400', color: 'grey.1800' }}
+        onChange={handlePhoneInput}
+        value={{ phoneNumber: state.phoneNumber, countryId: state.countryId }}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -125,7 +189,7 @@ const EditAccount: FC<Props> = ({customerData}) => {
           pb: 5,
         }}
       >
-        <Button
+        {/* <Button
           variant='contained'
           color='secondary'
           sx={{
@@ -137,13 +201,18 @@ const EditAccount: FC<Props> = ({customerData}) => {
           }}
         >
           Cancel
-        </Button>
+        </Button> */}
         <Button
           variant='contained'
           sx={{ width: 'auto', height: '44px' }}
           type='submit'
+          disabled={loading}
         >
-          save Changes
+          {loading ? (
+            <CircularProgress size={25} color='info' />
+          ) : (
+            'save Changes'
+          )}
         </Button>
       </Box>
     </Box>
