@@ -6,6 +6,7 @@ import React, {
   FC,
   useState,
 } from 'react';
+import { ERROR, LOADING, SUCCESS } from '../constants';
 import { getAllCities, getCountries } from '../services/common.services';
 import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateEmailNotification } from '../services/profile.services';
 import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
@@ -27,6 +28,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [addressLoading, setAddressLoading] = useState(false);
   const [updateAddressLoading, setUpdateAddressLoading] = useState(false);
   const [updateEmailLoading, setUpdateEmailLoading] = useState(false);
+  const [createStatus, setCreateStatus] = useState('');
   
   const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
     id: 0,
@@ -156,11 +158,14 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
   }
   async function triggerUpdateEmailNotification(data:emailNotificationData) {
     setUpdateEmailLoading(true);
+    setCreateStatus(LOADING)
     try {
       await  updateEmailNotification(data);
+      setCreateStatus(SUCCESS);
       setUpdateEmailLoading(false);
       fetchEmailNotificationData();
     } catch(error) {
+      setCreateStatus(ERROR);
       setUpdateEmailLoading(false);
       Promise.reject(error);
     }
@@ -178,6 +183,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     customerData,
     emailNotificationData,
     updateEmailLoading,
+    createStatus,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,

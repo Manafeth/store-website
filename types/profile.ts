@@ -95,4 +95,5 @@ export type ProfileModalState = {
   countryData:countryData[],
   customerData:customerData,
   emailNotificationData:emailNotificationData,
+  createStatus: string;
 }

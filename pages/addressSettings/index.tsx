@@ -1,13 +1,14 @@
 
 import React, { ChangeEvent, useEffect, useState } from "react";
 import AcccoutSettingForm from "../../components/AccountSettingForm";
+import { LOADING } from "../../constants";
 import { useProfileModal } from "../../contexts/ProfileContext";
 import MainLayout from "../../layouts/MainLayout";
 import ProfileLayout from "../../layouts/ProfileLayout";
 
 
 const Setting = () => {
-  const { fetchEmailNotificationData,  emailNotificationData} = useProfileModal();
+  const { fetchEmailNotificationData,  emailNotificationData,createStatus} = useProfileModal();
   useEffect(() => {
     fetchEmailNotificationData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -17,7 +18,8 @@ const Setting = () => {
     <MainLayout>
       <ProfileLayout>
         <AcccoutSettingForm 
-        emailNotificationData ={emailNotificationData}/>
+        emailNotificationData ={emailNotificationData}
+        loading={createStatus === LOADING}/>
       </ProfileLayout>
     </MainLayout>
   );

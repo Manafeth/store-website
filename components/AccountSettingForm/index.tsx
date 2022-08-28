@@ -14,9 +14,10 @@ import { useProfileModal } from '../../contexts/ProfileContext';
 
 interface Props {
   emailNotificationData :emailNotificationData,
+  loading: boolean;
 }
 
-const AcccoutSettingForm: FC<Props> = ({emailNotificationData}) => {
+const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
   const [isChecked, setIsChecked] = useState(false);
   const { i18n } = useTranslation();
   const {triggerUpdateEmailNotification} = useProfileModal();
@@ -28,7 +29,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData}) => {
 })
 
   const setLangaugeToEnglish = () => {
-    setIsChecked(isChecked);
+    setIsChecked(!isChecked);
     i18n.changeLanguage('ar');
     localStorage.setItem('userLanguage', 'ar');
   };
@@ -76,6 +77,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData}) => {
         checked={emailNotificationData.activityEmail}
         onChange={handleChecked}
         value={emailNotificationData.activityEmail}
+        disabled={loading}
         />
       </Box>
       <Typography
@@ -113,18 +115,15 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData}) => {
           checked={i18n.language === 'en'} 
           onChange={setLangaugeToEnglish} />}
           label='English'
-          sx={{ flex: '0.77', color: 'success.main' }}
+          sx={{ flex: '0.77', 'color': i18n.language === 'en' ? 'success.main' : '', }}
         />
         <FormControlLabel
           control={<Checkbox color='success'
           checked={i18n.language === 'ar'} 
            onChange={setLangaugeToArabic}/>}
           label='العربية'
-          sx={{
-            color: 'success',
-            '& .MuiSvgIcon-root': {
-              borderRadius: 10,
-            },
+          sx={{ 'color': i18n.language === 'ar' ? 'success.main' : '',
+           
           }}
         />
       </Box>
