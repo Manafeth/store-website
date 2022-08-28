@@ -5,21 +5,22 @@ import React, {
   FormEvent,
   SetStateAction,
   useEffect,
+  useState,
 } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
 import Divider from '@mui/material/Divider';
-import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-import { addressDetailsData } from '../../types/profile';
+import { addressData, addressDetailsData } from '../../types/profile';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import CircularProgress from '@mui/material/CircularProgress';
+import DeleteConfirmationMdoal from '../DeleteConfirmation';
 interface Props {
   // data: addressData;
   // eslint-disable-next-line no-unused-vars
@@ -49,6 +50,8 @@ const AddressManagment: FC<Props> = ({
     addressData,
     deleteAddressData
   } = useProfileModal();
+  const [deleteConfirmationActive, setDeleteConfirmationState] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState<addressData>();
   useEffect(() => {
     fetchAllAddressData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,14 +78,24 @@ const AddressManagment: FC<Props> = ({
       [ev.target.name]: ev.target.value,
     }));
   }
+  function handleDeleteConfirmationClose() {
+    setDeleteConfirmationState(false);
+  }
+  function HandleRemoveCustomer() {
+  
+      // deleteAddressData(selectedAddress.id).then(()=>{
+
+      // }).catch(()=>{
+
+      // })
+ 
+  }
+  function handleDeleteConfirmationOpen() {
+    setDeleteConfirmationState(true);
+  }
   function handleDelete() {
-    console.log('delete')
-    deleteAddressData(60).then((response)=>{
-      console.log('deleted',response)
-
-    }).catch((error)=>{
-
-    })   
+    // setSelectedAddress(id);
+    handleDeleteConfirmationOpen();   
 }
   return (
     <Box
@@ -250,6 +263,11 @@ const AddressManagment: FC<Props> = ({
           </>
         )}
       </Box>
+      <DeleteConfirmationMdoal
+        open={deleteConfirmationActive}
+        onClose={handleDeleteConfirmationClose}
+        handleRemove={HandleRemoveCustomer}
+      />
     </Box>
   );
 };
