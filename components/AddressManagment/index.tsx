@@ -19,6 +19,7 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
+import CircularProgress from '@mui/material/CircularProgress';
 interface Props {
   // data: addressData;
   // eslint-disable-next-line no-unused-vars
@@ -27,6 +28,7 @@ interface Props {
   accountAddressData: addressDetailsData;
   setAccountAddressData: Dispatch<SetStateAction<addressDetailsData>>;
   isEditMode: boolean;
+  loading: boolean;
 }
 
 const AddressManagment: FC<Props> = ({
@@ -35,6 +37,7 @@ const AddressManagment: FC<Props> = ({
   accountAddressData,
   setAccountAddressData,
   isEditMode,
+  loading
 }) => {
   const {
     fetchAllAddressData,
@@ -231,8 +234,9 @@ const AddressManagment: FC<Props> = ({
           variant='contained'
           sx={{ width: 'auto', height: '44px' }}
           type='submit'
+          disabled={loading}
         >
-          Add new address
+           {loading ? <CircularProgress size={25} color="info" /> : 'Add new address'}
         </Button>
         </>
          ) : (

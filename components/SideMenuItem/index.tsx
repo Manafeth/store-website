@@ -4,13 +4,21 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
+import { useEffect } from 'react';
 import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
+import { useProfileModal } from '../../contexts/ProfileContext';
 import ListMenuItem from './components/ListMenuItem';
 
 
 const SideMenuItem = () => {
   const { logout } = useAuthModal();
+  const { fetchCustomerProfileData, customerData } = useProfileModal();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      fetchCustomerProfileData();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
   const listItemSideBar = [
     { id: 1, name: 'Edit Account', link: paths.editAccount },
@@ -30,13 +38,13 @@ const SideMenuItem = () => {
           gap:'30px'
         }}
       >
-        <Avatar>A</Avatar>
+        <Avatar  src={customerData?.imageFilePath?.thumbUrl || ''}></Avatar>
         <Typography
           variant='h2'
           component='h1'
           sx={{ fontWeight: 'bold' }}
         >
-          Ahmed Shalayel
+         {customerData.fullName}
         </Typography>
       </Box>
       <List sx={{ display: 'flex', flexDirection: 'column' }}>

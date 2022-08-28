@@ -31,6 +31,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [updateCustomerLoading, setUpdateCustomerLoading] = useState(false);
   const [createStatus, setCreateStatus] = useState('');
   const [updateStatus, setupdateStatus] = useState('');
+  const [createAddressStatus, setCreateAddressStatus] = useState('');
   
   const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
     id: 0,
@@ -115,11 +116,14 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
   }
   async function triggerCreateAddress(data:addressDetailsData) {
     setAddressLoading(true);
+    setCreateAddressStatus(LOADING)
     try {
       await createAddress(data);
+      setCreateAddressStatus(SUCCESS)
       setAddressLoading(false);
       fetchAllAddressData();
     } catch(error) {
+      setCreateAddressStatus(ERROR)
       setAddressLoading(false);
       Promise.reject(error);
     }
@@ -203,6 +207,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     createStatus,
     updateCustomerLoading,
     updateStatus,
+    createAddressStatus,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,

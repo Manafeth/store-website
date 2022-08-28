@@ -5,10 +5,11 @@ import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import Box from '@mui/material/Box';
 import { addressDetailsData } from '../../types/profile';
+import { LOADING } from '../../constants';
 
 const Setting = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { triggerCreateAddress } = useProfileModal();
+  const { triggerCreateAddress,createAddressStatus } = useProfileModal();
   const [isEditMode, setIsEditMode] = useState(false);
   const [accountAddressData, setAccountAddressData] =
     useState<addressDetailsData>({
@@ -65,6 +66,7 @@ const Setting = () => {
             accountAddressData={accountAddressData}
             setAccountAddressData={setAccountAddressData}
             isEditMode={isEditMode}
+            loading={createAddressStatus === LOADING}
           />
         </Box>
       </ProfileLayout>

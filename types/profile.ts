@@ -100,4 +100,5 @@ export type ProfileModalState = {
   createStatus: string,
   updateCustomerLoading: boolean,
   updateStatus:string,
+  createAddressStatus:string,
 }
