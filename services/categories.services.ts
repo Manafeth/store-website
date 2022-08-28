@@ -13,7 +13,15 @@ function getAllCategories () {
   );
 }
 
+function getCategoryDetails (id: string | number) {
+  return axiosInstance.get(
+    'CustomerCategory/Get',
+    {params: { id }}
+  );
+}
+
 export {
     getFeaturedCategories,
-    getAllCategories
+    getAllCategories,
+    getCategoryDetails
 }

@@ -6,7 +6,7 @@ import ProductTabs from '../../../components/ProductTabs';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import RelatedProductCard from '../../../components/RelatedProducts';
+import RelatedProductCard from '../../../components/ProductVerticalItem';
 import ProductGallery from '../../../components/ImageGallery';
 import ProductDetailsInformation from '../../../components/ProductDetailsInformation';
 import MainLayout from '../../../layouts/MainLayout';
@@ -24,7 +24,7 @@ interface Props {
 
 const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) => {
   // const router = useRouter();
-console.log('productDetials', productDetials)
+
   return (
     <MainLayout>
       {/* {router.isFallback ? (
@@ -37,9 +37,9 @@ console.log('productDetials', productDetials)
             component='section'
             sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
           >
-            <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
+            <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 4.25, pb: 6.5 }}>
               <Breadcrumb />
-              <Grid container spacing={3} sx={{ mt: 4 }}>
+              <Grid container spacing={7} rowSpacing={4.25}>
                 <Grid item xs={6}>
                   <ProductGallery images={productDetials.imagesFilePath} />
                 </Grid>

@@ -21,8 +21,16 @@ function getRelatedProductDetails(productId: string) {
   );
 }
 
+function getProductsByCategory (params: { categoryId: number | string, priceFrom?: number, priceTo?: number, Options?: number[] }) {
+  return axiosInstance.get(
+    'Product/GetProductCategories',
+    {params}
+  );
+}
+
 export {
     getMostPurchasedProducts,
     getProductDetails,
-    getRelatedProductDetails
+    getRelatedProductDetails,
+    getProductsByCategory
 }

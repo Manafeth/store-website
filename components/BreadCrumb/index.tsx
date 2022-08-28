@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
 import Image from 'next/image';
 import ArrowRight from '../../assets/images/icons/arrow-right.png';
 
@@ -11,7 +12,7 @@ const Breadcrumb = () => {
     console.info('You clicked a breadcrumb.');
   }
   return (
-    <div role='presentation' onClick={handleClick}>
+    <Box role='presentation' onClick={handleClick} mb={4.25}>
       <Breadcrumbs
         separator={<Image src={ArrowRight} alt='Arrow right' />}
         aria-label='breadcrumb'
@@ -35,7 +36,7 @@ const Breadcrumb = () => {
         </Link>
         <Typography color='text.primary'>Modern yellow sofa</Typography>
       </Breadcrumbs>
-    </div>
+    </Box>
   );
 };
 
