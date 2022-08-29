@@ -9,10 +9,12 @@ interface Props {
 const ProductGallery: FC<Props> = ({ images }) => {
   return (
     <Box component='section'>
-      <ReactImageGallery items={images.map((item) => ({
-        thumbnail: item.thumbUrl,
-        original: item.orignialUrl
-      }))} />
+      <ReactImageGallery 
+        items={images.map((item) => ({
+          thumbnail: item.thumbUrl,
+          original: item.orignialUrl
+        }))}
+      />
     </Box>
   );
 };

@@ -2,15 +2,17 @@ import React, { FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import CardMedia from '@mui/material/CardMedia';
+import MuiLink from '@mui/material/Link';
 import Image from 'next/image';
-import ProductImage from '../../assets/images/product-one.jpg';
-import StarIcon from '../../assets/images/icons/star-icon.png';
-import EmptyStarIcon from '../../assets/images/icons/emptyStar-icon.png';
+// import StarIcon from '../../assets/images/icons/star-icon.png';
+// import EmptyStarIcon from '../../assets/images/icons/emptyStar-icon.png';
 import Link from 'next/link';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
 import CartIcon from '../../assets/images/icons/cart-icon.svg';
-import EyeIcon from '../../assets/images/icons/eye-icon.svg';
+// import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { ProductData } from '../../types/products';
+import paths from '../../constants/paths';
 
 interface Props {
   data: ProductData
@@ -29,14 +31,19 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
   return (
     <Box sx={{ textAlign: 'center' }}>
       <Box sx={{ position: 'relative' }}>
-        <Image
-          onMouseEnter={onHover}
-          onMouseLeave={onLeave}
-          src={ProductImage}
-          width={235}
-          height={300}
-          alt='product'
-        />
+        <Link href={paths.productDetails(data.id)}>
+          <MuiLink>
+            <CardMedia
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+              image={data.mainImageFilePath?.orignialUrl || ''}
+              component='img'
+              width={235}
+              height={300}
+              alt='product'
+            />
+          </MuiLink>
+        </Link>
         {hover ? (
           <Box
             sx={{
@@ -54,18 +61,19 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             <IconButton>
               <Image src={CartIcon} alt='cart icon' width={40} height={40} />
             </IconButton>
-            <IconButton>
+            {/* <IconButton>
               <Image src={EyeIcon} alt='eye icon' width={40} height={40} />
-            </IconButton>
+            </IconButton> */}
           </Box>
         ) : (
           ''
         )}
       </Box>
       <Box sx={{ pb: 4.25, pt: 3 }}>
-        <Link href='/'>
+        <Link href={paths.productDetails(data.id)}>
           <Typography
             variant='h5'
+            component='h3'
             sx={{
               mb: 1.25,
               cursor: 'pointer',

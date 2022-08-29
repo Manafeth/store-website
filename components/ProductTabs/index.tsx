@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import React, { useState, MouseEvent, FC } from 'react';
 import { ProductData } from '../../types/products';
 import ProductDescription from '../ProductDescription';
-import Tabs from './components/Tabs';
+// import Tabs from './components/Tabs';
 
 interface Props {
   productDetials: ProductData
@@ -18,7 +18,7 @@ const ProductTabs: FC<Props> = ({ productDetials }) => {
   }
   return (
     <Box>
-      <Tabs handleTabs={handleTabs} activeTab={activeTab} />
+      {/* <Tabs handleTabs={handleTabs} activeTab={activeTab} /> */}
       {activeTab === 1 && <ProductDescription productDetials={productDetials} />}
 
       {activeTab === 2 && (

@@ -1,4 +1,5 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
+
 html,
 body {
   padding: 0;
@@ -12,4 +13,9 @@ body {
 
 a {
   cursor: pointer;
+}
+
+.image-gallery-slide .image-gallery-image {
+  object-fit: cover;
+  min-height: 450px;
 }

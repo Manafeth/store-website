@@ -16,16 +16,16 @@ const ProductDescription: FC<Props> = ({ productDetials }) => {
   return (
     <Box sx={{ pt: 3 }}>
       <Container>
-        <Grid container spacing='40px'>
-          <Grid item xs={6}>
+        <Grid container spacing={4.25}>
+          <Grid item xs={4.3}>
             <CardMedia
               image={productDetials.mainImageFilePath?.orignialUrl || ''}
               component='img'
               alt='product'
-              sx={{ width: '100%', maxWidth: '100%' }}
+              sx={{ width: '100%', maxWidth: '100%', height: 372 }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={8.7}>
             <Box>
              {productDetials.description}
             </Box>
