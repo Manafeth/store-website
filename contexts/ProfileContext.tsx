@@ -22,13 +22,8 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [activeOrderData, setActiveOrderData] = useState<activeOrderData[]>([]);
   const [archiveedOrderData,setArchiveedOrderData] = useState<activeOrderData[]>([]);
   const [cityData, setCityData] = useState<cityData[]>([]);
-  const [countryData, setCountryData] = useState<countryData[]>([]);
-  
+  const [countryData, setCountryData] = useState<countryData[]>([]); 
   const [addressData,setaddressData] = useState<addressData[]>([]);
-  const [addressLoading, setAddressLoading] = useState(false);
-  const [updateAddressLoading, setUpdateAddressLoading] = useState(false);
-  const [updateEmailLoading, setUpdateEmailLoading] = useState(false);
-  const [updateCustomerLoading, setUpdateCustomerLoading] = useState(false);
   const [createStatus, setCreateStatus] = useState('');
   const [updateStatus, setupdateStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
@@ -115,32 +110,25 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     }
   }
   async function triggerCreateAddress(data:addressDetailsData) {
-    setAddressLoading(true);
     setCreateAddressStatus(LOADING)
     try {
       await createAddress(data);
       setCreateAddressStatus(SUCCESS)
-      setAddressLoading(false);
       fetchAllAddressData();
     } catch(error) {
       setCreateAddressStatus(ERROR)
-      setAddressLoading(false);
       Promise.reject(error);
     }
   }
   async function updateAddressData(data: addressDetailsData) {
-    setUpdateAddressLoading(true);
     try {
       await updateAddress(data);
-      setUpdateAddressLoading(false);
       fetchAllAddressData();
     } catch(error) {
-      setUpdateAddressLoading(false);
       Promise.reject(error);
     }
   }
   async function deleteAddressData(id:number) {
-    setUpdateAddressLoading(true);
     try {
       await deleteAddress(id);
     } catch(error) {
@@ -164,30 +152,24 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     }
   }
   async function triggerUpdateEmailNotification(data:emailNotificationData) {
-    setUpdateEmailLoading(true);
     setCreateStatus(LOADING)
     try {
       await  updateEmailNotification(data);
       setCreateStatus(SUCCESS);
-      setUpdateEmailLoading(false);
       fetchEmailNotificationData();
     } catch(error) {
       setCreateStatus(ERROR);
-      setUpdateEmailLoading(false);
       Promise.reject(error);
     }
   }
   async function updateProfileData(data: customerData) {
-    setUpdateCustomerLoading(true);
     setupdateStatus(LOADING)
     try {
       await updateCustomerProfile(data);
       setupdateStatus(SUCCESS);
-      setUpdateCustomerLoading(false);
       fetchCustomerProfileData();
     } catch(error) {
       setupdateStatus(ERROR);
-      setUpdateCustomerLoading(false);
       Promise.reject(error);
     }
   }
@@ -196,16 +178,12 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     activeOrderData,
     archiveedOrderData,
     addressData,
-    addressLoading,
-    updateAddressLoading,
     addressDetailsData,
     cityData,
     countryData,
     customerData,
     emailNotificationData,
-    updateEmailLoading,
     createStatus,
-    updateCustomerLoading,
     updateStatus,
     createAddressStatus,
     fetchWishListData,
