@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import usePagination from '@mui/material/usePagination';
 import { styled } from '@mui/material/styles';
@@ -10,10 +10,20 @@ const List = styled('ul')({
   display: 'flex',
 });
 
-const ProductPagination = () => {
+
+interface Props {
+  totalPages: number,
+  page: number,
+  onChange: (_:ChangeEvent<unknown>, page: number) => void
+}
+
+const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
   const { items } = usePagination({
-    count: 5,
+    count: totalPages,
+    page,
+    onChange
   });
+
 
   return (
     <Box
@@ -43,6 +53,7 @@ const ProductPagination = () => {
                     color: selected ? '#fff' : '#000',
                     borderLeft: 'none',
                     borderRight: 'none',
+                    cursor: 'pointer'
                   }}
                   {...item}
                 >
@@ -57,6 +68,7 @@ const ProductPagination = () => {
                     width: '83px',
                     height: '74px',
                     fontWeight: selected ? 'bold' : undefined,
+                    cursor: 'pointer'
                   }}
                   {...item}
                 >
