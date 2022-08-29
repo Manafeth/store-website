@@ -1,22 +1,84 @@
-import React, { ChangeEvent } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import profileImage from '../../assets/images/icons/placeHolder-icon.png';
 import uploadIcon from '../../assets/images/icons/upload-icon.png';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
+import Avatar from '@mui/material/Avatar';
+import PhoneNumberInput from '../PhoneNumberInput';
+import { customerData } from '../../types/profile';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const EditAccount = () => {
+interface Props {
+  customerData: customerData;
+  // eslint-disable-next-line no-unused-vars
+  handleSubmit: (ev: FormEvent<HTMLFormElement>) => void;
+  setState: Dispatch<SetStateAction<customerData>>;
+  state: customerData;
+  loading: boolean;
+}
+
+const EditAccount: FC<Props> = ({
+  customerData,
+  handleSubmit,
+  setState,
+  state,
+  loading,
+}) => {
+  const [image, setImage] = useState('');
+
+  function handlePhoneInput({
+    countryId,
+    phoneNumber,
+  }: {
+    countryId: number;
+    phoneNumber: string;
+  }) {
+    setState((prevState) => ({
+      ...prevState,
+      countryId: +countryId,
+      phoneNumber: phoneNumber,
+    }));
+  }
+
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
-    // setState((prevState: any) => ({
-    //   ...prevState,
-    //   [ev.target.name]: ev.target.value,
-    // }));
+    setState((prevState: any) => ({
+      ...prevState,
+      [ev.target.name]: ev.target.value,
+    }));
     console.log(ev.target.name);
   }
+
+  const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setState((prevState) => ({
+        ...prevState,
+        imageFile: event.target.files && event.target.files[0],
+      }));
+    }
+  };
+
+  useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      fullName: customerData.fullName,
+      email: customerData.email,
+      phoneNumber: customerData.phoneNumber,
+      countryId: customerData.countryId || 0,
+    }));
+    setImage(customerData.imageFilePath?.thumbUrl || '');
+  }, [customerData, setState]);
+
   return (
     <Box
       sx={{
@@ -25,6 +87,8 @@ const EditAccount = () => {
         flexDirection: 'column',
         justifyContent: 'left',
       }}
+      component='form'
+      onSubmit={handleSubmit}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
         Edit Account
@@ -38,7 +102,15 @@ const EditAccount = () => {
           mb: 4,
         }}
       >
-        <Image src={profileImage} alt='profileimage' width='100' height='100' />
+        <Avatar
+          src={
+            state.imageFile
+              ? URL.createObjectURL(state.imageFile)
+              : customerData?.imageFilePath?.thumbUrl || ''
+          }
+          alt='product'
+          sx={{ width: '100', height: '100' }}
+        ></Avatar>
         <Button
           variant='outlined'
           component='label'
@@ -46,34 +118,32 @@ const EditAccount = () => {
           endIcon={<Image src={uploadIcon} alt='upload Iocn' />}
         >
           Upload Photo (Max 1 Mb)
-          <input hidden accept='image/*' multiple type='file' />
+          <input
+            hidden
+            accept='image/*'
+            multiple
+            type='file'
+            onChange={onImageChange}
+          />
         </Button>
       </Box>
-      <Grid container spacing='40px'>
-        <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
-            First Name
-          </InputLabel>
-          <TextField
-            id='outlined-basic'
-            variant='outlined'
-            placeholder='Ahmed'
-            name='firstName'
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
-            Last Name
-          </InputLabel>
-
-          <TextField
-            id='outlined-basic'
-            variant='outlined'
-            placeholder='Mahmoud'
-            name='lastName'
-          />
-        </Grid>
-      </Grid>
+      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+        Full Name
+      </InputLabel>
+      <TextField
+        id='outlined-basic'
+        variant='outlined'
+        placeholder={customerData.fullName}
+        name='fullName'
+        onChange={handleInput}
+        InputProps={{
+          style: {
+            fontSize: '14px',
+            fontWeight: '400',
+            color: 'grey.1800',
+          },
+        }}
+      />
       <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
         Contact
       </Typography>
@@ -87,20 +157,29 @@ const EditAccount = () => {
       <TextField
         id='outlined-basic'
         variant='outlined'
-        placeholder='mall@example.com'
+        placeholder={customerData.email}
         name='email'
+        onChange={handleInput}
         sx={{ mb: 3 }}
+        InputProps={{
+          style: {
+            fontSize: '14px',
+            fontWeight: '400',
+            color: 'grey.1800',
+          },
+        }}
       />
-      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+      <InputLabel
+        shrink
+        sx={{ color: 'primary.dark', fontWeight: '500', mt: 1 }}
+      >
         Phone Number
       </InputLabel>
 
-      <TextField
-        id='outlined-basic'
-        variant='outlined'
-        placeholder='+966123456789'
-        name='phoneNumber'
-        sx={{ mb: 3 }}
+      <PhoneNumberInput
+        sx={{ mb: 3, fontSize: '14px', fontWeight: '400', color: 'grey.1800' }}
+        onChange={handlePhoneInput}
+        value={{ phoneNumber: state.phoneNumber, countryId: state.countryId }}
       />
       <Box
         sx={{
@@ -110,7 +189,7 @@ const EditAccount = () => {
           pb: 5,
         }}
       >
-        <Button
+        {/* <Button
           variant='contained'
           color='secondary'
           sx={{
@@ -122,10 +201,18 @@ const EditAccount = () => {
           }}
         >
           Cancel
-        </Button>
-        <Button variant='contained' sx={{  width: 'auto',
-            height: '44px',}} type='submit'>
-          save Changes
+        </Button> */}
+        <Button
+          variant='contained'
+          sx={{ width: 'auto', height: '44px' }}
+          type='submit'
+          disabled={loading}
+        >
+          {loading ? (
+            <CircularProgress size={25} color='info' />
+          ) : (
+            'save Changes'
+          )}
         </Button>
       </Box>
     </Box>

@@ -1,64 +1,74 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Image from "next/image";
-import blackHeart from "../../assets/images/icons/fill-heart.png";
-import goldStar from "../../assets/images/icons/gold-star.png";
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Image from 'next/image';
+import { FC } from 'react';
+import blackHeart from '../../assets/images/icons/fill-heart.png';
+import goldStar from '../../assets/images/icons/gold-star.png';
+import { wishListData } from '../../types/profile';
+interface Props {
+  data: wishListData;
+}
 
-const ProductItem = () => {
+const ProductItem: FC<Props> = ({ data }) => {
   return (
-    <Box sx={{ display: "flex", gap: "25px" }}>
+    <Box sx={{ display: 'flex', gap: '25px' }}>
       <Box
         sx={{
-          width: "120px",
-          height: "134px",
-          backgroundColor: "text.light",
-          position: "relative",
+          position: 'relative',
         }}
       >
+        <Avatar
+          src={data.imagesFilePath?.orignialUrl || ''}
+          alt='product'
+          sx={{ width: '120px', height: '134px', borderRadius: 0 }}
+        >
+          P
+        </Avatar>
         <Box
           sx={{
-            width: "44px",
-            height: "44px",
-            backgroundColor: "background.light",
-            position: "absolute",
-            bottom: "8px",
-            right: "8px",
-            textAlign: "center",
-            lineHeight: "3.5",
+            width: '44px',
+            height: '44px',
+            backgroundColor: 'background.light',
+            position: 'absolute',
+            bottom: '8px',
+            right: '8px',
+            textAlign: 'center',
+            lineHeight: '3.5',
           }}
         >
-          <Image src={blackHeart} alt="instagram" width="22" height="22" />
+          <Image src={blackHeart} alt='instagram' width='22' height='22' />
         </Box>
       </Box>
       <Box>
         <Typography
-          variant="h2"
-          component="h1"
-          sx={{ mb: 2, fontWeight: "400" }}
+          variant='h2'
+          component='h1'
+          sx={{ mb: 2, fontWeight: '400' }}
         >
-          Modern Yellow sofa
+          {data.name}
         </Typography>
-        <Box sx={{ display: "flex", justifyContent:'space-between' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography
-            variant="h5"
-            component="h1"
-            sx={{ mb: 2, fontWeight: "400" }}
+            variant='h5'
+            component='h1'
+            sx={{ mb: 2, fontWeight: '400' }}
           >
-            Home decore
+            {data.category}
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-            <Image src={goldStar} alt="instagram" width="22" height="22" />
+          {/* <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+            <Image src={goldStar} alt='instagram' width='22' height='22' />
             <Typography
-              variant="h5"
-              component="h1"
-              sx={{ mb: 2, fontWeight: "400" }}
+              variant='h5'
+              component='h1'
+              sx={{ mb: 2, fontWeight: '400' }}
             >
               4.8
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
-        <Typography variant="h2" component="h1" sx={{ fontWeight: "bold" }}>
-          SAR 1,139.33
+        <Typography variant='h2' component='h1' sx={{ fontWeight: 'bold' }}>
+          SAR {data.salePrice}
         </Typography>
       </Box>
     </Box>

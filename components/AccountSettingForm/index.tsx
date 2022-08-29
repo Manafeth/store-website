@@ -2,21 +2,51 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from '@mui/material/MenuItem';
 import Switch from '@mui/material/Switch';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import React, { ChangeEvent } from 'react';
+import React, {ChangeEvent, FC, useState } from 'react';
+import Link from 'next/link';
+import { emailNotificationData } from '../../types/profile';
+import IconButton from '@mui/material/IconButton';
+import { useTranslation } from 'react-i18next';
+import { useProfileModal } from '../../contexts/ProfileContext';
 
-const AcccoutSettingForm = () => {
-  function handleInput(ev: ChangeEvent<HTMLInputElement>) {
-    // setState((prevState: any) => ({
-    //   ...prevState,
-    //   [ev.target.name]: ev.target.value,
-    // }));
-    console.log(ev.target.name);
+interface Props {
+  emailNotificationData :emailNotificationData,
+  loading: boolean;
+}
+
+const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
+  const { i18n } = useTranslation();
+  const {triggerUpdateEmailNotification} = useProfileModal();
+  const [notification, setNotification] = useState<emailNotificationData>({
+    reminderEmail: false,
+    reminderPush: false,
+    activityEmail: false,
+    activityPush: false
+})
+
+  const setLangaugeToEnglish = () => {
+    i18n.changeLanguage('en');
+    localStorage.setItem('userLanguage', 'en');
+  };
+  function setLangaugeToArabic() {
+    i18n.changeLanguage('ar');
+    localStorage.setItem('userLanguage', 'ar');
   }
+  function handleChecked(event: ChangeEvent<HTMLInputElement>) {
+    const payload = {
+      ...emailNotificationData,
+      activityEmail: event.target.checked
+
+    }
+    triggerUpdateEmailNotification(payload).then(()=>{
+    }).catch()  
+    console.log('clicked')
+  }
+
+ 
   return (
     <Box
       sx={{
@@ -40,7 +70,12 @@ const AcccoutSettingForm = () => {
         <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
           Email Notification
         </Typography>
-        <Switch color='success' />
+        <Switch color='success' 
+        checked={emailNotificationData.activityEmail}
+        onChange={handleChecked}
+        value={emailNotificationData.activityEmail}
+        disabled={loading}
+        />
       </Box>
       <Typography
         sx={{
@@ -54,107 +89,38 @@ const AcccoutSettingForm = () => {
         invites to events & exclusive competitions related to Beuand,
       </Typography>
       <Divider sx={{ mb: 5, width: '80%' }} />
-
-      <TextField
-        variant='standard'
-        fullWidth
-        InputProps={{
-          endAdornment: (
-            <InputAdornment
-              position='end'
-              sx={{ mb: '48px', position: 'absolute', right: '0', top: -6 }}
-            >
-              Edit
-            </InputAdornment>
-          ),
-        }}
-        label='Shipping Address'
-        placeholder='Street name goes here, District name, City name, Country name, P.O12345'
-        InputLabelProps={{
-          shrink: true,
-          style: { fontSize: '24px', color: '#000', fontWeight: 'bold' },
-        }}
-        onChange={handleInput}
-        sx={{ mb: 4, width: '80%' }}
-        name='shippingAddress'
-      />
-      <TextField
-        variant='standard'
-        fullWidth
-        InputProps={{
-          endAdornment: (
-            <InputAdornment
-              position='end'
-              sx={{ mb: '48px', position: 'absolute', right: '0', top: -6 }}
-            >
-              Edit
-            </InputAdornment>
-          ),
-        }}
-        label='Payment'
-        placeholder='VISA 5168 **** **** 1932'
-        InputLabelProps={{
-          shrink: true,
-          style: { fontSize: '24px', color: '#000', fontWeight: 'bold' },
-        }}
-        onChange={handleInput}
-        sx={{ mb: 4, width: '80%' }}
-        name='Payment'
-      />
-      <TextField
-        select
-        label='Currency'
-        variant='standard'
-        margin='normal'
-        sx={{ mb: 5, width: '80%' }}
-        InputLabelProps={{
-          shrink: true,
-          style: { fontSize: '24px', color: '#000', fontWeight: 'bold' },
-        }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment
-              position='end'
-              sx={{
-                position: 'absolute',
-                right: '0',
-                top: -6,
-                fontSize: '16px',
-              }}
-            >
-              change
-            </InputAdornment>
-          ),
-        }}
-        name='currency'
-      >
-        <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-          test
-        </MenuItem>
-      </TextField>
+      <Box sx={{display:'flex',alignItems: 'baseline'}}>
+      <Typography variant='h2' component='h1' sx={{ mb: 5,flex: '0.7' }}>
+      Shipping Address
+      </Typography>
+      <Link href='/addressManagment'>
+      <IconButton sx={{fontSize:'16px'}}>
+      Edit
+      </IconButton> 
+      </Link>
+      </Box>
+      <Divider sx={{ mb: 5, width: '80%' }} />
       <Box sx={{ display: 'flex' }}>
-        <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
+        <Typography variant='h2' component='span'>
           Language
-        </Typography>
-        <Typography component='span' sx={{ fontSize: '16px' }}>
-          Change
         </Typography>
       </Box>
 
       <Box sx={{ display: 'flex' }}>
         <FormControlLabel
-          control={<Checkbox defaultChecked color='success' />}
+          control={<Checkbox defaultChecked color='success'  
+          checked={i18n.language === 'en'} 
+          onChange={setLangaugeToEnglish} />}
           label='English'
-          sx={{ flex: '0.77', color: 'success.main' }}
+          sx={{ flex: '0.77', 'color': i18n.language === 'en' ? 'success.main' : '', }}
         />
         <FormControlLabel
-          control={<Checkbox color='success' />}
+          control={<Checkbox color='success'
+          checked={i18n.language === 'ar'} 
+           onChange={setLangaugeToArabic}/>}
           label='العربية'
-          sx={{
-            color: 'success',
-            '& .MuiSvgIcon-root': {
-              borderRadius: 10,
-            },
+          sx={{ 'color': i18n.language === 'ar' ? 'success.main' : '',
+           
           }}
         />
       </Box>
