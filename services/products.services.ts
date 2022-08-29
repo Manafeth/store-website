@@ -1,3 +1,4 @@
+import { ProductByCategoryParams } from '../types/products';
 import { axiosInstance } from './axiosInstance';
 
 function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string }) {
@@ -21,7 +22,7 @@ function getRelatedProductDetails(productId: string) {
   );
 }
 
-function getProductsByCategory (params: { categoryId: number | string, priceFrom?: number, priceTo?: number, Options?: number[] }) {
+function getProductsByCategory(params: ProductByCategoryParams) {
   return axiosInstance.get(
     'Product/GetProductCategories',
     {params}

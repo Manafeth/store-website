@@ -1,9 +1,5 @@
-import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import Image from 'next/image';
-import ArrowRight from '../../../assets/images/icons/arrow-right.png';
 import { FC } from 'react';
 import React from 'react';
 import Link from 'next/link';
@@ -17,7 +13,6 @@ interface Props {
   };
 }
 const FilterMenuItem: FC<Props> = ({ data }) => {
-  const router = useRouter();
   
   const listButton = (
     <ListItemButton
