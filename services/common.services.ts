@@ -13,8 +13,14 @@ function getAllCities(countryId?: number) {
   });
 }
 
+function getStoreInfo() {
+  return axiosInstance.get(
+    'Auth/GetStoreInfo',
+  );
+}
 
 export {
     getCountries,
     getAllCities,
+    getStoreInfo
 };
