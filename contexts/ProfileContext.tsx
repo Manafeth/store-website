@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
 import { getAllCities, getCountries } from '../services/common.services';
-import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
+import { createAddress, deleteAddress, getAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
 import { activeOrderData, addressData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
 
 interface Props {
@@ -29,6 +29,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [updateAddressStatus, setupdateAddressStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
+
 
 const [customerData, setCustomerData] = useState<customerData>({
   imageFilePath: {
@@ -51,7 +52,15 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
   activityEmail: false,
   activityPush: false
 })
-
+const [addressDetails, setAddressDetails] = useState<addressData>({
+  id:0,
+  type:0,
+  address:'',
+  cityId:0,
+  street: '',
+  latitude: 0,
+  longitude: 0,
+})
   const router = useRouter();
 
   async function fetchWishListData() {
@@ -124,6 +133,14 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
       Promise.reject(error);
     }
   }
+  async function getAddressDetails(id:number) {
+    try {
+     const response = await  getAddress(id);
+      setAddressDetails(response.data.data)
+    } catch(error) {
+      Promise.reject(error);
+    }
+  }
   async function deleteAddressData(id:number) {
     setRemoveStatus(LOADING)
     try {
@@ -187,6 +204,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     createAddressStatus,
     removeStatus,
     updateAddressStatus,
+    addressDetails,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,
@@ -200,6 +218,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     fetchEmailNotificationData,
     triggerUpdateEmailNotification,
     updateProfileData,
+    getAddressDetails
    
   };
 

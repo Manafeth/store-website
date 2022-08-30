@@ -35,6 +35,7 @@ interface Props {
   // eslint-disable-next-line no-unused-vars
   handleSubmit: (ev: FormEvent<HTMLFormElement>) => void;
   handleClose?: () => void;
+  addressDetails:addressData;
 }
 
 const AddressDrawer: FC<Props> = ({
@@ -47,11 +48,13 @@ const AddressDrawer: FC<Props> = ({
   loading,
   handleSubmit,
   handleClose,
+  addressDetails
+  
 }) => {
-  const { cityData, countryData,addressData } =
+  const { cityData, countryData } =
     useProfileModal();
     const renderMarker =
-    accountAddressData.latitude > 0 && accountAddressData.longitude > 0;
+    addressDetails.latitude > 0 && addressDetails.longitude > 0;
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
     setAccountAddressData((prevState) => ({
@@ -71,15 +74,6 @@ const AddressDrawer: FC<Props> = ({
     }));
   }
  
-
-    useEffect(() => {
-      setAccountAddressData((prevState) => ({
-        ...prevState,
-        address: accountAddressData.address,
-        street: accountAddressData.street,
-        cityId: accountAddressData.cityId,
-      }));
-    }, [accountAddressData, setAccountAddressData]);
   return (
     <Drawer
       anchor='right'
@@ -141,8 +135,8 @@ const AddressDrawer: FC<Props> = ({
           variant='standard'
           placeholder='Street'
           name='street'
-          value={accountAddressData.street}
-          error={isSubmitted && !accountAddressData.street}
+          value={addressDetails.street}
+          error={isSubmitted && !addressDetails.street}
           sx={{ mb: 3 }}
           onChange={handleInput}
         />
@@ -160,10 +154,10 @@ const AddressDrawer: FC<Props> = ({
           variant='standard'
           margin='normal'
           sx={{ mb: 4 }}
-          value={cityData.length > 0 ? accountAddressData?.cityId : 0}
+          value={cityData.length > 0 ? addressDetails?.cityId : 0}
           // eslint-disable-next-line react/jsx-no-bind
           onChange={handleInput}
-          error={isSubmitted && !accountAddressData.cityId}
+          error={isSubmitted && !addressDetails.cityId}
           name='cityId'
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
@@ -223,8 +217,8 @@ const AddressDrawer: FC<Props> = ({
               {renderMarker ? (
                 <Marker
                   position={{
-                    lat: accountAddressData.latitude,
-                    lng: accountAddressData.longitude,
+                    lat: addressDetails.latitude,
+                    lng: addressDetails.longitude,
                   }}
                   icon={mapMarkupIcon}
                 />
@@ -280,7 +274,7 @@ const AddressDrawer: FC<Props> = ({
                   )}
                 </Button>
                 ):(
-              <Button variant='contained' sx={{ minWidth: 135 }} type='submit'  disabled={loading}>
+              <Button variant='contained' sx={{ width: 'auto', height: '44px' }} type='submit'  disabled={loading}>
               {loading ? (
                     <CircularProgress size={25} color='info' />
                   ) : (

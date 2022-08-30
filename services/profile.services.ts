@@ -39,7 +39,16 @@ function updateAddress(data:addressData) {
     data
   );
 }
-
+function getAddress(id: number) {
+  return axiosInstance.get(
+    'Address/Get',
+    {
+      params:{
+        id
+      },
+    }
+  );
+}
 
 function deleteAddress(id: number) {
   return axiosInstance.delete(
@@ -85,5 +94,6 @@ export {
     getCustomerProfileData,
     getEmailNotificationData,
     updateEmailNotification,
-    updateCustomerProfile
+    updateCustomerProfile,
+    getAddress
 }

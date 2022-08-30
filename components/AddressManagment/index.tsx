@@ -45,7 +45,10 @@ const AddressManagment = () => {
     createAddressStatus,
     triggerCreateAddress,
     removeStatus,
-    updateAddressData
+    updateAddressData,
+    updateAddressStatus,
+    getAddressDetails,
+    addressDetails  
   } = useProfileModal();
   function isFormValid() {
     return (
@@ -74,9 +77,7 @@ const AddressManagment = () => {
   }
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    console.log('clicked');
  return !isEditMode? createAddress():updateAddress()
-  
   }
   function createAddress(){
     if (isFormValid()) {
@@ -94,7 +95,18 @@ const AddressManagment = () => {
         });
     }
   }
+  useEffect(() => {
+    if (addressDetails) {
+    setAccountAddressData((prevState) => ({
+      ...prevState,
+      address: addressDetails.address,
+      street: addressDetails.street,
+      cityId: addressDetails.cityId,
+    }));
+  }
+  }, [addressDetails]);
   function updateAddress(){
+    if (isFormValid()) {
     const payload = {
       ...accountAddressData,
       id:selectedAddress?.id,
@@ -108,18 +120,20 @@ const AddressManagment = () => {
         setIsSubmitted(false);
     })
   }
+  }
   useEffect(() => {
     if (createAddressStatus === SUCCESS) {
       onClose();
       setIsSubmitted(false);
     }
   }, [createAddressStatus]);
-  // useEffect(() => {
-  //   if (updateAddressStatus === SUCCESS) {
-  //     onClose();
-  //     setIsSubmitted(false);
-  //   }
-  // }, [updateAddressStatus]);
+
+  useEffect(() => {
+    if (updateAddressStatus === SUCCESS) {
+      onClose();
+      setIsSubmitted(false);
+    }
+  }, [updateAddressStatus]);
 
   function handleDeleteConfirmationClose() {
     setDeleteConfirmationState(false);
@@ -129,6 +143,12 @@ const AddressManagment = () => {
       deleteAddressData(selectedAddress.id);
     }
   }
+  useEffect(() => {
+    if (selectedAddress && selectedAddress.id && open)
+    getAddressDetails(selectedAddress.id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAddress, open]);
+
   function handleActions(_: undefined, row: any) {
     function handleEdit() {
       setSelectedAddress(row);
@@ -241,10 +261,11 @@ const AddressManagment = () => {
         setAccountAddressData={setAccountAddressData}
         accountAddressData={accountAddressData}
         isEditMode={isEditMode}
-        loading={createAddressStatus === LOADING}
+        loading={createAddressStatus === LOADING || updateAddressStatus === LOADING}
         isSubmitted={isSubmitted}
         handleSubmit={handleSubmit}
         handleClose={handleClose}
+        addressDetails={addressDetails}
       />
       <DeleteConfirmationMdoal
         open={deleteConfirmationActive}
