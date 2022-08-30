@@ -10,24 +10,24 @@ function login(data: LoginData) {
 }
 
 function verifyOtp(data: VerifyOtpData) {
-    return axiosInstance.post(
-      'Auth/VerifyOtp',
-      data,
-    );
+  return axiosInstance.post(
+    'Auth/VerifyOtp',
+    data,
+  );
 }
 
 function getProfileData() {
-    return axiosInstance.get(
-      'Auth/GetProfile',
-    );
+  return axiosInstance.get(
+    'Auth/GetProfile',
+  );
 }
 
 function completeProfile(profileData: ProfileData) {
-    const data = convertToFormData(profileData)
-    return axiosInstance.put(
-      'Auth/CompleteProfile',
-      data
-    );
+  const data = convertToFormData(profileData)
+  return axiosInstance.put(
+    'Auth/CompleteProfile',
+    data
+  );
 }
   
 export {

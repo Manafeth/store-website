@@ -9,6 +9,7 @@ import Head from 'next/head';
 import { AuthModalProvider } from '../contexts/AuthModalContext';
 import AuthModal from '../components/AuthModal';
 import { ProfileModalProvider } from '../contexts/ProfileContext';
+import { CommonContextProvider } from '../contexts/CommonContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -32,14 +33,16 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Store website</title>
           <meta name="description" content="Store website" />
         </Head>
-        <AuthModalProvider>
-          <ProfileModalProvider>
-          <>
-            <Component {...pageProps} />
-            <AuthModal />
-          </>
-          </ProfileModalProvider>
-        </AuthModalProvider>
+        <CommonContextProvider>
+          <AuthModalProvider>
+            <ProfileModalProvider>
+            <>
+              <Component {...pageProps} />
+              <AuthModal />
+            </>
+            </ProfileModalProvider>
+          </AuthModalProvider>
+        </CommonContextProvider>
       </ThemeProvider>
     </I18nextProvider>
   )

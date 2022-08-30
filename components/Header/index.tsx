@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,6 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import logoImage from '../../assets/images/logo.png'
-import ArrowDown from '../../assets/images/icons/arrow-down.png'
 import SearchIcon from '../../assets/images/icons/search.png'
 import HeartIcon from '../../assets/images/icons/heart.png'
 import CartIcon from '../../assets/images/icons/cart.png'
@@ -22,8 +21,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
-import { useState } from 'react';
 import CartDrawer from '../CartDrawer';
+import { useCommon } from '../../contexts/CommonContext';
 
 const pages = [
   {page: 'Home', link: paths.home},
@@ -31,39 +30,38 @@ const pages = [
   {page: 'Contact us', link: paths.contactUs}
 ];
 
-const settings = [
-  {title: 'Test', link: '/test'},
-];
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElStore, setAnchorElStore] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const { isloggedIn, handleOpenAuthModal } = useAuthModal();
+  const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const {storeInfo, fetchStoreInfo} = useCommon()
+
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenStoreMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElStore(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseStoreMenu = () => {
-    setAnchorElStore(null);
-  };
   function onOpen() {
     setOpen(true);
   }
+
   function onClose() {
     setOpen(false);
   }
-  
+
+  useEffect(() => {
+    fetchStoreInfo();
+    if (isloggedIn)
+      fetchAccountData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isloggedIn])
+
   return (
     <AppBar position="static" color='inherit' sx={{ boxShadow: '0' }}>
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
@@ -76,56 +74,55 @@ const Header = () => {
             </Link>
 
             <Box px={4}>
-              <Box onClick={handleOpenStoreMenu} sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                <Avatar alt="Remy Sharp" src="" sx={{ width: 34, height: 34, mr: 1 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center'}}>
+                <Avatar alt="Remy Sharp" src={storeInfo.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>
                   S
                 </Avatar>
-                <Box component='span' sx={{ mr: 2, fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
+                <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
                   Welcome to, <br />
-                  Olivia store
-                </Box>
-                <Box sx={{ transform: Boolean(anchorElStore) ? 'rotate(180deg)' : '' }}>
-                  <Image src={ArrowDown} width='16' height='8' alt='Arrow down' />
+                  {storeInfo.name} store
                 </Box>
               </Box>
-              <Menu
-                sx={{ mt: '69px' }}
-                id="menu-appbar"
-                anchorEl={anchorElStore}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElStore)}
-                onClose={handleCloseStoreMenu}
-              >
-                {settings.map(({title, link}) => (
-                  <Link key={title} href={link}>
-                    <MenuItem  onClick={handleCloseStoreMenu}>
-                      <Typography textAlign="center">{title}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
-              </Menu>
             </Box>
           </Box>
 
           <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
             <Box sx={{ display: 'flex' }}>
               <IconButton
-                size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
-                m
+                <Box>
+                  <Box
+                    sx={{
+                      width: '20px',
+                      borderRadius: '2px',
+                      backgroundColor: '#323940',
+                      height: '2px',
+                      mb: 0.5
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: '20px',
+                      borderRadius: '2px',
+                      backgroundColor: '#323940',
+                      height: '2px',
+                      mb: 0.5
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: '20px',
+                      borderRadius: '2px',
+                      backgroundColor: '#323940',
+                      height: '2px'
+                    }}
+                  />
+                </Box>
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -158,17 +155,18 @@ const Header = () => {
             <Box
               sx={{
                 display: 'flex',
+                mr: 2
               }}
             >
               <Link href='/'>
-                <MuiLink>
-                  <Image src={logoImage} width='140' height='27' alt='logo' />
+                <MuiLink sx={{ display: 'flex' }}>
+                  <Image src={logoImage} width='120' height='20' alt='logo' />
                 </MuiLink>
               </Link>
             </Box>
           </Box>
           
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mx: -2 }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mx: {xs: -1, xl: -2} }}>
             {pages.map(({page, link}) => (
               <Link
                 key={page}
@@ -182,7 +180,7 @@ const Header = () => {
                     letterSpacing: '0.2px',
                     fontWeight: (router.pathname === link ? 600 : 400),
                     color: (router.pathname === link ? 'secondary.contrastText' : 'text.grey'),
-                    px: 2,
+                    px: {xs: 1, xl: 2},
                     '&:hover': {
                       fontWeight: 600,
                       color: 'secondary.contrastText',
@@ -213,21 +211,21 @@ const Header = () => {
                   lineHeight: '16px',
                   letterSpacing: '0.2px',
                   color: 'text.grey',
-                  minWidth: 300,
+                  minWidth: {xs: 250, xl: 300},
                   '& fieldset': {
                     border: '0 !important',
                   }
                 }
               }}
               placeholder='Search product, categories, services....'
-              sx={{mr: 2}}
+              sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
             />
 
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                mr: 4
+                mr: {xs: 1, sm: 2, md: 4}
               }}
             >
               <Image src={HeartIcon} alt='heart icon' width='16' height='15' />
@@ -248,7 +246,7 @@ const Header = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                mr: 2.5,
+                mr: {xs: 1, sm: 1.5, md: 2.5},
                 cursor: 'pointer'
               }}
               onClick={onOpen}
@@ -281,8 +279,8 @@ const Header = () => {
                     cursor: 'pointer'
                   }}
                 >
-                  <Avatar alt="Remy Sharp" src="" sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
-                  Ahmed K.
+                  <Avatar alt="Remy Sharp" src={profileData.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
+                  {profileData.fullName}
                 </Box>
               </Link>
             ) : (
