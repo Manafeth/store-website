@@ -37,7 +37,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               onMouseEnter={onHover}
               onMouseLeave={onLeave}
               src={data.mainImageFilePath?.orignialUrl || ''}
-              alt='product' sx={{ width: 235, height: 300, borderRadius: 0 }}
+              alt='product' sx={{ width: '100%', height: 300, borderRadius: 0 }}
             >
               P
             </Avatar>

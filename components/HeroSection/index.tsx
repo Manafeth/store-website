@@ -19,11 +19,11 @@ const HeroSection = () => {
                 <Typography
                     sx={{
                         fontWeight: 700,
-                        fontSize: '16px',
-                        lineHeight: '24px',
+                        fontSize: {xs: '14px', sm: '16px'},
+                        lineHeight: {xs: '20px', sm: '24px'},
                         letterSpacing: '0.1px',
                         color: 'grey.0',
-                        mb: 2
+                        mb: {xs: 1, sm: 2}
                     }}
                 >
                     SUMMER 2022
@@ -31,29 +31,29 @@ const HeroSection = () => {
                 <Typography
                     sx={{
                         fontWeight: 700,
-                        fontSize: '58px',
-                        lineHeight: '80px',
+                        fontSize: {xs: '35px', sm: '58px'},
+                        lineHeight: {xs: '50px', sm: '80px'},
                         letterSpacing: '0.2px',
                         color: 'grey.0',
-                        mb: 2
+                        mb: {xs: 1, sm: 2}
                     }}
                 >
                     -30% Discount
                 </Typography>
                 <Typography
                     sx={{
-                        fontSize: '14px',
-                        lineHeight: '20px',
+                        fontSize: {xs: '12px', sm: '14px'},
+                        lineHeight: {xs: '16px', sm: '20px'},
                         letterSpacing: '0.2px',
                         color: 'grey.0',
-                        mb: 2,
-                        maxWidth: 376
+                        mb: {xs: 1, sm: 2},
+                        maxWidth: {xs: 226, sm: 376}
                     }}
                 >
                     We know how large objects will act, but things on a small scale
                 </Typography>
                 <Link href='/'>
-                    <Button variant='contained' sx={{ minWidth: 160 }}>
+                    <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }}>
                         SHOP NOW
                     </Button>
                 </Link>

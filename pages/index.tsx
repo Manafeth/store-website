@@ -21,7 +21,7 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
   return (
     <MainLayout>
       <HeroSection />
-      <Box pt={22.25} pb={11.25}>
+      <Box pt={{xs: 6, md: 22.25}} pb={{xs: 6, md: 11.25}}>
         <FeaturedCategoriesSection categories={categories} />
       </Box>
       <Box component='section' >
@@ -30,7 +30,7 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
           <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }}>
             {productsList.map((item) => {
               return (
-                <Grid item xs={2.4} key={item.id}>
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>
                   <ProductVerticalItem data={item} />
                 </Grid>
               );

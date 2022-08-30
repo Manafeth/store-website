@@ -17,11 +17,11 @@ const FeaturedCategoryCard: FC<Props> = ({ isVertical, data }) => {
       <Box
         sx={{
           position: 'relative',
-          height: isVertical ? 559 : 274.5,
+          height: isVertical ? {xs: 300, md: 559} : {xs: 150, md: 274.5},
           cursor: 'pointer',
           backgroundRepeat: 'no-repeat',
           backgroundImage: `url(${data.bannerFilePath?.orignialUrl})`,
-          backgroundSize: isVertical ? 'auto 100%' : '100% auto',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
