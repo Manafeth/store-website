@@ -80,7 +80,7 @@ const AddressManagment = () => {
  return !isEditMode? createAddress():updateAddress()
   }
   function createAddress(){
-    if (isFormValid()) {
+    if (!isFormValid()) {
       const payload = {
         ...accountAddressData,
       };

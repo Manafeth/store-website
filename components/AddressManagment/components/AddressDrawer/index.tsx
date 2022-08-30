@@ -135,8 +135,8 @@ const AddressDrawer: FC<Props> = ({
           variant='standard'
           placeholder='Street'
           name='street'
-          value={addressDetails.street}
-          error={isSubmitted && !addressDetails.street}
+          value={accountAddressData.street}
+          error={isSubmitted && !accountAddressData.street}
           sx={{ mb: 3 }}
           onChange={handleInput}
         />
@@ -154,10 +154,10 @@ const AddressDrawer: FC<Props> = ({
           variant='standard'
           margin='normal'
           sx={{ mb: 4 }}
-          value={cityData.length > 0 ? addressDetails?.cityId : 0}
+          value={cityData.length > 0 ? accountAddressData?.cityId : 0}
           // eslint-disable-next-line react/jsx-no-bind
           onChange={handleInput}
-          error={isSubmitted && !addressDetails.cityId}
+          error={isSubmitted && !accountAddressData.cityId}
           name='cityId'
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
