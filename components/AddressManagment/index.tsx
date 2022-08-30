@@ -80,8 +80,9 @@ const AddressManagment = () => {
  return !isEditMode? createAddress():updateAddress()
   }
   function createAddress(){
-    if (!isFormValid()) {
-      const payload = {
+    if (!isFormValid())
+    setIsSubmitted(true); 
+    else  {const payload = {
         ...accountAddressData,
       };
       delete payload?.id;
@@ -93,7 +94,8 @@ const AddressManagment = () => {
         .catch(() => {
           setIsSubmitted(false);
         });
-    }
+      }
+    
   }
   useEffect(() => {
     if (addressDetails) {
@@ -105,9 +107,11 @@ const AddressManagment = () => {
     }));
   }
   }, [addressDetails]);
+
   function updateAddress(){
-    if (isFormValid()) {
-    const payload = {
+    if (!isFormValid())
+    setIsSubmitted(true);
+    else {const payload = {
       ...accountAddressData,
       id:selectedAddress?.id,
     };
@@ -119,7 +123,7 @@ const AddressManagment = () => {
     }).catch(() => {
         setIsSubmitted(false);
     })
-  }
+    }
   }
   useEffect(() => {
     if (createAddressStatus === SUCCESS) {
