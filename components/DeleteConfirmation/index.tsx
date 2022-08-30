@@ -38,10 +38,10 @@ const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove,
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h3">
-          {t('common.removeAlert')}
+        Remove alert!
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 4 }}>
-          {t('common.areYouSure') } {`${name ? `"${name}"` : t('common.thisItem')}`}
+          Are You Sure {`${name ? `"${name}"` : 'you want to delete this item'}`}
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 5 }}>
           <Button
@@ -53,7 +53,6 @@ const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove,
           >
            no
           </Button>
-
           <Button
             variant="contained"
             color="error"

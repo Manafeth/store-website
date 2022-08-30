@@ -97,4 +97,5 @@ export type ProfileModalState = {
   createStatus: string,
   updateStatus:string,
   createAddressStatus:string,
+  removeStatus:string,
 }

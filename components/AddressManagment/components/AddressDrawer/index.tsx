@@ -110,8 +110,7 @@ const AddressDrawer: FC<Props> = ({
           Address
         </label>
         <TextField
-          id='outlined-basic'
-          variant='outlined'
+          variant='standard'
           placeholder='Address'
           name='address'
           value={accountAddressData.address}
@@ -130,8 +129,7 @@ const AddressDrawer: FC<Props> = ({
           Street
         </label>
         <TextField
-          id='outlined-basic'
-          variant='outlined'
+          variant='standard'
           placeholder='Street'
           name='street'
           value={accountAddressData.street}
@@ -149,14 +147,14 @@ const AddressDrawer: FC<Props> = ({
           City
         </label>
         <TextField
-          id='outlined-basic'
           select
           variant='standard'
           margin='normal'
           sx={{ mb: 4 }}
-          value={accountAddressData.cityId}
+          value={cityData.length > 0 ? accountAddressData?.cityId : 0}
           // eslint-disable-next-line react/jsx-no-bind
           onChange={handleInput}
+          error={isSubmitted && !accountAddressData.cityId}
           name='cityId'
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
@@ -183,7 +181,6 @@ const AddressDrawer: FC<Props> = ({
           Country
         </label>
         <TextField
-          id='outlined-basic'
           select
           variant='standard'
           margin='normal'

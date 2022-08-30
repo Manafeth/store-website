@@ -27,6 +27,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [createStatus, setCreateStatus] = useState('');
   const [updateStatus, setupdateStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
+  const [removeStatus, setRemoveStatus] = useState('');
   
   const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
     id: 0,
@@ -129,9 +130,13 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     }
   }
   async function deleteAddressData(id:number) {
+    setRemoveStatus(LOADING)
     try {
       await deleteAddress(id);
+      setRemoveStatus(SUCCESS);
+      fetchAllAddressData();
     } catch(error) {
+      setRemoveStatus(ERROR);
       Promise.reject(error);
     }
   }
@@ -198,7 +203,8 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     fetchCustomerProfileData,
     fetchEmailNotificationData,
     triggerUpdateEmailNotification,
-    updateProfileData
+    updateProfileData,
+    removeStatus
   };
 
   return (
