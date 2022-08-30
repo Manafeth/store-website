@@ -29,7 +29,7 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
                 <Grid container spacing={3} rowSpacing={3.75}>
                     {allCategories.map((item) => {
                         return (
-                            <Grid item xs={3} key={item.id}>
+                            <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
                                 <CategoryCard data={item} />
                             </Grid>
                         )
