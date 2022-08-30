@@ -4,6 +4,7 @@ import React, {
   FC,
   FormEvent,
   SetStateAction,
+  useEffect,
 } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -47,8 +48,10 @@ const AddressDrawer: FC<Props> = ({
   handleSubmit,
   handleClose,
 }) => {
-  const { cityData, countryData, addressData, deleteAddressData } =
+  const { cityData, countryData,addressDetailsData } =
     useProfileModal();
+    const renderMarker =
+    accountAddressData.latitude > 0 && accountAddressData.longitude > 0;
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
     setAccountAddressData((prevState) => ({
@@ -67,8 +70,16 @@ const AddressDrawer: FC<Props> = ({
       longitude: ev.latLng.lng(),
     }));
   }
-  const renderMarker =
-    accountAddressData.latitude > 0 && accountAddressData.longitude > 0;
+ 
+
+    useEffect(() => {
+      setAccountAddressData((prevState) => ({
+        ...prevState,
+        address: addressDetailsData.address,
+        street: addressDetailsData.street,
+        cityId: addressDetailsData.cityId,
+      }));
+    }, [addressDetailsData, setAccountAddressData]);
   return (
     <Drawer
       anchor='right'
@@ -87,9 +98,7 @@ const AddressDrawer: FC<Props> = ({
           pb: 7,
         }}
       >
-        <Typography variant='h2' component='h1' sx={{ mb: 3, mt: 3 }}>
-          Add new address
-        </Typography>
+        <Typography variant="h2" component="h2">{!isEditMode ? 'Add new address' : 'Update address'}</Typography>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
         </IconButton>
@@ -235,8 +244,6 @@ const AddressDrawer: FC<Props> = ({
           }}
         >
           {' '}
-          {!isEditMode ? (
-            <>
               <Box
                 sx={{
                   display: 'flex',
@@ -259,6 +266,7 @@ const AddressDrawer: FC<Props> = ({
                 >
                   cancel
                 </Button>
+                {!isEditMode ? (
                 <Button
                   variant='contained'
                   sx={{ width: 'auto', height: '44px' }}
@@ -271,22 +279,16 @@ const AddressDrawer: FC<Props> = ({
                     'Add new address'
                   )}
                 </Button>
-              </Box>
-            </>
-          ) : (
-            <>
-              <Button
-                color='secondary'
-                variant='contained'
-                sx={{ minWidth: 135, mr: '20px' }}
-              >
-                Cancel
+                ):(
+              <Button variant='contained' sx={{ minWidth: 135 }} type='submit'  disabled={loading}>
+              {loading ? (
+                    <CircularProgress size={25} color='info' />
+                  ) : (
+                    'update address'
+                  )}
               </Button>
-              <Button variant='contained' sx={{ minWidth: 135 }} type='submit'>
-                update
-              </Button>
-            </>
-          )}
+                )}
+                </Box>
         </Box>
       </Box>
     </Drawer>

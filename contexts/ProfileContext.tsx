@@ -26,9 +26,9 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [addressData,setaddressData] = useState<addressData[]>([]);
   const [createStatus, setCreateStatus] = useState('');
   const [updateStatus, setupdateStatus] = useState('');
+  const [updateAddressStatus, setupdateAddressStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
-  
   const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
     id: 0,
     cityId: 0,
@@ -122,10 +122,13 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     }
   }
   async function updateAddressData(data: addressDetailsData) {
+    setupdateAddressStatus(LOADING)
     try {
       await updateAddress(data);
+      setupdateAddressStatus(SUCCESS);
       fetchAllAddressData();
     } catch(error) {
+      setupdateAddressStatus(ERROR);
       Promise.reject(error);
     }
   }
@@ -191,6 +194,8 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     createStatus,
     updateStatus,
     createAddressStatus,
+    removeStatus,
+    updateAddressStatus,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,
@@ -204,7 +209,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     fetchEmailNotificationData,
     triggerUpdateEmailNotification,
     updateProfileData,
-    removeStatus
+   
   };
 
   return (

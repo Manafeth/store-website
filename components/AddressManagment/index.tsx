@@ -38,7 +38,6 @@ const AddressManagment = () => {
   const {
     fetchAllAddressData,
     addressDetailsData,
-    cityData,
     fetchAllCityData,
     fetchAllCountryData,
     countryData,
@@ -46,7 +45,8 @@ const AddressManagment = () => {
     deleteAddressData,
     createAddressStatus,
     triggerCreateAddress,
-    removeStatus
+    removeStatus,
+    updateAddressData
   } = useProfileModal();
   function isFormValid() {
     return (
@@ -68,15 +68,7 @@ const AddressManagment = () => {
     fetchAllCountryData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    setAccountAddressData((prevState) => ({
-      ...prevState,
-      address: addressDetailsData.address,
-      street: addressDetailsData.street,
-      cityId: addressDetailsData.cityId,
-    }));
-  }, [addressDetailsData, setAccountAddressData]);
-
+ 
   function handleClose() {
     setAccountAddressData(initialState);
     onClose();
@@ -84,15 +76,10 @@ const AddressManagment = () => {
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     console.log('clicked');
-    // updateAddressData(accountAddressData).then(() => {
-    //     setIsSubmitted(false);
-    //     setAccountAddressData((prevState) => ({
-    //         ...prevState,
-    //     }));
-    // }).catch(() => {
-    //     setIsSubmitted(false);
-    // })
-
+ return !isEditMode? createAddress():updateAddress()
+  
+  }
+  function createAddress(){
     if (isFormValid()) {
       const payload = {
         ...accountAddressData,
@@ -108,12 +95,33 @@ const AddressManagment = () => {
         });
     }
   }
+  function updateAddress(){
+    const payload = {
+      ...accountAddressData,
+      id:selectedAddress?.id,
+    };
+    updateAddressData(payload).then(() => {
+        setIsSubmitted(false);
+        setAccountAddressData((prevState) => ({
+            ...prevState,
+        }));
+    }).catch(() => {
+        setIsSubmitted(false);
+    })
+  }
   useEffect(() => {
     if (createAddressStatus === SUCCESS) {
       onClose();
       setIsSubmitted(false);
     }
   }, [createAddressStatus]);
+  // useEffect(() => {
+  //   if (updateAddressStatus === SUCCESS) {
+  //     onClose();
+  //     setIsSubmitted(false);
+  //   }
+  // }, [updateAddressStatus]);
+
   function handleDeleteConfirmationClose() {
     setDeleteConfirmationState(false);
   }
@@ -211,25 +219,6 @@ const AddressManagment = () => {
           Add New Address
         </Button>
       </Box>
-
-      {/* {addressData?.map((item) => {
-        return (
-          // eslint-disable-next-line react/jsx-key
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Typography key={item.id}>{item.address}</Typography>
-            <IconButton onClick={handleDelete}>
-              <Image src={deleteIcon} width='14' height='14' alt='close icon' />
-            </IconButton>
-          </Box>
-        );
-      })} */}
-
        <DataTable
         columns={columns}
         rowsData={addressData}
