@@ -1,11 +1,10 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import AddressManagment from '../../components/AddressManagment';
-import { useProfileModal } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import Box from '@mui/material/Box';
-import { addressDetailsData } from '../../types/profile';
-import { LOADING, SUCCESS } from '../../constants';
+import { addressData } from '../../types/profile';
+
 
 const Setting = () => {
   return (
@@ -20,6 +19,6 @@ const Setting = () => {
 };
 
 export default Setting;
-function updateAddressData(addressDetailsData: addressDetailsData) {
+function updateAddressData(addressData: addressData) {
   throw new Error('Function not implemented.');
 }

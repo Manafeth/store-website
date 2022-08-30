@@ -7,7 +7,7 @@ import React, {
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { addressData, addressDetailsData } from '../../types/profile';
+import { addressData } from '../../types/profile';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
@@ -31,13 +31,12 @@ const AddressManagment = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [accountAddressData, setAccountAddressData] =useState<addressDetailsData>(initialState);
+  const [accountAddressData, setAccountAddressData] =useState<addressData>(initialState);
   const [deleteConfirmationActive, setDeleteConfirmationState] =useState(false);
   const [open, setOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<addressData>();
   const {
     fetchAllAddressData,
-    addressDetailsData,
     fetchAllCityData,
     fetchAllCountryData,
     countryData,
@@ -84,7 +83,7 @@ const AddressManagment = () => {
       const payload = {
         ...accountAddressData,
       };
-      delete payload.id;
+      delete payload?.id;
       triggerCreateAddress(payload)
         .then((response) => {
           console.log(response);

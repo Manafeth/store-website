@@ -20,20 +20,15 @@ export type activeOrderData = {
   createdAt:string,
 }
 export type addressData = {
-  id:number,
+  id?:number,
   type:number,
   address:string,
   cityId:number,
-}
-export type addressDetailsData = {
-  id?: number
-  cityId: number,
-  address: string,
   street: string,
-  type: number,
   latitude: number,
   longitude: number,
 }
+
 export type cityData = {
   id: number;
   name?: string,
@@ -76,10 +71,10 @@ export type ProfileModalState = {
   fetchActiveOrderData: () => Promise<void>,
   fetchArchiveedOrderData:() => Promise<void>,
   fetchAllAddressData:() => Promise<void>,
-  updateAddressData: (data:addressDetailsData) => Promise<void>,
+  updateAddressData: (data:addressData) => Promise<void>,
   fetchAllCityData:() => Promise<void>,
   fetchAllCountryData:() => Promise<void>,
-  triggerCreateAddress: (data:addressDetailsData) => Promise<void>,
+  triggerCreateAddress: (data:addressData) => Promise<void>,
   deleteAddressData: (id:number) => Promise<void>,
   fetchCustomerProfileData: () => Promise<void>,
   fetchEmailNotificationData:() => Promise<void>,
@@ -89,7 +84,6 @@ export type ProfileModalState = {
   activeOrderData:activeOrderData[],
   archiveedOrderData:activeOrderData[],
   addressData:addressData[],
-  addressDetailsData:addressDetailsData,
   cityData: cityData[],
   countryData:countryData[],
   customerData:customerData,

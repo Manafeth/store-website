@@ -17,7 +17,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useProfileModal } from '../../../../contexts/ProfileContext';
-import { addressDetailsData } from '../../../../types/profile';
+import { addressData} from '../../../../types/profile';
 import { GOOGLE_MAP_KEY } from '../../../../constants';
 import { Status, Wrapper } from '@googlemaps/react-wrapper';
 import GoogleMap from '../GoogleMap';
@@ -27,8 +27,8 @@ import mapMarkupIcon from '../../../../assets/images/icons/map-markup.svg';
 interface Props {
   open: boolean;
   onClose: () => void;
-  setAccountAddressData: Dispatch<SetStateAction<addressDetailsData>>;
-  accountAddressData: addressDetailsData;
+  setAccountAddressData: Dispatch<SetStateAction<addressData>>;
+  accountAddressData: addressData;
   isSubmitted: boolean;
   isEditMode: boolean;
   loading: boolean;
@@ -48,7 +48,7 @@ const AddressDrawer: FC<Props> = ({
   handleSubmit,
   handleClose,
 }) => {
-  const { cityData, countryData,addressDetailsData } =
+  const { cityData, countryData,addressData } =
     useProfileModal();
     const renderMarker =
     accountAddressData.latitude > 0 && accountAddressData.longitude > 0;
@@ -75,11 +75,11 @@ const AddressDrawer: FC<Props> = ({
     useEffect(() => {
       setAccountAddressData((prevState) => ({
         ...prevState,
-        address: addressDetailsData.address,
-        street: addressDetailsData.street,
-        cityId: addressDetailsData.cityId,
+        address: accountAddressData.address,
+        street: accountAddressData.street,
+        cityId: accountAddressData.cityId,
       }));
-    }, [addressDetailsData, setAccountAddressData]);
+    }, [accountAddressData, setAccountAddressData]);
   return (
     <Drawer
       anchor='right'

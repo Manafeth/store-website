@@ -9,7 +9,7 @@ import React, {
 import { ERROR, LOADING, SUCCESS } from '../constants';
 import { getAllCities, getCountries } from '../services/common.services';
 import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
-import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
+import { activeOrderData, addressData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -29,15 +29,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [updateAddressStatus, setupdateAddressStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
-  const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
-    id: 0,
-    cityId: 0,
-    address: '',
-    street: '',
-    type: 0,
-    latitude:0,
-    longitude:0,
-})
+
 const [customerData, setCustomerData] = useState<customerData>({
   imageFilePath: {
     orignialUrl: '',
@@ -110,7 +102,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
       Promise.reject(error);
     }
   }
-  async function triggerCreateAddress(data:addressDetailsData) {
+  async function triggerCreateAddress(data:addressData) {
     setCreateAddressStatus(LOADING)
     try {
       await createAddress(data);
@@ -121,7 +113,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
       Promise.reject(error);
     }
   }
-  async function updateAddressData(data: addressDetailsData) {
+  async function updateAddressData(data:addressData) {
     setupdateAddressStatus(LOADING)
     try {
       await updateAddress(data);
@@ -186,7 +178,6 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     activeOrderData,
     archiveedOrderData,
     addressData,
-    addressDetailsData,
     cityData,
     countryData,
     customerData,
