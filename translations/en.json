@@ -16,7 +16,14 @@
         "refundPolicy":"Refund policy",
         "faq":"FAQ",
         "contactUs":"Contact us",
-        "sar":"SAR"
+        "sar":"SAR",
+        "fullName":"Full Name",
+        "contact":"Contact",
+        "email":"Email",
+        "phoneNumber":"Phone Number",
+        "saveChanges":"Save Changes",
+        "edit":"Edit",
+        "language":"Language"
        
     },
     "Auth": {
@@ -31,7 +38,14 @@
         "logout":"Logout",
         "noOrder":"No Order",
         "activeOrders":"Active orders",
-        "histriory":"Histriory"
+        "histriory":"Histriory",
+        "uploadPhoto":"Upload Photo (Max 1 Mb)",
+        "wishlistProduct":"Wishlist Product",
+        "accountSetting":"Account Setting",
+        "emailNotification":"Email Notification",
+        "emailTextOne":"We would like you to be first to get customized news",
+        "emailtextTwo":",special offers,invites to events & exclusive competitions related to Beuand",
+        "shippingAddress":"Shipping Address"
 
        
     },

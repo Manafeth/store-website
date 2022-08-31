@@ -19,6 +19,7 @@ interface Props {
 
 const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
   const { i18n } = useTranslation();
+  const [t] = useTranslation();
   const {triggerUpdateEmailNotification} = useProfileModal();
   const [notification, setNotification] = useState<emailNotificationData>({
     reminderEmail: false,
@@ -57,7 +58,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        Account Setting
+      {t('settings.accountSetting')}
       </Typography>
       <Box
         sx={{
@@ -68,7 +69,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
         }}
       >
         <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
-          Email Notification
+        {t('settings.emailNotification')}
         </Typography>
         <Switch color='success' 
         checked={emailNotificationData.activityEmail}
@@ -85,24 +86,23 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
           mb: 5,
         }}
       >
-        We would like you to be first to get customized news, special offers,
-        invites to events & exclusive competitions related to Beuand,
+      {t('settings.emailTextOne')}{t('settings.emailtextTwo')}
       </Typography>
       <Divider sx={{ mb: 5, width: '80%' }} />
       <Box sx={{display:'flex',alignItems: 'baseline'}}>
       <Typography variant='h2' component='h1' sx={{ mb: 5,flex: '0.7' }}>
-      Shipping Address
+      {t('settings.shippingAddress')}
       </Typography>
       <Link href='/addressManagment'>
       <IconButton sx={{fontSize:'16px'}}>
-      Edit
+      {t('common.edit')}
       </IconButton> 
       </Link>
       </Box>
       <Divider sx={{ mb: 5, width: '80%' }} />
       <Box sx={{ display: 'flex' }}>
         <Typography variant='h2' component='span'>
-          Language
+        {t('common.language')}
         </Typography>
       </Box>
 

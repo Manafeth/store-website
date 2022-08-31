@@ -15,7 +15,14 @@
         "termsOfUse":"تعليمات الاستخدام",
         "refundPolicy":"سياسة الاسترجاع",
         "faq":"التعليمات",
-        "contactUs":"اتصل بنا"
+        "contactUs":"اتصل بنا",
+        "fullName":"الاسم بالكامل",
+        "contact":"اتصال",
+        "email":"البريد الإلكتروني",
+        "phoneNumber":"رقم الهاتف",
+        "saveChanges":"حفظ التغييرات",
+        "edit":"يحرر",
+        "language":"لغة"
        
     },
     "Auth": {
@@ -30,7 +37,15 @@
         "logout":"تسجيل خروج",
         "noOrder":"رقم الطلب",
         "activeOrders":"طلبات نشطة",
-        "histriory":"التاريخ"
+        "histriory":"التاريخ",
+        "uploadPhoto":"تحميل الصورة (بحد أقصى 1 ميجا بايت)",
+        "wishlistProduct":"منتج قائمة الرغبات",
+        "accountSetting":"إعدادات الحساب",
+        "emailNotification":"تنبيه اليريد الالكترونى",
+        "emailTextOne":"نود أن تكون أول من يحصل على أخبار مخصصة",
+        "emailtextTwo":"، عروض خاصة ، دعوات إلى الأحداث والمسابقات الحصرية المتعلقة بـ Beuand",
+        "shippingAddress":"عنوان الشحن"
+        
        
     },
     "errorMsg": {

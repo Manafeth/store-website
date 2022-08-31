@@ -5,9 +5,11 @@ import ProductItem from '../../components/ProductItem';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
+import { useTranslation } from "react-i18next";
 
 const WishListProduct = () => {
   const { fetchWishListData, wishListData } = useProfileModal();
+  const [t] = useTranslation();
   useEffect(() => {
     fetchWishListData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,7 +23,7 @@ const WishListProduct = () => {
             component='h1'
             sx={{ mb: 5, fontWeight: 'bold' }}
           >
-            Wishlist Product
+              {t('settings.wishlistProduct')}
           </Typography>
           {wishListData?.map((item) => {
             return(
