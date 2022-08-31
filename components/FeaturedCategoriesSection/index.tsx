@@ -19,12 +19,12 @@ const FeaturedCategoriesSection: FC<Props> = ({ categories }) => {
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
             <Grid container spacing={1.25}>
                 {category1 && (
-                    <Grid item xs={4}>
+                    <Grid item  xs={12} md={4}>
                         <FeaturedCategoryCard isVertical data={category1} />
                     </Grid>
                 )}
                 {categories.length > 3 ? (
-                    <Grid item xs={4}>
+                    <Grid item  xs={12} md={4}>
                         {category2 && (
                             <Box mb={1.25}>
                                 <FeaturedCategoryCard data={category2} />
@@ -39,19 +39,19 @@ const FeaturedCategoriesSection: FC<Props> = ({ categories }) => {
                 ) : (
                     <>
                         {category2 && (
-                            <Grid item xs={4}>
+                            <Grid item  xs={12} md={4}>
                                 <FeaturedCategoryCard isVertical data={category2} />
                             </Grid>
                         )}
                         {category3 && (
-                            <Grid item xs={4}>
+                            <Grid item  xs={12} md={4}>
                                 <FeaturedCategoryCard isVertical data={category3} />
                             </Grid>
                         )}
                     </>
                 )}
                 {category4 && (
-                    <Grid item xs={4}>
+                    <Grid item xs={12} md={4}>
                         <FeaturedCategoryCard isVertical data={category4} />
                     </Grid>
                 )}

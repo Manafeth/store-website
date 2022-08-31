@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import CardMedia from '@mui/material/CardMedia';
+import Avatar from '@mui/material/Avatar';
 import MuiLink from '@mui/material/Link';
 import Image from 'next/image';
 // import StarIcon from '../../assets/images/icons/star-icon.png';
@@ -33,15 +33,14 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
       <Box sx={{ position: 'relative' }}>
         <Link href={paths.productDetails(data.id)}>
           <MuiLink>
-            <CardMedia
+            <Avatar
               onMouseEnter={onHover}
               onMouseLeave={onLeave}
-              image={data.mainImageFilePath?.orignialUrl || ''}
-              component='img'
-              width={235}
-              height={300}
-              alt='product'
-            />
+              src={data.mainImageFilePath?.orignialUrl || ''}
+              alt='product' sx={{ width: '100%', height: 300, borderRadius: 0 }}
+            >
+              P
+            </Avatar>
           </MuiLink>
         </Link>
         {hover ? (
