@@ -13,6 +13,7 @@ import CartIcon from '../../assets/images/icons/cart-icon.svg';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { ProductData } from '../../types/products';
 import paths from '../../constants/paths';
+import { useTranslation } from "react-i18next";
 
 interface Props {
   data: ProductData
@@ -20,6 +21,7 @@ interface Props {
 
 const RelatedProductCard: FC<Props> = ({ data }) => {
   const [hover, setHover] = useState(false);
+  const [t] = useTranslation();
   const onHover = () => {
     setHover(true);
   };
@@ -94,14 +96,14 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               fontWeight: '700',
             }}
           >
-            SAR {data.salePrice}
+             {t('common.sar')} {data.salePrice}
           </Typography>
           <Typography
             variant='h5'
             component='span'
             sx={{ color: '#23856D', fontWeight: '700' }}
           >
-            SAR {data.priceAfterDiscount}
+             {t('common.sar')} {data.priceAfterDiscount}
           </Typography>
         </Box>
         {/* <Box

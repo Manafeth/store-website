@@ -22,12 +22,20 @@
         "phoneNumber":"رقم الهاتف",
         "saveChanges":"حفظ التغييرات",
         "edit":"يحرر",
-        "language":"لغة"
+        "language":"لغة",
+        "items":"العناصر"
        
     },
     "Auth": {
        
     },
+    "heroSection": {
+        "summerYear":"صيف 2022",
+        "discount":"- خصم 30٪",
+        "description":"نحن نعلم كيف ستتصرف الأشياء الكبيرة ، لكن الأشياء على نطاق صغير",
+        "shopNow":"تسوق الآن"    
+          
+       },
     "settings": {
         "myOrders":"طلباتي",
         "editAccount":"تحرير الحساب",
