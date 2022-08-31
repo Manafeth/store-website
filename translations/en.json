@@ -1,8 +1,38 @@
 {
     "common": {
+        "welcomeTo":"Welcome to",
+        "store":"store",
+        "home":"Home",
+        "login":"Login",
+        "beuandCompany":"Beuand is a Saudi company with a global vision that seeks to help the retail sector start its e-commerce business by providing various solutions that enable e-store owners to launch and manage their stores smoothly.",
+        "beaundTeam":"Designed and developed with love by Beuand team",
+        "quickAccess":"Quick access",
+        "categories":"Categories",
+        "wishlist":"Wishlist",
+        "settings":"Settings",
+        "legal":"Legal",
+        "privacyPolicy":"Privacy policy",
+        "termsOfUse":"Terms of use",
+        "refundPolicy":"Refund policy",
+        "faq":"FAQ",
+        "contactUs":"Contact us",
+        "sar":"SAR"
        
     },
     "Auth": {
+       
+    },
+    "settings": {
+        "myOrders":"My Orders",
+        "editAccount":"Edit Account",
+        "orders":"Orders",
+        "wishlist":"Wishlist",
+        "setting":"Setting",
+        "logout":"Logout",
+        "noOrder":"No Order",
+        "activeOrders":"Active orders",
+        "histriory":"Histriory"
+
        
     },
     "errorMsg": {

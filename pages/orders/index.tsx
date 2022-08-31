@@ -1,11 +1,13 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import OrderTabs from "../../components/OrderTabs";
 import MainLayout from "../../layouts/MainLayout";
 import ProfileLayout from "../../layouts/ProfileLayout";
 
 const ProfileOrders = () => {
+  const [t] = useTranslation();
   return (
     <MainLayout>
        <ProfileLayout>
@@ -15,9 +17,8 @@ const ProfileOrders = () => {
               component="h1"
               sx={{ mb: 5, fontWeight: "bold" }}
             >
-              My Orders
+              {t('settings.myOrders')}
             </Typography>
-
             <OrderTabs/>
           </Box>
        </ProfileLayout>
