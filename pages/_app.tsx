@@ -10,6 +10,7 @@ import { AuthModalProvider } from '../contexts/AuthModalContext';
 import AuthModal from '../components/AuthModal';
 import { ProfileModalProvider } from '../contexts/ProfileContext';
 import { CommonContextProvider } from '../contexts/CommonContext';
+import { AlertProvider } from '../contexts/AlertContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -33,16 +34,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Store website</title>
           <meta name="description" content="Store website" />
         </Head>
-        <CommonContextProvider>
-          <AuthModalProvider>
-            <ProfileModalProvider>
-            <>
-              <Component {...pageProps} />
-              <AuthModal />
-            </>
-            </ProfileModalProvider>
-          </AuthModalProvider>
-        </CommonContextProvider>
+        <AlertProvider>
+          <CommonContextProvider>
+            <AuthModalProvider>
+              <ProfileModalProvider>
+                <Component {...pageProps} />
+              </ProfileModalProvider>
+            </AuthModalProvider>
+          </CommonContextProvider>
+        </AlertProvider>
       </ThemeProvider>
     </I18nextProvider>
   )

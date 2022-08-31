@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, ReactElement, useState, FC, useEffect } from 'react';
+import AuthModal from '../components/AuthModal';
 import paths from '../constants/paths';
 import { completeProfile, getProfileData, login, verifyOtp } from '../services/auth.services';
 import { AuthModalState, LoginData, ProfileData, VerifyOtpData } from '../types/auth';
 import getAccessToken from '../utils/getToken';
+import { useAlert } from './AlertContext';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -27,6 +29,7 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   const [verifyLoading, setVerifyLoading] = useState(false);
   const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
 
+  const { sendAlert } = useAlert();
   const router = useRouter();
 
   function handleOpenAuthModal() {
@@ -40,10 +43,12 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   async function sendPhoneNumber(data: LoginData) {
     setLoginLoading(true);
     try {
-      await login(data);
+      const response = await login(data);
       setLoginLoading(false);
-    } catch(error) {
+      sendAlert(response.data?.message, 'success')
+    } catch(error: any) {
       setLoginLoading(false);
+      sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);
     }
   }
@@ -56,8 +61,10 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
       localStorage.setItem('accessToken', response?.data?.data?.token?.accessToken);
       setVerifyLoading(false);
       setIsloggedIn(true);
-    } catch(error) {
+      sendAlert(response.data?.message, 'success')
+    } catch(error: any) {
       setVerifyLoading(false);
+      sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);
     }
   }
@@ -66,7 +73,9 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
     try {
       const response = await getProfileData();
       setProfileData(response.data.data);
-    } catch(error) {
+      sendAlert(response.data?.message, 'success')
+    } catch(error: any) {
+      sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);
     }
   }
@@ -74,11 +83,13 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   async function updateAccountData(data: ProfileData) {
     setUpdateProfileLoading(true);
     try {
-      await completeProfile(data);
+      const response = await completeProfile(data);
       setUpdateProfileLoading(false);
       fetchAccountData();
-    } catch(error) {
+      sendAlert(response.data?.message, 'success')
+    } catch(error: any) {
       setUpdateProfileLoading(false);
+      sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);
     }
   }
@@ -124,6 +135,7 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   
   return (
     <AuthModalContext.Provider value={state}>
+      <AuthModal />
       {children}
     </AuthModalContext.Provider>
   );
