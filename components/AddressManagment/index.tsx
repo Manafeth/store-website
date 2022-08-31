@@ -87,8 +87,8 @@ const AddressManagment = () => {
       };
       delete payload?.id;
       triggerCreateAddress(payload)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          setAccountAddressData(initialState);
           setIsSubmitted(false);
         })
         .catch(() => {
@@ -120,6 +120,7 @@ const AddressManagment = () => {
         setAccountAddressData((prevState) => ({
             ...prevState,
         }));
+        setAccountAddressData(initialState);
     }).catch(() => {
         setIsSubmitted(false);
     })
