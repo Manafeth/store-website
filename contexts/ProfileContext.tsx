@@ -29,6 +29,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [updateAddressStatus, setupdateAddressStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
+  const [status, setStatus] = useState('');
 
 
 const [customerData, setCustomerData] = useState<customerData>({
@@ -88,10 +89,13 @@ const [addressDetails, setAddressDetails] = useState<addressData>({
     }
   }
   async function fetchAllAddressData() {
+    setStatus(LOADING)
     try {
       const response = await getAllAddress({page: 1, pageSize: 10});
+      setStatus(SUCCESS)
       setaddressData(response.data.data.data);
     } catch (error) {
+      setStatus(ERROR)
       Promise.reject(error);
     }
   }
@@ -205,6 +209,7 @@ const [addressDetails, setAddressDetails] = useState<addressData>({
     removeStatus,
     updateAddressStatus,
     addressDetails,
+    status,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,

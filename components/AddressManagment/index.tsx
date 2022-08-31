@@ -39,7 +39,7 @@ const AddressManagment = () => {
     fetchAllAddressData,
     fetchAllCityData,
     fetchAllCountryData,
-    countryData,
+    status,
     addressData,
     deleteAddressData,
     createAddressStatus,
@@ -247,6 +247,7 @@ const AddressManagment = () => {
         rowsData={addressData}
         rowFields={fields}
         keyField="id"
+        loading={status === LOADING}
         noDataContent={
           <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
             <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
@@ -258,7 +259,6 @@ const AddressManagment = () => {
           </Box>
         }
       />
-
       <AddressDrawer
         onClose={onClose}
         open={open}
