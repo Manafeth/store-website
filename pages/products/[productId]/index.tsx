@@ -17,6 +17,7 @@ import { CircularProgress } from '@mui/material';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useAlert } from '../../../contexts/AlertContext';
+import { addProductToCart } from '../../../services/cart.services';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -55,6 +56,19 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
     });
   }
 
+  function handleAddProductToCart() {
+    addProductToCart({
+      productId: productData.id,
+      quantity: 1,
+      options: [],
+      checkOutAttributes: [],
+    }).then((response) => {
+      sendAlert(response?.data?.message, 'success')
+    }).catch((error: any) => {
+      sendAlert(error.response.data.Message, 'error')
+    })
+  }
+
   useEffect(() => {
     setProductData(productDetials);
   }, [productDetials])
@@ -79,7 +93,11 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
                   <ProductGallery images={productData.imagesFilePath} />
                 </Grid>
                 <Grid item xs={6}>
-                  <ProductDetailsInformation  productDetials={productData} handleTogglingProductInWishList={handleTogglingProductInWishList} />
+                  <ProductDetailsInformation 
+                    productDetials={productData}
+                    handleTogglingProductInWishList={handleTogglingProductInWishList}
+                    handleAddProductToCart={handleAddProductToCart}
+                  />
                 </Grid>
               </Grid>
             </Container>

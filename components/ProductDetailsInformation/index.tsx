@@ -14,10 +14,11 @@ import { ProductData } from '../../types/products';
 
 interface Props {
   productDetials: ProductData,
-  handleTogglingProductInWishList: () => void
+  handleTogglingProductInWishList: () => void,
+  handleAddProductToCart: () => void,
 }
 
-const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList }) => {
+const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList, handleAddProductToCart }) => {
   const colorAttribute = productDetials.attributes.find((item) => item.type === 2);
   return (
     <Box>
@@ -100,7 +101,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
           <IconButton onClick={handleTogglingProductInWishList}>
             <Image src={productDetials.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40}/>
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleAddProductToCart}>
             <Image src={CartIcon} alt='cart icon' width={40} height={40} />
           </IconButton>
         </Box>

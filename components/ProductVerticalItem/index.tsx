@@ -16,6 +16,7 @@ import { ProductData } from '../../types/products';
 import paths from '../../constants/paths';
 import { toggleProductInWishList } from '../../services/products.services';
 import { useAlert } from '../../contexts/AlertContext';
+import { addProductToCart } from '../../services/cart.services';
 interface Props {
   data: ProductData
 }
@@ -61,6 +62,19 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
     });
   }
 
+  function handleAddProductToCart() {
+    addProductToCart({
+      productId: product.id,
+      quantity: 1,
+      options: [],
+      checkOutAttributes: [],
+    }).then((response) => {
+      sendAlert(response?.data?.message, 'success')
+    }).catch((error: any) => {
+      sendAlert(error.response.data.Message, 'error')
+    })
+  }
+
   useEffect(() => {
     setProduct(data)
   }, [data])
@@ -96,7 +110,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             <IconButton onClick={handleTogglingProductInWishList}>
               <Image src={product.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40} />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleAddProductToCart}>
               <Image src={CartIcon} alt='cart icon' width={40} height={40} />
             </IconButton>
             {/* <IconButton>
