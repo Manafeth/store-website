@@ -61,8 +61,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
 
   const [attributes, setAttributes] = useState<ProductAttributesData[]>([]);
   const [categories, setCategories] = useState<CategoryData[]>([])
-console.log('attributes', attributes)
-console.log('categories', categories)
+
   async function getProducts(data: ProductByCategoryParams) {
     if (categoryId) {
       const payload: ProductByCategoryParams = {

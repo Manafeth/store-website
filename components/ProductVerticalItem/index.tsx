@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -9,17 +9,40 @@ import Image from 'next/image';
 // import EmptyStarIcon from '../../assets/images/icons/emptyStar-icon.png';
 import Link from 'next/link';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
+import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.png';
 import CartIcon from '../../assets/images/icons/cart-icon.svg';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { ProductData } from '../../types/products';
 import paths from '../../constants/paths';
-
+import { toggleProductInWishList } from '../../services/products.services';
+import { useAlert } from '../../contexts/AlertContext';
+import { addProductToCart } from '../../services/cart.services';
 interface Props {
   data: ProductData
 }
 
 const RelatedProductCard: FC<Props> = ({ data }) => {
   const [hover, setHover] = useState(false);
+  const [product, setProduct] = useState<ProductData>({
+    id: 0,
+    name: '',
+    salePrice: 0,
+    quantity: 0,
+    category: '',
+    priceAfterDiscount: 0,
+    shortDescription: '',
+    description: '',
+    pageTitle: '',
+    metaDescription: '',
+    isInWishList: false,
+    imagesFilePath: [],
+    attributes: [],
+    checkOutAttributes: [],
+    subProducts: [],
+  });
+
+  const { sendAlert } = useAlert();
+
   const onHover = () => {
     setHover(true);
   };
@@ -28,15 +51,45 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
     setHover(false);
   };
 
+  function handleTogglingProductInWishList() {
+    toggleProductInWishList(product.id).then(() => {
+      setProduct((prevState) => ({
+        ...prevState,
+        isInWishList: !prevState.isInWishList
+      }))
+    }).catch((error: any) => {
+      sendAlert(error.response.data.Message, 'error')
+    });
+  }
+
+  function handleAddProductToCart() {
+    addProductToCart({
+      productId: product.id,
+      quantity: 1,
+      options: [],
+      checkOutAttributes: [],
+    }).then((response) => {
+      sendAlert(response?.data?.message, 'success')
+    }).catch((error: any) => {
+      sendAlert(error.response.data.Message, 'error')
+    })
+  }
+
+  useEffect(() => {
+    setProduct(data)
+  }, [data])
+
+  const colorAttribute = product.attributes.find((item) => item.type === 2);
+  
   return (
     <Box sx={{ textAlign: 'center' }}>
       <Box sx={{ position: 'relative' }}>
-        <Link href={paths.productDetails(data.id)}>
+        <Link href={paths.productDetails(product.id)}>
           <MuiLink>
             <Avatar
               onMouseEnter={onHover}
               onMouseLeave={onLeave}
-              src={data.mainImageFilePath?.orignialUrl || ''}
+              src={product.mainImageFilePath?.orignialUrl || ''}
               alt='product' sx={{ width: '100%', height: 300, borderRadius: 0 }}
             >
               P
@@ -54,10 +107,10 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             }}
             onMouseEnter={onHover}
           >
-            <IconButton>
-              <Image src={HeartIcon} alt='heart icon' width={40} height={40} />
+            <IconButton onClick={handleTogglingProductInWishList}>
+              <Image src={product.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40} />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleAddProductToCart}>
               <Image src={CartIcon} alt='cart icon' width={40} height={40} />
             </IconButton>
             {/* <IconButton>
@@ -69,7 +122,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
         )}
       </Box>
       <Box sx={{ pb: 4.25, pt: 3 }}>
-        <Link href={paths.productDetails(data.id)}>
+        <Link href={paths.productDetails(product.id)}>
           <Typography
             variant='h5'
             component='h3'
@@ -80,7 +133,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               textAlign: 'left',
             }}
           >
-            {data.name}
+            {product.name}
           </Typography>
         </Link>
         <Box sx={{ display: 'flex', mb: 2 }}>
@@ -94,14 +147,14 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               fontWeight: '700',
             }}
           >
-            SAR {data.salePrice}
+            SAR {product.salePrice}
           </Typography>
           <Typography
             variant='h5'
             component='span'
             sx={{ color: '#23856D', fontWeight: '700' }}
           >
-            SAR {data.priceAfterDiscount}
+            SAR {product.priceAfterDiscount}
           </Typography>
         </Box>
         {/* <Box
@@ -122,49 +175,31 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             10 Reviews
           </Typography>
         </Box> */}
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-          }}
-        >
+        {colorAttribute && (
           <Box
             sx={{
-              backgroundColor: '#23A6F0',
-              width: 16,
-              height: 16,
-              borderRadius: '50%',
-              mr: 0.75,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
             }}
-          />
-          <Box
-            sx={{
-              backgroundColor: '#23856D',
-              width: 16,
-              height: 16,
-              borderRadius: '50%',
-              mr: 0.75,
-            }}
-          />
-          <Box
-            sx={{
-              backgroundColor: '#E77C40',
-              width: 16,
-              height: 16,
-              borderRadius: '50%',
-              mr: 0.75,
-            }}
-          />
-          <Box
-            sx={{
-              backgroundColor: '#252B42',
-              width: 16,
-              height: 16,
-              borderRadius: '50%',
-            }}
-          />
-        </Box>
+          >
+            {colorAttribute.options.map((item) => {
+              return (
+                <Box
+                  key={item.id}
+                  sx={{
+                    backgroundColor: item.nameEn,
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    mr: 0.75,
+                  }}
+                />
+              )
+            })}
+          </Box>
+        )}
+        
       </Box>
     </Box>
   );

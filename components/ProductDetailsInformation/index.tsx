@@ -2,20 +2,24 @@ import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
-import StarIcon from '../../assets/images/icons/gold-star.png';
+// import StarIcon from '../../assets/images/icons/gold-star.png';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
+import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.png';
 import CartIcon from '../../assets/images/icons/cart-icon.svg';
-import EyeIcon from '../../assets/images/icons/eye-icon.svg';
+// import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { IconButton } from '@mui/material';
 import { ProductData } from '../../types/products';
 
 interface Props {
-  productDetials: ProductData
+  productDetials: ProductData,
+  handleTogglingProductInWishList: () => void,
+  handleAddProductToCart: () => void,
 }
 
-const ProductDetailsInformation: FC<Props> = ({ productDetials }) => {
+const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList, handleAddProductToCart }) => {
+  const colorAttribute = productDetials.attributes.find((item) => item.type === 2);
   return (
     <Box>
       <Typography
@@ -62,43 +66,29 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials }) => {
         {productDetials.shortDescription}
       </Typography>
       <Divider sx={{ mb: 1 }} />
-      <Box sx={{ display: 'flex', mb: 1 }}>
+      {colorAttribute && (
         <Box
           sx={{
-            backgroundColor: '#F6D44B',
-            width: 30,
-            height: 30,
-            borderRadius: '50%',
-            mr: 0.75,
+            display: 'flex',
+            alignItems: 'center',
           }}
-        />
-        <Box
-          sx={{
-            backgroundColor: '#23856D',
-            width: 30,
-            height: 30,
-            borderRadius: '50%',
-            mr: 0.75,
-          }}
-        />
-        <Box
-          sx={{
-            backgroundColor: '#E77C40',
-            width: 30,
-            height: 30,
-            borderRadius: '50%',
-            mr: 0.75,
-          }}
-        />
-        <Box
-          sx={{
-            backgroundColor: '#252B42',
-            width: 30,
-            height: 30,
-            borderRadius: '50%',
-          }}
-        />
-      </Box>
+        >
+          {colorAttribute.options.map((item) => {
+            return (
+              <Box
+                key={item.id}
+                sx={{
+                  backgroundColor: item.nameEn,
+                  width: 30,
+                  height: 30,
+                  borderRadius: '50%',
+                  mr: 0.75,
+                }}
+              />
+            )
+          })}
+        </Box>
+      )}
       <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
         <Button
           variant='contained'
@@ -108,10 +98,10 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials }) => {
           Select Options
         </Button>
         <Box sx={{display:'flex',gap:'5px'}}>
-          <IconButton>
-            <Image src={HeartIcon} alt='heart icon' width={40} height={40}/>
+          <IconButton onClick={handleTogglingProductInWishList}>
+            <Image src={productDetials.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40}/>
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleAddProductToCart}>
             <Image src={CartIcon} alt='cart icon' width={40} height={40} />
           </IconButton>
         </Box>
