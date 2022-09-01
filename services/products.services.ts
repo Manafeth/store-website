@@ -29,9 +29,17 @@ function getProductsByCategory(params: ProductByCategoryParams) {
   );
 }
 
+function toggleProductInWishList(productId: number | string) {
+    return axiosInstance.post(
+      'WishList/AddOrDeleteWishList',
+      { productId }
+    );
+}
+
 export {
     getMostPurchasedProducts,
     getProductDetails,
     getRelatedProductDetails,
-    getProductsByCategory
+    getProductsByCategory,
+    toggleProductInWishList
 }

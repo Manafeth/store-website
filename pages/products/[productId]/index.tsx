@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Breadcrumb from '../../../components/BreadCrumb';
 import Container from '@mui/material/Container';
@@ -10,12 +10,13 @@ import RelatedProductCard from '../../../components/ProductVerticalItem';
 import ProductGallery from '../../../components/ImageGallery';
 import ProductDetailsInformation from '../../../components/ProductDetailsInformation';
 import MainLayout from '../../../layouts/MainLayout';
-import { getMostPurchasedProducts, getProductDetails, getRelatedProductDetails } from '../../../services/products.services';
+import { getMostPurchasedProducts, getProductDetails, getRelatedProductDetails, toggleProductInWishList } from '../../../services/products.services';
 import { ProductData } from '../../../types/products';
 // import { useRouter } from 'next/router';
 import { CircularProgress } from '@mui/material';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { useAlert } from '../../../contexts/AlertContext';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -24,6 +25,40 @@ interface Props {
 
 const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) => {
   // const router = useRouter();
+  const {sendAlert} = useAlert();
+  const [productData, setProductData] = useState<ProductData>({
+    id: 0,
+    name: '',
+    salePrice: 0,
+    quantity: 0,
+    category: '',
+    priceAfterDiscount: 0,
+    shortDescription: '',
+    description: '',
+    pageTitle: '',
+    metaDescription: '',
+    isInWishList: false,
+    imagesFilePath: [],
+    attributes: [],
+    checkOutAttributes: [],
+    subProducts: [],
+  })
+
+  function handleTogglingProductInWishList() {
+    toggleProductInWishList(productData.id).then(() => {
+      setProductData((prevState) => ({
+        ...prevState,
+        isInWishList: !prevState.isInWishList
+      }))
+    }).catch((error: any) => {
+      sendAlert(error.response.data.Message, 'error')
+    });
+  }
+
+  useEffect(() => {
+    setProductData(productDetials);
+  }, [productDetials])
+  
 
   return (
     <MainLayout>
@@ -41,17 +76,17 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
               <Breadcrumb />
               <Grid container spacing={7} rowSpacing={4.25}>
                 <Grid item xs={6}>
-                  <ProductGallery images={productDetials.imagesFilePath} />
+                  <ProductGallery images={productData.imagesFilePath} />
                 </Grid>
                 <Grid item xs={6}>
-                  <ProductDetailsInformation  productDetials={productDetials} />
+                  <ProductDetailsInformation  productDetials={productData} handleTogglingProductInWishList={handleTogglingProductInWishList} />
                 </Grid>
               </Grid>
             </Container>
           </Box>
           <Box>
             <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
-              <ProductTabs productDetials={productDetials} />
+              <ProductTabs productDetials={productData} />
             </Container>
           </Box>
           <Box
