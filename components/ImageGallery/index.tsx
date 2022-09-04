@@ -10,7 +10,7 @@ const ProductGallery: FC<Props> = ({ images }) => {
   return (
     <Box component='section'>
       <ReactImageGallery 
-        items={images.map((item) => ({
+        items={(images || []).map((item) => ({
           thumbnail: item.thumbUrl,
           original: item.orignialUrl
         }))}

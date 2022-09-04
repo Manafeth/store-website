@@ -31,7 +31,7 @@ const ColorFilter: FC<Props> = ({ data, onClick, params }) => {
           my: 3,
         }}
       >
-        {data.nameEn}
+        {data.name}
       </FormLabel>
       {data.options.map((item) => {
         return (
@@ -45,7 +45,7 @@ const ColorFilter: FC<Props> = ({ data, onClick, params }) => {
           >
             <Box
               sx={{
-                backgroundColor: item.nameEn,
+                backgroundColor: item.name,
                 width: 30,
                 height: 30,
                 borderRadius: '50%',
@@ -59,7 +59,7 @@ const ColorFilter: FC<Props> = ({ data, onClick, params }) => {
               component='h1'
               sx={{ color: 'grey.2200', fontWeight: '700' }}
             >
-              {item.nameEn}
+              {item.name}
             </Typography>
           </IconButton>
         )

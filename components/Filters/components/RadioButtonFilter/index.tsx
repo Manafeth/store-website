@@ -23,7 +23,7 @@ const RadioButtonFilter: FC<Props> = ({ data, onChange }) => {
           my: 3,
         }}
       >
-        {data.nameEn}
+        {data.name}
       </FormLabel>
       <RadioGroup
         aria-labelledby='demo-radio-buttons-group-label'
@@ -31,7 +31,7 @@ const RadioButtonFilter: FC<Props> = ({ data, onChange }) => {
       >
         {data.options.map((item) => {
           return (
-            <FormControlLabel control={<Radio onChange={onChange} value={item.id} />} label={item.nameEn} key={item.id} />
+            <FormControlLabel control={<Radio onChange={onChange} value={item.id} />} label={item.name} key={item.id} />
           )
         })}
       </RadioGroup>

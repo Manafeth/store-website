@@ -73,7 +73,6 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
     try {
       const response = await getProfileData();
       setProfileData(response.data.data);
-      sendAlert(response.data?.message, 'success')
     } catch(error: any) {
       sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);

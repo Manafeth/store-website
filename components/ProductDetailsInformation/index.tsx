@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
-import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.png';
+import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.svg';
 import CartIcon from '../../assets/images/icons/cart-icon.svg';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { IconButton } from '@mui/material';
@@ -78,7 +78,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
               <Box
                 key={item.id}
                 sx={{
-                  backgroundColor: item.nameEn,
+                  backgroundColor: item.name,
                   width: 30,
                   height: 30,
                   borderRadius: '50%',
