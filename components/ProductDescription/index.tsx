@@ -26,9 +26,9 @@ const ProductDescription: FC<Props> = ({ productDetials }) => {
             />
           </Grid>
           <Grid item md={7.7}>
-            <Box>
+            <Typography>
              {productDetials.description}
-            </Box>
+            </Typography>
           </Grid>
         </Grid>
       </Container>

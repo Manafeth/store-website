@@ -36,12 +36,13 @@ const ColorFilter: FC<Props> = ({ data, onClick, params }) => {
       {data.options.map((item) => {
         return (
           <IconButton
-            sx={{ display: 'flex', alignItems: 'center', borderRadius: 0, p: 0, textAlign: 'left', justifyContent: 'flex-start', backgroundColor: params.options?.includes(item.id || 0) ? 'secondary.main' : '' }}
+            sx={{ display: 'flex', alignItems: 'center', borderRadius: 0, p: 0, textAlign: 'left', justifyContent: 'flex-start', backgroundColor: 'transparent!important' }}
             key={item.id}
             onClick={function () {
               if (item.id)
                 onClick(item.id)
             }}
+            disableRipple
           >
             <Box
               sx={{
@@ -50,8 +51,8 @@ const ColorFilter: FC<Props> = ({ data, onClick, params }) => {
                 height: 30,
                 borderRadius: '50%',
                 mr: 0.75,
-                border: '2px solid #FFFFFF',
-                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+                border: params.options?.includes(item.id || 0) ?  '2px solid #FFFFFF' : '',
+                boxShadow: params.options?.includes(item.id || 0) ? '0px 2px 4px rgba(0, 0, 0, 0.7)' : '0px 2px 4px rgba(0, 0, 0, 0.1)',
               }}
             />
             <Typography
