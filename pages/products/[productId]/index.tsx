@@ -18,6 +18,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useAlert } from '../../../contexts/AlertContext';
 import { addProductToCart } from '../../../services/cart.services';
+import Head from 'next/head';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -81,53 +82,57 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
           <CircularProgress />
         </Box>
       ) : ( */}
-        <>
-          <Box
-            component='section'
-            sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
-          >
-            <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 4.25, pb: 6.5 }}>
-              <Breadcrumb />
-              <Grid container spacing={7} rowSpacing={4.25}>
-                <Grid item xs={6}>
-                  <ProductGallery images={productData.imagesFilePath} />
-                </Grid>
-                <Grid item xs={6}>
-                  <ProductDetailsInformation 
-                    productDetials={productData}
-                    handleTogglingProductInWishList={handleTogglingProductInWishList}
-                    handleAddProductToCart={handleAddProductToCart}
-                  />
-                </Grid>
+      <Head>
+        <title>{productData.pageTitle || ''}</title>
+        <meta name="description" content={productData.metaDescription || ''} />
+      </Head>
+      <>
+        <Box
+          component='section'
+          sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
+        >
+          <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 4.25, pb: 6.5 }}>
+            <Breadcrumb />
+            <Grid container spacing={7} rowSpacing={4.25}>
+              <Grid item xs={12} md={6}>
+                <ProductGallery images={productData.imagesFilePath} />
               </Grid>
-            </Container>
-          </Box>
-          <Box>
-            <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
-              <ProductTabs productDetials={productData} />
-            </Container>
-          </Box>
-          <Box
-            component='section'
-            sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
-          >
-            <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
-              <Typography variant='h2' sx={{ mb: 3, cursor: 'pointer' }}>
-                Related Products
-              </Typography>
-              <Divider sx={{ mb: 3 }} />
-              <Grid container spacing={3} rowSpacing={3.75}>
-                {realtedProducts.map((item) => {
-                  return (
-                    <Grid item xs={3} key={item.id}>
-                      <RelatedProductCard data={item} />
-                    </Grid>
-                  )
-                })}
+              <Grid item xs={12} md={6}>
+                <ProductDetailsInformation 
+                  productDetials={productData}
+                  handleTogglingProductInWishList={handleTogglingProductInWishList}
+                  handleAddProductToCart={handleAddProductToCart}
+                />
               </Grid>
-            </Container>
-          </Box>
-        </>
+            </Grid>
+          </Container>
+        </Box>
+        <Box>
+          <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
+            <ProductTabs productDetials={productData} />
+          </Container>
+        </Box>
+        <Box
+          component='section'
+          sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
+        >
+          <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
+            <Typography variant='h2' sx={{ mb: 3, cursor: 'pointer' }}>
+              Related Products
+            </Typography>
+            <Divider sx={{ mb: 3 }} />
+            <Grid container spacing={3} rowSpacing={3.75}>
+              {realtedProducts.map((item) => {
+                return (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
+                    <RelatedProductCard data={item} />
+                  </Grid>
+                )
+              })}
+            </Grid>
+          </Container>
+        </Box>
+      </>
       {/* )} */}
     </MainLayout>
   );

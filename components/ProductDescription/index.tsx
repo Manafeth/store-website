@@ -14,10 +14,10 @@ interface Props {
 const ProductDescription: FC<Props> = ({ productDetials }) => {
   
   return (
-    <Box sx={{ pt: 3 }}>
+    <Box sx={{ pt: 3, pb: 8.5 }}>
       <Container>
         <Grid container spacing={4.25}>
-          <Grid item xs={4.3}>
+          <Grid item md={4.3}>
             <CardMedia
               image={productDetials.mainImageFilePath?.orignialUrl || ''}
               component='img'
@@ -25,7 +25,7 @@ const ProductDescription: FC<Props> = ({ productDetials }) => {
               sx={{ width: '100%', maxWidth: '100%', height: 372 }}
             />
           </Grid>
-          <Grid item xs={8.7}>
+          <Grid item md={7.7}>
             <Box>
              {productDetials.description}
             </Box>
