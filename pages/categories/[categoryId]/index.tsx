@@ -61,8 +61,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
 
   const [attributes, setAttributes] = useState<ProductAttributesData[]>([]);
   const [categories, setCategories] = useState<CategoryData[]>([])
-console.log('attributes', attributes)
-console.log('categories', categories)
+
   async function getProducts(data: ProductByCategoryParams) {
     if (categoryId) {
       const payload: ProductByCategoryParams = {
@@ -78,7 +77,7 @@ console.log('categories', categories)
         payload.priceTo = data.priceTo || params.priceTo
       if (data.productStatus || params.productStatus)
         payload.productStatus = data.productStatus || params.productStatus
-        
+        console.log('payload', payload)
       const productsData = await getProductsByCategory(payload);
       setAttributes(productsData.data.data.attributes)
       setCategories(productsData.data.data.categories)
@@ -97,9 +96,10 @@ console.log('categories', categories)
   function handleSort(ev: ChangeEvent<HTMLInputElement>) {
     setParams((prevState) => ({
       ...prevState,
-      productStatus: +ev.target.value
+      productStatus: +ev.target.value,
+      page: 1
     }))
-    getProducts({ productStatus: +ev.target.value });
+    getProducts({ productStatus: +ev.target.value, page: 1 });
   }
 
   useEffect(() => {
@@ -124,7 +124,7 @@ console.log('categories', categories)
       <Box component='footer' py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing={3} rowSpacing={3.75}>
-            <Grid item xs={3}>
+            <Grid item xs={3} display={{ xs: 'none', md: 'block' }}>
               <Filters
                 getProducts={getProducts}
                 setParams={setParams}
@@ -133,7 +133,7 @@ console.log('categories', categories)
                 params={params}
               />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item md={9}>
               <Box
                 sx={{
                   display: 'flex',
@@ -171,7 +171,7 @@ console.log('categories', categories)
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }}>
                 {products.data.map((item) => {
                   return (
-                    <Grid item xs={4} key={item.id}>
+                    <Grid item xs={12} sm={6} lg={4} key={item.id}>
                       <ProductVerticalItem data={item} />
                     </Grid>
                   )

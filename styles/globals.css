@@ -19,3 +19,7 @@ a {
   object-fit: cover;
   min-height: 450px;
 }
+
+.image-gallery-slides {
+  min-height: 450px;
+}
