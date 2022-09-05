@@ -32,8 +32,17 @@
         "filter":"تصفية",
         "search":"بحث",
         "filterByPrice":"تصفية حسب السعر",
-        "browse":"تصفح"
-       
+        "browse":"تصفح",
+        "back":"خلف",
+        "availability":"التوفر",
+        "selectOptions":"اشر على الخيارات",
+        "selectItem":"حدد البند",
+        "cancel":"إلغاء",
+        "showingAll":"عرض كل شيء",
+        "results":"النتائج",
+        "popularity":"شعبية",
+        "date":"تاريخ"
+         
     },
     "Auth": {
         "phoneNumber":"أدخل رقم الهاتف",
@@ -71,7 +80,20 @@
         "emailNotification":"تنبيه اليريد الالكترونى",
         "emailTextOne":"نود أن تكون أول من يحصل على أخبار مخصصة",
         "emailtextTwo":"، عروض خاصة ، دعوات إلى الأحداث والمسابقات الحصرية المتعلقة بـ Beuand",
-        "shippingAddress":"عنوان الشحن"            
+        "shippingAddress":"عنوان الشحن",
+        "addressManagment":"إدارة العنوان",
+        "homeAddress":"عنوان المنزل",
+        "addNewAddress":"أضف عنوان جديد",
+        "oops":"عفواً !",
+        "noAddress":"لا يوجد عنوان للعرض ، يرجى إضافة عنوان جديد",
+        "address":"العنوان",
+        "street":"الشارع",
+        "city":"المدينة",
+        "country":"البلد",
+        "updateAddress":"تحديث العنوان",
+        "orderDetails":"تفاصيل الطلب",
+        "viewInvoice":"عرض الفاتورة",
+        "relatedProducts":"منتجات ذات صله"        
     },
     "cart":{
         "myBag":"حقيبتي",
@@ -81,7 +103,23 @@
         "total":"المجموع"
     },
     "checkOut":{
-        "checkOut":"الدفع"
+        "checkOut":"الدفع",
+        "paymentDetail":"تفاصيل الدفع",
+        "promocode":"رمز ترويجي",
+        "nameOnCard":"الاسم على البطاقة",
+        "cardNumber":"رقم البطاقة",
+        "inovice":"فاتورة",
+        "viewInvoice":"عرض تفاصيل الفاتورة الخاصة بك.",
+        "billTo":"مشروع قانون ل",
+        "amount":"مقدار",
+        "paymentDue":"استحقاق الدفع",
+        "orderSummery":"ملخص الطلب",
+        "downloadInvoice":"تحميل فاتورة",
+        "paymnetMethod":"طريقة الدفع او السداد",
+        "paymentStatus":"حالة السداد",
+        "shippingMethod":"طريقة الشحن",
+        "shippingStatus":"حالة الشحن",
+        "orderTimeline":"مخطط زمني للطلب"
 
     },
     "errorMsg": {

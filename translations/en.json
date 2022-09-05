@@ -33,8 +33,16 @@
         "filter":"Filter",
         "search":"search",
         "filterByPrice":"Filter By Price",
-        "browse":"Browse"
-       
+        "browse":"Browse",
+        "back":"Back",
+        "availability":"Availability",
+        "selectOptions":"Select Options",
+        "selectItem":"Select Item",
+        "cancel":"cancel",
+        "showingAll":"Showing all",
+        "results":"results",
+        "popularity":"Popularity",
+        "date":"Date"
     },
     "Auth": {
     "phoneNumber":"Enter phone number",
@@ -72,7 +80,21 @@
         "emailNotification":"Email Notification",
         "emailTextOne":"We would like you to be first to get customized news",
         "emailtextTwo":",special offers,invites to events & exclusive competitions related to Beuand",
-        "shippingAddress":"Shipping Address"     
+        "shippingAddress":"Shipping Address",
+        "addressManagment":"Address managment",
+        "homeAddress":"Home address",
+        "addNewAddress":"Add New Address",
+        "oops":"OOPS!",
+        "noAddress":"There is no address to show, please add new address",
+        "address":"Address",
+        "street":"Street",
+        "city":"City",
+        "country":"Country",
+        "updateAddress":"update address",
+        "orderDetails":"Order details",
+        "viewInvoice":"View invoice",
+        "relatedProducts":"Related Products"
+       
     },
     "cart":{
         "myBag":"My bag",
@@ -82,7 +104,24 @@
         "total":"Total"
     },
     "checkOut":{
-        "checkOut":"Check-out"
+        "checkOut":"Check-out",
+        "paymentDetail":"Payment Detail",
+        "promocode":"Promocode",
+        "nameOnCard":"Name On Card",
+        "cardNumber":"Card Number",
+        "inovice":"Inovice",
+        "viewInvoice":"View your invoice detials.",
+        "billTo":"Bill to",
+        "amount":"Amount",
+        "paymentDue":"Payment due",
+        "orderSummery":"Order summery",
+        "downloadInvoice":"Download invoice",
+        "paymnetMethod":"Paymnet method",
+        "paymentStatus":"Payment status",
+        "shippingMethod":"Shipping method",
+        "shippingStatus":"Shipping status",
+        "orderTimeline":"Order timeline"
+       
 
     },
     "errorMsg": {

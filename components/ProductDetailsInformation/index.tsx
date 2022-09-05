@@ -11,6 +11,7 @@ import CartIcon from '../../assets/images/icons/cart-icon.svg';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { IconButton } from '@mui/material';
 import { ProductData } from '../../types/products';
+import { useTranslation } from "react-i18next";
 
 interface Props {
   productDetials: ProductData,
@@ -20,6 +21,7 @@ interface Props {
 
 const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList, handleAddProductToCart }) => {
   const colorAttribute = productDetials.attributes.find((item) => item.type === 2);
+  const [t] = useTranslation();
   return (
     <Box>
       <Typography
@@ -40,7 +42,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         </Typography>
       </Box> */}
       <Typography variant='h2' component='span' sx={{ mb: 1 }}>
-        SAR {productDetials.salePrice}
+      {t('common.sar')} {productDetials.salePrice}
       </Typography>
       <Box sx={{ display: 'flex', gap:'10px' }}>
         <Typography
@@ -48,7 +50,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
           component='h1'
           sx={{ mb: 1, color: 'text.secondary', fontWeight: '700' }}
         >
-          Availability :
+           {t('common.availability')} :
         </Typography>
         <Typography
           variant='h6'
@@ -95,7 +97,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
           sx={{ width: 'auto', height: '44px' }}
           type='submit'
         >
-          Select Options
+           {t('common.selectOptions')}
         </Button>
         <Box sx={{display:'flex',gap:'5px'}}>
           <IconButton onClick={handleTogglingProductInWishList}>

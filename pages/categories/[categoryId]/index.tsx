@@ -18,6 +18,7 @@ import { getAllCategories, getCategoryDetails } from '../../../services/categori
 import { getProductsByCategory } from '../../../services/products.services';
 import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../../types/products';
 import { useRouter } from 'next/router';
+import { useTranslation } from "react-i18next";
 import productStatusMenu from '../../../constants/ProductStatusValues';
 
 interface Products {
@@ -39,6 +40,7 @@ interface Props {
 
 const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => {
   const router = useRouter();
+  const [t] = useTranslation();
 
   const { categoryId } = router.query
   const [products, setProducts] = useState<Products>({
@@ -146,7 +148,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   component='h1'
                   sx={{ mb: 5, fontWeight: '700', color: 'text.primary' }}
                 >
-                  Showing all {products.data.length} results
+                   {t('common.showingAll')} {products.data.length} {t('common.results')} 
                 </Typography>
                 <TextField
                   id='outlined-basic'
@@ -159,7 +161,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   onChange={handleSort}
                   value={params.productStatus || 0}
                 >
-                  <MenuItem value={0} disabled>Popularity</MenuItem>
+                  <MenuItem value={0} disabled>{t('common.popularity')}</MenuItem>
                   {productStatusMenu.map((item) => {
                     return (
                       <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>

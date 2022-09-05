@@ -19,6 +19,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { useAlert } from '../../../contexts/AlertContext';
 import { addProductToCart } from '../../../services/cart.services';
 import Head from 'next/head';
+import { useTranslation } from "react-i18next";
 
 interface Props {
   realtedProducts: ProductData[],
@@ -27,6 +28,7 @@ interface Props {
 
 const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) => {
   // const router = useRouter();
+  const [t] = useTranslation();
   const {sendAlert} = useAlert();
   const [productData, setProductData] = useState<ProductData>({
     id: 0,
@@ -118,7 +120,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
             <Typography variant='h2' sx={{ mb: 3, cursor: 'pointer' }}>
-              Related Products
+            {t('settings.relatedProducts')}
             </Typography>
             <Divider sx={{ mb: 3 }} />
             <Grid container spacing={3} rowSpacing={3.75}>

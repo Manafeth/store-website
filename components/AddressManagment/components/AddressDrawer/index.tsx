@@ -22,6 +22,7 @@ import { GOOGLE_MAP_KEY } from '../../../../constants';
 import { Status, Wrapper } from '@googlemaps/react-wrapper';
 import GoogleMap from '../GoogleMap';
 import Marker from '../Marker';
+import { useTranslation } from "react-i18next";
 import mapMarkupIcon from '../../../../assets/images/icons/map-markup.svg';
 
 interface Props {
@@ -53,6 +54,7 @@ const AddressDrawer: FC<Props> = ({
 }) => {
   const { cityData, countryData } =
     useProfileModal();
+    const [t] = useTranslation();
     const renderMarker =
     addressDetails.latitude > 0 && addressDetails.longitude > 0;
 
@@ -110,7 +112,7 @@ const AddressDrawer: FC<Props> = ({
           }}
         >
           {' '}
-          Address
+          {t('settings.address')}
         </Box>
         <TextField
           variant='standard'
@@ -129,7 +131,7 @@ const AddressDrawer: FC<Props> = ({
             marginTop: '16px',
           }}
         >
-          Street
+           {t('settings.street')}
         </Box>
         <TextField
           variant='standard'
@@ -147,7 +149,7 @@ const AddressDrawer: FC<Props> = ({
             marginTop: '16px',
           }}
         >
-          City
+           {t('settings.city')}
         </Box>
         <TextField
           select
@@ -161,7 +163,7 @@ const AddressDrawer: FC<Props> = ({
           name='cityId'
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-            Select Item
+          {t('common.selectItem')}
           </MenuItem>
           {cityData?.length > 0 &&
             cityData?.map((option) => (
@@ -181,7 +183,7 @@ const AddressDrawer: FC<Props> = ({
             marginTop: '16px',
           }}
         >
-          Country
+           {t('settings.country')}
         </Box>
         <TextField
           select
@@ -193,7 +195,7 @@ const AddressDrawer: FC<Props> = ({
           name='country'
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-            Select Item
+          {t('common.selectItem')}
           </MenuItem>
           {countryData?.length > 0 &&
             countryData?.map((option) => (
@@ -258,7 +260,7 @@ const AddressDrawer: FC<Props> = ({
                   }}
                   onClick={handleClose}
                 >
-                  cancel
+                  {t('common.cancel')}
                 </Button>
                 {!isEditMode ? (
                 <Button
@@ -270,7 +272,7 @@ const AddressDrawer: FC<Props> = ({
                   {loading ? (
                     <CircularProgress size={25} color='info' />
                   ) : (
-                    'Add new address'
+                    t('settings.addNewAddress')
                   )}
                 </Button>
                 ):(
@@ -278,7 +280,7 @@ const AddressDrawer: FC<Props> = ({
               {loading ? (
                     <CircularProgress size={25} color='info' />
                   ) : (
-                    'update address'
+                    t('settings.updateAddress')
                   )}
               </Button>
                 )}

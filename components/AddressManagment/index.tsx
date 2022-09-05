@@ -17,6 +17,7 @@ import DeleteConfirmationMdoal from '../DeleteConfirmation';
 import AddressDrawer from './components/AddressDrawer';
 import { LOADING, SUCCESS } from '../../constants';
 import DataTable from './components/DataTable';
+import { useTranslation } from "react-i18next";
 
 const AddressManagment = () => {
   const initialState = {
@@ -28,7 +29,7 @@ const AddressManagment = () => {
     latitude: 0,
     longitude: 0,
   };
-
+  const [t] = useTranslation();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [accountAddressData, setAccountAddressData] =useState<addressData>(initialState);
@@ -208,7 +209,7 @@ const AddressManagment = () => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        Address managment
+      {t('settings.addressManagment')}
       </Typography>
       <Box
         sx={{
@@ -220,7 +221,7 @@ const AddressManagment = () => {
         }}
       >
          <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
-          Home address
+         {t('settings.homeAddress')}
         </Typography>
         <Button
           variant='contained'
@@ -240,7 +241,7 @@ const AddressManagment = () => {
           }}
           onClick={onOpen}
         >
-          Add New Address
+           {t('settings.addNewAddress')}
         </Button>
       </Box>
        <DataTable
@@ -252,10 +253,10 @@ const AddressManagment = () => {
         noDataContent={
           <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
             <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
-             OOPS!
+            {t('settings.oops')}
             </Typography>
             <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
-              There is no address to show, please add new address
+            {t('settings.noAddress')}
             </Typography>
           </Box>
         }

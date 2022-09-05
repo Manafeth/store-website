@@ -7,11 +7,13 @@ import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
+import { useTranslation } from "react-i18next";
 interface Props {
   handleNext: () => void;
 }
 
 const CheckoutForm: FC<Props> = ({ handleNext }) => {
+  const [t] = useTranslation();
   return (
     <Box
       sx={{

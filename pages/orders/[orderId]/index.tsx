@@ -10,8 +10,12 @@ import aramexIcon from '../../../assets/images/icons/aramex-icon.png';
 import OrderTimeline from '../../../components/OrderTimeline';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
+import { useTranslation } from "react-i18next";
+
+
 
 const OrderDetails = () => {
+  const [t] = useTranslation();
   return (
     <MainLayout>
       <Box component='section'>
@@ -24,14 +28,14 @@ const OrderDetails = () => {
             component='h1'
             sx={{ fontWeight: 'bold', mb: 3 }}
           >
-            Order details
+            {t('settings.orderDetails')}
           </Typography>
           <Typography
             variant='h2'
             component='h1'
             sx={{ fontWeight: '700', fontSize: '20px', mb: 3 }}
           >
-            Invoice #33221
+            {t('checkOut.inovice')} #33221
           </Typography>
           <Grid container spacing='40px'>
             <Grid item xs={6}>
@@ -40,7 +44,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Date
+                 {t('common.date')}
               </Typography>
               <Typography
                 variant='h5'
@@ -56,7 +60,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Phone number
+                 {t('common.phoneNumber')}
               </Typography>
               <Typography
                 variant='h5'
@@ -74,7 +78,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Paymnet method
+                 {t('checkOut.paymnetMethod')}
               </Typography>
               <Typography
                 variant='h5'
@@ -90,7 +94,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Payment status
+                 {t('checkOut.paymentStatus')}
               </Typography>
               <Typography
                 variant='h5'
@@ -108,7 +112,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Shipping method
+                  {t('checkOut.shippingMethod')}
               </Typography>
               <Box sx={{ mb: 4 }}>
                 <Image
@@ -125,7 +129,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Shipping status
+                 {t('checkOut.shippingStatus')}
               </Typography>
               <Typography
                 variant='h5'
@@ -144,7 +148,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '500', mb: 2 }}
               >
-                Total
+                 {t('cart.total')}
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -153,7 +157,7 @@ const OrderDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '800', mb: 2 }}
               >
-                SAR 4,567.32
+                 {t('common.sar')} 4,567.32
               </Typography>
             </Grid>
           </Grid>
@@ -163,7 +167,7 @@ const OrderDetails = () => {
             component='h1'
             sx={{ fontWeight: '600', mb: 2 }}
           >
-            Order timeline
+             {t('checkOut.orderTimeline')}
           </Typography>
           <OrderTimeline />
           <Box
@@ -180,7 +184,7 @@ const OrderDetails = () => {
                 sx={{ width: '219px', height: '44px' }}
                 type='submit'
               >
-                View invoice
+                 {t('settings.viewInvoice')}
               </Button>
             </Link>
           </Box>
