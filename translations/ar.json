@@ -26,7 +26,13 @@
         "items":"العناصر",
         "optional":"اختياري",
         "next":"التالي",
-        "allCategories":"جميع الفئات"
+        "allCategories":"جميع الفئات",
+        "estimatedDelivery":"يقدر التسليم والتسليم",
+        "no":"لا",
+        "filter":"تصفية",
+        "search":"بحث",
+        "filterByPrice":"تصفية حسب السعر",
+        "browse":"تصفح"
        
     },
     "Auth": {
@@ -43,6 +49,7 @@
     },
     "heroSection": {
         "summerYear":"صيف 2022",
+        "off":"20٪ خصم",
         "discount":"- خصم 30٪",
         "description":"نحن نعلم كيف ستتصرف الأشياء الكبيرة ، لكن الأشياء على نطاق صغير",
         "shopNow":"تسوق الآن"    
@@ -64,9 +71,18 @@
         "emailNotification":"تنبيه اليريد الالكترونى",
         "emailTextOne":"نود أن تكون أول من يحصل على أخبار مخصصة",
         "emailtextTwo":"، عروض خاصة ، دعوات إلى الأحداث والمسابقات الحصرية المتعلقة بـ Beuand",
-        "shippingAddress":"عنوان الشحن"
-        
-       
+        "shippingAddress":"عنوان الشحن"            
+    },
+    "cart":{
+        "myBag":"حقيبتي",
+        "continueShopping":"مواصلة التسوق",
+        "continueToPayment":"مواصلة الدفع",
+        "subTotal":"المجموع الفرعي",
+        "total":"المجموع"
+    },
+    "checkOut":{
+        "checkOut":"الدفع"
+
     },
     "errorMsg": {
 

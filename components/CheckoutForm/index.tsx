@@ -22,7 +22,7 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        Check-out
+      {t('checkOut.checkOut')}
       </Typography>
 
       <Grid container spacing='40px' sx={{ mb: 3 }}>

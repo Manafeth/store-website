@@ -27,7 +27,13 @@
         "items":"items",
         "optional":"Optional",
         "next":"Next",
-        "allCategories":"All categories"
+        "allCategories":"All categories",
+        "estimatedDelivery":"Estimated Delivery & Handling",
+        "no":"no",
+        "filter":"Filter",
+        "search":"search",
+        "filterByPrice":"Filter By Price",
+        "browse":"Browse"
        
     },
     "Auth": {
@@ -44,6 +50,7 @@
     },
     "heroSection": {
      "summerYear":"SUMMER 2022",
+     "off":"20% OFF",
      "discount":"-30% Discount",
      "description":"We know how large objects will act, but things on a small scale",
      "shopNow":"SHOP NOW"
@@ -65,9 +72,18 @@
         "emailNotification":"Email Notification",
         "emailTextOne":"We would like you to be first to get customized news",
         "emailtextTwo":",special offers,invites to events & exclusive competitions related to Beuand",
-        "shippingAddress":"Shipping Address"
+        "shippingAddress":"Shipping Address"     
+    },
+    "cart":{
+        "myBag":"My bag",
+        "continueShopping":"Continue shopping",
+        "continueToPayment":"Continue to payment",
+        "subTotal":"Subtotal",
+        "total":"Total"
+    },
+    "checkOut":{
+        "checkOut":"Check-out"
 
-       
     },
     "errorMsg": {
 
