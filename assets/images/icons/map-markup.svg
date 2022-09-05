@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="45.424" viewBox="0 0 38 45.424">
+  <g id="Group_757" data-name="Group 757" transform="translate(-292 -536)">
+    <path id="Bounding_box" data-name="Bounding box" d="M12,0H26A12,12,0,0,1,38,12V26A12,12,0,0,1,26,38l-8.5,7.424L12,38A12,12,0,0,1,0,26V12A12,12,0,0,1,12,0Z" transform="translate(292 536)" fill="#394032"/>
+    <path id="Icon_color" data-name="Icon color" d="M8.383,20H7.717a1,1,0,0,1-.947-.681L6.26,17.78A7.016,7.016,0,0,0,3.577,14.6C1.819,13.207,0,11.764,0,8A8,8,0,0,1,16,8c0,3.756-1.791,5.2-3.524,6.6A6.9,6.9,0,0,0,9.84,17.78L9.33,19.32A1,1,0,0,1,8.383,20ZM8,5a3,3,0,1,0,3,3A3,3,0,0,0,8,5Z" transform="translate(303 546)" fill="#fff"/>
+  </g>
+</svg>

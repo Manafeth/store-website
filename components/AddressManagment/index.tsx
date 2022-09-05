@@ -1,57 +1,63 @@
 import React, {
   ChangeEvent,
-  Dispatch,
-  FC,
   FormEvent,
-  SetStateAction,
   useEffect,
   useState,
 } from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Switch from '@mui/material/Switch';
-import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import { addressData, addressDetailsData } from '../../types/profile';
+import { addressData } from '../../types/profile';
 import { useProfileModal } from '../../contexts/ProfileContext';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
 import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
-import CircularProgress from '@mui/material/CircularProgress';
+import editIcon from '../../assets/images/icons/edit-icon.svg';
+import addIcon from '../../assets/images/icons/add-icon.svg';
 import DeleteConfirmationMdoal from '../DeleteConfirmation';
-interface Props {
-  // data: addressData;
-  // eslint-disable-next-line no-unused-vars
-  handleSubmit: (ev: FormEvent<HTMLFormElement>) => void;
-  isSubmitted: boolean;
-  accountAddressData: addressDetailsData;
-  setAccountAddressData: Dispatch<SetStateAction<addressDetailsData>>;
-  isEditMode: boolean;
-  loading: boolean;
-}
+import AddressDrawer from './components/AddressDrawer';
+import { LOADING, SUCCESS } from '../../constants';
+import DataTable from './components/DataTable';
 
-const AddressManagment: FC<Props> = ({
-  handleSubmit,
-  isSubmitted,
-  accountAddressData,
-  setAccountAddressData,
-  isEditMode,
-  loading
-}) => {
+const AddressManagment = () => {
+  const initialState = {
+    id: 0,
+    cityId: 0,
+    address: '',
+    street: '',
+    type: 0,
+    latitude: 0,
+    longitude: 0,
+  };
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [accountAddressData, setAccountAddressData] =useState<addressData>(initialState);
+  const [deleteConfirmationActive, setDeleteConfirmationState] =useState(false);
+  const [open, setOpen] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState<addressData>();
   const {
     fetchAllAddressData,
-    addressDetailsData,
-    cityData,
     fetchAllCityData,
     fetchAllCountryData,
-    countryData,
+    status,
     addressData,
-    deleteAddressData
+    deleteAddressData,
+    createAddressStatus,
+    triggerCreateAddress,
+    removeStatus,
+    updateAddressData,
+    updateAddressStatus,
+    getAddressDetails,
+    addressDetails  
   } = useProfileModal();
-  const [deleteConfirmationActive, setDeleteConfirmationState] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState<addressData>();
+  function isFormValid() {
+    return (
+      accountAddressData.address &&
+      accountAddressData.street &&
+      accountAddressData.cityId
+    );
+  }
+
   useEffect(() => {
     fetchAllAddressData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,43 +70,136 @@ const AddressManagment: FC<Props> = ({
     fetchAllCountryData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+ 
+  function handleClose() {
+    setAccountAddressData(initialState);
+    onClose();
+  }
+  function handleSubmit(ev: FormEvent<HTMLFormElement>) {
+    ev.preventDefault();
+ return !isEditMode? createAddress():updateAddress()
+  }
+  function createAddress(){
+    if (!isFormValid())
+    setIsSubmitted(true); 
+    else  {const payload = {
+        ...accountAddressData,
+      };
+      delete payload?.id;
+      triggerCreateAddress(payload)
+        .then(() => {
+          setAccountAddressData(initialState);
+          setIsSubmitted(false);
+        })
+        .catch(() => {
+          setIsSubmitted(false);
+        });
+      }
+    
+  }
   useEffect(() => {
+    if (addressDetails) {
     setAccountAddressData((prevState) => ({
       ...prevState,
-      address: addressDetailsData.address,
-      street: addressDetailsData.street,
-      cityId: addressDetailsData.cityId,
-    }));
-  }, [addressDetailsData, setAccountAddressData]);
-  function handleInput(ev: ChangeEvent<HTMLInputElement>) {
-    setAccountAddressData((prevState) => ({
-      ...prevState,
-      [ev.target.name]: ev.target.value,
+      address: addressDetails.address,
+      street: addressDetails.street,
+      cityId: addressDetails.cityId,
     }));
   }
+  }, [addressDetails]);
+
+  function updateAddress(){
+    if (!isFormValid())
+    setIsSubmitted(true);
+    else {const payload = {
+      ...accountAddressData,
+      id:selectedAddress?.id,
+    };
+    updateAddressData(payload).then(() => {
+        setIsSubmitted(false);
+        setAccountAddressData((prevState) => ({
+            ...prevState,
+        }));
+        setAccountAddressData(initialState);
+    }).catch(() => {
+        setIsSubmitted(false);
+    })
+    }
+  }
+  useEffect(() => {
+    if (createAddressStatus === SUCCESS) {
+      onClose();
+      setIsSubmitted(false);
+    }
+  }, [createAddressStatus]);
+
+  useEffect(() => {
+    if (updateAddressStatus === SUCCESS) {
+      onClose();
+      setIsSubmitted(false);
+    }
+  }, [updateAddressStatus]);
+
   function handleDeleteConfirmationClose() {
     setDeleteConfirmationState(false);
   }
-  function HandleRemoveCustomer() {
-  
-      // deleteAddressData(selectedAddress.id).then(()=>{
+  function HandleRemoveAddress() {
+    if (selectedAddress && selectedAddress.id) {
+      deleteAddressData(selectedAddress.id);
+    }
+  }
+  useEffect(() => {
+    if (selectedAddress && selectedAddress.id && open)
+    getAddressDetails(selectedAddress.id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAddress, open]);
 
-      // }).catch(()=>{
+  function handleActions(_: undefined, row: any) {
+    function handleEdit() {
+      setSelectedAddress(row);
+      setOpen(true);
+      setIsEditMode(true);
+    }
 
-      // })
- 
+    function handleDelete() {
+      setSelectedAddress(row);
+      handleDeleteConfirmationOpen();
+    }
+
+    return (
+      <>
+          <Button size="small" sx={{ minWidth: 0, p: '5px', mr: '14px', color: 'text.primary' }} variant="contained" color="secondary" onClick={handleEdit}>
+          <Image src={editIcon} width='14' height='14' alt='edit icon' />
+          </Button>
+          <Button size="small" sx={{ minWidth: 0, p: '5px' }} variant="contained" color="secondary" onClick={handleDelete}>
+          <Image src={deleteIcon} width='14' height='14' alt='delete icon' />
+          </Button>
+      </>
+    );
   }
   function handleDeleteConfirmationOpen() {
     setDeleteConfirmationState(true);
   }
-  function handleDelete() {
-    // setSelectedAddress(id);
-    handleDeleteConfirmationOpen();   
-}
+  function onOpen() {
+    setOpen(true);
+  }
+  function onClose() {
+    setOpen(false);
+  }
+  const columns: any[] = [];
+  const fields: any[] = [
+    { id: 1, field: 'address', alignment: 'left' },
+    { id: 2, field: '', alignment: 'center', render: handleActions },
+  ];
+  useEffect(() => {
+    if (removeStatus === SUCCESS) {
+
+      handleDeleteConfirmationClose();
+    }
+  }, [removeStatus]);
+
   return (
     <Box
-      component='form'
-      onSubmit={handleSubmit}
       sx={{
         height: '100%',
         display: 'flex',
@@ -117,156 +216,67 @@ const AddressManagment: FC<Props> = ({
           display: 'flex',
           alignItems: 'center',
           flexWrap: 'wrap',
+          justifyContent: 'space-between',
         }}
       >
-        <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
+         <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
           Home address
         </Typography>
-        {/* <Switch color='success' /> */}
-      </Box>
-
-      {addressData?.map((item) => {
-        return( 
-          // eslint-disable-next-line react/jsx-key
-          <Box sx={{display:'flex', justifyContent: 'space-between',
-          alignItems: 'center'}}>
-        <Typography key={item.id}>{item.address}</Typography>
-        <IconButton onClick={handleDelete}>
-        <Image src={deleteIcon} width='14' height='14' alt='close icon' />
-        </IconButton> 
-        </Box>
-        );
-      })}
-
-      <Divider sx={{ mb: 5, width: '80%' }} />
-      <Typography variant='h2' component='h1' sx={{ mb: 3, mt: 3 }}>
-        Add new address
-      </Typography>
-      <label
-        style={{ color: 'primary.dark', fontWeight: '500', marginTop: '16px' }}
-      >
-        {' '}
-        Address 
-      </label>
-      <TextField
-        id='outlined-basic'
-        variant='outlined'
-        placeholder='Address'
-        name='address'
-        value={accountAddressData.address}
-        sx={{ mb: 3 }}
-        onChange={handleInput}
-        error={isSubmitted && !accountAddressData.address}
-      />
-
-      <label
-        style={{ color: 'primary.dark', fontWeight: '500', marginTop: '16px' }}
-      >
-        Street
-      </label>
-      <TextField
-        id='outlined-basic'
-        variant='outlined'
-        placeholder='Street'
-        name='street'
-        value={accountAddressData.street}
-        error={isSubmitted && !accountAddressData.street}
-        sx={{ mb: 3 }}
-        onChange={handleInput}
-      />
-      <label
-        style={{ color: 'primary.dark', fontWeight: '500', marginTop: '16px' }}
-      >
-        City
-      </label>
-      <TextField
-        id='outlined-basic'
-        select
-        variant='standard'
-        margin='normal'
-        sx={{ mb: 4 }}
-        value={accountAddressData.cityId}
-        // eslint-disable-next-line react/jsx-no-bind
-        onChange={handleInput}
-        name='cityId'
-      >
-        <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-          Select Item
-        </MenuItem>
-        {cityData?.length > 0 &&
-          cityData?.map((option) => (
-            <MenuItem
-              key={option.id}
-              value={option?.id}
-              sx={{ fontSize: '14px', fontWeight: 'bold' }}
-            >
-              {option?.name}
-            </MenuItem>
-          ))}
-      </TextField>
-      <label
-        style={{ color: 'primary.dark', fontWeight: '500', marginTop: '16px' }}
-      >
-        Country
-      </label>
-      <TextField
-        id='outlined-basic'
-        select
-        variant='standard'
-        margin='normal'
-        sx={{ mb: 4 }}
-        // eslint-disable-next-line react/jsx-no-bind
-        onChange={handleInput}
-        name='country'
-      >
-        <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-          Select Item
-        </MenuItem>
-        {countryData?.length > 0 &&
-          countryData?.map((option) => (
-            <MenuItem
-              key={option.id}
-              value={option?.id}
-              sx={{ fontSize: '14px', fontWeight: 'bold' }}
-            >
-              {option?.name}
-            </MenuItem>
-          ))}
-      </TextField>
-
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: { xs: 'space-between', sm: 'flex-start' },
-          pt: 7,
-          pb: 5,
-        }}
-      > {!isEditMode ? (
-        <>
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px' }}
-          type='submit'
-          disabled={loading}
+          color='primary'
+          endIcon={
+            <Image src={addIcon} width='14' height='14' alt='add icon' />
+          }
+          sx={{
+            py: '11px',
+            mr: { xs: 3, lg: 4 },
+            width: 'auto',
+            height: '38px',
+            fontSize: '14px',
+            '& .MuiButton-endIcon': {
+              mr: '15px',
+            },
+          }}
+          onClick={onOpen}
         >
-           {loading ? <CircularProgress size={25} color="info" /> : 'Add new address'}
+          Add New Address
         </Button>
-        </>
-         ) : (
-          <>
-            <Button color="secondary" variant="contained" sx={{ minWidth: 135, mr: '20px' }}>
-            Cancel
-            </Button>
-            <Button variant="contained" sx={{ minWidth: 135, }} type="submit">
-              update
-            </Button>
-          </>
-        )}
       </Box>
+       <DataTable
+        columns={columns}
+        rowsData={addressData}
+        rowFields={fields}
+        keyField="id"
+        loading={status === LOADING}
+        noDataContent={
+          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
+            <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
+             OOPS!
+            </Typography>
+            <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
+              There is no address to show, please add new address
+            </Typography>
+          </Box>
+        }
+      />
+      <AddressDrawer
+        onClose={onClose}
+        open={open}
+        setAccountAddressData={setAccountAddressData}
+        accountAddressData={accountAddressData}
+        isEditMode={isEditMode}
+        loading={createAddressStatus === LOADING || updateAddressStatus === LOADING}
+        isSubmitted={isSubmitted}
+        handleSubmit={handleSubmit}
+        handleClose={handleClose}
+        addressDetails={addressDetails}
+      />
       <DeleteConfirmationMdoal
         open={deleteConfirmationActive}
         onClose={handleDeleteConfirmationClose}
-        handleRemove={HandleRemoveCustomer}
+        handleRemove={HandleRemoveAddress}
+        loading={removeStatus === LOADING}
       />
     </Box>
   );
