@@ -8,8 +8,8 @@ import React, {
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
 import { getAllCities, getCountries } from '../services/common.services';
-import { createAddress, deleteAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
-import { activeOrderData, addressData, addressDetailsData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
+import { createAddress, deleteAddress, getAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
+import { activeOrderData, addressData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -26,17 +26,12 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [addressData,setaddressData] = useState<addressData[]>([]);
   const [createStatus, setCreateStatus] = useState('');
   const [updateStatus, setupdateStatus] = useState('');
+  const [updateAddressStatus, setupdateAddressStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
-  
-  const [addressDetailsData, setAddressDetailsData] = useState<addressDetailsData>({
-    id: 0,
-    cityId: 0,
-    address: '',
-    street: '',
-    type: 0,
-    latitude:0,
-    longitude:0,
-})
+  const [removeStatus, setRemoveStatus] = useState('');
+  const [status, setStatus] = useState('');
+
+
 const [customerData, setCustomerData] = useState<customerData>({
   imageFilePath: {
     orignialUrl: '',
@@ -58,7 +53,15 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
   activityEmail: false,
   activityPush: false
 })
-
+const [addressDetails, setAddressDetails] = useState<addressData>({
+  id:0,
+  type:0,
+  address:'',
+  cityId:0,
+  street: '',
+  latitude: 0,
+  longitude: 0,
+})
   const router = useRouter();
 
   async function fetchWishListData() {
@@ -86,10 +89,13 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     }
   }
   async function fetchAllAddressData() {
+    setStatus(LOADING)
     try {
       const response = await getAllAddress({page: 1, pageSize: 10});
+      setStatus(SUCCESS)
       setaddressData(response.data.data.data);
     } catch (error) {
+      setStatus(ERROR)
       Promise.reject(error);
     }
   }
@@ -109,7 +115,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
       Promise.reject(error);
     }
   }
-  async function triggerCreateAddress(data:addressDetailsData) {
+  async function triggerCreateAddress(data:addressData) {
     setCreateAddressStatus(LOADING)
     try {
       await createAddress(data);
@@ -120,18 +126,33 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
       Promise.reject(error);
     }
   }
-  async function updateAddressData(data: addressDetailsData) {
+  async function updateAddressData(data:addressData) {
+    setupdateAddressStatus(LOADING)
     try {
       await updateAddress(data);
+      setupdateAddressStatus(SUCCESS);
       fetchAllAddressData();
+    } catch(error) {
+      setupdateAddressStatus(ERROR);
+      Promise.reject(error);
+    }
+  }
+  async function getAddressDetails(id:number) {
+    try {
+     const response = await  getAddress(id);
+      setAddressDetails(response.data.data)
     } catch(error) {
       Promise.reject(error);
     }
   }
   async function deleteAddressData(id:number) {
+    setRemoveStatus(LOADING)
     try {
       await deleteAddress(id);
+      setRemoveStatus(SUCCESS);
+      fetchAllAddressData();
     } catch(error) {
+      setRemoveStatus(ERROR);
       Promise.reject(error);
     }
   }
@@ -178,7 +199,6 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     activeOrderData,
     archiveedOrderData,
     addressData,
-    addressDetailsData,
     cityData,
     countryData,
     customerData,
@@ -186,6 +206,10 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     createStatus,
     updateStatus,
     createAddressStatus,
+    removeStatus,
+    updateAddressStatus,
+    addressDetails,
+    status,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,
@@ -198,7 +222,9 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
     fetchCustomerProfileData,
     fetchEmailNotificationData,
     triggerUpdateEmailNotification,
-    updateProfileData
+    updateProfileData,
+    getAddressDetails
+   
   };
 
   return (
