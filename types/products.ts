@@ -16,6 +16,15 @@ export type ProductAttributesData = {
   type: number
 }
 
+export type checkOutAttributes = {
+  descriptionAr: string;
+  descriptionEn: string;
+  id: number;
+  nameAr: string;
+  nameEn: string;
+  price: number;
+}
+
 export type ProductData =  {
     id: number,
     name: string,
@@ -37,7 +46,7 @@ export type ProductData =  {
       thumbUrl: string,
     }[],
     attributes: ProductAttributesData[],
-    checkOutAttributes: [],
+    checkOutAttributes: checkOutAttributes[],
     subProducts: []
 }
 

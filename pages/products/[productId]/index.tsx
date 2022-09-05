@@ -13,11 +13,9 @@ import MainLayout from '../../../layouts/MainLayout';
 import { getMostPurchasedProducts, getProductDetails, getRelatedProductDetails, toggleProductInWishList } from '../../../services/products.services';
 import { ProductData } from '../../../types/products';
 // import { useRouter } from 'next/router';
-import { CircularProgress } from '@mui/material';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useAlert } from '../../../contexts/AlertContext';
-import { addProductToCart } from '../../../services/cart.services';
 import Head from 'next/head';
 
 interface Props {
@@ -57,19 +55,6 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
     });
   }
 
-  function handleAddProductToCart() {
-    addProductToCart({
-      productId: productData.id,
-      quantity: 1,
-      options: [],
-      checkOutAttributes: [],
-    }).then((response) => {
-      sendAlert(response?.data?.message, 'success')
-    }).catch((error: any) => {
-      sendAlert(error.response.data.Message, 'error')
-    })
-  }
-
   useEffect(() => {
     setProductData(productDetials);
   }, [productDetials])
@@ -101,7 +86,6 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
                 <ProductDetailsInformation 
                   productDetials={productData}
                   handleTogglingProductInWishList={handleTogglingProductInWishList}
-                  handleAddProductToCart={handleAddProductToCart}
                 />
               </Grid>
             </Grid>
