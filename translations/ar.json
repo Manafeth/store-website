@@ -23,10 +23,22 @@
         "saveChanges":"حفظ التغييرات",
         "edit":"يحرر",
         "language":"لغة",
-        "items":"العناصر"
+        "items":"العناصر",
+        "optional":"اختياري",
+        "next":"التالي",
+        "allCategories":"جميع الفئات"
        
     },
     "Auth": {
+        "phoneNumber":"أدخل رقم الهاتف",
+        "signInStore":"تسجيل الدخول إلى متجر Olivia باستخدام رقم هاتفك",
+        "verifyPhoneNumber":"التحقق من رقم الهاتف",
+        "verificationCode":"أدخل رمز التحقق أدناه",
+        "confirmationMessage":"لقد أرسلنا رسالة تأكيد إلى الرقم",
+        "yourCode":"رمزك",
+        "reciveCode":"ألم تستلم رمزًا؟",
+        "completeProfile":"أكمل ملفك الشخصي في beuand",
+        "completeYourOrders":"أكمل ملف التعريف الخاص بك في beuand لتتمكن من تقديم الطلبات ..."
        
     },
     "heroSection": {

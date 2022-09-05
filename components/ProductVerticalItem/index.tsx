@@ -14,7 +14,6 @@ import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.svg';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { ProductData } from '../../types/products';
 import paths from '../../constants/paths';
-import { useTranslation } from "react-i18next";
 import { toggleProductInWishList } from '../../services/products.services';
 import { useAlert } from '../../contexts/AlertContext';
 interface Props {
@@ -22,11 +21,23 @@ interface Props {
 }
 
 const RelatedProductCard: FC<Props> = ({ data }) => {
-  const [hover, setHover] = useState(false);
-  const [t] = useTranslation();
-  const onHover = () => {
-    setHover(true);
-  };
+  const [product, setProduct] = useState<ProductData>({
+    id: 0,
+    name: '',
+    salePrice: 0,
+    quantity: 0,
+    category: '',
+    priceAfterDiscount: 0,
+    shortDescription: '',
+    description: '',
+    pageTitle: '',
+    metaDescription: '',
+    isInWishList: false,
+    imagesFilePath: [],
+    attributes: [],
+    checkOutAttributes: [],
+    subProducts: [],
+  });
 
   const { sendAlert } = useAlert();
 
@@ -94,25 +105,37 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
           </Typography>
         </Link>
         <Box sx={{ display: 'flex', mb: 2 }}>
-          <Typography
-            variant='h5'
-            component='span'
-            sx={{
-              mr: 1,
-              color: 'text.disabled',
-              textDecorationLine: 'line-through',
-              fontWeight: '700',
-            }}
-          >
-             {t('common.sar')} {data.salePrice}
-          </Typography>
-          <Typography
-            variant='h5'
-            component='span'
-            sx={{ color: '#23856D', fontWeight: '700' }}
-          >
-             {t('common.sar')} {data.priceAfterDiscount}
-          </Typography>
+          {product.priceAfterDiscount ? (
+            <>
+              <Typography
+                variant='h5'
+                component='span'
+                sx={{
+                  mr: 1,
+                  color: 'text.disabled',
+                  textDecorationLine: 'line-through',
+                  fontWeight: '700',
+                }}
+              >
+                SAR {product.salePrice}
+              </Typography>
+              <Typography
+                variant='h5'
+                component='span'
+                sx={{ color: '#23856D', fontWeight: '700' }}
+              >
+                SAR {product.priceAfterDiscount}
+              </Typography>
+            </>
+          ) : (
+            <Typography
+              variant='h5'
+              component='span'
+              sx={{ color: '#23856D', fontWeight: '700' }}
+            >
+              SAR {product.salePrice}
+            </Typography>
+          )}
         </Box>
         {/* <Box
           sx={{ display: 'flex', mb: 2, alignItems: 'flex-start', gap: '20px' }}

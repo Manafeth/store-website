@@ -24,10 +24,22 @@
         "saveChanges":"Save Changes",
         "edit":"Edit",
         "language":"Language",
-        "items":"items"
+        "items":"items",
+        "optional":"Optional",
+        "next":"Next",
+        "allCategories":"All categories"
        
     },
     "Auth": {
+    "phoneNumber":"Enter phone number",
+    "signInStore":"Sign-in to Olivia Store with your phone number",
+    "verifyPhoneNumber":"Verify phone number",
+    "verificationCode":"Enter your verification code below",
+    "confirmationMessage":"We’ve sent a confirmation message to the number",
+    "yourCode":"Your code",
+    "reciveCode":"Didn’t recive a code?",
+    "completeProfile":"Complete your beuand profile",
+    "completeYourOrders":"Complete your beuand profile to be able to place orders..."
        
     },
     "heroSection": {

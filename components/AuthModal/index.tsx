@@ -15,6 +15,7 @@ import { CodeData, LoginData, ProfileData } from '../../types/auth';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import isEmail from 'validator/lib/isEmail';
 import { LoadingButton } from '@mui/lab';
+import { useTranslation } from "react-i18next";
 
 interface Props {
 
@@ -32,6 +33,7 @@ const AuthModal: FC<Props> = () => {
         updateProfileLoading
     } = useAuthModal();
     const [tab, setTab] = useState(1);
+    const [t] = useTranslation();
     const [isInvalid, setIsInvalid] = useState(false);
     const [loginData, setLoginData] = useState<LoginData>({
         countryId: 0,
@@ -152,7 +154,7 @@ const AuthModal: FC<Props> = () => {
                     type="submit"
                     loading={[loginLoading, verifyLoading, updateProfileLoading].includes(true)}
                 >
-                    Next
+                         {t('Auth.next')}
                 </LoadingButton>
             </Box>
         </Drawer>

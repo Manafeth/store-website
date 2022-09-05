@@ -92,7 +92,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
           sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 4.25, pb: 6.5 }}>
-            <Breadcrumb />
+            <Breadcrumb  productDetials={productData}/>
             <Grid container spacing={7} rowSpacing={4.25}>
               <Grid item xs={12} md={6}>
                 <ProductGallery images={productData.imagesFilePath} />
