@@ -38,7 +38,7 @@ const CartItem = () => {
           </Typography>
         </Box>
       </Box>
-      <Grid container spacing='40px' sx={{ mt: 2 }}>
+      <Grid container spacing='40px'>
         <Grid item xs={6}>
           <TextField
             id='outlined-basic'

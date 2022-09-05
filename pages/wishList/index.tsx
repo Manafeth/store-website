@@ -6,6 +6,7 @@ import { useProfileModal } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import { useTranslation } from "react-i18next";
+import Divider from '@mui/material/Divider';
 
 const WishListProduct = () => {
   const { fetchWishListData, wishListData } = useProfileModal();

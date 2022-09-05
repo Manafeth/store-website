@@ -13,7 +13,7 @@ interface Props {
 const ProductItem: FC<Props> = ({ data }) => {
   const [t] = useTranslation();
   return (
-    <Box sx={{ display: 'flex', gap: '25px' }}>
+    <Box sx={{ display: 'flex', gap: '25px', mt:2 , mb:2 }}>
       <Box
         sx={{
           position: 'relative',

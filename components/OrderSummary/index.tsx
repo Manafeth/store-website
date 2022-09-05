@@ -43,7 +43,7 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-        {t('common.total')}
+        {t('cart.total')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
         {t('common.sar')} 4,567.32

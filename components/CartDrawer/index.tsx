@@ -49,7 +49,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       </Box>
       <Box>
         <CartItem />
-        <Divider sx={{ mt: 3, mb: 3 }} />
+        <Divider sx={{ mt: 1, mb: 1 }} />
       </Box>
 
       <OrderSummary />
