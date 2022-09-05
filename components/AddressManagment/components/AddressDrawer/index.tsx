@@ -102,7 +102,7 @@ const AddressDrawer: FC<Props> = ({
         onSubmit={handleSubmit}
         sx={{ display: 'flex', flexDirection: 'column' }}
       >
-        <label
+        <Box component='label'
           style={{
             color: 'primary.dark',
             fontWeight: '500',
@@ -111,7 +111,7 @@ const AddressDrawer: FC<Props> = ({
         >
           {' '}
           Address
-        </label>
+        </Box>
         <TextField
           variant='standard'
           placeholder='Address'
@@ -122,7 +122,7 @@ const AddressDrawer: FC<Props> = ({
           error={isSubmitted && !accountAddressData.address}
         />
 
-        <label
+        <Box component='label'
           style={{
             color: 'primary.dark',
             fontWeight: '500',
@@ -130,7 +130,7 @@ const AddressDrawer: FC<Props> = ({
           }}
         >
           Street
-        </label>
+        </Box>
         <TextField
           variant='standard'
           placeholder='Street'
@@ -140,7 +140,7 @@ const AddressDrawer: FC<Props> = ({
           sx={{ mb: 3 }}
           onChange={handleInput}
         />
-        <label
+        <Box component='label'
           style={{
             color: 'primary.dark',
             fontWeight: '500',
@@ -148,7 +148,7 @@ const AddressDrawer: FC<Props> = ({
           }}
         >
           City
-        </label>
+        </Box>
         <TextField
           select
           variant='standard'
@@ -174,7 +174,7 @@ const AddressDrawer: FC<Props> = ({
               </MenuItem>
             ))}
         </TextField>
-        <label
+        <Box component='label'
           style={{
             color: 'primary.dark',
             fontWeight: '500',
@@ -182,7 +182,7 @@ const AddressDrawer: FC<Props> = ({
           }}
         >
           Country
-        </label>
+        </Box>
         <TextField
           select
           variant='standard'
