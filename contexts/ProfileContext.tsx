@@ -10,6 +10,7 @@ import { ERROR, LOADING, SUCCESS } from '../constants';
 import { getAllCities, getCountries } from '../services/common.services';
 import { createAddress, deleteAddress, getAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
 import { activeOrderData, addressData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
+import { useAlert } from './AlertContext';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -30,6 +31,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [createAddressStatus, setCreateAddressStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
   const [status, setStatus] = useState('');
+  const { sendAlert } = useAlert();
 
 
 const [customerData, setCustomerData] = useState<customerData>({
@@ -118,22 +120,26 @@ const [addressDetails, setAddressDetails] = useState<addressData>({
   async function triggerCreateAddress(data:addressData) {
     setCreateAddressStatus(LOADING)
     try {
-      await createAddress(data);
+      const response = await createAddress(data);
       setCreateAddressStatus(SUCCESS)
       fetchAllAddressData();
-    } catch(error) {
+      sendAlert(response.data?.message, 'success')
+    } catch(error: any) {
       setCreateAddressStatus(ERROR)
+      sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);
     }
   }
   async function updateAddressData(data:addressData) {
     setupdateAddressStatus(LOADING)
     try {
-      await updateAddress(data);
+      const response = await updateAddress(data);
       setupdateAddressStatus(SUCCESS);
       fetchAllAddressData();
-    } catch(error) {
+      sendAlert(response.data?.message, 'success')
+    } catch(error: any) {
       setupdateAddressStatus(ERROR);
+      sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);
     }
   }
@@ -148,11 +154,13 @@ const [addressDetails, setAddressDetails] = useState<addressData>({
   async function deleteAddressData(id:number) {
     setRemoveStatus(LOADING)
     try {
-      await deleteAddress(id);
+      const response = await deleteAddress(id);
       setRemoveStatus(SUCCESS);
       fetchAllAddressData();
-    } catch(error) {
+      sendAlert(response.data?.message, 'success')
+    } catch(error: any) {
       setRemoveStatus(ERROR);
+      sendAlert(error.response?.data?.Message, 'error')
       Promise.reject(error);
     }
   }
