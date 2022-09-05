@@ -1,3 +1,21 @@
+export type ProductAttributesOptionData = {
+  id?: number,
+  isChecked: boolean,
+  name: string | null,
+  nameEn: string | null,
+  nameAr: string | null,
+  productAttributeId: number
+}
+
+export type ProductAttributesData = {
+  id?: number,
+  name: string | null,
+  nameEn: string | null,
+  nameAr: string | null,
+  options: ProductAttributesOptionData[],
+  type: number
+}
+
 export type ProductData =  {
     id: number,
     name: string,
@@ -18,7 +36,7 @@ export type ProductData =  {
       orignialUrl: string,
       thumbUrl: string,
     }[],
-    attributes: [],
+    attributes: ProductAttributesData[],
     checkOutAttributes: [],
     subProducts: []
 }
@@ -36,20 +54,3 @@ export type ProductByCategoryParams = {
 }
 
 
-export type ProductAttributesOptionData = {
-  id?: number,
-  isChecked: boolean,
-  name: string | null,
-  nameEn: string | null,
-  nameAr: string | null,
-  productAttributeId: number
-}
-
-export type ProductAttributesData = {
-  id?: number,
-  name: string | null,
-  nameEn: string | null,
-  nameAr: string | null,
-  options: ProductAttributesOptionData[],
-  type: number
-}

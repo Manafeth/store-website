@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FilterUtils from './components/SerachFilter';
 import MenuItemFilter from './components/MenuItemFilter';
-// import CheckboxFilter from './components/CheckboxFilter';
+import CheckboxFilter from './components/CheckboxFilter';
 import ColorFilter from './components/ColorFilter';
 import RadioButtonFilter from './components/RadioButtonFilter';
 import FilterByPrice from './components/PriceFilter';
@@ -27,9 +27,10 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
     setParams((prevState) => ({
       ...prevState,
-      generalSearch: ev.target.value
+      generalSearch: ev.target.value,
+      page: 1,
     }))
-    getProducts({generalSearch: ev.target.value})
+    getProducts({generalSearch: ev.target.value, page: 1})
   }
 
   function handleColorAttribute(id: number) {
@@ -76,9 +77,10 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
         </Typography>
         <FilterUtils onSearch={handleSearch} />
       </Box>
-      <MenuItemFilter categories={categories} />
+      {categories.length > 0 && (
+        <MenuItemFilter categories={categories} />
+      )}
       {/* <Divider sx={{ mb: 3 }} /> */}
-      {/* <CheckboxFilter /> */}
       {attributes.map((item) => {
         if (item.type === 2) {
           return (
@@ -91,10 +93,12 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
         return (
           <Box key={item.id}>
             <Divider sx={{ mb: 3, mt: 3 }} />
-            <RadioButtonFilter data={item} onChange={handleAttributeChange} />
+            {/* <RadioButtonFilter data={item} onChange={handleAttributeChange} /> */}
+            <CheckboxFilter data={item} onChange={handleAttributeChange} params={params} />
           </Box>
         )
       })}
+     
      
    
       {/* <Divider sx={{ mb: 3, mt: 3 }} /> */}

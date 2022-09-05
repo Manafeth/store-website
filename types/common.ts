@@ -21,3 +21,12 @@ export type CommonContextState = {
     storeInfo: StoreInfoData,
     fetchStoreInfo: () => Promise<void>
 }
+
+
+export type AlertType = 'error' | 'success' | 'info' | 'warning' | undefined;
+
+export type AlertState = {
+  message?: string;
+  type?: AlertType;
+  sendAlert: (message: string, type: AlertType) => void;
+};
