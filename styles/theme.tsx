@@ -48,7 +48,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         letterSpacing: '0.2px'
       },
       h4: {
-
+        fontSize: '18px',
+        fontWeight: 400,
       },
       h5: {
         fontSize: '16px',
@@ -114,7 +115,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         1600:'#F3F3F3',
         1800:'#262D33',
         2000:'#B9B9B9',
-        2200:' #737373'
+        2200:' #737373',
+        2400:'#F8F8F8',
       },
     },
   } as ThemeOptions);

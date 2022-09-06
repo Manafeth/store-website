@@ -10,23 +10,22 @@ import DeliveryAddress from '../../components/DeliveryAddress';
 import PaymentDetail from '../../components/PaymentDetail';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
-import InfoIcon from'../../assets/images/icons/info-icon.svg';
+import TruckIcon from'../../assets/images/icons/truck-icon.svg';
 import SendIcon from'../../assets/images/icons/send-icon.svg';
 import CreditIcon from'../../assets/images/icons/credit-icon.svg';
-import DollarIcon from'../../assets/images/icons/dollar-icon.svg';
 import StepLabel from '@mui/material/StepLabel';
 import { StepIconProps } from '@mui/material/StepIcon';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
+import ShippingProviders from '../../components/ShippingProviders';
 
 
 const steps = [
   {id:1, name:'FIRST STEP',info:'Information'},
   {id:2, name:'SECOND STEP',info:'Delivery'},
   {id:3, name:'THIRD STEP',info:'Billing'},
-  {id:4, name:'FOURTH STEP',info:'Payment'},
 ];
 
 const ColorlibStepIconRoot = styled('div')<{
@@ -66,10 +65,9 @@ const Checkout = () => {
     const { active, completed, className } = props;
   
     const icons: { [index: string]: React.ReactElement } = {
-      1: <Image src={InfoIcon} alt='info icon' />,
-      2: <Image src={SendIcon} alt='send icon' />,
-      3: <Image src={CreditIcon} alt='Arrow right' />,
-      4: <Image src={DollarIcon} alt='Arrow right' />,
+      1: <Image src={SendIcon} alt='send icon' />,
+      2: <Image src={TruckIcon} alt='truck icon' />,
+      3: <Image src={CreditIcon} alt='Arrow right' />
     };
   
     return (
@@ -82,6 +80,7 @@ const Checkout = () => {
     <MainLayout>
       <Box component='section'>
         <Container sx={{ px: { xs: 2, lg: 7.5 }, mt: 5 }}>
+        <Container maxWidth={false} sx={{ maxWidth: 800 }}>
           <Stepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
               <Step key={step.id}>
@@ -96,28 +95,26 @@ const Checkout = () => {
               </Step>
             ))}
           </Stepper>
+          </Container>
           <Grid container spacing='40px' mt={5}>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
             {activeStep === 0 && (
-                <CheckoutForm handleNext={handleNext} />
+               <DeliveryAddress
+               handleNext={handleNext}
+               handleBack={handleBack}
+             />
+               
             )}
 
             {activeStep === 1 && (
-                <DeliveryAddress
-                  handleNext={handleNext}
-                  handleBack={handleBack}
-                />
+                <ShippingProviders handleNext={handleNext} />
             )}
 
             {activeStep === 2 && (
                 <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
             )}
-
-            {activeStep === 3 && (
-                <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
-            )}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
                 Order summery
               </Typography>
