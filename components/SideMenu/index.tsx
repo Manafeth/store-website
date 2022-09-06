@@ -11,7 +11,7 @@ import { useProfileModal } from '../../contexts/ProfileContext';
 import ListMenuItem from './components/ListMenuItem';
 
 
-const SideMenuItem = () => {
+const SideMenu = () => {
   const { logout } = useAuthModal();
   const { fetchCustomerProfileData, customerData } = useProfileModal();
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -34,8 +34,8 @@ const SideMenuItem = () => {
           display: 'flex',
           alignItems: 'center',
           pr: 2,
-          mb: 5,
-          gap:'30px'
+          mb: {xs: 3, md: 5},
+          gap: '30px'
         }}
       >
         <Avatar  src={customerData?.imageFilePath?.thumbUrl || ''}></Avatar>
@@ -56,4 +56,4 @@ const SideMenuItem = () => {
   );
 };
 
-export default SideMenuItem;
+export default SideMenu;

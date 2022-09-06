@@ -43,8 +43,8 @@ const ProductItem: FC<Props> = ({ data }) => {
       <Box>
         <Typography
           variant='h2'
-          component='h1'
-          sx={{ mb: 2, fontWeight: '400' }}
+          component='h3'
+          sx={{ mb: 2, fontWeight: '400', fontSize: '20px' }}
         >
           {data.name}
         </Typography>
@@ -52,7 +52,7 @@ const ProductItem: FC<Props> = ({ data }) => {
           <Typography
             variant='h5'
             component='h1'
-            sx={{ mb: 2, fontWeight: '400' }}
+            sx={{ mb: 2, fontWeight: '400', color: 'text.secondary' }}
           >
             {data.category}
           </Typography>
@@ -67,7 +67,7 @@ const ProductItem: FC<Props> = ({ data }) => {
             </Typography>
           </Box> */}
         </Box>
-        <Typography variant='h2' component='h1' sx={{ fontWeight: 'bold' }}>
+        <Typography variant='h2' component='p' sx={{ fontWeight: 'bold' }}>
           SAR {data.salePrice}
         </Typography>
       </Box>

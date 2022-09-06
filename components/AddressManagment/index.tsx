@@ -207,7 +207,7 @@ const AddressManagment = () => {
         justifyContent: 'left',
       }}
     >
-      <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
+      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' }  }}>
         Address managment
       </Typography>
       <Box
@@ -219,7 +219,7 @@ const AddressManagment = () => {
           justifyContent: 'space-between',
         }}
       >
-         <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
+         <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }  }}>
           Home address
         </Typography>
         <Button
@@ -233,14 +233,11 @@ const AddressManagment = () => {
             mr: { xs: 3, lg: 4 },
             width: 'auto',
             height: '38px',
-            fontSize: '14px',
-            '& .MuiButton-endIcon': {
-              mr: '15px',
-            },
+            fontSize: { xs: '12px', md: '14px' },
           }}
           onClick={onOpen}
         >
-          Add New Address
+          Add New
         </Button>
       </Box>
        <DataTable

@@ -90,7 +90,7 @@ const EditAccount: FC<Props> = ({
       component='form'
       onSubmit={handleSubmit}
     >
-      <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
+      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
         Edit Account
       </Typography>
       <Box
@@ -144,7 +144,7 @@ const EditAccount: FC<Props> = ({
           },
         }}
       />
-      <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
+      <Typography variant='h1' component='h2' sx={{ mb: 3, mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
         Contact
       </Typography>
       <InputLabel

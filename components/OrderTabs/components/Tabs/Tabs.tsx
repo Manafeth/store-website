@@ -12,7 +12,7 @@ interface Props {
 const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
   const sharedStyle = {
     'mr': 3,
-    'fontSize': '18px',
+    'fontSize': { xs: '14px', md: '18px' },
     'minWidth': 170,
     'minHieght': 40,
     'justifyContent': 'center',
