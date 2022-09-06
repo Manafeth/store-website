@@ -7,12 +7,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { useTranslation } from "react-i18next";
 interface Props {
   handleNext?: () => void;
   handleBack: () => void;
 }
 
 const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
+  const [t] = useTranslation();
   return (
     <Box
       sx={{
@@ -23,13 +25,13 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        Payment Detail
+      {t('checkOut.paymentDetail')}
       </Typography>
       <InputLabel
         shrink
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
-        Promocode
+         {t('checkOut.promocode')}
       </InputLabel>
 
       <TextField
@@ -41,7 +43,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
         InputProps={{ endAdornment: <Button>Apply</Button> }}
       />
       <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
-        Name On Card
+         {t('checkOut.nameOnCard')}
       </InputLabel>
 
       <TextField
@@ -52,7 +54,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
         sx={{ mb: 3 }}
       />
       <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
-        Card Number
+      {t('checkOut.cardNumber')}
       </InputLabel>
 
       <TextField
@@ -114,7 +116,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
           }}
           onClick={handleBack}
         >
-          Back
+          {t('common.back')}
         </Button>
         <Button
           variant='contained'
@@ -122,7 +124,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
           type='submit'
           onClick={handleNext}
         >
-          Next
+           {t('common.next')}
         </Button>
       </Box>
     </Box>

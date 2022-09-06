@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Divider from '@mui/material/Divider';
 import { activeOrderData } from '../../../../types/profile';
 import moment from 'moment';
+import { useTranslation } from "react-i18next";
 
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const ActiveOrders: FC<Props> = ({ data }) => {
+  const [t] = useTranslation();
   return (
     <Box
       sx={{
@@ -24,7 +26,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
       }}
     >
       <Typography variant='h2' component='h1' sx={{ mb: 5 }}>
-        No Order : #{data.id}
+      {t('settings.noOrder')} : #{data.id}
       </Typography>
       <Box
         sx={{
@@ -54,7 +56,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
        {moment(data.createdAt).format('DD MMMM  YYYY hh:MM A')}
       </Typography>
       <Typography variant='h3' sx={{ mb: 5, fontWeight: '600' }}>
-        SAR {data.total}
+      {t('common.sar')} {data.total}
       </Typography>
       <Divider sx={{ mb: 3 }} />
     </Box>

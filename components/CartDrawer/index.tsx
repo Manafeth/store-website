@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import OrderSummary from '../OrderSummary';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   open: boolean;
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
+  const [t] = useTranslation();
   function handleClose() {
     onClose();
   }
@@ -39,7 +41,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Typography variant='h1' component='h2'>
-          My bag (2)
+        {t('cart.myBag')} (2)
         </Typography>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -47,7 +49,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       </Box>
       <Box>
         <CartItem />
-        <Divider sx={{ mt: 3, mb: 3 }} />
+        <Divider sx={{ mt: 1, mb: 1 }} />
       </Box>
 
       <OrderSummary />
@@ -71,7 +73,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             mr: '20px',
           }}
         >
-          Continue shopping
+          {t('cart.continueShopping')}
         </Button>
         <Link href='/checkout'>
           <Button
@@ -79,7 +81,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             sx={{ width: 'auto', height: '44px' }}
             type='submit'
           >
-            Continue to payment
+              {t('cart.continueToPayment')}
           </Button>
         </Link>
       </Box>

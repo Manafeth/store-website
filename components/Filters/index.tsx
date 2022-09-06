@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../types/products';
 import { CategoryData } from '../../types/categories';
+import { useTranslation } from "react-i18next";
 // import TagFilter from './components/TagFilter';
 
 
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, params }) => {
+  const [t] = useTranslation();
 
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
     setParams((prevState) => ({
@@ -73,7 +75,7 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
           component='h1'
           sx={{ fontWeight: '700' }}
         >
-          Filter :
+          {t('common.filter')} :
         </Typography>
         <FilterUtils onSearch={handleSearch} />
       </Box>
@@ -118,7 +120,7 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
         }}
         onClick={handleFilterSubmit}
       >
-        Filter
+          {t('common.filter')}
       </Button>
     </>
   );

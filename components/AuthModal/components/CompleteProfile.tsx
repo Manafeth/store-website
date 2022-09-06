@@ -7,6 +7,7 @@ import ImageInput from '../../ImageInput';
 import { useAuthModal } from '../../../contexts/AuthModalContext';
 import { ProfileData } from '../../../types/auth';
 import isEmail from 'validator/lib/isEmail';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   accountData: ProfileData,
@@ -17,6 +18,7 @@ interface Props {
 const CompleteProfile: FC<Props> = ({ accountData, setAccountData, isInvalid }) => {
   const [image, setImage] = useState('')
   const { fetchAccountData, profileData } = useAuthModal();
+  const [t] = useTranslation();
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
     setAccountData((prevState) => ({
@@ -61,11 +63,11 @@ const CompleteProfile: FC<Props> = ({ accountData, setAccountData, isInvalid }) 
   return (
     <Box>
       <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
-        Complete your beuand profile
+      {t('Auth.completeProfile')}
       </Typography>
 
       <Typography variant='h2' sx={{ mb: 5, lineHeight: '30px', letterSpacing: '0.2px' }}>
-        Complete your beuand profile to be able to place orders...
+      {t('Auth.completeYourOrders')}
       </Typography>
 
       <ImageInput
@@ -99,7 +101,7 @@ const CompleteProfile: FC<Props> = ({ accountData, setAccountData, isInvalid }) 
         InputProps={{
           endAdornment: (
             <InputAdornment position="end" sx={{ position: 'absolute', right: '0', top: -6 }}>
-              Optional
+                   {t('Auth.optional')}
             </InputAdornment>
           ),
         }}
