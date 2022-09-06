@@ -16,6 +16,7 @@ import { ProductData } from '../../types/products';
 import paths from '../../constants/paths';
 import { toggleProductInWishList } from '../../services/products.services';
 import { useAlert } from '../../contexts/AlertContext';
+import { useTranslation } from "react-i18next";
 interface Props {
   data: ProductData
 }
@@ -40,6 +41,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
   });
 
   const { sendAlert } = useAlert();
+  const [t] = useTranslation();
 
   function handleTogglingProductInWishList() {
     toggleProductInWishList(product.id).then(() => {
@@ -117,14 +119,14 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
                   fontWeight: '700',
                 }}
               >
-                SAR {product.salePrice}
+                {t('common.sar')} {product.salePrice}
               </Typography>
               <Typography
                 variant='h5'
                 component='span'
                 sx={{ color: '#23856D', fontWeight: '700' }}
               >
-                SAR {product.priceAfterDiscount}
+                 {t('common.sar')} {product.priceAfterDiscount}
               </Typography>
             </>
           ) : (
@@ -133,7 +135,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               component='span'
               sx={{ color: '#23856D', fontWeight: '700' }}
             >
-              SAR {product.salePrice}
+               {t('common.sar')} {product.salePrice}
             </Typography>
           )}
         </Box>

@@ -7,11 +7,13 @@ import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
+import { useTranslation } from "react-i18next";
 interface Props {
   handleNext: () => void;
 }
 
 const CheckoutForm: FC<Props> = ({ handleNext }) => {
+  const [t] = useTranslation();
   return (
     <Box
       sx={{
@@ -22,7 +24,7 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        Check-out
+      {t('checkOut.checkOut')}
       </Typography>
 
       <Grid container spacing='40px' sx={{ mb: 3 }}>

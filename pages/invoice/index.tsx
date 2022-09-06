@@ -7,21 +7,23 @@ import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
+import { useTranslation } from "react-i18next";
 
 const Invoice = () => {
+  const [t] = useTranslation();
   return (
     <MainLayout>
       <Box component='section' sx={{ mt: 5 }}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Typography variant='h1' component='h1' sx={{ mb: 3 }}>
-            Inovice #33221
+          {t('checkOut.inovice')} #33221
           </Typography>
           <Typography
             variant='h6'
             component='h1'
             sx={{ fontWeight: '700', mb: 3, color: 'text.grey' }}
           >
-            View your invoice detials.
+            {t('checkOut.viewInvoice')}
           </Typography>
           <Grid container spacing='40px'>
             <Grid item xs={4}>
@@ -30,7 +32,7 @@ const Invoice = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Bill to
+                 {t('checkOut.billTo')}
               </Typography>
               <Typography
                 variant='h5'
@@ -46,14 +48,14 @@ const Invoice = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Amount
+                 {t('checkOut.amount')}
               </Typography>
               <Typography
                 variant='h5'
                 component='h1'
                 sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
               >
-                SAR 4,567.32
+                 {t('common.sar')} 4,567.32
               </Typography>
             </Grid>
             <Grid item xs={4}>
@@ -62,7 +64,7 @@ const Invoice = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                Payment due
+                 {t('checkOut.paymentDue')}
               </Typography>
               <Typography
                 variant='h5'
@@ -79,7 +81,7 @@ const Invoice = () => {
               component='h1'
               sx={{ fontWeight: '600', mb: 2, flex: '0.75' }}
             >
-              Items
+               {t('common.Items')}
             </Typography>
 
             <Typography
@@ -87,7 +89,7 @@ const Invoice = () => {
               component='h1'
               sx={{ fontWeight: '600', mb: 2 }}
             >
-              Amount
+              {t('checkOut.amount')}
             </Typography>
           </Box>
           <Divider sx={{width:'80%'}} />
@@ -105,7 +107,7 @@ const Invoice = () => {
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                SAR 2,278.66
+                 {t('common.sar')} 2,278.66
               </Typography>
             </Box>
 
@@ -114,11 +116,11 @@ const Invoice = () => {
               component='h1'
               sx={{ fontWeight: '500', mb: 2 }}
             >
-              2X SAR 1,139.33
+              2X {t('common.sar')} 1,139.33
             </Typography>
           </Box>
           <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 5 }}>
-            Order summery
+          {t('checkOut.orderSummery')}
           </Typography>
           <Box sx={{ mt: 2, display: 'flex' }}>
             <Typography
@@ -126,7 +128,7 @@ const Invoice = () => {
               component='h1'
               sx={{ mb: 2, flex: '0.75' }}
             >
-              Subtotal
+              {t('cart.subTotal')}
             </Typography>
 
             <Typography
@@ -134,7 +136,7 @@ const Invoice = () => {
               component='h1'
               sx={{ fontWeight: '700', mb: 2 }}
             >
-              SAR 4,557.32
+              {t('common.sar')} 4,557.32
             </Typography>
           </Box>
           <Box
@@ -151,7 +153,7 @@ const Invoice = () => {
                 sx={{ width: '219px', height: '44px' }}
                 type='submit'
               >
-                Download invoice
+                {t('checkOut.downloadInvoice')}
               </Button>
             </Link>
           </Box>

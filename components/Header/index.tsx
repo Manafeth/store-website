@@ -23,18 +23,16 @@ import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import CartDrawer from '../CartDrawer';
 import { useCommon } from '../../contexts/CommonContext';
+import { useTranslation } from "react-i18next";
 
-const pages = [
-  {page: 'Home', link: paths.home},
-  {page: 'Categories', link: paths.categories},
-  {page: 'Contact us', link: paths.contactUs}
-];
+
 
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const [t] = useTranslation();
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
 
   const {storeInfo, fetchStoreInfo} = useCommon()
@@ -61,6 +59,11 @@ const Header = () => {
       fetchAccountData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isloggedIn])
+  const pages = [
+    {page: t('common.home'), link: paths.home},
+    {page: t('common.categories'), link: paths.categories},
+    {page: t('common.contactUs'), link: paths.contactUs}
+  ];
 
   return (
     <AppBar position="static" color='inherit' sx={{ boxShadow: '0' }}>
@@ -79,8 +82,8 @@ const Header = () => {
                   S
                 </Avatar>
                 <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
-                  Welcome to, <br />
-                  {storeInfo.name} store
+                {t('common.welcomeTo')}, <br />
+                  {storeInfo.name}  {t('common.store')}
                 </Box>
               </Box>
             </Box>
@@ -287,7 +290,7 @@ const Header = () => {
               <Button
                 onClick={handleOpenAuthModal}
               >
-                Login
+                 {t('common.login')}
               </Button>
             )}
             

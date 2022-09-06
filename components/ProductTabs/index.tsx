@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import React, { useState, MouseEvent, FC } from 'react';
 import { ProductData } from '../../types/products';
 import ProductDescription from '../ProductDescription';
+import { useTranslation } from "react-i18next";
 // import Tabs from './components/Tabs';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 const ProductTabs: FC<Props> = ({ productDetials }) => {
   const [activeTab, setActiveTab] = useState(1);
+  const [t] = useTranslation();
 
   function handleTabs(ev: MouseEvent<HTMLButtonElement>) {
     // @ts-ignore
@@ -30,7 +32,7 @@ const ProductTabs: FC<Props> = ({ productDetials }) => {
             mb: 2,
           }}
         >
-          history
+          {t('settings.histriory')}
         </Typography>
       )}
       {activeTab === 3 && (
@@ -42,7 +44,7 @@ const ProductTabs: FC<Props> = ({ productDetials }) => {
             mb: 2,
           }}
         >
-          history
+          {t('settings.histriory')}
         </Typography>
       )}
     </Box>

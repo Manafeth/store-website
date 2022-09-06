@@ -1,8 +1,10 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { useTranslation } from "react-i18next";
 
 const OrderSummary = () => {
+  const [t] = useTranslation();
   return (
     <Box>
       <Box
@@ -13,10 +15,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-          Subtotal
+        {t('cart.subTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          SAR 4,557.32
+        {t('common.sar')} 4,557.32
         </Typography>
       </Box>
       <Box
@@ -27,10 +29,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-          Estimated Delivery & Handling
+        {t('common.estimatedDelivery')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          SAR 10
+        {t('common.sar')} 10
         </Typography>
       </Box>
       <Box
@@ -41,10 +43,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-          Total
+        {t('cart.total')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          SAR 4,567.32
+        {t('common.sar')} 4,567.32
         </Typography>
       </Box>
     </Box>
