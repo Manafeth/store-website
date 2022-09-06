@@ -29,8 +29,8 @@ const ListMenuItem: FC<Props> = ({ data }) => {
         sx={{
           backgroundColor: router.pathname === data.link ? 'grey.1600' : '',
           borderColor: 'primary.main',
-          width: '350px',
-          height: '67px',
+          width: { md: '350px' },
+          height: { xs: '50px', md: '67px' },
           borderRadius: '8px',
           px: router.pathname === data.link ? 2.5 : 0,
           '&:hover': {

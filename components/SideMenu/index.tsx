@@ -12,7 +12,7 @@ import ListMenuItem from './components/ListMenuItem';
 import { useTranslation } from "react-i18next";
 
 
-const SideMenuItem = () => {
+const SideMenu = () => {
   const { logout } = useAuthModal();
   const [t] = useTranslation();
   const { fetchCustomerProfileData, customerData } = useProfileModal();
@@ -36,8 +36,8 @@ const SideMenuItem = () => {
           display: 'flex',
           alignItems: 'center',
           pr: 2,
-          mb: 5,
-          gap:'30px'
+          mb: {xs: 3, md: 5},
+          gap: '30px'
         }}
       >
         <Avatar  src={customerData?.imageFilePath?.thumbUrl || ''}></Avatar>
@@ -58,4 +58,4 @@ const SideMenuItem = () => {
   );
 };
 
-export default SideMenuItem;
+export default SideMenu;

@@ -92,8 +92,8 @@ const EditAccount: FC<Props> = ({
       component='form'
       onSubmit={handleSubmit}
     >
-      <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      {t('settings.editAccount')}
+      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
+        {t('settings.editAccount')}
       </Typography>
       <Box
         sx={{
@@ -146,8 +146,8 @@ const EditAccount: FC<Props> = ({
           },
         }}
       />
-      <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
-      {t('common.contact')}
+      <Typography variant='h1' component='h2' sx={{ mb: 3, mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
+        {t('common.contact')}
       </Typography>
       <InputLabel
         shrink

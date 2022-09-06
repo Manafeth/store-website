@@ -21,15 +21,16 @@ const WishListProduct = () => {
         <Box>
           <Typography
             variant='h1'
-            component='h1'
-            sx={{ mb: 5, fontWeight: 'bold' }}
+            sx={{ mb: 5, fontWeight: 'bold', fontSize: { xs: '28px', md: '34px', fontSize: { xs: '28px', md: '34px' } } }}
           >
               {t('settings.wishlistProduct')}
           </Typography>
           {wishListData?.map((item) => {
             return(
-            <ProductItem data={item} key={item.id} />
-          );
+              <Box key={item.id} mb={3}>
+                <ProductItem data={item} />
+              </Box>
+            );
           })}
         </Box>
       </ProfileLayout>
