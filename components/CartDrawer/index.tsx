@@ -10,6 +10,9 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import OrderSummary from '../OrderSummary';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
 interface Props {
   open: boolean;
@@ -46,7 +49,42 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         </IconButton>
       </Box>
       <Box>
-        <CartItem />
+        {/* <CartItem /> */}
+        <Grid container spacing='40px' sx={{ mt: 2 }}>
+        <Grid item xs={6}>
+          <TextField
+            id='outlined-basic'
+            select
+            variant='outlined'
+            label='Size : L'
+            fullWidth
+            margin='normal'
+            name='cityId'
+            sx={{ mb: 4 }}
+          >
+            <MenuItem value={0}>test</MenuItem>
+
+            <MenuItem value={1}></MenuItem>
+          </TextField>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id='outlined-basic'
+            select
+            variant='outlined'
+            label='Qty : 1'
+            fullWidth
+            margin='normal'
+            name='cityId'
+            sx={{ mb: 4 }}
+            inputProps={{ style: { fontSize: '16px', fontWeight: '700' } }}
+          >
+            <MenuItem value={0}>test</MenuItem>
+
+            <MenuItem value={1}></MenuItem>
+          </TextField>
+        </Grid>
+      </Grid>
         <Divider sx={{ mt: 3, mb: 3 }} />
       </Box>
 

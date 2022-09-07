@@ -9,6 +9,13 @@ function addProductToCart(data: ProductCartData) {
   );
 }
 
+function getAllCartProducts() {
+  return axiosInstance.get(
+    'Cart/GetCartProducts',
+  );
+}
+
 export {
     addProductToCart,
+    getAllCartProducts
 }

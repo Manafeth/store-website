@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -20,6 +20,7 @@ import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
 import ShippingProviders from '../../components/ShippingProviders';
+import { useCartModal } from '../../contexts/CartContext';
 
 
 const steps = [
@@ -52,6 +53,11 @@ const ColorlibStepIconRoot = styled('div')<{
 }));
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const {fetchCartProducts,cartData } = useCartModal();
+  useEffect(() => {
+    fetchCartProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   function handleBack() {
     setActiveStep(activeStep - 1);
   }
@@ -123,7 +129,11 @@ const Checkout = () => {
               <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
                 Items
               </Typography>
-              <CartItem />
+              {cartData?.map((item) => {
+                 return(
+              <CartItem data={item} key={item.id}/>
+              );
+            })}
             </Grid>
           </Grid>
         </Container>

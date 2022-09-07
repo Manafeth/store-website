@@ -34,7 +34,7 @@ const AddressCard: FC<Props> = ({ data }) => {
             defaultValue={1}
             name={data.address}
             onChange={handleChange}
-            value={data.address}
+            value={state?.address}
           >
             <FormControlLabel
               key={data.id}
