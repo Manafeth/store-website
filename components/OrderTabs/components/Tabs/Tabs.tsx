@@ -1,6 +1,7 @@
 import React, { FC, MouseEvent } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { useTranslation } from "react-i18next";
 
 
 interface Props {
@@ -10,9 +11,10 @@ interface Props {
 }
 
 const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
+  const [t] = useTranslation();
   const sharedStyle = {
     'mr': 3,
-    'fontSize': '18px',
+    'fontSize': { xs: '14px', md: '18px' },
     'minWidth': 170,
     'minHieght': 40,
     'justifyContent': 'center',
@@ -42,7 +44,7 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
         value={1}
         onClick={handleTabs}
       >
-       Active orders
+      {t('settings.activeOrders')}
       </Button>
       <Button
         variant="text"
@@ -52,7 +54,7 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
         onClick={handleTabs}
       >
 
-        Histriory
+      {t('settings.histriory')}
       </Button>
      
     </Box>

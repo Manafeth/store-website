@@ -51,7 +51,7 @@ const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove,
             sx={{ mr: 3 }}
             onClick={onClose}
           >
-           no
+           {t('common.no')}
           </Button>
           <Button
             variant="contained"

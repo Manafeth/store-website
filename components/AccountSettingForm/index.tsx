@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import MenuItem from '@mui/material/MenuItem';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import React, {ChangeEvent, FC, useState } from 'react';
@@ -19,6 +18,7 @@ interface Props {
 
 const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
   const { i18n } = useTranslation();
+  const [t] = useTranslation();
   const {triggerUpdateEmailNotification} = useProfileModal();
   const [notification, setNotification] = useState<emailNotificationData>({
     reminderEmail: false,
@@ -51,58 +51,60 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
     <Box
       sx={{
         height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'left',
+        maxWidth: {md: 400}
       }}
     >
-      <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        Account Setting
+      <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
+        {t('settings.accountSetting')}
       </Typography>
+
       <Box
         sx={{
           pb: 4,
           display: 'flex',
           alignItems: 'center',
-          flexWrap: 'wrap',
+          justifyContent: 'space-between'
         }}
       >
-        <Typography variant='h2' component='span' sx={{ flex: '0.75' }}>
-          Email Notification
+        <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' } }}>
+          {t('settings.emailNotification')}
         </Typography>
         <Switch color='success' 
-        checked={emailNotificationData.activityEmail}
-        onChange={handleChecked}
-        value={emailNotificationData.activityEmail}
-        disabled={loading}
+          checked={emailNotificationData.activityEmail}
+          onChange={handleChecked}
+          value={emailNotificationData.activityEmail}
+          disabled={loading}
         />
       </Box>
+
       <Typography
         sx={{
-          width: '76%',
           color: 'text.secondary',
           fontSize: '16px',
           mb: 5,
         }}
       >
-        We would like you to be first to get customized news, special offers,
-        invites to events & exclusive competitions related to Beuand,
+      {t('settings.emailTextOne')}{t('settings.emailtextTwo')}
       </Typography>
-      <Divider sx={{ mb: 5, width: '80%' }} />
-      <Box sx={{display:'flex',alignItems: 'baseline'}}>
-      <Typography variant='h2' component='h1' sx={{ mb: 5,flex: '0.7' }}>
-      Shipping Address
-      </Typography>
-      <Link href='/addressManagment'>
-      <IconButton sx={{fontSize:'16px'}}>
-      Edit
-      </IconButton> 
-      </Link>
+
+      <Divider sx={{ mb: 5 }} />
+
+      <Box sx={{display:'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
+        <Typography variant='h2' sx={{ mb: 5,flex: '0.7', fontSize: { xs: '20px', md: '24px' } }}>
+          {t('settings.shippingAddress')}
+        </Typography>
+        <Link href='/addressManagment'>
+          <IconButton sx={{fontSize:'16px'}}>
+            {t('common.edit')}
+          </IconButton> 
+        </Link>
       </Box>
-      <Divider sx={{ mb: 5, width: '80%' }} />
+
+      <Divider sx={{ mb: 5 }} />
+
       <Box sx={{ display: 'flex' }}>
         <Typography variant='h2' component='span'>
-          Language
+        {t('common.language')}
         </Typography>
       </Box>
 

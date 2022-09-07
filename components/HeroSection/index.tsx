@@ -3,12 +3,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import { useTranslation } from "react-i18next";
 
 import Image from 'next/image';
 import hero from '../../assets/images/hero.png';
 import Link from 'next/link';
 
 const HeroSection = () => {
+    const [t] = useTranslation();
   return (
     <Box component='section' sx={{ position: 'relative' }}>
         <Box sx={{ display: 'flex' }}>
@@ -26,7 +28,7 @@ const HeroSection = () => {
                         mb: {xs: 1, sm: 2}
                     }}
                 >
-                    SUMMER 2022
+                    {t('heroSection.summerYear')}
                 </Typography>
                 <Typography
                     sx={{
@@ -38,7 +40,7 @@ const HeroSection = () => {
                         mb: {xs: 1, sm: 2}
                     }}
                 >
-                    -30% Discount
+                    {t('heroSection.discount')}
                 </Typography>
                 <Typography
                     sx={{
@@ -50,11 +52,11 @@ const HeroSection = () => {
                         maxWidth: {xs: 226, sm: 376}
                     }}
                 >
-                    We know how large objects will act, but things on a small scale
+                     {t('heroSection.description')}
                 </Typography>
                 <Link href='/'>
                     <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }}>
-                        SHOP NOW
+                    {t('heroSection.shopNow')}
                     </Button>
                 </Link>
             </Container>

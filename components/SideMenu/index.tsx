@@ -9,10 +9,12 @@ import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import ListMenuItem from './components/ListMenuItem';
+import { useTranslation } from "react-i18next";
 
 
-const SideMenuItem = () => {
+const SideMenu = () => {
   const { logout } = useAuthModal();
+  const [t] = useTranslation();
   const { fetchCustomerProfileData, customerData } = useProfileModal();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
@@ -21,11 +23,11 @@ const SideMenuItem = () => {
     }, []);
 
   const listItemSideBar = [
-    { id: 1, name: 'Edit Account', link: paths.editAccount },
-    { id: 2, name: 'Orders', link: paths.profileOrders},
-    { id: 3, name: 'Wishlist', link: paths.whishList},
-    { id: 4, name: 'Setting', link: paths.addressSettings },
-    { id: 5, name: 'Logout', onClick: logout},
+    { id: 1, name: t('settings.editAccount'), link: paths.editAccount },
+    { id: 2, name: t('settings.orders'), link: paths.profileOrders},
+    { id: 3, name: t('settings.wishlist'), link: paths.whishList},
+    { id: 4, name: t('settings.setting'), link: paths.addressSettings },
+    { id: 5, name: t('settings.logout'), onClick: logout},
   ];
   return (
     <Box sx={{ minHeight: '100%' }}>
@@ -34,8 +36,8 @@ const SideMenuItem = () => {
           display: 'flex',
           alignItems: 'center',
           pr: 2,
-          mb: 5,
-          gap:'30px'
+          mb: {xs: 3, md: 5},
+          gap: '30px'
         }}
       >
         <Avatar  src={customerData?.imageFilePath?.thumbUrl || ''}></Avatar>
@@ -56,4 +58,4 @@ const SideMenuItem = () => {
   );
 };
 
-export default SideMenuItem;
+export default SideMenu;

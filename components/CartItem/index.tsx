@@ -51,6 +51,41 @@ const CartItem: FC<Props> = ({data}) => {
           </Typography>
         </Box>
       </Box>
+      <Grid container spacing='40px' sx={{ mt: 2 }}>
+        <Grid item xs={6}>
+          <TextField
+            id='outlined-basic'
+            select
+            variant='outlined'
+            label='Size : L'
+            fullWidth
+            margin='normal'
+            name='cityId'
+            sx={{ mb: 4 }}
+          >
+            <MenuItem value={0}>test</MenuItem>
+
+            <MenuItem value={1}></MenuItem>
+          </TextField>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id='outlined-basic'
+            select
+            variant='outlined'
+            label='Qty : 1'
+            fullWidth
+            margin='normal'
+            name='cityId'
+            sx={{ mb: 4 }}
+            inputProps={{ style: { fontSize: '16px', fontWeight: '700' } }}
+          >
+            <MenuItem value={0}>test</MenuItem>
+
+            <MenuItem value={1}></MenuItem>
+          </TextField>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

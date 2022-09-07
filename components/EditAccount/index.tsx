@@ -18,6 +18,7 @@ import Avatar from '@mui/material/Avatar';
 import PhoneNumberInput from '../PhoneNumberInput';
 import { customerData } from '../../types/profile';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useTranslation } from "react-i18next";
 
 interface Props {
   customerData: customerData;
@@ -36,6 +37,7 @@ const EditAccount: FC<Props> = ({
   loading,
 }) => {
   const [image, setImage] = useState('');
+  const [t] = useTranslation();
 
   function handlePhoneInput({
     countryId,
@@ -90,8 +92,8 @@ const EditAccount: FC<Props> = ({
       component='form'
       onSubmit={handleSubmit}
     >
-      <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        Edit Account
+      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
+        {t('settings.editAccount')}
       </Typography>
       <Box
         sx={{
@@ -117,7 +119,7 @@ const EditAccount: FC<Props> = ({
           sx={{ fontSize: '14px', color: 'grey.2000', fontWeight: '400' }}
           endIcon={<Image src={uploadIcon} alt='upload Iocn' />}
         >
-          Upload Photo (Max 1 Mb)
+          {t('settings.uploadPhoto')}
           <input
             hidden
             accept='image/*'
@@ -128,7 +130,7 @@ const EditAccount: FC<Props> = ({
         </Button>
       </Box>
       <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
-        Full Name
+      {t('common.fullName')}
       </InputLabel>
       <TextField
         id='outlined-basic'
@@ -144,14 +146,14 @@ const EditAccount: FC<Props> = ({
           },
         }}
       />
-      <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
-        Contact
+      <Typography variant='h1' component='h2' sx={{ mb: 3, mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
+        {t('common.contact')}
       </Typography>
       <InputLabel
         shrink
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
-        Email
+          {t('common.email')}
       </InputLabel>
 
       <TextField
@@ -173,7 +175,7 @@ const EditAccount: FC<Props> = ({
         shrink
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 1 }}
       >
-        Phone Number
+          {t('common.phoneNumber')}
       </InputLabel>
 
       <PhoneNumberInput
@@ -211,7 +213,7 @@ const EditAccount: FC<Props> = ({
           {loading ? (
             <CircularProgress size={25} color='info' />
           ) : (
-            'save Changes'
+            t('common.saveChanges')
           )}
         </Button>
       </Box>

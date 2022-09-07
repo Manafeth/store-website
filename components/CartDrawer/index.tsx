@@ -13,6 +13,7 @@ import OrderSummary from '../OrderSummary';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   open: boolean;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
+  const [t] = useTranslation();
   function handleClose() {
     onClose();
   }
@@ -42,7 +44,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Typography variant='h1' component='h2'>
-          My bag (2)
+        {t('cart.myBag')} (2)
         </Typography>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -50,41 +52,6 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       </Box>
       <Box>
         {/* <CartItem /> */}
-        <Grid container spacing='40px' sx={{ mt: 2 }}>
-        <Grid item xs={6}>
-          <TextField
-            id='outlined-basic'
-            select
-            variant='outlined'
-            label='Size : L'
-            fullWidth
-            margin='normal'
-            name='cityId'
-            sx={{ mb: 4 }}
-          >
-            <MenuItem value={0}>test</MenuItem>
-
-            <MenuItem value={1}></MenuItem>
-          </TextField>
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id='outlined-basic'
-            select
-            variant='outlined'
-            label='Qty : 1'
-            fullWidth
-            margin='normal'
-            name='cityId'
-            sx={{ mb: 4 }}
-            inputProps={{ style: { fontSize: '16px', fontWeight: '700' } }}
-          >
-            <MenuItem value={0}>test</MenuItem>
-
-            <MenuItem value={1}></MenuItem>
-          </TextField>
-        </Grid>
-      </Grid>
         <Divider sx={{ mt: 3, mb: 3 }} />
       </Box>
 
@@ -109,7 +76,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             mr: '20px',
           }}
         >
-          Continue shopping
+          {t('cart.continueShopping')}
         </Button>
         <Link href='/checkout'>
           <Button
@@ -117,7 +84,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             sx={{ width: 'auto', height: '44px' }}
             type='submit'
           >
-            Continue to payment
+              {t('cart.continueToPayment')}
           </Button>
         </Link>
       </Box>

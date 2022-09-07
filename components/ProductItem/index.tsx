@@ -4,15 +4,16 @@ import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import { FC } from 'react';
 import blackHeart from '../../assets/images/icons/fill-heart.png';
-import goldStar from '../../assets/images/icons/gold-star.png';
 import { wishListData } from '../../types/profile';
+import { useTranslation } from "react-i18next";
 interface Props {
   data: wishListData;
 }
 
 const ProductItem: FC<Props> = ({ data }) => {
+  const [t] = useTranslation();
   return (
-    <Box sx={{ display: 'flex', gap: '25px' }}>
+    <Box sx={{ display: 'flex', gap: '25px', mt:2 , mb:2 }}>
       <Box
         sx={{
           position: 'relative',
@@ -43,8 +44,8 @@ const ProductItem: FC<Props> = ({ data }) => {
       <Box>
         <Typography
           variant='h2'
-          component='h1'
-          sx={{ mb: 2, fontWeight: '400' }}
+          component='h3'
+          sx={{ mb: 2, fontWeight: '400', fontSize: '20px' }}
         >
           {data.name}
         </Typography>
@@ -52,7 +53,7 @@ const ProductItem: FC<Props> = ({ data }) => {
           <Typography
             variant='h5'
             component='h1'
-            sx={{ mb: 2, fontWeight: '400' }}
+            sx={{ mb: 2, fontWeight: '400', color: 'text.secondary' }}
           >
             {data.category}
           </Typography>
@@ -67,8 +68,8 @@ const ProductItem: FC<Props> = ({ data }) => {
             </Typography>
           </Box> */}
         </Box>
-        <Typography variant='h2' component='h1' sx={{ fontWeight: 'bold' }}>
-          SAR {data.salePrice}
+        <Typography variant='h2' component='p' sx={{ fontWeight: 'bold' }}>
+          {t('common.sar')} {data.salePrice}
         </Typography>
       </Box>
     </Box>

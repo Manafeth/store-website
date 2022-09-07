@@ -7,12 +7,14 @@ import Link from 'next/link';
 
 import { CategoryData } from '../../types/categories';
 import paths from '../../constants/paths';
+import { useTranslation } from "react-i18next";
 
 interface Props {
     data: CategoryData
 }
 
 const CategoryCard: FC<Props> = ({ data }) => {
+    const [t] = useTranslation();
   return (
     <Link href={paths.categoryDetails(data.id)}>
         <Box
@@ -46,7 +48,7 @@ const CategoryCard: FC<Props> = ({ data }) => {
                         lineHeight: '20px',
                     }}
                 >
-                    {data.itemsCount} items
+                    {data.itemsCount}  {t('common.items')}
                 </Typography>
             </Box>
         </Box>
