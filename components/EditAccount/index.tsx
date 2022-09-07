@@ -13,7 +13,6 @@ import uploadIcon from '../../assets/images/icons/upload-icon.png';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
 import Avatar from '@mui/material/Avatar';
 import PhoneNumberInput from '../PhoneNumberInput';
 import { customerData } from '../../types/profile';
@@ -129,9 +128,9 @@ const EditAccount: FC<Props> = ({
           />
         </Button>
       </Box>
-      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+      <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
       {t('common.fullName')}
-      </InputLabel>
+      </Box>
       <TextField
         id='outlined-basic'
         variant='outlined'
@@ -149,12 +148,11 @@ const EditAccount: FC<Props> = ({
       <Typography variant='h1' component='h2' sx={{ mb: 3, mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
         {t('common.contact')}
       </Typography>
-      <InputLabel
-        shrink
+      <Box component='label'
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
           {t('common.email')}
-      </InputLabel>
+      </Box>
 
       <TextField
         id='outlined-basic'
@@ -171,12 +169,11 @@ const EditAccount: FC<Props> = ({
           },
         }}
       />
-      <InputLabel
-        shrink
+      <Box component='label'
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 1 }}
       >
           {t('common.phoneNumber')}
-      </InputLabel>
+      </Box>
 
       <PhoneNumberInput
         sx={{ mb: 3, fontSize: '14px', fontWeight: '400', color: 'grey.1800' }}

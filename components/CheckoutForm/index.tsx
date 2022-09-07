@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
@@ -29,9 +28,9 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
 
       <Grid container spacing='40px' sx={{ mb: 3 }}>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             First Name
-          </InputLabel>
+          </Box>
           <TextField
             id='outlined-basic'
             variant='outlined'
@@ -40,9 +39,9 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
           />
         </Grid>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             Last Name
-          </InputLabel>
+          </Box>
 
           <TextField
             id='outlined-basic'
@@ -52,12 +51,12 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
           />
         </Grid>
       </Grid>
-      <InputLabel
-        shrink
+      <Box component='label'
+      
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
         Address
-      </InputLabel>
+      </Box>
 
       <TextField
         id='outlined-basic'
@@ -68,9 +67,9 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
       />
       <Grid container spacing='40px' sx={{ mb: 3 }}>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             Postal Code
-          </InputLabel>
+          </Box>
           <TextField
             id='outlined-basic'
             variant='outlined'
@@ -79,9 +78,9 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
           />
         </Grid>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             City
-          </InputLabel>
+          </Box>
 
           <TextField
             id='outlined-basic'
@@ -93,9 +92,9 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
       </Grid>
       <Grid container spacing='40px' sx={{ mb: 3 }}>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             Province/State
-          </InputLabel>
+          </Box>
           <TextField
             id='outlined-basic'
             select
@@ -111,9 +110,9 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
           </TextField>
         </Grid>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             Country
-          </InputLabel>
+          </Box>
 
           <TextField
             id='outlined-basic'
@@ -136,12 +135,12 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
       <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 3 }}>
         Contact
       </Typography>
-      <InputLabel
-        shrink
+      <Box component='label'
+      
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
         Email
-      </InputLabel>
+      </Box>
 
       <TextField
         id='outlined-basic'
@@ -150,9 +149,9 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
         name='email'
         sx={{ mb: 3 }}
       />
-      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+      <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
         Phone Number
-      </InputLabel>
+      </Box>
 
       <TextField
         id='outlined-basic'
