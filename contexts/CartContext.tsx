@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
-import { getAllCartProducts } from '../services/cart.services';
-import { CartModalState, productData } from '../types/cart';
+import { getAllCartProducts, getAllProviders } from '../services/cart.services';
+import { CartModalState, paymentProvidersData, productData, shipmentsProvidersData } from '../types/cart';
 
 
 interface Props {
@@ -19,6 +19,8 @@ const CartModalContext = createContext({} as CartModalState);
 
 export const CartModalProvider: FC<Props> = ({ children }) => {
     const [cartData, setCartData] = useState<productData[]>([]);
+    const [shipmentData, setShipmentData] = useState<shipmentsProvidersData[]>([]);
+    const [paymnetData, setPaymnetData] = useState<paymentProvidersData[]>([]);
 
 
 
@@ -33,11 +35,31 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       Promise.reject(error);
     }
   }
+  async function fetchShipmentsProviders(id:number) {
+    try {
+     const response = await  getAllProviders(id);
+     setShipmentData(response.data.data.shipmentsProviders)
+    } catch(error) {
+      Promise.reject(error);
+    }
+  }
+  async function fetchPaymentProviders(id:number) {
+    try {
+     const response = await  getAllProviders(id);
+     setPaymnetData(response.data.data.paymentProviders)
+    } catch(error) {
+      Promise.reject(error);
+    }
+  }
 
 
   const state: CartModalState = {
     cartData,
-    fetchCartProducts
+    shipmentData,
+    paymnetData,
+    fetchCartProducts,
+    fetchShipmentsProviders,
+    fetchPaymentProviders
   
   };
 

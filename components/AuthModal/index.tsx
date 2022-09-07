@@ -154,7 +154,7 @@ const AuthModal: FC<Props> = () => {
                     type="submit"
                     loading={[loginLoading, verifyLoading, updateProfileLoading].includes(true)}
                 >
-                         {t('Auth.next')}
+                         {t('common.next')}
                 </LoadingButton>
             </Box>
         </Drawer>

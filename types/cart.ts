@@ -16,6 +16,9 @@ export type productData = {
     quantity: number,
     maxQuantity: number,
     productId:number,
+    total: number,
+    subTotal:number,
+    checkoutAttributsTotal:number,
     mainImageFilePath?: {
     orignialUrl: string,
     thumbUrl: string,
@@ -23,10 +26,31 @@ export type productData = {
     checkOutAttributes: [],
     attributes: null
 }
+export type shipmentsProvidersData = {
+    id:number,
+    name:string,
+    imageFilePath?: {
+        orignialUrl: string,
+        thumbUrl: string,
+        },
+}
+export type paymentProvidersData = {
+    id:number,
+    name:string,
+    providerCategory:number,
+    imageFilePath?: {
+        orignialUrl: string,
+        thumbUrl: string,
+        },
+}
 
 
 export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
+    fetchShipmentsProviders:(id:number) => Promise<void>,
+    fetchPaymentProviders:(id:number) => Promise<void>,
     cartData:productData[],
+    shipmentData:shipmentsProvidersData[],
+    paymnetData:paymentProvidersData[],
   
   }

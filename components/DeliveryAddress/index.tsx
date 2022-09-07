@@ -53,6 +53,9 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
               height: '44px',
               backgroundColor: ' background.grayDisabled',
               mr: '20px',
+              fontSize:'14px',
+              fontWeight:'500',
+             
             }}
             onClick={handleBack}
           >

@@ -15,7 +15,19 @@ function getAllCartProducts() {
   );
 }
 
+function getAllProviders(addressId: number) {
+  return axiosInstance.get(
+    'Providers/GetAll',
+    {
+      params:{
+        addressId
+      },
+    }
+  );
+}
+
 export {
     addProductToCart,
-    getAllCartProducts
+    getAllCartProducts,
+    getAllProviders
 }

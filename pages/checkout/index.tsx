@@ -19,8 +19,9 @@ import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
-import ShippingProviders from '../../components/ShippingProviders';
+import ShippingProviders from '../../components/Providers';
 import { useCartModal } from '../../contexts/CartContext';
+import Providers from '../../components/Providers';
 
 
 const steps = [
@@ -113,18 +114,28 @@ const Checkout = () => {
             )}
 
             {activeStep === 1 && (
-                <ShippingProviders handleNext={handleNext} />
+              <Providers 
+                title="Shipping Providers"
+                text="shipping" 
+                handleNext={handleNext}
+                handleBack={handleBack} />
             )}
 
             {activeStep === 2 && (
-                <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
+                <Providers 
+                title="Payment Providers"
+                text="paymnet" 
+                handleNext={handleNext}
+                handleBack={handleBack} />
             )}
             </Grid>
             <Grid item xs={4}>
               <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
                 Order summery
               </Typography>
-              <OrderSummary />
+             
+              <OrderSummary/>
+         
               <Divider />
               <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
                 Items
