@@ -120,7 +120,8 @@
         "paymentStatus":"Payment status",
         "shippingMethod":"Shipping method",
         "shippingStatus":"Shipping status",
-        "orderTimeline":"Order timeline"
+        "orderTimeline":"Order timeline",
+        "checkoutAttributsTotal":"CheckoutAttributsTotal"
        
 
     },

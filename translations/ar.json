@@ -119,7 +119,8 @@
         "paymentStatus":"حالة السداد",
         "shippingMethod":"طريقة الشحن",
         "shippingStatus":"حالة الشحن",
-        "orderTimeline":"مخطط زمني للطلب"
+        "orderTimeline":"مخطط زمني للطلب",
+        "checkoutAttributsTotal":"سمات الخروج إجمالي"
 
     },
     "errorMsg": {
