@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import FormControl from '@mui/material/FormControl';
@@ -5,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
-import React, { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { addressData } from '../../../types/profile';
 interface Props {
   data: addressData;
@@ -13,19 +14,22 @@ interface Props {
 
 const AddressCard: FC<Props> = ({ data }) => {
   const [state, setState] = useState<addressData>();
-  function handleInputChange(ev: any) {
-    // setState((prevState) => ({
-    //   ...prevState,
-    //   [ev.target.name]: ev.target.value,
-    // }));
+  const [checked, setChecked] = useState(false);
+
+  function handleClick() { 
+    setChecked(!checked)
   }
-  function handleChange(e: any) {
+ 
+  function handleChange(e:ChangeEvent<HTMLInputElement>) {
     setState((prev: any) => ({
       ...prev,
       [e.target.name]: e.target.value,
+     
     }));
+    console.log('state',e.target.value)
   }
   return (
+    <Box>
     <Card sx={{ width: '420px', backgroundColor: 'grey.2400' }}>
       <CardContent>
         <FormControl>
@@ -34,12 +38,11 @@ const AddressCard: FC<Props> = ({ data }) => {
             defaultValue={1}
             name={data.address}
             onChange={handleChange}
-            value={state?.address}
           >
             <FormControlLabel
               key={data.id}
-              value={data.address}
-              control={<Radio />}
+              value={data.id}
+              control={<Radio checked={checked} onClick={handleClick}/>}
               label={
                 <Typography sx={{ fontSize: '24px', fontweight: '600' }}>
                   {data.id}
@@ -54,6 +57,7 @@ const AddressCard: FC<Props> = ({ data }) => {
         </Typography>
       </CardContent>
     </Card>
+    </Box>
   );
 };
 

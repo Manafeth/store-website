@@ -1,9 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import AddressCard from './components';
+import { addressData } from '../../types/profile';
 interface Props {
   handleNext: () => void;
   handleBack: () => void;
@@ -31,7 +32,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
         {addressData.map((item) => {
           return (
             <Box key={item.id} sx={{ mb: 2 }}>
-              <AddressCard data={item} />
+              <AddressCard data={item}/>
             </Box>
           );
         })}
