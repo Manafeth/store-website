@@ -1,81 +1,184 @@
 import React, {
   ChangeEvent,
-  Dispatch,
   FC,
   FormEvent,
-  SetStateAction,
   useEffect,
+  useState,
 } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
-import closeIcon from '../../../../assets/images/icons/close-icon.png';
+import closeIcon from '../../../assets/images/icons/close-icon.png';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useProfileModal } from '../../../../contexts/ProfileContext';
-import { addressData} from '../../../../types/profile';
-import { GOOGLE_MAP_KEY } from '../../../../constants';
+import { useProfileModal } from '../../../contexts/ProfileContext';
+import { AddressData } from '../../../types/profile';
+import { GOOGLE_MAP_KEY, LOADING, SUCCESS } from '../../../constants';
 import { Status, Wrapper } from '@googlemaps/react-wrapper';
-import GoogleMap from '../GoogleMap';
-import Marker from '../Marker';
+import GoogleMap from '../../GoogleMap';
+import Marker from '../../Marker';
 import { useTranslation } from "react-i18next";
-import mapMarkupIcon from '../../../../assets/images/icons/map-markup.svg';
+import mapMarkupIcon from '../../../assets/images/icons/map-markup.svg';
+import { LoadingButton } from '@mui/lab';
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  setAccountAddressData: Dispatch<SetStateAction<addressData>>;
-  accountAddressData: addressData;
-  isSubmitted: boolean;
-  isEditMode: boolean;
-  loading: boolean;
-  // eslint-disable-next-line no-unused-vars
-  handleSubmit: (ev: FormEvent<HTMLFormElement>) => void;
-  handleClose?: () => void;
-  addressDetails:addressData;
+  selectedAddress?: AddressData | undefined;
 }
 
 const AddressDrawer: FC<Props> = ({
   open,
   onClose,
-  setAccountAddressData,
-  accountAddressData,
-  isSubmitted,
-  isEditMode,
-  loading,
-  handleSubmit,
-  handleClose,
-  addressDetails
-  
+  selectedAddress
 }) => {
-  const { cityData, countryData } =
-    useProfileModal();
-    const [t] = useTranslation();
-    const renderMarker =
-    addressDetails.latitude > 0 && addressDetails.longitude > 0;
+  const {
+    createAddressStatus,
+    triggerCreateAddress,
+    updateAddressData,
+    updateAddressStatus,
+    getAddressDetails,
+    addressDetails
+  } = useProfileModal();
+
+  const initialState = {
+    id: 0,
+    cityId: 0,
+    address: '',
+    street: '',
+    type: 0,
+    latitude: 0,
+    longitude: 0,
+  };
+
+  const [state, setState] = useState<AddressData>(initialState);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { cityData, countryData } = useProfileModal();
+
+  const [t] = useTranslation();
+
+  function handleClose() {
+    onClose();
+    setState(initialState);
+  }
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
-    setAccountAddressData((prevState) => ({
+    setState((prevState) => ({
       ...prevState,
       [ev.target.name]: ev.target.value,
     }));
   }
+
   function renderMapStatus(status: Status) {
     return <h1>{status}</h1>;
   }
   // eslint-disable-next-line no-undef
   function handleMapClick(ev: google.maps.MapMouseEvent) {
-    setAccountAddressData((prevState) => ({
+    setState((prevState) => ({
       ...prevState,
       latitude: ev.latLng.lat(),
       longitude: ev.latLng.lng(),
     }));
   }
- 
+
+  function isFormValid() {
+    return (
+      state.address &&
+      state.street &&
+      state.cityId
+    );
+  }
+
+  function createAddress(){
+    if (!isFormValid())
+    setIsSubmitted(true); 
+    else  {const payload = {
+        ...state,
+      };
+      delete payload?.id;
+      triggerCreateAddress(payload)
+        .then(() => {
+          setState(initialState);
+          setIsSubmitted(false);
+        })
+        .catch(() => {
+          setIsSubmitted(false);
+        });
+      }
+    
+  }
+
+  function updateAddress(){
+    if (!isFormValid())
+    setIsSubmitted(true);
+    else {const payload = {
+      ...state,
+      id:selectedAddress?.id,
+    };
+    updateAddressData(payload).then(() => {
+        setIsSubmitted(false);
+        setState((prevState) => ({
+            ...prevState,
+        }));
+        setState(initialState);
+    }).catch(() => {
+        setIsSubmitted(false);
+    })
+    }
+  }
+
+
+  function handleSubmit(ev: FormEvent<HTMLFormElement>) {
+    ev.preventDefault();
+    if (selectedAddress) {
+      updateAddress()
+    } else {
+      createAddress()
+    }
+  }
+
+  useEffect(() => {
+    if (selectedAddress && selectedAddress.id && open)
+      getAddressDetails(selectedAddress.id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAddress, open]);
+
+
+  useEffect(() => {
+    if (addressDetails) {
+      setState((prevState) => ({
+        ...prevState,
+        address: addressDetails.address,
+        street: addressDetails.street,
+        cityId: addressDetails.cityId,
+      }));
+    }
+  }, [addressDetails]);
+
+  useEffect(() => {
+    if (createAddressStatus === SUCCESS) {
+      handleClose();
+      setIsSubmitted(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createAddressStatus]);
+
+  useEffect(() => {
+    if (updateAddressStatus === SUCCESS) {
+      handleClose();
+      setIsSubmitted(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateAddressStatus]);
+
+
+  const renderMarker = (selectedAddress?.latitude || 0) > 0 && (selectedAddress?.longitude || 0)> 0;
+  const loading = createAddressStatus === LOADING || updateAddressStatus === LOADING;
+
   return (
     <Drawer
       anchor='right'
@@ -94,11 +197,12 @@ const AddressDrawer: FC<Props> = ({
           pb: 7,
         }}
       >
-        <Typography variant="h2" component="h2">{!isEditMode ? 'Add new address' : 'Update address'}</Typography>
-        <IconButton onClick={onClose}>
+        <Typography variant="h2" component="h2">{!selectedAddress ? 'Add new address' : 'Update address'}</Typography>
+        <IconButton onClick={handleClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
         </IconButton>
       </Box>
+
       <Box
         component='form'
         onSubmit={handleSubmit}
@@ -118,10 +222,10 @@ const AddressDrawer: FC<Props> = ({
           variant='standard'
           placeholder='Address'
           name='address'
-          value={accountAddressData.address}
+          value={state.address}
           sx={{ mb: 3 }}
           onChange={handleInput}
-          error={isSubmitted && !accountAddressData.address}
+          error={isSubmitted && !state.address}
         />
 
         <Box component='label'
@@ -133,15 +237,17 @@ const AddressDrawer: FC<Props> = ({
         >
            {t('settings.street')}
         </Box>
+
         <TextField
           variant='standard'
           placeholder='Street'
           name='street'
-          value={accountAddressData.street}
-          error={isSubmitted && !accountAddressData.street}
+          value={state.street}
+          error={isSubmitted && !state.street}
           sx={{ mb: 3 }}
           onChange={handleInput}
         />
+
         <Box component='label'
           style={{
             color: 'primary.dark',
@@ -151,15 +257,16 @@ const AddressDrawer: FC<Props> = ({
         >
            {t('settings.city')}
         </Box>
+
         <TextField
           select
           variant='standard'
           margin='normal'
           sx={{ mb: 4 }}
-          value={cityData.length > 0 ? accountAddressData?.cityId : 0}
+          value={cityData.length > 0 ? state?.cityId : 0}
           // eslint-disable-next-line react/jsx-no-bind
           onChange={handleInput}
-          error={isSubmitted && !accountAddressData.cityId}
+          error={isSubmitted && !state.cityId}
           name='cityId'
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
@@ -176,6 +283,7 @@ const AddressDrawer: FC<Props> = ({
               </MenuItem>
             ))}
         </TextField>
+
         <Box component='label'
           style={{
             color: 'primary.dark',
@@ -185,6 +293,7 @@ const AddressDrawer: FC<Props> = ({
         >
            {t('settings.country')}
         </Box>
+
         <TextField
           select
           variant='standard'
@@ -208,6 +317,7 @@ const AddressDrawer: FC<Props> = ({
               </MenuItem>
             ))}
         </TextField>
+
         <Box sx={{ mb: 5 }}>
           <Wrapper apiKey={GOOGLE_MAP_KEY || ''} render={renderMapStatus}>
             <GoogleMap
@@ -219,8 +329,8 @@ const AddressDrawer: FC<Props> = ({
               {renderMarker ? (
                 <Marker
                   position={{
-                    lat: addressDetails.latitude,
-                    lng: addressDetails.longitude,
+                    lat: selectedAddress?.latitude || 0,
+                    lng: selectedAddress?.longitude || 0,
                   }}
                   icon={mapMarkupIcon}
                 />
@@ -239,53 +349,40 @@ const AddressDrawer: FC<Props> = ({
             pb: 5,
           }}
         >
-          {' '}
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: { xs: 'space-between', sm: 'flex-end' },
-                  pt: 7,
-                  pb: 5,
-                }}
-              >
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  sx={{
-                    color: 'secondary.contrastText',
-                    width: '135px',
-                    height: '46px',
-                    backgroundColor: ' background.grayDisabled',
-                    mr: '20px',
-                  }}
-                  onClick={handleClose}
-                >
-                  {t('common.cancel')}
-                </Button>
-                {!isEditMode ? (
-                <Button
-                  variant='contained'
-                  sx={{ width: 'auto', height: '44px' }}
-                  type='submit'
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <CircularProgress size={25} color='info' />
-                  ) : (
-                    t('settings.addNewAddress')
-                  )}
-                </Button>
-                ):(
-              <Button variant='contained' sx={{ width: 'auto', height: '44px' }} type='submit'  disabled={loading}>
-              {loading ? (
-                    <CircularProgress size={25} color='info' />
-                  ) : (
-                    t('settings.updateAddress')
-                  )}
-              </Button>
-                )}
-                </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: { xs: 'space-between', sm: 'flex-end' },
+              pt: 7,
+              pb: 5,
+            }}
+          >
+            <Button
+              variant='contained'
+              color='secondary'
+              sx={{
+                color: 'secondary.contrastText',
+                width: '135px',
+                height: '46px',
+                backgroundColor: ' background.grayDisabled',
+                mr: '20px',
+              }}
+              onClick={handleClose}
+            >
+              {t('common.cancel')}
+            </Button>
+
+            <LoadingButton
+              variant='contained'
+              sx={{ width: 'auto', height: '44px' }}
+              type='submit'
+              loading={loading}
+            >
+              {!selectedAddress ? t('settings.addNewAddress') : t('settings.updateAddress')}
+            </LoadingButton>
+          </Box>
         </Box>
+        
       </Box>
     </Drawer>
   );
