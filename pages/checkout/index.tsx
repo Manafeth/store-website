@@ -20,6 +20,7 @@ import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
 import { useCartModal } from '../../contexts/CartContext';
+import { useTranslation } from "react-i18next";
 import PaymentProviders from '../../components/Providers/components/PaymentProviders';
 import ShippingProviders from '../../components/Providers/components/ShippingProviders';
 
@@ -55,6 +56,7 @@ const ColorlibStepIconRoot = styled('div')<{
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const {fetchCartProducts,cartData } = useCartModal();
+  const [t] = useTranslation();
   useEffect(() => {
     fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,14 +128,14 @@ const Checkout = () => {
             </Grid>
             <Grid item xs={4}>
               <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-                Order summery
+                {t('checkOut.orderSummery')}
               </Typography>
              
               <OrderSummary/>
          
               <Divider />
               <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
-                Items
+              {t('common.items')}
               </Typography>
               {cartData?.map((item) => {
                  return(

@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
-import { getAllCartProducts, getAllProviders } from '../services/cart.services';
-import { CartModalState, paymentProvidersData, productData, shipmentsProvidersData } from '../types/cart';
+import { getAllCartProducts, getAllProviders, getOrder } from '../services/cart.services';
+import { CartModalState, OrderData, paymentProvidersData, productData, shipmentsProvidersData } from '../types/cart';
 
 
 interface Props {
@@ -21,6 +21,27 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     const [cartData, setCartData] = useState<productData[]>([]);
     const [shipmentData, setShipmentData] = useState<shipmentsProvidersData[]>([]);
     const [paymnetData, setPaymnetData] = useState<paymentProvidersData[]>([]);
+    const [orderData, setOrderData] = useState<OrderData>({
+      id:0,
+      invoiceId:0,
+      orderDate:'',
+      phoneNumber:'',
+      paymentProvider:'',
+      paymentStatus:0,
+      status:0,
+      shipmentProviderImage: {
+          orignialUrl:'',
+          thumbUrl:'',
+          },
+      orderChangeLogs:[
+        {
+          id:0,
+          new:0,
+          changeAt:'',
+        }
+      ]
+
+    });
 
 
 
@@ -51,14 +72,24 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     }
   }
 
-
+  async function fetchOrderDetails(id:number) {
+    try {
+     const response = await  getOrder(id);
+     console.log('response',response)
+     setOrderData(response.data.data)
+    } catch(error) {
+      Promise.reject(error);
+    }
+  }
   const state: CartModalState = {
     cartData,
     shipmentData,
     paymnetData,
+    orderData,
     fetchCartProducts,
     fetchShipmentsProviders,
-    fetchPaymentProviders
+    fetchPaymentProviders,
+    fetchOrderDetails
   
   };
 

@@ -25,9 +25,21 @@ function getAllProviders(addressId: number) {
     }
   );
 }
+function getOrder(id: number) {
+  return axiosInstance.get(
+    'Order/Get',
+    {
+      params:{
+        id
+      },
+    }
+  );
+}
+
 
 export {
     addProductToCart,
     getAllCartProducts,
-    getAllProviders
+    getAllProviders,
+    getOrder
 }

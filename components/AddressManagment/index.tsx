@@ -29,7 +29,6 @@ const AddressManagment = () => {
     longitude: 0,
   };
   const [t] = useTranslation();
-  const [accountAddressData, setAccountAddressData] = useState<AddressData>(initialState);
   const [deleteConfirmationActive, setDeleteConfirmationState] =useState(false);
   const [open, setOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<AddressData>();

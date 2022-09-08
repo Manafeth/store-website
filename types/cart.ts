@@ -43,14 +43,34 @@ export type paymentProvidersData = {
         thumbUrl: string,
         },
 }
-
+export type orderChangeLogsData = {
+    id:number,
+    new:number,
+    changeAt:string,
+}
+export type OrderData = {
+    id:number,
+    invoiceId:number,
+    orderDate:string,
+    phoneNumber:string,
+    paymentProvider:string,
+    paymentStatus:number,
+    status:number,
+    shipmentProviderImage?: {
+        orignialUrl: string,
+        thumbUrl: string,
+        },
+    orderChangeLogs:orderChangeLogsData[]
+}
 
 export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
     fetchShipmentsProviders:(id:number) => Promise<void>,
     fetchPaymentProviders:(id:number) => Promise<void>,
+    fetchOrderDetails:(id:number) => Promise<void>,
     cartData:productData[],
     shipmentData:shipmentsProvidersData[],
     paymnetData:paymentProvidersData[],
+    orderData:OrderData,
   
   }
