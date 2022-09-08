@@ -7,14 +7,15 @@ import { useCartModal } from '../../../../contexts/CartContext';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useTranslation } from "react-i18next";
+import Link from 'next/link';
+import paths from '../../../../constants/paths';
 
 
 interface Props {
-  handleNext: () => void;
   handleBack: () => void;
 }
 
-const PaymentProviders: FC<Props> = ({ handleNext, handleBack }) => {
+const PaymentProviders: FC<Props> = ({ handleBack }) => {
     const [t] = useTranslation();
   const [selectedId, setSelectedId] = useState("")
   const { paymnetData,fetchPaymentProviders } = useCartModal();
@@ -92,16 +93,17 @@ const PaymentProviders: FC<Props> = ({ handleNext, handleBack }) => {
           }}
           onClick={handleBack}
         >
-          Back
+             {t('common.back')}
         </Button>
+        <Link href={paths.orderDetails(1)}>
         <Button
           variant='contained'
           sx={{ width: '219px', height: '44px' }}
           type='submit'
-          onClick={handleNext}
         >
-          Next
+           {t('checkOut.placeOrder')}
         </Button>
+        </Link>
       </Box>
     </Box>
   );

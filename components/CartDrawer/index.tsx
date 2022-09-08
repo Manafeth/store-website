@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,6 +14,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
+import { useCartModal } from '../../contexts/CartContext';
 
 interface Props {
   open: boolean;
@@ -22,6 +23,11 @@ interface Props {
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();
+  const {fetchCartProducts,cartData } = useCartModal();
+  useEffect(() => {
+    fetchCartProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   function handleClose() {
     onClose();
   }
@@ -51,7 +57,11 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         </IconButton>
       </Box>
       <Box>
-        {/* <CartItem /> */}
+      {cartData?.map((item) => {
+                 return(
+        <CartItem data={item} key={item.id} />
+        );
+      })}
         <Divider sx={{ mt: 3, mb: 3 }} />
       </Box>
 

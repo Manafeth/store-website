@@ -10,6 +10,7 @@ import React, { ChangeEvent, FC, useState } from 'react';
 import { AddressData } from '../../../types/profile';
 interface Props {
   data: AddressData;
+
 }
 
 const AddressCard: FC<Props> = ({ data }) => {
@@ -46,7 +47,7 @@ const AddressCard: FC<Props> = ({ data }) => {
           >
             <FormControlLabel
               key={data.id}
-              value={data.id}
+              value={data.address}
               control={<Radio checked={checked} onClick={handleClick}/>}
               label={
                 <Typography sx={{ fontSize: '24px', fontweight: '600' }}>

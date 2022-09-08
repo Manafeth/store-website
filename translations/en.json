@@ -126,7 +126,8 @@
         "shippingProviders":"Shipping Providers",
         "shippingDiscription":"These are available shipping methods, please select suitable one for you",
         "paymentProviders":"Payment Providers",
-        "paymentDiscription":"These are available paymnet methods, please select suitable one for you"
+        "paymentDiscription":"These are available paymnet methods, please select suitable one for you",
+        "placeOrder":"Place Order"
        
 
     },

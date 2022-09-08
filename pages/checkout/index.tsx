@@ -121,7 +121,6 @@ const Checkout = () => {
 
             {activeStep === 2 && (
                 <PaymentProviders
-                handleNext={handleNext}
                 handleBack={handleBack} />
             )}
             </Grid>
