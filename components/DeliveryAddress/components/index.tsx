@@ -7,14 +7,18 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 import React, { ChangeEvent, FC, useState } from 'react';
-import { addressData } from '../../../types/profile';
+import { AddressData } from '../../../types/profile';
 interface Props {
-  data: addressData;
+  data: AddressData;
 }
 
 const AddressCard: FC<Props> = ({ data }) => {
-  const [state, setState] = useState<addressData>();
+  const [state, setState] = useState<AddressData>();
   const [checked, setChecked] = useState(false);
+
+  function handleSelected(data: AddressData) {
+    setState(data);
+  }
 
   function handleClick() { 
     setChecked(!checked)
@@ -26,10 +30,11 @@ const AddressCard: FC<Props> = ({ data }) => {
       [e.target.name]: e.target.value,
      
     }));
-    console.log('state',e.target.value)
   }
   return (
-    <Box>
+    <Box  onClick={function () {
+      handleSelected(data)
+    }}>
     <Card sx={{ width: '420px', backgroundColor: 'grey.2400' }}>
       <CardContent>
         <FormControl>

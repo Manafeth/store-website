@@ -6,6 +6,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import Box from '@mui/material/Box';
 import { shipmentsProvidersData } from '../../../../types/cart';
 import Avatar from '@mui/material/Avatar';
+import ButtonBase from '@mui/material/ButtonBase';
 
 interface Props {
     title:string;
@@ -17,7 +18,7 @@ interface Props {
 
 const ShippingCard: FC<Props> = ({ title, id, selectedId, handleClick, data }) => {
   return (
-    <Box
+    <ButtonBase
     onClick={handleClick}
     >
     <Card sx={{width:'420px', display:id === selectedId ? 'red': null, mb:3}}>
@@ -33,7 +34,7 @@ const ShippingCard: FC<Props> = ({ title, id, selectedId, handleClick, data }) =
       </CardContent>
     </CardActionArea>
   </Card>
-    </Box>
+    </ButtonBase>
   )
 }
 

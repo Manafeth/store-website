@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import AddressCard from './components';
-import { addressData } from '../../types/profile';
+import { useTranslation } from "react-i18next";
 interface Props {
   handleNext: () => void;
   handleBack: () => void;
@@ -12,6 +12,7 @@ interface Props {
 
 const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
   const { fetchAllAddressData, addressData } = useProfileModal();
+  const [t] = useTranslation();
   useEffect(() => {
     fetchAllAddressData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,13 +30,22 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
         <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
           Delivery address
         </Typography>
-        {addressData.map((item) => {
+        {addressData.length > 0 ? addressData.map((item) => {
           return (
             <Box key={item.id} sx={{ mb: 2 }}>
               <AddressCard data={item}/>
             </Box>
           );
-        })}
+        }):(
+          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
+          <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
+          {t('settings.oops')}
+          </Typography>
+          <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
+          {t('settings.noAddress')}
+          </Typography>
+        </Box>
+        )}
 
         <Box
           sx={{

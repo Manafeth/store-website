@@ -1,55 +1,51 @@
-import React, { FC, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ShippingCard from './components/ShippingCard';
-import { useCartModal } from '../../contexts/CartContext';
-import PaymentCard from './components/PaymentCard';
+import PaymentCard from '../PaymentCard';
+import Card from '@mui/material/Card';
+import { useCartModal } from '../../../../contexts/CartContext';
+import CardContent from '@mui/material/CardContent';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+
 
 interface Props {
-  title: string;
-  text: string;
   handleNext: () => void;
   handleBack: () => void;
 }
 
-const Providers: FC<Props> = ({ handleNext, title, text, handleBack }) => {
-  const [selectedId, setSelectedId] = useState();
-  const { fetchShipmentsProviders, shipmentData, paymnetData,fetchPaymentProviders } = useCartModal();
-  useEffect(() => {
-    fetchShipmentsProviders(76);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const PaymentProviders: FC<Props> = ({ handleNext, handleBack }) => {
+  const [selectedId, setSelectedId] = useState("")
+  const { paymnetData,fetchPaymentProviders } = useCartModal();
+
+
   useEffect(() => {
     fetchPaymentProviders(76);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  function handleInputChange(ev: ChangeEvent<HTMLInputElement>) {
+    // setState((prevState) => ({
+    //   ...prevState,
+    //   [ev.target.name]: ev.target.value,
+    // }));
+  }
+
  
   function handleClick() {
+    
     console.log('hello');
   }
 
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        {title}
+      Payment Providers
       </Typography>
       <Typography variant='h4' component='h1' sx={{ mb: 2, width: '70%' }}>
-        These are available {text} methods, please select suitable one for you
+        These are available paymnet methods, please select suitable one for you
       </Typography>
 
-      {shipmentData.map((item) => {
-        return (
-          <ShippingCard
-            selectedId={selectedId}
-            title='test'
-            id={1}
-            handleClick={handleClick}
-            data={item}
-            key={item.id}
-          />
-        );
-      })}
       {paymnetData.map((item) => {
         return (
       <PaymentCard
@@ -57,6 +53,23 @@ const Providers: FC<Props> = ({ handleNext, title, text, handleBack }) => {
             key={item.id}/>
       );
     })}
+      <TextField
+        id="outlined-basic"
+        label="Promocode"
+        placeholder="HappyEid2022"
+        variant="outlined"
+        sx={{ mb: 4, width:'420px',mt:2 }}
+        onChange={handleInputChange}
+        name="fullName"
+        value="test"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="start" sx={{ position: 'absolute', right: '0', top: '-6' }}>
+               <Typography>Apply</Typography>
+            </InputAdornment>
+          ),
+        }}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -94,4 +107,4 @@ const Providers: FC<Props> = ({ handleNext, title, text, handleBack }) => {
   );
 };
 
-export default Providers;
+export default PaymentProviders;

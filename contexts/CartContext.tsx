@@ -30,7 +30,6 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     try {
       const response = await  getAllCartProducts();
       setCartData(response.data.data);
-      console.log('response',response)
     } catch (error) {
       Promise.reject(error);
     }

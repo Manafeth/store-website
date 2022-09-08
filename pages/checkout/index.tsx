@@ -19,9 +19,9 @@ import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
-import ShippingProviders from '../../components/Providers';
 import { useCartModal } from '../../contexts/CartContext';
-import Providers from '../../components/Providers';
+import PaymentProviders from '../../components/Providers/components/PaymentProviders';
+import ShippingProviders from '../../components/Providers/components/ShippingProviders';
 
 
 const steps = [
@@ -114,17 +114,13 @@ const Checkout = () => {
             )}
 
             {activeStep === 1 && (
-              <Providers 
-                title="Shipping Providers"
-                text="shipping" 
+              <ShippingProviders
                 handleNext={handleNext}
                 handleBack={handleBack} />
             )}
 
             {activeStep === 2 && (
-                <Providers 
-                title="Payment Providers"
-                text="paymnet" 
+                <PaymentProviders
                 handleNext={handleNext}
                 handleBack={handleBack} />
             )}
