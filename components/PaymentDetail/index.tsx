@@ -2,7 +2,6 @@ import Button from '@mui/material/Button';
 import React, { FC } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
@@ -27,12 +26,12 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
       {t('checkOut.paymentDetail')}
       </Typography>
-      <InputLabel
-        shrink
+      <Box
+        component='label'
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
          {t('checkOut.promocode')}
-      </InputLabel>
+      </Box>
 
       <TextField
         id='outlined-basic'
@@ -42,9 +41,9 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
         sx={{ mb: 3 }}
         InputProps={{ endAdornment: <Button>Apply</Button> }}
       />
-      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+      <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
          {t('checkOut.nameOnCard')}
-      </InputLabel>
+      </Box>
 
       <TextField
         id='outlined-basic'
@@ -53,9 +52,9 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
         name='nameCard'
         sx={{ mb: 3 }}
       />
-      <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+      <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
       {t('checkOut.cardNumber')}
-      </InputLabel>
+      </Box>
 
       <TextField
         id='outlined-basic'
@@ -66,9 +65,9 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
       />
       <Grid container spacing='40px'>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             MM/YY
-          </InputLabel>
+          </Box>
           <TextField
             id='outlined-basic'
             variant='outlined'
@@ -77,9 +76,9 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
           />
         </Grid>
         <Grid item xs={6}>
-          <InputLabel shrink sx={{ color: 'primary.dark', fontWeight: '500' }}>
+          <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             CVV
-          </InputLabel>
+          </Box>
 
           <TextField
             id='outlined-basic'

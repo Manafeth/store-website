@@ -44,11 +44,12 @@ const settingAccount = () => {
     <MainLayout>
       <ProfileLayout>
         <EditAccount 
-        customerData={customerData}
-        handleSubmit={handleSubmit}
-        setState={setState}
-        state={state}
-        loading={updateStatus === LOADING} />
+          customerData={customerData}
+          handleSubmit={handleSubmit}
+          setState={setState}
+          state={state}
+          loading={updateStatus === LOADING}
+        />
       </ProfileLayout>
     </MainLayout>
   )

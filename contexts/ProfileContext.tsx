@@ -9,7 +9,7 @@ import React, {
 import { ERROR, LOADING, SUCCESS } from '../constants';
 import { getAllCities, getCountries } from '../services/common.services';
 import { createAddress, deleteAddress, getAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
-import { activeOrderData, addressData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
+import { activeOrderData, AddressData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
 import { useAlert } from './AlertContext';
 
 interface Props {
@@ -24,7 +24,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [archiveedOrderData,setArchiveedOrderData] = useState<activeOrderData[]>([]);
   const [cityData, setCityData] = useState<cityData[]>([]);
   const [countryData, setCountryData] = useState<countryData[]>([]); 
-  const [addressData,setaddressData] = useState<addressData[]>([]);
+  const [addressData,setaddressData] = useState<AddressData[]>([]);
   const [createStatus, setCreateStatus] = useState('');
   const [updateStatus, setupdateStatus] = useState('');
   const [updateAddressStatus, setupdateAddressStatus] = useState('');
@@ -55,7 +55,7 @@ const [emailNotificationData, setEmailNotificationData] = useState<emailNotifica
   activityEmail: false,
   activityPush: false
 })
-const [addressDetails, setAddressDetails] = useState<addressData>({
+const [addressDetails, setAddressDetails] = useState<AddressData>({
   id:0,
   type:0,
   address:'',
@@ -117,7 +117,7 @@ const [addressDetails, setAddressDetails] = useState<addressData>({
       Promise.reject(error);
     }
   }
-  async function triggerCreateAddress(data:addressData) {
+  async function triggerCreateAddress(data:AddressData) {
     setCreateAddressStatus(LOADING)
     try {
       const response = await createAddress(data);
@@ -130,7 +130,7 @@ const [addressDetails, setAddressDetails] = useState<addressData>({
       Promise.reject(error);
     }
   }
-  async function updateAddressData(data:addressData) {
+  async function updateAddressData(data:AddressData) {
     setupdateAddressStatus(LOADING)
     try {
       const response = await updateAddress(data);

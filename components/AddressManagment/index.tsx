@@ -1,22 +1,21 @@
 import React, {
-  ChangeEvent,
-  FormEvent,
   useEffect,
   useState,
 } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { addressData } from '../../types/profile';
+import IconButton from '@mui/material/IconButton';
+import Card from '@mui/material/Card';
+import { AddressData } from '../../types/profile';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import editIcon from '../../assets/images/icons/edit-icon.svg';
 import addIcon from '../../assets/images/icons/add-icon.svg';
 import DeleteConfirmationMdoal from '../DeleteConfirmation';
-import AddressDrawer from './components/AddressDrawer';
+import AddressDrawer from './AddressDrawer';
 import { LOADING, SUCCESS } from '../../constants';
-import DataTable from './components/DataTable';
 import { useTranslation } from "react-i18next";
 
 const AddressManagment = () => {
@@ -30,12 +29,11 @@ const AddressManagment = () => {
     longitude: 0,
   };
   const [t] = useTranslation();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [accountAddressData, setAccountAddressData] =useState<addressData>(initialState);
+  const [accountAddressData, setAccountAddressData] = useState<AddressData>(initialState);
   const [deleteConfirmationActive, setDeleteConfirmationState] =useState(false);
   const [open, setOpen] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState<addressData>();
+  const [selectedAddress, setSelectedAddress] = useState<AddressData>();
+
   const {
     fetchAllAddressData,
     fetchAllCityData,
@@ -43,161 +41,55 @@ const AddressManagment = () => {
     status,
     addressData,
     deleteAddressData,
-    createAddressStatus,
-    triggerCreateAddress,
     removeStatus,
-    updateAddressData,
-    updateAddressStatus,
-    getAddressDetails,
-    addressDetails  
   } = useProfileModal();
-  function isFormValid() {
-    return (
-      accountAddressData.address &&
-      accountAddressData.street &&
-      accountAddressData.cityId
-    );
-  }
 
-  useEffect(() => {
-    fetchAllAddressData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    fetchAllCityData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    fetchAllCountryData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
- 
-  function handleClose() {
-    setAccountAddressData(initialState);
-    onClose();
+  function handleDeleteConfirmationOpen() {
+    setDeleteConfirmationState(true);
   }
-  function handleSubmit(ev: FormEvent<HTMLFormElement>) {
-    ev.preventDefault();
- return !isEditMode? createAddress():updateAddress()
-  }
-  function createAddress(){
-    if (!isFormValid())
-    setIsSubmitted(true); 
-    else  {const payload = {
-        ...accountAddressData,
-      };
-      delete payload?.id;
-      triggerCreateAddress(payload)
-        .then(() => {
-          setAccountAddressData(initialState);
-          setIsSubmitted(false);
-        })
-        .catch(() => {
-          setIsSubmitted(false);
-        });
-      }
-    
-  }
-  useEffect(() => {
-    if (addressDetails) {
-    setAccountAddressData((prevState) => ({
-      ...prevState,
-      address: addressDetails.address,
-      street: addressDetails.street,
-      cityId: addressDetails.cityId,
-    }));
-  }
-  }, [addressDetails]);
-
-  function updateAddress(){
-    if (!isFormValid())
-    setIsSubmitted(true);
-    else {const payload = {
-      ...accountAddressData,
-      id:selectedAddress?.id,
-    };
-    updateAddressData(payload).then(() => {
-        setIsSubmitted(false);
-        setAccountAddressData((prevState) => ({
-            ...prevState,
-        }));
-        setAccountAddressData(initialState);
-    }).catch(() => {
-        setIsSubmitted(false);
-    })
-    }
-  }
-  useEffect(() => {
-    if (createAddressStatus === SUCCESS) {
-      onClose();
-      setIsSubmitted(false);
-    }
-  }, [createAddressStatus]);
-
-  useEffect(() => {
-    if (updateAddressStatus === SUCCESS) {
-      onClose();
-      setIsSubmitted(false);
-    }
-  }, [updateAddressStatus]);
 
   function handleDeleteConfirmationClose() {
     setDeleteConfirmationState(false);
   }
+
   function HandleRemoveAddress() {
     if (selectedAddress && selectedAddress.id) {
       deleteAddressData(selectedAddress.id);
     }
   }
-  useEffect(() => {
-    if (selectedAddress && selectedAddress.id && open)
-    getAddressDetails(selectedAddress.id);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAddress, open]);
 
-  function handleActions(_: undefined, row: any) {
-    function handleEdit() {
-      setSelectedAddress(row);
-      setOpen(true);
-      setIsEditMode(true);
-    }
-
-    function handleDelete() {
-      setSelectedAddress(row);
-      handleDeleteConfirmationOpen();
-    }
-
-    return (
-      <>
-          <Button size="small" sx={{ minWidth: 0, p: '5px', mr: '14px', color: 'text.primary' }} variant="contained" color="secondary" onClick={handleEdit}>
-          <Image src={editIcon} width='14' height='14' alt='edit icon' />
-          </Button>
-          <Button size="small" sx={{ minWidth: 0, p: '5px' }} variant="contained" color="secondary" onClick={handleDelete}>
-          <Image src={deleteIcon} width='14' height='14' alt='delete icon' />
-          </Button>
-      </>
-    );
+  function handleEdit(data: AddressData) {
+    setSelectedAddress(data);
+    setOpen(true);
   }
-  function handleDeleteConfirmationOpen() {
-    setDeleteConfirmationState(true);
+
+  function handleDelete(data: AddressData) {
+    setSelectedAddress(data);
+    handleDeleteConfirmationOpen();
   }
+
   function onOpen() {
     setOpen(true);
   }
+
   function onClose() {
     setOpen(false);
+    setSelectedAddress(undefined);
   }
-  const columns: any[] = [];
-  const fields: any[] = [
-    { id: 1, field: 'address', alignment: 'left' },
-    { id: 2, field: '', alignment: 'center', render: handleActions },
-  ];
+
+  useEffect(() => {
+    fetchAllAddressData();
+    fetchAllCityData(); 
+    fetchAllCountryData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     if (removeStatus === SUCCESS) {
-
       handleDeleteConfirmationClose();
     }
   }, [removeStatus]);
+
 
   return (
     <Box
@@ -211,6 +103,7 @@ const AddressManagment = () => {
       <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' }  }}>
         {t('settings.addressManagment')}
       </Typography>
+      
       <Box
         sx={{
           pb: 4,
@@ -241,41 +134,53 @@ const AddressManagment = () => {
           {t('settings.addNewAddress')}
         </Button>
       </Box>
-       <DataTable
-        columns={columns}
-        rowsData={addressData}
-        rowFields={fields}
-        keyField="id"
-        loading={status === LOADING}
-        noDataContent={
-          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
-            <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
-            {t('settings.oops')}
-            </Typography>
-            <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
-            {t('settings.noAddress')}
-            </Typography>
-          </Box>
-        }
-      />
+
+      {addressData.length > 0 ? addressData.map((item) => {
+        return (
+          <Card key={item.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderRadius: 2, px: 2, py: 1, mb: 2 }}>
+            {item.address}
+            <Box>
+              <IconButton
+                onClick={function () {
+                  handleEdit(item)
+                }}
+              >
+                <Image src={editIcon} width='14' height='14' alt='edit icon' />
+              </IconButton>
+              <IconButton
+                onClick={function () {
+                  handleDelete(item)
+                }}
+              >
+                <Image src={deleteIcon} width='14' height='14' alt='delete icon' />
+              </IconButton>
+            </Box>
+          </Card>
+        )
+      }) : (
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
+          <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
+          {t('settings.oops')}
+          </Typography>
+          <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
+          {t('settings.noAddress')}
+          </Typography>
+        </Box>
+      )}
+
       <AddressDrawer
         onClose={onClose}
         open={open}
-        setAccountAddressData={setAccountAddressData}
-        accountAddressData={accountAddressData}
-        isEditMode={isEditMode}
-        loading={createAddressStatus === LOADING || updateAddressStatus === LOADING}
-        isSubmitted={isSubmitted}
-        handleSubmit={handleSubmit}
-        handleClose={handleClose}
-        addressDetails={addressDetails}
+        selectedAddress={selectedAddress}
       />
+
       <DeleteConfirmationMdoal
         open={deleteConfirmationActive}
         onClose={handleDeleteConfirmationClose}
         handleRemove={HandleRemoveAddress}
         loading={removeStatus === LOADING}
       />
+      
     </Box>
   );
 };

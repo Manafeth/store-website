@@ -1,4 +1,4 @@
-import { addressData,customerData, emailNotificationData } from "../types/profile";
+import { AddressData,customerData, emailNotificationData } from "../types/profile";
 import convertToFormData from "../utils/convertToFormData";
 import { axiosInstance } from "./axiosInstance";
 
@@ -27,13 +27,13 @@ function getAllAddress (params?: { page: number, pageSize: number }) {
   );
 }
 
-function createAddress(data:addressData) {
+function createAddress(data:AddressData) {
   return axiosInstance.post(
     'Address/Create',
     data
   );
 }
-function updateAddress(data:addressData) {
+function updateAddress(data:AddressData) {
   return axiosInstance.put(
     'Address/Update',
     data

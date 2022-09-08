@@ -20,12 +20,6 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
   const { i18n } = useTranslation();
   const [t] = useTranslation();
   const {triggerUpdateEmailNotification} = useProfileModal();
-  const [notification, setNotification] = useState<emailNotificationData>({
-    reminderEmail: false,
-    reminderPush: false,
-    activityEmail: false,
-    activityPush: false
-})
 
   const setLangaugeToEnglish = () => {
     i18n.changeLanguage('en');
