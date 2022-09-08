@@ -3,11 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PaymentCard from '../PaymentCard';
-import Card from '@mui/material/Card';
 import { useCartModal } from '../../../../contexts/CartContext';
-import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useTranslation } from "react-i18next";
 
 
 interface Props {
@@ -16,6 +15,7 @@ interface Props {
 }
 
 const PaymentProviders: FC<Props> = ({ handleNext, handleBack }) => {
+    const [t] = useTranslation();
   const [selectedId, setSelectedId] = useState("")
   const { paymnetData,fetchPaymentProviders } = useCartModal();
 
@@ -40,10 +40,10 @@ const PaymentProviders: FC<Props> = ({ handleNext, handleBack }) => {
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      Payment Providers
+      {t('checkOut.paymentProviders')}
       </Typography>
       <Typography variant='h4' component='h1' sx={{ mb: 2, width: '70%' }}>
-        These are available paymnet methods, please select suitable one for you
+      {t('checkOut.paymentDiscription')}
       </Typography>
 
       {paymnetData.map((item) => {

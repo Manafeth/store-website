@@ -121,7 +121,12 @@
         "shippingMethod":"Shipping method",
         "shippingStatus":"Shipping status",
         "orderTimeline":"Order timeline",
-        "checkoutAttributsTotal":"CheckoutAttributsTotal"
+        "checkoutAttributsTotal":"CheckoutAttributsTotal",
+        "deliveryAddress":"Delivery Address",
+        "shippingProviders":"Shipping Providers",
+        "shippingDiscription":"These are available shipping methods, please select suitable one for you",
+        "paymentProviders":"Payment Providers",
+        "paymentDiscription":"These are available paymnet methods, please select suitable one for you"
        
 
     },

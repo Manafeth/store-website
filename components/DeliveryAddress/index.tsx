@@ -28,7 +28,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
     >
       <>
         <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-          Delivery address
+        {t('checkOut.deliveryAddress')}
         </Typography>
         {addressData.length > 0 ? addressData.map((item) => {
           return (
@@ -37,7 +37,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
             </Box>
           );
         }):(
-          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
+          <Box sx={{ display: 'flex', alignItems: 'left', flexDirection: 'column', marginTop: '20px' }}>
           <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
           {t('settings.oops')}
           </Typography>
@@ -70,7 +70,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
             }}
             onClick={handleBack}
           >
-            Back
+              {t('common.back')}
           </Button>
           <Button
             variant='contained'
@@ -78,7 +78,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
             type='submit'
             onClick={handleNext}
           >
-            Next
+             {t('common.next')}
           </Button>
         </Box>
       </>

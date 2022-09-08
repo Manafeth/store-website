@@ -120,7 +120,12 @@
         "shippingMethod":"طريقة الشحن",
         "shippingStatus":"حالة الشحن",
         "orderTimeline":"مخطط زمني للطلب",
-        "checkoutAttributsTotal":"سمات الخروج إجمالي"
+        "checkoutAttributsTotal":"سمات الخروج إجمالي",
+        "deliveryAddress":"عنوان التسليم",
+        "shippingProviders":"مزودو الشحن",
+        "shippingDiscription":"هذه طرق الشحن المتاحة ، يرجى تحديد طريقة مناسبة لك",
+        "paymentProviders":"موفرو الدفع",
+        "paymentDiscription":"طرق الدفع هذه متوفرة ، يرجى تحديد طريقة مناسبة لك"
 
     },
     "errorMsg": {

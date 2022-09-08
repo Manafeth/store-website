@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ShippingCard from '../ShippingCard';
 import { useCartModal } from '../../../../contexts/CartContext';
+import { useTranslation } from "react-i18next";
 
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   const [selectedId, setSelectedId] = useState("")
   const { fetchShipmentsProviders, shipmentData} = useCartModal();
+  const [t] = useTranslation();
   useEffect(() => {
     fetchShipmentsProviders(76);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,10 +30,10 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      Shipping Providers
+      {t('checkOut.shippingProviders')}
       </Typography>
       <Typography variant='h4' component='h1' sx={{ mb: 2, width: '70%' }}>
-        These are available shipping methods, please select suitable one for you
+      {t('checkOut.shippingDiscription')}
       </Typography>
 
       {shipmentData.map((item) => {
@@ -68,7 +70,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           }}
           onClick={handleBack}
         >
-          Back
+          {t('common.back')}
         </Button>
         <Button
           variant='contained'
@@ -76,7 +78,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           type='submit'
           onClick={handleNext}
         >
-          Next
+           {t('common.next')}
         </Button>
       </Box>
     </Box>
