@@ -9,6 +9,8 @@ const paths = {
   checkout:'/checkout',
   productDetails: (id: string | number) => `/products/${id}`,
   categoryDetails: (id: string | number) => `/categories/${id}`,
+  orderDetails: (id: string | number) => `/orders/${id}`,
+  invoiceDetails: (id: string | number) => `/invoice/${id}`,
 };
   
 

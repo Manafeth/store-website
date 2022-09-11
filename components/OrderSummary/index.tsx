@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
+import { useCart } from '../../contexts/CartContext';
 
 const OrderSummary = () => {
   const [t] = useTranslation();
+  const { cartData } = useCart();
+  const result = cartData.reduce((total, currentValue) => total = total + currentValue.total,0);
+  const subTotal = cartData.reduce((total, currentValue) => total = total + currentValue.subTotal,0);
+  const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + currentValue.checkoutAttributsTotal,0);
+
   return (
     <Box>
       <Box
@@ -15,10 +21,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-        {t('cart.subTotal')}
+          {t('cart.subTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-        {t('common.sar')} 4,557.32
+          {t('common.sar')} {subTotal}
         </Typography>
       </Box>
       <Box
@@ -29,10 +35,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-        {t('common.estimatedDelivery')}
+        {t('checkOut.checkoutAttributsTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-        {t('common.sar')} 10
+          {t('common.sar')} {checkoutAttributsTotal}
         </Typography>
       </Box>
       <Box
@@ -43,10 +49,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-        {t('cart.total')}
+          {t('cart.total')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-        {t('common.sar')} 4,567.32
+          {t('common.sar')} {result}
         </Typography>
       </Box>
     </Box>

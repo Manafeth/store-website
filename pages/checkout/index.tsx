@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -10,23 +10,26 @@ import DeliveryAddress from '../../components/DeliveryAddress';
 import PaymentDetail from '../../components/PaymentDetail';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
-import InfoIcon from'../../assets/images/icons/info-icon.svg';
+import TruckIcon from'../../assets/images/icons/truck-icon.svg';
 import SendIcon from'../../assets/images/icons/send-icon.svg';
 import CreditIcon from'../../assets/images/icons/credit-icon.svg';
-import DollarIcon from'../../assets/images/icons/dollar-icon.svg';
 import StepLabel from '@mui/material/StepLabel';
 import { StepIconProps } from '@mui/material/StepIcon';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
+import { useCart } from '../../contexts/CartContext';
+import { useTranslation } from "react-i18next";
+import PaymentProviders from '../../components/Providers/PaymentProviders';
+import ShippingProviders from '../../components/Providers/ShippingProviders';
+import { LOADING, SUCCESS } from '../../constants';
 
 
 const steps = [
   {id:1, name:'FIRST STEP',info:'Information'},
   {id:2, name:'SECOND STEP',info:'Delivery'},
   {id:3, name:'THIRD STEP',info:'Billing'},
-  {id:4, name:'FOURTH STEP',info:'Payment'},
 ];
 
 const ColorlibStepIconRoot = styled('div')<{
@@ -53,6 +56,13 @@ const ColorlibStepIconRoot = styled('div')<{
 }));
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const {fetchCartProducts,cartData,createOrderStatus } = useCart();
+  const [t] = useTranslation();
+  useEffect(() => {
+    fetchCartProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+ 
   function handleBack() {
     setActiveStep(activeStep - 1);
   }
@@ -66,10 +76,9 @@ const Checkout = () => {
     const { active, completed, className } = props;
   
     const icons: { [index: string]: React.ReactElement } = {
-      1: <Image src={InfoIcon} alt='info icon' />,
-      2: <Image src={SendIcon} alt='send icon' />,
-      3: <Image src={CreditIcon} alt='Arrow right' />,
-      4: <Image src={DollarIcon} alt='Arrow right' />,
+      1: <Image src={SendIcon} alt='send icon' />,
+      2: <Image src={TruckIcon} alt='truck icon' />,
+      3: <Image src={CreditIcon} alt='Arrow right' />
     };
   
     return (
@@ -81,7 +90,8 @@ const Checkout = () => {
   return (
     <MainLayout>
       <Box component='section'>
-        <Container sx={{ px: { xs: 2, lg: 7.5 }, mt: 5 }}>
+        <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 }, mt: 5, maxWidth: 1050 }}>
+        <Container maxWidth={false} sx={{ maxWidth: 800 }}>
           <Stepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
               <Step key={step.id}>
@@ -96,37 +106,44 @@ const Checkout = () => {
               </Step>
             ))}
           </Stepper>
-          <Grid container spacing='40px' mt={5}>
-            <Grid item xs={6}>
+          </Container>
+          <Grid container spacing='40px' mt={5} justifyContent='space-between'>
+            <Grid item xs={12} md={5.7}>
             {activeStep === 0 && (
-                <CheckoutForm handleNext={handleNext} />
+               <DeliveryAddress
+               handleNext={handleNext}
+               handleBack={handleBack}/>
+               
             )}
 
             {activeStep === 1 && (
-                <DeliveryAddress
-                  handleNext={handleNext}
-                  handleBack={handleBack}
-                />
+              <ShippingProviders
+                handleNext={handleNext}
+                handleBack={handleBack} />
             )}
 
             {activeStep === 2 && (
-                <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
-            )}
-
-            {activeStep === 3 && (
-                <PaymentDetail handleNext={handleNext} handleBack={handleBack} />
+                <PaymentProviders
+                handleBack={handleBack}
+                loading={createOrderStatus === LOADING } />
             )}
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={5}>
               <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-                Order summery
+                {t('checkOut.orderSummery')}
               </Typography>
-              <OrderSummary />
+             
+              <OrderSummary/>
+         
               <Divider />
               <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
-                Items
+              {t('common.items')}
               </Typography>
-              <CartItem />
+              {cartData?.map((item) => {
+                 return(
+              <CartItem data={item} key={item.id}/>
+              );
+            })}
             </Grid>
           </Grid>
         </Container>

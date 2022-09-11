@@ -24,6 +24,7 @@ import { useAuthModal } from '../../contexts/AuthModalContext';
 import CartDrawer from '../CartDrawer';
 import { useCommon } from '../../contexts/CommonContext';
 import { useTranslation } from "react-i18next";
+import { useCart } from '../../contexts/CartContext';
 
 
 
@@ -34,6 +35,7 @@ const Header = () => {
   const router = useRouter();
   const [t] = useTranslation();
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
+  const { fetchCartProducts, cartData } = useCart();
 
   const {storeInfo, fetchStoreInfo} = useCommon()
 
@@ -55,8 +57,10 @@ const Header = () => {
 
   useEffect(() => {
     fetchStoreInfo();
-    if (isloggedIn)
+    if (isloggedIn) {
       fetchAccountData()
+      fetchCartProducts()
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isloggedIn])
   const pages = [
@@ -265,7 +269,7 @@ const Header = () => {
                   ml: 0.5
                 }}
               >
-                1
+                {cartData.length}
               </Box>
             </Box>
             {isloggedIn ? (

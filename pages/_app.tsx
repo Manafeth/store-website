@@ -10,6 +10,7 @@ import { AuthModalProvider } from '../contexts/AuthModalContext';
 import { ProfileModalProvider } from '../contexts/ProfileContext';
 import { CommonContextProvider } from '../contexts/CommonContext';
 import { AlertProvider } from '../contexts/AlertContext';
+import { CartModalProvider } from '../contexts/CartContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -37,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <CommonContextProvider>
             <AuthModalProvider>
               <ProfileModalProvider>
+                <CartModalProvider>
                 <Component {...pageProps} />
+                </CartModalProvider>
               </ProfileModalProvider>
             </AuthModalProvider>
           </CommonContextProvider>

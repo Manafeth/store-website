@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,7 +10,11 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import OrderSummary from '../OrderSummary';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
+import { useCart } from '../../contexts/CartContext';
 
 interface Props {
   open: boolean;
@@ -19,9 +23,17 @@ interface Props {
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();
+  const { fetchCartProducts, cartData } = useCart();
+  useEffect(() => {
+    if (open)
+      fetchCartProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   function handleClose() {
     onClose();
   }
+
   return (
     <Drawer
       anchor='right'
@@ -41,15 +53,19 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Typography variant='h1' component='h2'>
-        {t('cart.myBag')} (2)
+        {t('cart.myBag')} ({cartData.length})
         </Typography>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
         </IconButton>
       </Box>
       <Box>
-        <CartItem />
-        <Divider sx={{ mt: 1, mb: 1 }} />
+      {cartData?.map((item) => {
+                 return(
+        <CartItem data={item} key={item.id} />
+        );
+      })}
+        <Divider sx={{ mt: 3, mb: 3 }} />
       </Box>
 
       <OrderSummary />
@@ -72,18 +88,30 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             backgroundColor: ' background.grayDisabled',
             mr: '20px',
           }}
+          onClick={handleClose}
         >
           {t('cart.continueShopping')}
         </Button>
-        <Link href='/checkout'>
+        {cartData.length > 0 ? (
+          <Link href='/checkout'>
+            <Button
+              variant='contained'
+              sx={{ width: 'auto', height: '44px' }}
+              type='submit'
+            >
+                {t('cart.continueToPayment')}
+            </Button>
+          </Link>
+        ) : (
           <Button
             variant='contained'
             sx={{ width: 'auto', height: '44px' }}
-            type='submit'
+            disabled
           >
               {t('cart.continueToPayment')}
           </Button>
-        </Link>
+        )}
+        
       </Box>
     </Drawer>
   );

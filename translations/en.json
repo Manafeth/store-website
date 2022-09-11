@@ -24,7 +24,7 @@
         "saveChanges":"Save Changes",
         "edit":"Edit",
         "language":"Language",
-        "items":"items",
+        "items":"Items",
         "optional":"Optional",
         "next":"Next",
         "allCategories":"All categories",
@@ -122,7 +122,17 @@
         "paymentStatus":"Payment status",
         "shippingMethod":"Shipping method",
         "shippingStatus":"Shipping status",
-        "orderTimeline":"Order timeline"
+        "orderTimeline":"Order timeline",
+        "checkoutAttributsTotal":"CheckoutAttributsTotal",
+        "deliveryAddress":"Delivery Address",
+        "shippingProviders":"Shipping Providers",
+        "shippingDiscription":"These are available shipping methods, please select suitable one for you",
+        "paymentProviders":"Payment Providers",
+        "paymentDiscription":"These are available paymnet methods, please select suitable one for you",
+        "placeOrder":"Place Order",
+        "netValue":"Net Value",
+        "discount":"Discount",
+        "vatPercentage":"Vat Percentage"
        
 
     },

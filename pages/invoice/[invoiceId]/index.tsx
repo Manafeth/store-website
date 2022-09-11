@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useTranslation } from "react-i18next";
+import MainLayout from '../../../layouts/MainLayout';
+import { useCart } from '../../../contexts/CartContext';
+import moment from 'moment';
+import { useRouter } from 'next/router';
 
-const Invoice = () => {
+const InvoiceDetails = () => {
   const [t] = useTranslation();
+  const { fetchInvoiceDetails, orderAndInvoice,invoiceData } = useCart();
+  const router = useRouter();
+
+  const { invoiceId } = router.query;
+
+  useEffect(() => {
+    if (invoiceId)
+    fetchInvoiceDetails(invoiceId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [invoiceId]);
+
   return (
     <MainLayout>
       <Box component='section' sx={{ mt: 5 }}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Typography variant='h1' component='h1' sx={{ mb: 3 }}>
-          {t('checkOut.inovice')} #33221
+          {t('checkOut.inovice')}  {invoiceData.id}
           </Typography>
           <Typography
             variant='h6'
@@ -39,7 +53,7 @@ const Invoice = () => {
                 component='h1'
                 sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
               >
-                Ahmed Shalayel
+               {invoiceData?.account?.title}
               </Typography>
             </Grid>
             <Grid item xs={4}>
@@ -55,7 +69,7 @@ const Invoice = () => {
                 component='h1'
                 sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
               >
-                 {t('common.sar')} 4,567.32
+                 {t('common.sar')} {invoiceData.total}
               </Typography>
             </Grid>
             <Grid item xs={4}>
@@ -71,7 +85,8 @@ const Invoice = () => {
                 component='h1'
                 sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
               >
-                02 / June / 2022
+                {/* 02 / June / 2022 */}
+                {moment(invoiceData.date).format("DD/MM/YYYY ")}
               </Typography>
             </Grid>
           </Grid>
@@ -81,7 +96,7 @@ const Invoice = () => {
               component='h1'
               sx={{ fontWeight: '600', mb: 2, flex: '0.75' }}
             >
-               {t('common.Items')}
+               {t('common.items')}
             </Typography>
 
             <Typography
@@ -94,20 +109,23 @@ const Invoice = () => {
           </Box>
           <Divider sx={{width:'80%'}} />
           <Box sx={{ mt: 2 }}>
+          {invoiceData.invoiceItems.map((item) => {
+              return (
+                <>
             <Box sx={{ display: 'flex' }}>
               <Typography
                 variant='h5'
                 component='h1'
                 sx={{ fontWeight: '700', mb: 2, flex: '0.75' }}
               >
-                Sketchers GOAL Pant
+                {item.item}
               </Typography>
               <Typography
                 variant='h6'
                 component='h1'
                 sx={{ fontWeight: '600', mb: 2 }}
               >
-                 {t('common.sar')} 2,278.66
+                 {t('common.sar')} {item.total}
               </Typography>
             </Box>
 
@@ -116,8 +134,12 @@ const Invoice = () => {
               component='h1'
               sx={{ fontWeight: '500', mb: 2 }}
             >
-              2X {t('common.sar')} 1,139.33
+              {item.quantity} {t('common.sar')} {item.unitPrice}
             </Typography>
+            <Divider sx={{width:'80%', mt:1, mb:1}} />
+            </>
+              )
+            })}
           </Box>
           <Typography variant='h1' component='h1' sx={{ mb: 3, mt: 5 }}>
           {t('checkOut.orderSummery')}
@@ -128,7 +150,7 @@ const Invoice = () => {
               component='h1'
               sx={{ mb: 2, flex: '0.75' }}
             >
-              {t('cart.subTotal')}
+             {t('checkOut.netValue')}
             </Typography>
 
             <Typography
@@ -136,7 +158,58 @@ const Invoice = () => {
               component='h1'
               sx={{ fontWeight: '700', mb: 2 }}
             >
-              {t('common.sar')} 4,557.32
+              {t('common.sar')} {invoiceData.netValue}
+            </Typography>
+          </Box>
+          <Box sx={{ mt: 2, display: 'flex' }}>
+            <Typography
+              variant='h5'
+              component='h1'
+              sx={{ mb: 2, flex: '0.75' }}
+            >
+             {t('checkOut.discount')}
+            </Typography>
+
+            <Typography
+              variant='h5'
+              component='h1'
+              sx={{ fontWeight: '700', mb: 2 }}
+            >
+              {t('common.sar')} {invoiceData.discount}
+            </Typography>
+          </Box>
+          <Box sx={{ mt: 2, display: 'flex' }}>
+            <Typography
+              variant='h5'
+              component='h1'
+              sx={{ mb: 2, flex: '0.75' }}
+            >
+            {t('checkOut.vatPercentage')}
+            </Typography>
+
+            <Typography
+              variant='h5'
+              component='h1'
+              sx={{ fontWeight: '700', mb: 2 }}
+            >
+              {t('common.sar')} {invoiceData.vatPercentage}
+            </Typography>
+          </Box>
+          <Box sx={{ mt: 2, display: 'flex' }}>
+            <Typography
+              variant='h5'
+              component='h1'
+              sx={{ mb: 2, flex: '0.75' }}
+            >
+             {t('cart.total')}
+            </Typography>
+
+            <Typography
+              variant='h5'
+              component='h1'
+              sx={{ fontWeight: '700', mb: 2 }}
+            >
+              {t('common.sar')} {invoiceData.total}
             </Typography>
           </Box>
           <Box
@@ -147,15 +220,13 @@ const Invoice = () => {
               pb: 5,
             }}
           >
-            <Link href='#'>
-              <Button
-                variant='contained'
-                sx={{ width: '219px', height: '44px' }}
-                type='submit'
-              >
-                {t('checkOut.downloadInvoice')}
-              </Button>
-            </Link>
+            {/* <Button
+              variant='contained'
+              sx={{ width: '219px', height: '44px' }}
+              type='submit'
+            >
+              {t('checkOut.downloadInvoice')}
+            </Button> */}
           </Box>
         </Container>
       </Box>
@@ -163,4 +234,4 @@ const Invoice = () => {
   );
 };
 
-export default Invoice;
+export default InvoiceDetails;
