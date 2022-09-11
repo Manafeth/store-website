@@ -16,6 +16,7 @@ export type StoreInfoData = {
         thumbUrl: string
     },
     complaintNumber: string,
+    supportEmail: string
 }
 
 export type CommonContextState = {

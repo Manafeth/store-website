@@ -17,7 +17,8 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
             orignialUrl: '',
             thumbUrl: ''
         },
-        complaintNumber: ''
+        complaintNumber: '',
+        supportEmail: ''
     })
     
     async function fetchStoreInfo() {
@@ -33,8 +34,6 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
     storeInfo,
     fetchStoreInfo
   };
-
-  console.log('storeInfo', storeInfo)
   
   return (
     <CommonContext.Provider value={state}>
