@@ -123,10 +123,10 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
       const response = await createAddress(data);
       setCreateAddressStatus(SUCCESS)
       fetchAllAddressData();
-      sendAlert(response.data?.message, 'success')
+      sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
       setCreateAddressStatus(ERROR)
-      sendAlert(error.response?.data?.Message, 'error')
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }
@@ -136,10 +136,10 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
       const response = await updateAddress(data);
       setupdateAddressStatus(SUCCESS);
       fetchAllAddressData();
-      sendAlert(response.data?.message, 'success')
+      sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
       setupdateAddressStatus(ERROR);
-      sendAlert(error.response?.data?.Message, 'error')
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }
@@ -157,10 +157,10 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
       const response = await deleteAddress(id);
       setRemoveStatus(SUCCESS);
       fetchAllAddressData();
-      sendAlert(response.data?.message, 'success')
+      sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
       setRemoveStatus(ERROR);
-      sendAlert(error.response?.data?.Message, 'error')
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }
@@ -183,22 +183,26 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
   async function triggerUpdateEmailNotification(data:emailNotificationData) {
     setCreateStatus(LOADING)
     try {
-      await  updateEmailNotification(data);
+      const response = await  updateEmailNotification(data);
       setCreateStatus(SUCCESS);
       fetchEmailNotificationData();
-    } catch(error) {
+      sendAlert(response.data?.message, SUCCESS)
+    } catch(error: any) {      
       setCreateStatus(ERROR);
-      Promise.reject(error);
+      sendAlert(error.response?.data?.Message, ERROR)
+    Promise.reject(error);
     }
   }
   async function updateProfileData(data: customerData) {
     setupdateStatus(LOADING)
     try {
-      await updateCustomerProfile(data);
+      const response = await updateCustomerProfile(data);
       setupdateStatus(SUCCESS);
       fetchCustomerProfileData();
-    } catch(error) {
+      sendAlert(response.data?.message, SUCCESS)
+    } catch(error: any) {
       setupdateStatus(ERROR);
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, ReactElement, useState, FC, useEffect } from 'react';
 import AuthModal from '../components/AuthModal';
+import { ERROR, LOADING, SUCCESS } from '../constants';
 import paths from '../constants/paths';
 import { completeProfile, getProfileData, login, verifyOtp } from '../services/auth.services';
 import { AuthModalState, LoginData, ProfileData, VerifyOtpData } from '../types/auth';
@@ -25,9 +26,9 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
       }
   })
 
-  const [loginLoading, setLoginLoading] = useState(false);
-  const [verifyLoading, setVerifyLoading] = useState(false);
-  const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
+  const [sendPhoneNumberStatus, setSendPhoneNumberStatus] = useState('')
+  const [verifyStatus, setVerifyStatus] = useState('')
+  const [updateProfileStatus, setUpdateProfileStatus] = useState('')
 
   const { sendAlert } = useAlert();
   const router = useRouter();
@@ -41,30 +42,30 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   }
 
   async function sendPhoneNumber(data: LoginData) {
-    setLoginLoading(true);
+    setSendPhoneNumberStatus(LOADING);
     try {
       const response = await login(data);
-      setLoginLoading(false);
-      sendAlert(response.data?.message, 'success')
+      setSendPhoneNumberStatus(SUCCESS);
+      sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
-      setLoginLoading(false);
-      sendAlert(error.response?.data?.Message, 'error')
+      setSendPhoneNumberStatus(ERROR);
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }
 
   async function verifyPhoneNumber(data: VerifyOtpData) {
-    setVerifyLoading(true);
+    setVerifyStatus(LOADING);
     try {
       const response = await verifyOtp(data);
       localStorage.setItem('userData', JSON.stringify(response?.data?.data?.profile));
       localStorage.setItem('accessToken', response?.data?.data?.token?.accessToken);
-      setVerifyLoading(false);
+      setVerifyStatus(SUCCESS);
       setIsloggedIn(true);
-      sendAlert(response.data?.message, 'success')
+      sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
-      setVerifyLoading(false);
-      sendAlert(error.response?.data?.Message, 'error')
+      setVerifyStatus(ERROR);
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }
@@ -74,21 +75,21 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
       const response = await getProfileData();
       setProfileData(response.data.data);
     } catch(error: any) {
-      sendAlert(error.response?.data?.Message, 'error')
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }
 
   async function updateAccountData(data: ProfileData) {
-    setUpdateProfileLoading(true);
+    setUpdateProfileStatus(LOADING);
     try {
       const response = await completeProfile(data);
-      setUpdateProfileLoading(false);
+      setUpdateProfileStatus(SUCCESS);
       fetchAccountData();
-      sendAlert(response.data?.message, 'success')
+      sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
-      setUpdateProfileLoading(false);
-      sendAlert(error.response?.data?.Message, 'error')
+      setUpdateProfileStatus(ERROR);
+      sendAlert(error.response?.data?.Message, ERROR)
       Promise.reject(error);
     }
   }
@@ -125,9 +126,9 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
     handleOpenAuthModal,
     handleCloseAuthModal,
     profileData,
-    loginLoading,
-    verifyLoading,
-    updateProfileLoading,
+    sendPhoneNumberStatus,
+    verifyStatus,
+    updateProfileStatus,
     logout,
     isloggedIn
   };
