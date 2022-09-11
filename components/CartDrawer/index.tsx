@@ -14,7 +14,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
-import { useCartModal } from '../../contexts/CartContext';
+import { useCart } from '../../contexts/CartContext';
 
 interface Props {
   open: boolean;
@@ -23,7 +23,7 @@ interface Props {
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();
-  const {fetchCartProducts,cartData } = useCartModal();
+  const {fetchCartProducts,cartData } = useCart();
   useEffect(() => {
     fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,5 +1,5 @@
 
-import { ProductCartData } from '../types/cart';
+import { CheckoutData, ProductCartData } from '../types/cart';
 import { axiosInstance } from './axiosInstance';
 
 function addProductToCart(data: ProductCartData) {
@@ -36,10 +36,18 @@ function getOrder(id: number) {
   );
 }
 
+function createOrder(data: CheckoutData) {
+  return axiosInstance.post(
+    'Order/Create',
+    data
+  );
+}
+
 
 export {
     addProductToCart,
     getAllCartProducts,
     getAllProviders,
-    getOrder
+    getOrder,
+    createOrder
 }

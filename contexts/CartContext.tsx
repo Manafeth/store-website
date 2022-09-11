@@ -7,8 +7,9 @@ import React, {
   useState,
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
-import { getAllCartProducts, getAllProviders, getOrder } from '../services/cart.services';
-import { CartModalState, OrderData, paymentProvidersData, productData, shipmentsProvidersData } from '../types/cart';
+import { createOrder, getAllCartProducts, getAllProviders, getOrder } from '../services/cart.services';
+import { CartModalState, CheckoutData, OrderData, paymentProvidersData, productData, shipmentsProvidersData } from '../types/cart';
+import { useAlert } from './AlertContext';
 
 
 interface Props {
@@ -21,6 +22,18 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     const [cartData, setCartData] = useState<productData[]>([]);
     const [shipmentData, setShipmentData] = useState<shipmentsProvidersData[]>([]);
     const [paymnetData, setPaymnetData] = useState<paymentProvidersData[]>([]);
+    const [orderAndInvoice, setOrderAndInvoice] = useState({
+      orderId: 0,
+      invoiceId: 0
+    })
+    const [checkoutData, setCheckoutData] = useState<CheckoutData>({
+      shipmentProviderId: 0,
+      paymentProviderId: 0,
+      couponCode: "",
+      addressId: 0,
+      type: 1
+    });
+
     const [orderData, setOrderData] = useState<OrderData>({
       id:0,
       invoiceId:0,
@@ -30,9 +43,9 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       paymentStatus:0,
       status:0,
       shipmentProviderImage: {
-          orignialUrl:'',
-          thumbUrl:'',
-          },
+        orignialUrl:'',
+        thumbUrl:'',
+      },
       orderChangeLogs:[
         {
           id:0,
@@ -40,12 +53,11 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
           changeAt:'',
         }
       ]
-
     });
 
 
 
-  const router = useRouter();
+  const { sendAlert } = useAlert();
 
   async function fetchCartProducts() {
     try {
@@ -75,12 +87,30 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
   async function fetchOrderDetails(id:number) {
     try {
      const response = await  getOrder(id);
-     console.log('response',response)
      setOrderData(response.data.data)
     } catch(error) {
       Promise.reject(error);
     }
   }
+
+  async function createOrderTrigger() {
+    try {
+      const response = await createOrder(checkoutData);
+      setOrderAndInvoice(response.data.data);
+      sendAlert(response.data?.message, 'success');
+    } catch(error: any) {
+      sendAlert(error.response?.data?.Message, 'error');
+    }
+  }
+
+  function updateCheckoutData(name: string, value: any) {
+    setCheckoutData((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+
   const state: CartModalState = {
     cartData,
     shipmentData,
@@ -89,8 +119,11 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     fetchCartProducts,
     fetchShipmentsProviders,
     fetchPaymentProviders,
-    fetchOrderDetails
-  
+    fetchOrderDetails,
+    updateCheckoutData,
+    createOrderTrigger,
+    checkoutData,
+    orderAndInvoice
   };
 
   return (
@@ -100,4 +133,4 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
   );
 };
 
-export const useCartModal = () => useContext(CartModalContext);
+export const useCart = () => useContext(CartModalContext);

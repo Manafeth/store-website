@@ -19,10 +19,10 @@ import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
-import { useCartModal } from '../../contexts/CartContext';
+import { useCart } from '../../contexts/CartContext';
 import { useTranslation } from "react-i18next";
-import PaymentProviders from '../../components/Providers/components/PaymentProviders';
-import ShippingProviders from '../../components/Providers/components/ShippingProviders';
+import PaymentProviders from '../../components/Providers/PaymentProviders';
+import ShippingProviders from '../../components/Providers/ShippingProviders';
 
 
 const steps = [
@@ -55,7 +55,7 @@ const ColorlibStepIconRoot = styled('div')<{
 }));
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const {fetchCartProducts,cartData } = useCartModal();
+  const {fetchCartProducts,cartData } = useCart();
   const [t] = useTranslation();
   useEffect(() => {
     fetchCartProducts();

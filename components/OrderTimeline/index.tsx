@@ -8,11 +8,16 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { OrderData } from '../../types/cart';
+import moment from 'moment';
 interface Props {
-  orderData?: OrderData;
+  data: {
+    id: number,
+    changeAt: string,
+    new: number
+  }
 }
 
-const OrderTimeline: FC<Props> = ({orderData}) => {
+const OrderTimeline: FC<Props> = ({ data }) => {
   return (
     <>
       <Timeline
@@ -44,7 +49,7 @@ const OrderTimeline: FC<Props> = ({orderData}) => {
                   component='h1'
                   sx={{ color: 'text.grey' }}
                 >
-                  Apr 5, 2022, 02:50:23 PM
+                  {moment(data.changeAt).format('MMM DD, YYYY, h:mm:ss a')}
                 </Typography>
               </Grid>
             </Grid>

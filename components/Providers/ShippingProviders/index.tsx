@@ -1,9 +1,9 @@
-import React, { FC, FormEvent, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ShippingCard from '../ShippingCard';
-import { useCartModal } from '../../../../contexts/CartContext';
+import { useCart } from '../../../contexts/CartContext';
 import { useTranslation } from "react-i18next";
 
 
@@ -13,19 +13,13 @@ interface Props {
 }
 
 const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
-  const [selectedId, setSelectedId] = useState("")
-  const { fetchShipmentsProviders, shipmentData} = useCartModal();
+  const { fetchShipmentsProviders, shipmentData, checkoutData } = useCart();
   const [t] = useTranslation();
+
   useEffect(() => {
-    fetchShipmentsProviders(76);
+    fetchShipmentsProviders(checkoutData.addressId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
- 
-  function handleClick() {
-    
-    console.log('hello');
-  }
 
   return (
     <Box>
@@ -39,10 +33,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
       {shipmentData.map((item) => {
         return (
           <ShippingCard
-            selectedId={selectedId}
             title='test'
-            id={1}
-            handleClick={handleClick}
             data={item}
             key={item.id}
           />

@@ -12,12 +12,13 @@ interface Props {
 
 const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
   const { fetchAllAddressData, addressData } = useProfileModal();
-  const [selectedId, setSelectedId] = useState(null)
   const [t] = useTranslation();
   useEffect(() => {
     fetchAllAddressData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  
   return (
     <Box
       sx={{

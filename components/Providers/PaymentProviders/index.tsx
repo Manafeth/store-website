@@ -3,12 +3,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PaymentCard from '../PaymentCard';
-import { useCartModal } from '../../../../contexts/CartContext';
+import { useCart } from '../../../contexts/CartContext';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useTranslation } from "react-i18next";
 import Link from 'next/link';
-import paths from '../../../../constants/paths';
+import paths from '../../../constants/paths';
 
 
 interface Props {
@@ -16,26 +16,21 @@ interface Props {
 }
 
 const PaymentProviders: FC<Props> = ({ handleBack }) => {
-    const [t] = useTranslation();
-  const [selectedId, setSelectedId] = useState("")
-  const { paymnetData,fetchPaymentProviders } = useCartModal();
-
+  const [t] = useTranslation();
+  const { paymnetData, fetchPaymentProviders, createOrderTrigger, updateCheckoutData, checkoutData } = useCart();
 
   useEffect(() => {
-    fetchPaymentProviders(76);
+    fetchPaymentProviders(checkoutData.addressId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   function handleInputChange(ev: ChangeEvent<HTMLInputElement>) {
-    // setState((prevState) => ({
-    //   ...prevState,
-    //   [ev.target.name]: ev.target.value,
-    // }));
+    updateCheckoutData('couponCode', ev.target.value)
   }
 
  
   function handleClick() {
-    
-    console.log('hello');
+    createOrderTrigger()
   }
 
   return (
@@ -49,11 +44,13 @@ const PaymentProviders: FC<Props> = ({ handleBack }) => {
 
       {paymnetData.map((item) => {
         return (
-      <PaymentCard
+          <PaymentCard
             data={item}
-            key={item.id}/>
-      );
-    })}
+            key={item.id}
+          />
+        );
+      })}
+
       <TextField
         id="outlined-basic"
         label="Promocode"
@@ -62,7 +59,7 @@ const PaymentProviders: FC<Props> = ({ handleBack }) => {
         sx={{ mb: 4, width:'420px',mt:2 }}
         onChange={handleInputChange}
         name="fullName"
-        value="test"
+        value={checkoutData.couponCode}
         InputProps={{
           endAdornment: (
             <InputAdornment position="start" sx={{ position: 'absolute', right: '0', top: '-6' }}>
@@ -71,6 +68,7 @@ const PaymentProviders: FC<Props> = ({ handleBack }) => {
           ),
         }}
       />
+
       <Box
         sx={{
           display: 'flex',
@@ -99,7 +97,7 @@ const PaymentProviders: FC<Props> = ({ handleBack }) => {
         <Button
           variant='contained'
           sx={{ width: '219px', height: '44px' }}
-          type='submit'
+          onClick={handleClick}
         >
            {t('checkOut.placeOrder')}
         </Button>

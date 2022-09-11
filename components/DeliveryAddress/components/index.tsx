@@ -7,6 +7,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 import React, { ChangeEvent, FC, useState } from 'react';
+import { useCart } from '../../../contexts/CartContext';
 import { AddressData } from '../../../types/profile';
 interface Props {
   data: AddressData;
@@ -14,48 +15,26 @@ interface Props {
 }
 
 const AddressCard: FC<Props> = ({ data }) => {
-  const [state, setState] = useState<AddressData>();
-  const [checked, setChecked] = useState(false);
+  const { updateCheckoutData, checkoutData } = useCart();
 
-  function handleSelected(data: AddressData) {
-    setState(data);
+  function handleChange() {
+    updateCheckoutData('addressId', data.id);
   }
 
-  function handleClick() { 
-    setChecked(!checked)
-  }
- 
-  function handleChange(e:ChangeEvent<HTMLInputElement>) {
-    setState((prev: any) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-     
-    }));
-  }
   return (
-    <Box  onClick={function () {
-      handleSelected(data)
-    }}>
     <Card sx={{ width: '420px', backgroundColor: 'grey.2400' }}>
       <CardContent>
         <FormControl>
-          <RadioGroup
-            aria-labelledby='demo-radio-buttons-group-label'
-            defaultValue={1}
-            name={data.address}
-            onChange={handleChange}
-          >
-            <FormControlLabel
-              key={data.id}
-              value={data.address}
-              control={<Radio checked={checked} onClick={handleClick}/>}
-              label={
-                <Typography sx={{ fontSize: '24px', fontweight: '600' }}>
-                  {data.id}
-                </Typography>
-              }
-            />
-          </RadioGroup>
+          <FormControlLabel
+            key={data.id}
+            value={data.address}
+            control={<Radio onChange={handleChange} checked={data.id === checkoutData.addressId}  />}
+            label={
+              <Typography sx={{ fontSize: '24px', fontweight: '600' }}>
+                {data.id}
+              </Typography>
+            }
+          />
         </FormControl>
 
         <Typography variant='h6' sx={{ ml: 4.5, color: 'text.secondary' }}>
@@ -63,7 +42,6 @@ const AddressCard: FC<Props> = ({ data }) => {
         </Typography>
       </CardContent>
     </Card>
-    </Box>
   );
 };
 

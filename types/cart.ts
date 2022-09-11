@@ -26,6 +26,7 @@ export type productData = {
     checkOutAttributes: [],
     attributes: null
 }
+
 export type shipmentsProvidersData = {
     id:number,
     name:string,
@@ -34,6 +35,7 @@ export type shipmentsProvidersData = {
         thumbUrl: string,
         },
 }
+
 export type paymentProvidersData = {
     id:number,
     name:string,
@@ -43,11 +45,13 @@ export type paymentProvidersData = {
         thumbUrl: string,
         },
 }
+
 export type orderChangeLogsData = {
     id:number,
     new:number,
     changeAt:string,
 }
+
 export type OrderData = {
     id:number,
     invoiceId:number,
@@ -63,14 +67,28 @@ export type OrderData = {
     orderChangeLogs:orderChangeLogsData[]
 }
 
+export type CheckoutData = {
+    shipmentProviderId: number,
+    paymentProviderId: number,
+    couponCode: string,
+    addressId: number,
+    type: number
+}
+
 export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
     fetchShipmentsProviders:(id:number) => Promise<void>,
-    fetchPaymentProviders:(id:number) => Promise<void>,
-    fetchOrderDetails:(id:number) => Promise<void>,
-    cartData:productData[],
-    shipmentData:shipmentsProvidersData[],
-    paymnetData:paymentProvidersData[],
-    orderData:OrderData,
-  
+    fetchPaymentProviders: (id:number) => Promise<void>,
+    fetchOrderDetails: (id:number) => Promise<void>,
+    cartData: productData[],
+    shipmentData: shipmentsProvidersData[],
+    paymnetData: paymentProvidersData[],
+    orderData: OrderData,
+    updateCheckoutData: (_:string, v: any) => void,
+    createOrderTrigger: () => Promise<void>,
+    checkoutData: CheckoutData,
+    orderAndInvoice: {
+        orderId: number,
+        invoiceId: number
+    }
   }
