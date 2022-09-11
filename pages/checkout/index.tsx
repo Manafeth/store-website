@@ -90,7 +90,7 @@ const Checkout = () => {
   return (
     <MainLayout>
       <Box component='section'>
-        <Container sx={{ px: { xs: 2, lg: 7.5 }, mt: 5 }}>
+        <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 }, mt: 5, maxWidth: 1050 }}>
         <Container maxWidth={false} sx={{ maxWidth: 800 }}>
           <Stepper nonLinear activeStep={activeStep}>
             {steps.map((step, index) => (
@@ -107,8 +107,8 @@ const Checkout = () => {
             ))}
           </Stepper>
           </Container>
-          <Grid container spacing='40px' mt={5}>
-            <Grid item xs={8}>
+          <Grid container spacing='40px' mt={5} justifyContent='space-between'>
+            <Grid item xs={12} md={5.7}>
             {activeStep === 0 && (
                <DeliveryAddress
                handleNext={handleNext}
@@ -128,7 +128,7 @@ const Checkout = () => {
                 loading={createOrderStatus === LOADING } />
             )}
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={5}>
               <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
                 {t('checkOut.orderSummery')}
               </Typography>

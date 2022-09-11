@@ -42,7 +42,6 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       paymentProvider:'',
       paymentStatus:0,
       status:0,
-      totalCost:0,
       shipmentProviderImage: {
         orignialUrl:'',
         thumbUrl:'',
@@ -80,7 +79,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     });
 
 
-    const [createOrderStatus, setCreateOrderStatus] = useState('');
+  const [createOrderStatus, setCreateOrderStatus] = useState('');
 
   const { sendAlert } = useAlert();
 
@@ -109,7 +108,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     }
   }
 
-  async function fetchOrderDetails(id:number) {
+  async function fetchOrderDetails(id: number | string | string[]) {
     try {
      const response = await  getOrder(id);
      setOrderData(response.data.data)
@@ -124,10 +123,10 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       const response = await createOrder(checkoutData);
       setCreateOrderStatus(SUCCESS)
       setOrderAndInvoice(response.data.data);
-      sendAlert(response.data?.message, 'success');
+      sendAlert(response.data?.message, SUCCESS);
     } catch(error: any) {
       setCreateOrderStatus(ERROR)
-      sendAlert(error.response?.data?.Message, 'error');
+      sendAlert(error.response?.data?.Message, ERROR);
     }
   }
 
@@ -138,13 +137,17 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     }))
   }
 
-  async function fetchInvoiceDetails(id:number) {
+  async function fetchInvoiceDetails(id: number | string | string[]) {
     try {
      const response = await getInvoice(id);
      setInvoiceData(response.data.data)
     } catch(error) {
       Promise.reject(error);
     }
+  }
+
+  function clearOrderStatus() {
+    setCreateOrderStatus('');
   }
 
   const state: CartModalState = {
@@ -162,7 +165,8 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     fetchOrderDetails,
     updateCheckoutData,
     createOrderTrigger,
-    fetchInvoiceDetails
+    fetchInvoiceDetails,
+    clearOrderStatus
   };
 
   return (

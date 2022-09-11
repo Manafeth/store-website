@@ -18,6 +18,7 @@ import Attributes from './components/Attributes';
 import { ProductCartData } from '../../types/cart';
 import { addProductToCart } from '../../services/cart.services';
 import { useAlert } from '../../contexts/AlertContext';
+import { useCart } from '../../contexts/CartContext';
 interface Props {
   productDetials: ProductData,
   handleTogglingProductInWishList: () => void,
@@ -35,11 +36,13 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
   const [t] = useTranslation();
   
   const { sendAlert } = useAlert()
+  const { fetchCartProducts } = useCart()
 
 
   function handleAddProductToCart() {
     addProductToCart(state).then((response) => {
       sendAlert(response?.data?.message, 'success')
+      fetchCartProducts()
     }).catch((error: any) => {
       sendAlert(error.response.data.Message, 'error')
     })

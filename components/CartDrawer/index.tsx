@@ -23,14 +23,17 @@ interface Props {
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();
-  const {fetchCartProducts,cartData } = useCart();
+  const { fetchCartProducts, cartData } = useCart();
   useEffect(() => {
-    fetchCartProducts();
+    if (open)
+      fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [open]);
+
   function handleClose() {
     onClose();
   }
+
   return (
     <Drawer
       anchor='right'
@@ -50,7 +53,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Typography variant='h1' component='h2'>
-        {t('cart.myBag')} (2)
+        {t('cart.myBag')} ({cartData.length})
         </Typography>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -85,18 +88,30 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             backgroundColor: ' background.grayDisabled',
             mr: '20px',
           }}
+          onClick={handleClose}
         >
           {t('cart.continueShopping')}
         </Button>
-        <Link href='/checkout'>
+        {cartData.length > 0 ? (
+          <Link href='/checkout'>
+            <Button
+              variant='contained'
+              sx={{ width: 'auto', height: '44px' }}
+              type='submit'
+            >
+                {t('cart.continueToPayment')}
+            </Button>
+          </Link>
+        ) : (
           <Button
             variant='contained'
             sx={{ width: 'auto', height: '44px' }}
-            type='submit'
+            disabled
           >
               {t('cart.continueToPayment')}
           </Button>
-        </Link>
+        )}
+        
       </Box>
     </Drawer>
   );

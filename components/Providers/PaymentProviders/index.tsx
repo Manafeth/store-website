@@ -5,11 +5,12 @@ import Typography from '@mui/material/Typography';
 import PaymentCard from '../PaymentCard';
 import { useCart } from '../../../contexts/CartContext';
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import { useTranslation } from "react-i18next";
 import Link from 'next/link';
 import paths from '../../../constants/paths';
 import CircularProgress from '@mui/material/CircularProgress';
+import { SUCCESS } from '../../../constants';
+import { useRouter } from 'next/router';
 
 
 interface Props {
@@ -19,8 +20,8 @@ interface Props {
 
 const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   const [t] = useTranslation();
-  const [isEditMode, setIsEditMode] = useState(false);
-  const { paymnetData, fetchPaymentProviders, createOrderTrigger, updateCheckoutData, checkoutData,orderAndInvoice } = useCart();
+  const { paymnetData, fetchPaymentProviders, createOrderTrigger, updateCheckoutData, checkoutData, orderAndInvoice, createOrderStatus, clearOrderStatus } = useCart();
+  const router = useRouter()
 
   useEffect(() => {
     fetchPaymentProviders(checkoutData.addressId);
@@ -36,12 +37,21 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
     createOrderTrigger()
   }
 
+  useEffect(() => {
+    if (createOrderStatus === SUCCESS) {
+      router.push(paths.orderDetails(orderAndInvoice.orderId));
+      clearOrderStatus();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createOrderStatus, orderAndInvoice.orderId, router])
+  
+
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
       {t('checkOut.paymentProviders')}
       </Typography>
-      <Typography variant='h4' component='h1' sx={{ mb: 2, width: '70%' }}>
+      <Typography variant='h4' component='h1' sx={{ mb: 2 }}>
       {t('checkOut.paymentDiscription')}
       </Typography>
 
@@ -50,7 +60,6 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
           <PaymentCard
             data={item}
             key={item.id}
-            setIsEditMode={setIsEditMode}
           />
         );
       })}
@@ -60,10 +69,11 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
         label="Promocode"
         placeholder="HappyEid2022"
         variant="outlined"
-        sx={{ mb: 4, width:'420px',mt:2 }}
+        sx={{ mb: 4, mt: 2 }}
         onChange={handleInputChange}
         name="fullName"
         value={checkoutData.couponCode}
+        fullWidth
       />
 
       <Box
@@ -90,18 +100,15 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
         >
              {t('common.back')}
         </Button>
-        <Link href={paths.orderDetails(orderAndInvoice.orderId)}>
         <Button
           variant='contained'
           type="submit" 
-          disabled={!isEditMode ||loading}
+          disabled={!checkoutData.paymentProviderId ||loading}
           sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px' }}
           onClick={handleClick}
         >
-            {loading ? <CircularProgress size={25} color="info" /> : t('checkOut.placeOrder')}
-          
+          {loading ? <CircularProgress size={25} color="info" /> : t('checkOut.placeOrder')}
         </Button>
-        </Link>
       </Box>
     </Box>
   );

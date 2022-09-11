@@ -15,7 +15,6 @@ interface Props {
 const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   const { fetchShipmentsProviders, shipmentData, checkoutData } = useCart();
   const [t] = useTranslation();
-  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     fetchShipmentsProviders(checkoutData.addressId);
@@ -27,17 +26,15 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
       {t('checkOut.shippingProviders')}
       </Typography>
-      <Typography variant='h4' component='h1' sx={{ mb: 2, width: '70%' }}>
+      <Typography variant='h4' component='h1' sx={{ mb: 2 }}>
       {t('checkOut.shippingDiscription')}
       </Typography>
 
       {shipmentData.map((item) => {
         return (
           <ShippingCard
-            title='test'
             data={item}
             key={item.id}
-            setIsEditMode={setIsEditMode}
           />
         );
       })}
@@ -70,7 +67,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           sx={{ width: '219px', height: '44px' }}
           type='submit'
           onClick={handleNext}
-          disabled={!isEditMode}
+          disabled={!checkoutData.shipmentProviderId}
         >
            {t('common.next')}
         </Button>

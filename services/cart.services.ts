@@ -25,7 +25,7 @@ function getAllProviders(addressId: number) {
     }
   );
 }
-function getOrder(id: number) {
+function getOrder(id: number | string | string[]) {
   return axiosInstance.get(
     'Order/Get',
     {
@@ -42,7 +42,7 @@ function createOrder(data: CheckoutData) {
     data
   );
 }
-function getInvoice(id: number) {
+function getInvoice(id: number | string | string[]) {
   return axiosInstance.get(
     'Invoice/Get',
     {

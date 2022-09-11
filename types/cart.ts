@@ -60,7 +60,6 @@ export type OrderData = {
     paymentProvider:string,
     paymentStatus:number,
     status:number,
-    totalCost:number,
     shipmentProviderImage?: {
         orignialUrl: string,
         thumbUrl: string,
@@ -102,8 +101,8 @@ export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
     fetchShipmentsProviders:(id:number) => Promise<void>,
     fetchPaymentProviders: (id:number) => Promise<void>,
-    fetchOrderDetails: (id:number) => Promise<void>,
-    fetchInvoiceDetails: (id:number) => Promise<void>,
+    fetchOrderDetails: (id: number | string | string[]) => Promise<void>,
+    fetchInvoiceDetails: (id: number | string | string[]) => Promise<void>,
     cartData: productData[],
     shipmentData: shipmentsProvidersData[],
     paymnetData: paymentProvidersData[],
@@ -116,5 +115,6 @@ export type CartModalState = {
         invoiceId: number
     }
     createOrderStatus:string,
-    invoiceData:InvocieData
+    invoiceData:InvocieData,
+    clearOrderStatus: () => void
   }

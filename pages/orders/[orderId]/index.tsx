@@ -16,16 +16,20 @@ import moment from 'moment';
 import StatusText from '../../../components/StatusText';
 import { invoiceStatusEnums, orderStatusEnums } from '../../../constants/statuses';
 import paths from '../../../constants/paths';
+import { useRouter } from 'next/router';
 
 const OrderDetails = () => {
   const [t, i18n] = useTranslation();
-  const { fetchOrderDetails, orderData, orderAndInvoice } = useCart();
+  const { fetchOrderDetails, orderData } = useCart();
+  const router = useRouter()
+  const { orderId } = router.query
 
   useEffect(() => {
-    if (orderAndInvoice.orderId)
-      fetchOrderDetails(orderAndInvoice.orderId);
+    if (orderId)
+      fetchOrderDetails(orderId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [orderId]);
+
   function renderOrderStatus(fieldValue: number) {
     // eslint-disable-next-line default-case
     switch (fieldValue) {
@@ -186,6 +190,7 @@ const OrderDetails = () => {
                   sx={{ fontWeight: '600', color: 'success.main', mb: 4 }}
                 >
                    {renderInvoiceStatus(orderData.paymentStatus)}
+                  {/* {orderData.paymentStatus} */}
                 </Typography>
               </Grid>
             </Grid>
@@ -242,8 +247,8 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '800', mb: 2 }}
                 >
-                  {t('common.sar')} {orderData.totalCost}
-                  </Typography>
+                  {t('common.sar')} 4,567.32
+                </Typography>
               </Grid>
             </Grid>
             <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
@@ -267,15 +272,25 @@ const OrderDetails = () => {
                 pb: 5,
               }}
             >
-              <Link href={paths.invoiceDetails(orderAndInvoice.invoiceId)}>
+              {orderData.invoiceId ? (
+                <Link href={paths.invoiceDetails(orderData.invoiceId)}>
+                  <Button
+                    variant='contained'
+                    sx={{ width: '219px', height: '44px' }}
+                    type='submit'
+                  >
+                    {t('settings.viewInvoice')}
+                  </Button>
+                </Link>
+              ) : (
                 <Button
                   variant='contained'
                   sx={{ width: '219px', height: '44px' }}
-                  type='submit'
+                  disabled
                 >
                   {t('settings.viewInvoice')}
                 </Button>
-              </Link>
+              )}
             </Box>
           </>
         </Container>

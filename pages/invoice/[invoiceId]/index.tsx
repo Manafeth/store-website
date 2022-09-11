@@ -10,15 +10,21 @@ import { useTranslation } from "react-i18next";
 import MainLayout from '../../../layouts/MainLayout';
 import { useCart } from '../../../contexts/CartContext';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 
 const InvoiceDetails = () => {
   const [t] = useTranslation();
   const { fetchInvoiceDetails, orderAndInvoice,invoiceData } = useCart();
+  const router = useRouter();
+
+  const { invoiceId } = router.query;
+
   useEffect(() => {
-    if (orderAndInvoice.invoiceId)
-    fetchInvoiceDetails(orderAndInvoice.invoiceId);
+    if (invoiceId)
+    fetchInvoiceDetails(invoiceId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [invoiceId]);
+
   return (
     <MainLayout>
       <Box component='section' sx={{ mt: 5 }}>
@@ -214,15 +220,13 @@ const InvoiceDetails = () => {
               pb: 5,
             }}
           >
-            {/* <Link href='#'>
-              <Button
-                variant='contained'
-                sx={{ width: '219px', height: '44px' }}
-                type='submit'
-              >
-                {t('checkOut.downloadInvoice')}
-              </Button>
-            </Link> */}
+            {/* <Button
+              variant='contained'
+              sx={{ width: '219px', height: '44px' }}
+              type='submit'
+            >
+              {t('checkOut.downloadInvoice')}
+            </Button> */}
           </Box>
         </Container>
       </Box>

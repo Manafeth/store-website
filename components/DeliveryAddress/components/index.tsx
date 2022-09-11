@@ -11,20 +11,17 @@ import { useCart } from '../../../contexts/CartContext';
 import { AddressData } from '../../../types/profile';
 interface Props {
   data: AddressData;
-  setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-
 }
 
-const AddressCard: FC<Props> = ({ data,setIsEditMode }) => {
+const AddressCard: FC<Props> = ({ data }) => {
   const { updateCheckoutData, checkoutData } = useCart();
 
   function handleChange() {
     updateCheckoutData('addressId', data.id);
-    setIsEditMode(true)
   }
 
   return (
-    <Card sx={{ width: '420px', backgroundColor: 'grey.2400' }}>
+    <Card sx={{ width: '100%', backgroundColor: 'grey.2400' }}>
       <CardContent>
         <FormControl>
           <FormControlLabel

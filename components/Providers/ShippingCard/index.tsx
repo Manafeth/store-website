@@ -10,24 +10,22 @@ import ButtonBase from '@mui/material/ButtonBase';
 import { useCart } from '../../../contexts/CartContext';
 
 interface Props {
-    title: string;
     data: shipmentsProvidersData;
-    setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
-const ShippingCard: FC<Props> = ({ title, data,setIsEditMode }) => {
+const ShippingCard: FC<Props> = ({  data }) => {
   const { checkoutData, updateCheckoutData } = useCart();
 
   function handleClick() {
     updateCheckoutData('shipmentProviderId', data.id);
-    setIsEditMode(true)
   }
 
   return (
     <ButtonBase
       onClick={handleClick}
+      sx={{ width: '100%' }}
     >
-      <Card sx={{ width: '420px', backgroundColor: data.id === checkoutData.shipmentProviderId ? '#F3F3F3': null, mb: 3 }}>
+      <Card sx={{ width: '100%', backgroundColor: data.id === checkoutData.shipmentProviderId ? '#F3F3F3': null, mb: 3 }}>
         <CardActionArea>
           <CardContent>
             <Box sx={{display:'flex', gap:'20px'}}>
