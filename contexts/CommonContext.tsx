@@ -1,6 +1,7 @@
 import React, { createContext, useContext, ReactElement, FC, useEffect, useState } from 'react';
 import { getStoreInfo } from '../services/common.services';
 import { CommonContextState, StoreInfoData } from '../types/common';
+import FloatingWhatsApp from 'react-floating-whatsapp'
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -15,7 +16,8 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         mainImageFilePath: {
             orignialUrl: '',
             thumbUrl: ''
-        }
+        },
+        complaintNumber: ''
     })
     
     async function fetchStoreInfo() {
@@ -31,10 +33,13 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
     storeInfo,
     fetchStoreInfo
   };
+
+  console.log('storeInfo', storeInfo)
   
   return (
     <CommonContext.Provider value={state}>
       {children}
+      <FloatingWhatsApp phoneNumber={storeInfo.complaintNumber} accountName={storeInfo.name} avatar={storeInfo.mainImageFilePath?.thumbUrl} />
     </CommonContext.Provider>
   );
 };
