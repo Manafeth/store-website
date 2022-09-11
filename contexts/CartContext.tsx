@@ -42,6 +42,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       paymentProvider:'',
       paymentStatus:0,
       status:0,
+      totalCost:0,
       shipmentProviderImage: {
         orignialUrl:'',
         thumbUrl:'',

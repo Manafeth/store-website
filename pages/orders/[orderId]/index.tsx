@@ -186,7 +186,6 @@ const OrderDetails = () => {
                   sx={{ fontWeight: '600', color: 'success.main', mb: 4 }}
                 >
                    {renderInvoiceStatus(orderData.paymentStatus)}
-                  {/* {orderData.paymentStatus} */}
                 </Typography>
               </Grid>
             </Grid>
@@ -243,8 +242,8 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '800', mb: 2 }}
                 >
-                  {t('common.sar')} 4,567.32
-                </Typography>
+                  {t('common.sar')} {orderData.totalCost}
+                  </Typography>
               </Grid>
             </Grid>
             <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />

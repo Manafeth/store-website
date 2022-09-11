@@ -214,7 +214,7 @@ const InvoiceDetails = () => {
               pb: 5,
             }}
           >
-            <Link href='#'>
+            {/* <Link href='#'>
               <Button
                 variant='contained'
                 sx={{ width: '219px', height: '44px' }}
@@ -222,7 +222,7 @@ const InvoiceDetails = () => {
               >
                 {t('checkOut.downloadInvoice')}
               </Button>
-            </Link>
+            </Link> */}
           </Box>
         </Container>
       </Box>

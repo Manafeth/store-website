@@ -60,6 +60,7 @@ export type OrderData = {
     paymentProvider:string,
     paymentStatus:number,
     status:number,
+    totalCost:number,
     shipmentProviderImage?: {
         orignialUrl: string,
         thumbUrl: string,
