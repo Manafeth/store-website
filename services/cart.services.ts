@@ -42,12 +42,22 @@ function createOrder(data: CheckoutData) {
     data
   );
 }
-
+function getInvoice(id: number) {
+  return axiosInstance.get(
+    'Invoice/Get',
+    {
+      params:{
+        id
+      },
+    }
+  );
+}
 
 export {
     addProductToCart,
     getAllCartProducts,
     getAllProviders,
     getOrder,
-    createOrder
+    createOrder,
+    getInvoice
 }

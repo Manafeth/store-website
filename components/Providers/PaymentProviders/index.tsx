@@ -9,15 +9,17 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useTranslation } from "react-i18next";
 import Link from 'next/link';
 import paths from '../../../constants/paths';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 interface Props {
   handleBack: () => void;
+  loading?: boolean;
 }
 
-const PaymentProviders: FC<Props> = ({ handleBack }) => {
+const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   const [t] = useTranslation();
-  const { paymnetData, fetchPaymentProviders, createOrderTrigger, updateCheckoutData, checkoutData } = useCart();
+  const { paymnetData, fetchPaymentProviders, createOrderTrigger, updateCheckoutData, checkoutData,orderAndInvoice } = useCart();
 
   useEffect(() => {
     fetchPaymentProviders(checkoutData.addressId);
@@ -60,13 +62,6 @@ const PaymentProviders: FC<Props> = ({ handleBack }) => {
         onChange={handleInputChange}
         name="fullName"
         value={checkoutData.couponCode}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="start" sx={{ position: 'absolute', right: '0', top: '-6' }}>
-               <Typography>Apply</Typography>
-            </InputAdornment>
-          ),
-        }}
       />
 
       <Box
@@ -84,7 +79,7 @@ const PaymentProviders: FC<Props> = ({ handleBack }) => {
             color: 'secondary.contrastText',
             width: '171px',
             height: '44px',
-            backgroundColor: ' background.grayDisabled',
+            backgroundColor: 'background.grayDisabled',
             mr: '20px',
             fontSize: '14px',
             fontWeight: '500',
@@ -93,13 +88,16 @@ const PaymentProviders: FC<Props> = ({ handleBack }) => {
         >
              {t('common.back')}
         </Button>
-        <Link href={paths.orderDetails(1)}>
+        <Link href={paths.orderDetails(orderAndInvoice.orderId)}>
         <Button
           variant='contained'
-          sx={{ width: '219px', height: '44px' }}
+          type="submit" 
+          disabled={loading}
+          sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px' }}
           onClick={handleClick}
         >
-           {t('checkOut.placeOrder')}
+            {loading ? <CircularProgress size={25} color="info" /> : t('checkOut.placeOrder')}
+          
         </Button>
         </Link>
       </Box>

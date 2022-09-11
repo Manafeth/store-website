@@ -13,9 +13,12 @@ import { OrderData } from '../../../types/cart';
 import { useCart } from '../../../contexts/CartContext';
 import Avatar from '@mui/material/Avatar';
 import moment from 'moment';
+import StatusText from '../../../components/StatusText';
+import { invoiceStatusEnums, orderStatusEnums } from '../../../constants/statuses';
+import paths from '../../../constants/paths';
 
 const OrderDetails = () => {
-  const [t] = useTranslation();
+  const [t, i18n] = useTranslation();
   const { fetchOrderDetails, orderData, orderAndInvoice } = useCart();
 
   useEffect(() => {
@@ -23,6 +26,80 @@ const OrderDetails = () => {
       fetchOrderDetails(orderAndInvoice.orderId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  function renderOrderStatus(fieldValue: number) {
+    // eslint-disable-next-line default-case
+    switch (fieldValue) {
+      case 1:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[0].labelAr : orderStatusEnums[0].label}
+          color="buttons.blueDarker"
+        />;
+      case 2:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[1].labelAr : orderStatusEnums[1].label}
+          color="warning.main"
+        />;
+      case 3:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[2].labelAr : orderStatusEnums[2].label}
+          color="buttons.readyDarker"
+        />;
+      case 4:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[3].labelAr : orderStatusEnums[3].label}
+          color="buttons.shippedDarker"
+        />;
+
+      case 5:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[4].labelAr : orderStatusEnums[4].label}
+          color="success.main"
+        />;
+      case 6:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[5].labelAr : orderStatusEnums[5].label}
+          color="buttons.cancelledDarker"
+        />;
+      case 7:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[6].labelAr : orderStatusEnums[6].label}
+          color="buttons.cancelledDarker"
+        />;
+
+      case 8:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[7].labelAr : orderStatusEnums[7].label}
+          color="warning.main"
+        />;
+
+      case 9:
+        return <StatusText
+          title={i18n.language === 'ar' ? orderStatusEnums[8].labelAr : orderStatusEnums[8].label}
+          color="primary.main"
+        />;
+    }
+  }
+  function renderInvoiceStatus(fieldValue: number) {
+    // eslint-disable-next-line default-case
+    switch (fieldValue) {
+      case 1:
+        return <StatusText
+          title={i18n.language === 'ar' ? invoiceStatusEnums[0].labelAr : orderStatusEnums[0].label}
+          color="buttons.blueDarker"
+        />;
+      case 2:
+        return <StatusText
+          title={i18n.language === 'ar' ? invoiceStatusEnums[1].labelAr : orderStatusEnums[1].label}
+          color="warning.main"
+        />;
+      case 3:
+        return <StatusText
+          title={i18n.language === 'ar' ? invoiceStatusEnums[2].labelAr : orderStatusEnums[2].label}
+          color="buttons.readyDarker"
+        />;
+    }
+  }
+  
   
   return (
     <MainLayout>
@@ -108,7 +185,8 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', color: 'success.main', mb: 4 }}
                 >
-                  {orderData.paymentStatus}
+                   {renderInvoiceStatus(orderData.paymentStatus)}
+                  {/* {orderData.paymentStatus} */}
                 </Typography>
               </Grid>
             </Grid>
@@ -144,7 +222,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', color: 'success.main', mb: 4 }}
                 >
-                  {orderData.status}
+                  {renderOrderStatus(orderData.status)}
                 </Typography>
               </Grid>
             </Grid>
@@ -190,7 +268,7 @@ const OrderDetails = () => {
                 pb: 5,
               }}
             >
-              <Link href='/invoice'>
+              <Link href={paths.invoiceDetails(orderAndInvoice.invoiceId)}>
                 <Button
                   variant='contained'
                   sx={{ width: '219px', height: '44px' }}

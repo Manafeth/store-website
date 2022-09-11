@@ -127,7 +127,10 @@
         "shippingDiscription":"These are available shipping methods, please select suitable one for you",
         "paymentProviders":"Payment Providers",
         "paymentDiscription":"These are available paymnet methods, please select suitable one for you",
-        "placeOrder":"Place Order"
+        "placeOrder":"Place Order",
+        "netValue":"Net Value",
+        "discount":"Discount",
+        "vatPercentage":"Vat Percentage"
        
 
     },

@@ -5,12 +5,14 @@ import Button from '@mui/material/Button';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import AddressCard from './components';
 import { useTranslation } from "react-i18next";
+import CircularProgress from '@mui/material/CircularProgress';
 interface Props {
   handleNext: () => void;
   handleBack: () => void;
+  loading?: boolean;
 }
 
-const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
+const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading  }) => {
   const { fetchAllAddressData, addressData } = useProfileModal();
   const [t] = useTranslation();
   useEffect(() => {
@@ -76,11 +78,13 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack }) => {
           </Button>
           <Button
             variant='contained'
-            sx={{ width: '219px', height: '44px' }}
+            sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px'}}
             type='submit'
+            disabled={loading}
             onClick={handleNext}
           >
-             {t('common.next')}
+            {loading ? <CircularProgress size={25} color="info" /> :  t('common.next')}
+            
           </Button>
         </Box>
       </>

@@ -25,7 +25,7 @@ const PaymentCard: FC<Props> = ({ data }) => {
     <Box
       onClick={handleClick}
     >
-      <Card sx={{width:'420px', mb:3, backgroundColor: data.id === checkoutData.paymentProviderId ? 'red': null}}>
+      <Card sx={{width:'420px', mb:3, backgroundColor: data.id === checkoutData.paymentProviderId ? '#F3F3F3': null}}>
         <CardActionArea>
           <CardContent>
             <Box sx={{display:'flex', gap:'20px'}}>

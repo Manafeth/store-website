@@ -126,7 +126,10 @@
         "shippingDiscription":"هذه طرق الشحن المتاحة ، يرجى تحديد طريقة مناسبة لك",
         "paymentProviders":"موفرو الدفع",
         "paymentDiscription":"طرق الدفع هذه متوفرة ، يرجى تحديد طريقة مناسبة لك",
-        "placeOrder":"مكان الامر"
+        "placeOrder":"مكان الامر",
+        "netValue":"صافي القيمة",
+        "discount":"تخفيض",
+        "vatPercentage":"نسبة ضريبة القيمة المضافة"
 
     },
     "errorMsg": {

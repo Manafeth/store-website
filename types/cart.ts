@@ -74,12 +74,35 @@ export type CheckoutData = {
     addressId: number,
     type: number
 }
+export type InvoiceItems= {
+    id: number,
+    itemId: number,
+    item: string,
+    unitPrice: number,
+    quantity: number,
+    total: number,
+}
+export type InvocieData = {
+    id:number,
+    createAt: string,
+    date: string,
+    total: number,
+    vatPercentage: number,
+    discount: number,
+    netValue: number,
+    account?: {
+        id:number,
+        title:string
+    }
+    invoiceItems:InvoiceItems[],
+}
 
 export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
     fetchShipmentsProviders:(id:number) => Promise<void>,
     fetchPaymentProviders: (id:number) => Promise<void>,
     fetchOrderDetails: (id:number) => Promise<void>,
+    fetchInvoiceDetails: (id:number) => Promise<void>,
     cartData: productData[],
     shipmentData: shipmentsProvidersData[],
     paymnetData: paymentProvidersData[],
@@ -91,4 +114,6 @@ export type CartModalState = {
         orderId: number,
         invoiceId: number
     }
+    createOrderStatus:string,
+    invoiceData:InvocieData
   }

@@ -23,6 +23,7 @@ import { useCart } from '../../contexts/CartContext';
 import { useTranslation } from "react-i18next";
 import PaymentProviders from '../../components/Providers/PaymentProviders';
 import ShippingProviders from '../../components/Providers/ShippingProviders';
+import { LOADING, SUCCESS } from '../../constants';
 
 
 const steps = [
@@ -55,12 +56,13 @@ const ColorlibStepIconRoot = styled('div')<{
 }));
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const {fetchCartProducts,cartData } = useCart();
+  const {fetchCartProducts,cartData,createOrderStatus } = useCart();
   const [t] = useTranslation();
   useEffect(() => {
     fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+ 
   function handleBack() {
     setActiveStep(activeStep - 1);
   }
@@ -123,7 +125,8 @@ const Checkout = () => {
 
             {activeStep === 2 && (
                 <PaymentProviders
-                handleBack={handleBack} />
+                handleBack={handleBack}
+                loading={createOrderStatus === LOADING } />
             )}
             </Grid>
             <Grid item xs={4}>

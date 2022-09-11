@@ -25,7 +25,7 @@ const ShippingCard: FC<Props> = ({ title, data }) => {
     <ButtonBase
       onClick={handleClick}
     >
-      <Card sx={{ width: '420px', backgroundColor: data.id === checkoutData.shipmentProviderId ? 'red': null, mb: 3 }}>
+      <Card sx={{ width: '420px', backgroundColor: data.id === checkoutData.shipmentProviderId ? '#F3F3F3': null, mb: 3 }}>
         <CardActionArea>
           <CardContent>
             <Box sx={{display:'flex', gap:'20px'}}>
