@@ -14,7 +14,8 @@ export type StoreInfoData = {
     mainImageFilePath?: {
         orignialUrl: string,
         thumbUrl: string
-    }
+    },
+    complaintNumber: string,
 }
 
 export type CommonContextState = {
