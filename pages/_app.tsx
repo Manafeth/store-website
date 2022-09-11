@@ -7,7 +7,6 @@ import arLang from '../translations/ar.json';
 import enLang from '../translations/en.json';
 import Head from 'next/head';
 import { AuthModalProvider } from '../contexts/AuthModalContext';
-import AuthModal from '../components/AuthModal';
 import { ProfileModalProvider } from '../contexts/ProfileContext';
 import { CommonContextProvider } from '../contexts/CommonContext';
 import { AlertProvider } from '../contexts/AlertContext';

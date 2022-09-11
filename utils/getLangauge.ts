@@ -3,4 +3,3 @@ export default function getLocalStorage() {
       return localStorage.userLanguage;
     return 'en'
 }
-  

@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useEffect, useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -16,6 +16,7 @@ import { useAuthModal } from '../../contexts/AuthModalContext';
 import isEmail from 'validator/lib/isEmail';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from "react-i18next";
+import { LOADING, SUCCESS } from '../../constants';
 
 interface Props {
 
@@ -28,9 +29,9 @@ const AuthModal: FC<Props> = () => {
         sendPhoneNumber,
         verifyPhoneNumber,
         updateAccountData,
-        loginLoading,
-        verifyLoading,
-        updateProfileLoading
+        sendPhoneNumberStatus,
+        verifyStatus,
+        updateProfileStatus
     } = useAuthModal();
     const [tab, setTab] = useState(1);
     const [t] = useTranslation();
@@ -63,7 +64,6 @@ const AuthModal: FC<Props> = () => {
         if (tab === 1) {
             if (loginData.phoneNumber && loginData.countryId) {
                 sendPhoneNumber(loginData).then(() => {
-                    setTab(2);
                     setIsInvalid(false);
                 }).catch(() => {
                     setIsInvalid(false);
@@ -81,7 +81,6 @@ const AuthModal: FC<Props> = () => {
                     ...loginData,
                     otp: varificationCode
                 }).then(() => {
-                    setTab(3);
                     setIsInvalid(false);
                 }).catch((err) => {
                     setIsInvalid(false);
@@ -97,7 +96,6 @@ const AuthModal: FC<Props> = () => {
                         ...prevState,
                         image: null
                     }));
-                    handleClose();
                 }).catch(() => {
                     setIsInvalid(false);
                 })
@@ -107,6 +105,21 @@ const AuthModal: FC<Props> = () => {
         }
     }
 
+    useEffect(() => {
+      if (sendPhoneNumberStatus === SUCCESS)
+        setTab(2)
+    }, [sendPhoneNumberStatus])
+    
+    useEffect(() => {
+        if (verifyStatus === SUCCESS)
+            setTab(3);
+    }, [verifyStatus])
+
+    useEffect(() => {
+        if (updateProfileStatus === SUCCESS)
+            handleClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [updateProfileStatus])
     
     return (
         <Drawer
@@ -152,7 +165,7 @@ const AuthModal: FC<Props> = () => {
                     fullWidth
                     sx={{ borderRadius: 2 }}
                     type="submit"
-                    loading={[loginLoading, verifyLoading, updateProfileLoading].includes(true)}
+                    loading={[sendPhoneNumberStatus, verifyStatus, updateProfileStatus].includes(LOADING)}
                 >
                          {t('common.next')}
                 </LoadingButton>

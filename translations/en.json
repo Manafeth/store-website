@@ -42,7 +42,9 @@
         "showingAll":"Showing all",
         "results":"results",
         "popularity":"Popularity",
-        "date":"Date"
+        "date":"Date",
+        "compliantsNumber": "Compliants number",
+        "compliantsEmail":"Compliants email"
     },
     "Auth": {
     "phoneNumber":"Enter phone number",

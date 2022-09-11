@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getLangauge from '../utils/getLangauge';
 import getAccessToken from '../utils/getToken';
 
 // create axios instance
@@ -22,7 +23,7 @@ export const axiosInstance = (() => {
           }
         }
 
-        // updatedConfig.headers.common['Accept-Language'] = localStorage.userLanguage || 'en';
+        updatedConfig.headers.common['Accept-Language'] = getLangauge();
 
         return updatedConfig;
       } catch (err) {

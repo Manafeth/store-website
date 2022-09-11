@@ -41,9 +41,9 @@ export type AuthModalState = {
     handleOpenAuthModal: () => void,
     handleCloseAuthModal: () => void,
     profileData: ProfileData,
-    loginLoading: boolean,
-    verifyLoading: boolean,
-    updateProfileLoading: boolean,
+    sendPhoneNumberStatus: string,
+    verifyStatus: string,
+    updateProfileStatus: string,
     logout: () => void,
     isloggedIn: boolean
 }

@@ -41,8 +41,9 @@
         "showingAll":"عرض كل شيء",
         "results":"النتائج",
         "popularity":"شعبية",
-        "date":"تاريخ"
-         
+        "date":"تاريخ",
+        "compliantsNumber": "هاتف الشكاوي",
+        "compliantsEmail": "بريد الشكاوي"
     },
     "Auth": {
         "phoneNumber":"أدخل رقم الهاتف",
