@@ -10,13 +10,15 @@ import { useCart } from '../../../contexts/CartContext';
 
 interface Props {
     data:paymentProvidersData;
+    setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
-const PaymentCard: FC<Props> = ({ data }) => {
+const PaymentCard: FC<Props> = ({ data,setIsEditMode }) => {
   const { updateCheckoutData, checkoutData } = useCart();
 
   function handleClick() {
-    updateCheckoutData('paymentProviderId', data.id)
+    updateCheckoutData('paymentProviderId', data.id);
+    setIsEditMode(true)
   }
 
   console.log('checkoutData', checkoutData)

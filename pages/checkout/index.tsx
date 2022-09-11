@@ -112,8 +112,7 @@ const Checkout = () => {
             {activeStep === 0 && (
                <DeliveryAddress
                handleNext={handleNext}
-               handleBack={handleBack}
-             />
+               handleBack={handleBack}/>
                
             )}
 

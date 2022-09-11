@@ -19,6 +19,7 @@ interface Props {
 
 const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   const [t] = useTranslation();
+  const [isEditMode, setIsEditMode] = useState(false);
   const { paymnetData, fetchPaymentProviders, createOrderTrigger, updateCheckoutData, checkoutData,orderAndInvoice } = useCart();
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
           <PaymentCard
             data={item}
             key={item.id}
+            setIsEditMode={setIsEditMode}
           />
         );
       })}
@@ -92,7 +94,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
         <Button
           variant='contained'
           type="submit" 
-          disabled={loading}
+          disabled={!isEditMode ||loading}
           sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px' }}
           onClick={handleClick}
         >

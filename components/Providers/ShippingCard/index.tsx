@@ -12,13 +12,15 @@ import { useCart } from '../../../contexts/CartContext';
 interface Props {
     title: string;
     data: shipmentsProvidersData;
+    setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
-const ShippingCard: FC<Props> = ({ title, data }) => {
+const ShippingCard: FC<Props> = ({ title, data,setIsEditMode }) => {
   const { checkoutData, updateCheckoutData } = useCart();
 
   function handleClick() {
-    updateCheckoutData('shipmentProviderId', data.id)
+    updateCheckoutData('shipmentProviderId', data.id);
+    setIsEditMode(true)
   }
 
   return (

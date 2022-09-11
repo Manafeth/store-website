@@ -15,8 +15,8 @@ const InvoiceDetails = () => {
   const [t] = useTranslation();
   const { fetchInvoiceDetails, orderAndInvoice,invoiceData } = useCart();
   useEffect(() => {
-    // if (orderAndInvoice.orderId)
-    fetchInvoiceDetails(417 || orderAndInvoice.invoiceId);
+    if (orderAndInvoice.invoiceId)
+    fetchInvoiceDetails(orderAndInvoice.invoiceId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

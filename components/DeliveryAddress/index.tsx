@@ -12,9 +12,10 @@ interface Props {
   loading?: boolean;
 }
 
-const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading  }) => {
+const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
   const { fetchAllAddressData, addressData } = useProfileModal();
   const [t] = useTranslation();
+  const [isEditMode, setIsEditMode] = useState(false);
   useEffect(() => {
     fetchAllAddressData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,7 +38,8 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading  }) => {
         {addressData.length > 0 ? addressData.map((item) => {
           return (
             <Box key={item.id} sx={{ mb: 2 }}>
-              <AddressCard data={item}/>
+              <AddressCard data={item}
+              setIsEditMode={setIsEditMode}/>
             </Box>
           );
         }):(
@@ -80,8 +82,8 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading  }) => {
             variant='contained'
             sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px'}}
             type='submit'
-            disabled={loading}
             onClick={handleNext}
+            disabled={!isEditMode || loading}
           >
             {loading ? <CircularProgress size={25} color="info" /> :  t('common.next')}
             

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -15,6 +15,7 @@ interface Props {
 const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   const { fetchShipmentsProviders, shipmentData, checkoutData } = useCart();
   const [t] = useTranslation();
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     fetchShipmentsProviders(checkoutData.addressId);
@@ -36,6 +37,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
             title='test'
             data={item}
             key={item.id}
+            setIsEditMode={setIsEditMode}
           />
         );
       })}
@@ -68,6 +70,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           sx={{ width: '219px', height: '44px' }}
           type='submit'
           onClick={handleNext}
+          disabled={!isEditMode}
         >
            {t('common.next')}
         </Button>
