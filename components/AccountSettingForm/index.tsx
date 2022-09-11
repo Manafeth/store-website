@@ -104,7 +104,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
 
       <Box sx={{ display: 'flex' }}>
         <FormControlLabel
-          control={<Checkbox defaultChecked color='success'  
+          control={<Checkbox color='success'  
           checked={i18n.language === 'en'} 
           onChange={setLangaugeToEnglish} />}
           label='English'

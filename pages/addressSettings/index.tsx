@@ -18,8 +18,9 @@ const Setting = () => {
     <MainLayout>
       <ProfileLayout>
         <AcccoutSettingForm 
-        emailNotificationData ={emailNotificationData}
-        loading={createStatus === LOADING}/>
+          emailNotificationData ={emailNotificationData}
+          loading={createStatus === LOADING}
+        />
       </ProfileLayout>
     </MainLayout>
   );
