@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import validator from 'validator';
 import { CodeData } from '../../../types/auth';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 interface CodeInputProps {
   error?: boolean;
@@ -119,19 +119,19 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
     return (
         <Box>
             <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
-            {t('Auth.verifyPhoneNumber')}
+            {t('auth:verifyPhoneNumber')}
             </Typography>
 
             <Typography variant='h2' sx={{ mb: 1, lineHeight: '30px', letterSpacing: '0.2px' }}>
-            {t('Auth.verificationCode')}
+            {t('auth:verificationCode')}
             </Typography>
 
             <Typography variant='h6' sx={{ mb: 4, lineHeight: '30px', fontWeight: 500, letterSpacing: '0.2px' }}>
-            {t('Auth.confirmationMessage')} +96605666888777
+            {t('auth:confirmationMessage')} +96605666888777
             </Typography>
 
             <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
-            {t('Auth.yourCode')}
+            {t('auth:yourCode')}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
                 <CodeInput
@@ -171,7 +171,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
                 />
             </Box>
             <Typography variant='h5' component='p' sx={{ mb: 5.25, letterSpacing: '0.1px' }}>
-            {t('Auth.reciveCode')} <Button sx={{ p: 0, textTransform: 'none', minWidth: 0 }}>Resend</Button>
+            {t('auth:reciveCode')} <Button sx={{ p: 0, textTransform: 'none', minWidth: 0 }}>Resend</Button>
             </Typography>
         </Box>
     )

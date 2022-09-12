@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 
 interface Props {
@@ -44,7 +44,7 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
         value={1}
         onClick={handleTabs}
       >
-      {t('settings.activeOrders')}
+      {t('settings:activeOrders')}
       </Button>
       <Button
         variant="text"
@@ -54,7 +54,7 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
         onClick={handleTabs}
       >
 
-      {t('settings.histriory')}
+      {t('settings:histriory')}
       </Button>
      
     </Box>

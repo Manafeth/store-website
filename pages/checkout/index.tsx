@@ -20,10 +20,12 @@ import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
 import { useCart } from '../../contexts/CartContext';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import PaymentProviders from '../../components/Providers/PaymentProviders';
 import ShippingProviders from '../../components/Providers/ShippingProviders';
 import { LOADING, SUCCESS } from '../../constants';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 
 const steps = [
@@ -130,14 +132,14 @@ const Checkout = () => {
             </Grid>
             <Grid item xs={12} md={5}>
               <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-                {t('checkOut.orderSummery')}
+                {t('checkout:orderSummery')}
               </Typography>
              
               <OrderSummary/>
          
               <Divider />
               <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
-              {t('common.items')}
+              {t('common:items')}
               </Typography>
               {cartData?.map((item) => {
                  return(
@@ -151,5 +153,15 @@ const Checkout = () => {
     </MainLayout>
   );
 };
+
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(locale && await serverSideTranslations(locale, ['settings', 'checkout', 'common', 'cart', 'auth']))
+    },
+    revalidate: 10,
+  }
+}
 
 export default Checkout;

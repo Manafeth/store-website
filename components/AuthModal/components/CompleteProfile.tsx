@@ -7,7 +7,7 @@ import ImageInput from '../../ImageInput';
 import { useAuthModal } from '../../../contexts/AuthModalContext';
 import { ProfileData } from '../../../types/auth';
 import isEmail from 'validator/lib/isEmail';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
   accountData: ProfileData,
@@ -63,11 +63,11 @@ const CompleteProfile: FC<Props> = ({ accountData, setAccountData, isInvalid }) 
   return (
     <Box>
       <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
-      {t('Auth.completeProfile')}
+      {t('auth:completeProfile')}
       </Typography>
 
       <Typography variant='h2' sx={{ mb: 5, lineHeight: '30px', letterSpacing: '0.2px' }}>
-      {t('Auth.completeYourOrders')}
+      {t('auth:completeYourOrders')}
       </Typography>
 
       <ImageInput
@@ -101,7 +101,7 @@ const CompleteProfile: FC<Props> = ({ accountData, setAccountData, isInvalid }) 
         InputProps={{
           endAdornment: (
             <InputAdornment position="end" sx={{ position: 'absolute', right: '0', top: -6 }}>
-                   {t('Auth.optional')}
+                   {t('auth:optional')}
             </InputAdornment>
           ),
         }}

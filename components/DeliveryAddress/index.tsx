@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import AddressCard from './components';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import CircularProgress from '@mui/material/CircularProgress';
 import { useCart } from '../../contexts/CartContext';
 interface Props {
@@ -34,7 +34,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
     >
       <>
         <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        {t('checkOut.deliveryAddress')}
+        {t('checkout:deliveryAddress')}
         </Typography>
         {addressData.length > 0 ? addressData.map((item) => {
           return (
@@ -47,10 +47,10 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
         }):(
           <Box sx={{ display: 'flex', alignItems: 'left', flexDirection: 'column', marginTop: '20px' }}>
           <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
-          {t('settings.oops')}
+          {t('settings:oops')}
           </Typography>
           <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
-          {t('settings.noAddress')}
+          {t('settings:noAddress')}
           </Typography>
         </Box>
         )}
@@ -78,7 +78,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
             }}
             onClick={handleBack}
           >
-              {t('common.back')}
+              {t('common:back')}
           </Button>
           <Button
             variant='contained'
@@ -87,7 +87,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
             onClick={handleNext}
             disabled={!checkoutData.addressId || loading}
           >
-            {loading ? <CircularProgress size={25} color="info" /> :  t('common.next')}
+            {loading ? <CircularProgress size={25} color="info" /> :  t('common:next')}
             
           </Button>
         </Box>

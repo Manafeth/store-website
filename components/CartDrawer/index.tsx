@@ -13,7 +13,7 @@ import OrderSummary from '../OrderSummary';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useCart } from '../../contexts/CartContext';
 
 interface Props {
@@ -53,7 +53,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Typography variant='h1' component='h2'>
-        {t('cart.myBag')} ({cartData.length})
+        {t('cat:myBag')} ({cartData.length})
         </Typography>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -90,7 +90,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           }}
           onClick={handleClose}
         >
-          {t('cart.continueShopping')}
+          {t('cat:continueShopping')}
         </Button>
         {cartData.length > 0 ? (
           <Link href='/checkout'>
@@ -99,7 +99,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
               sx={{ width: 'auto', height: '44px' }}
               type='submit'
             >
-                {t('cart.continueToPayment')}
+                {t('cat:continueToPayment')}
             </Button>
           </Link>
         ) : (
@@ -108,7 +108,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             sx={{ width: 'auto', height: '44px' }}
             disabled
           >
-              {t('cart.continueToPayment')}
+              {t('cat:continueToPayment')}
           </Button>
         )}
         

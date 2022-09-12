@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import PaymentCard from '../PaymentCard';
 import { useCart } from '../../../contexts/CartContext';
 import TextField from '@mui/material/TextField';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import Link from 'next/link';
 import paths from '../../../constants/paths';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -49,10 +49,10 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      {t('checkOut.paymentProviders')}
+      {t('checkout:paymentProviders')}
       </Typography>
       <Typography variant='h4' component='h1' sx={{ mb: 2 }}>
-      {t('checkOut.paymentDiscription')}
+      {t('checkout:paymentDiscription')}
       </Typography>
 
       {paymnetData.map((item) => {
@@ -98,7 +98,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
           }}
           onClick={handleBack}
         >
-             {t('common.back')}
+             {t('common:back')}
         </Button>
         <Button
           variant='contained'
@@ -107,7 +107,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
           sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px' }}
           onClick={handleClick}
         >
-          {loading ? <CircularProgress size={25} color="info" /> : t('checkOut.placeOrder')}
+          {loading ? <CircularProgress size={25} color="info" /> : t('checkout:placeOrder')}
         </Button>
       </Box>
     </Box>

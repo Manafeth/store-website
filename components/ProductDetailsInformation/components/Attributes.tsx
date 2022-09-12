@@ -95,6 +95,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                                         handleAddingAttribute(option.id)
                                     }
                                 }
+                                key={option.id}
                             >
                                 <Box
                                     key={option.id}

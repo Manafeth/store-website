@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../types/products';
 import { CategoryData } from '../../types/categories';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 // import TagFilter from './components/TagFilter';
 
 
@@ -75,7 +75,7 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
           component='h1'
           sx={{ fontWeight: '700' }}
         >
-          {t('common.filter')} :
+          {t('common:filter')} :
         </Typography>
         <FilterUtils onSearch={handleSearch} />
       </Box>
@@ -120,7 +120,7 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
         }}
         onClick={handleFilterSubmit}
       >
-          {t('common.filter')}
+          {t('common:filter')}
       </Button>
     </>
   );

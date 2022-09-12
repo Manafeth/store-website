@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ShippingCard from '../ShippingCard';
 import { useCart } from '../../../contexts/CartContext';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 
 interface Props {
@@ -24,10 +24,10 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      {t('checkOut.shippingProviders')}
+      {t('checkout:shippingProviders')}
       </Typography>
       <Typography variant='h4' component='h1' sx={{ mb: 2 }}>
-      {t('checkOut.shippingDiscription')}
+      {t('checkout:shippingDiscription')}
       </Typography>
 
       {shipmentData.map((item) => {
@@ -60,7 +60,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           }}
           onClick={handleBack}
         >
-          {t('common.back')}
+          {t('common:back')}
         </Button>
         <Button
           variant='contained'
@@ -69,7 +69,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           onClick={handleNext}
           disabled={!checkoutData.shipmentProviderId}
         >
-           {t('common.next')}
+           {t('common:next')}
         </Button>
       </Box>
     </Box>
