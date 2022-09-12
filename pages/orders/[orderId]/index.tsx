@@ -190,7 +190,6 @@ const OrderDetails = () => {
                   sx={{ fontWeight: '600', color: 'success.main', mb: 4 }}
                 >
                    {renderInvoiceStatus(orderData.paymentStatus)}
-                  {/* {orderData.paymentStatus} */}
                 </Typography>
               </Grid>
             </Grid>
