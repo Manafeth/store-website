@@ -123,7 +123,6 @@ const AddressManagment = () => {
           }
           sx={{
             py: '11px',
-            mr: { xs: 3, lg: 4 },
             width: 'auto',
             height: '38px',
             fontSize: { xs: '12px', md: '14px' },
