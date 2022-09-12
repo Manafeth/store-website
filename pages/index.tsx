@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import FeaturedCategoriesSection from '../components/FeaturedCategoriesSection';
 import HeroSection from '../components/HeroSection';
 import MainLayout from '../layouts/MainLayout';
@@ -11,7 +11,7 @@ import { getFeaturedCategories } from '../services/categories.services';
 import { ProductData } from '../types/products';
 import { CategoryData } from '../types/categories';
 import ProductVerticalItem from '../components/ProductVerticalItem';
-
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[]
@@ -42,13 +42,14 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''});
   const categories = await getFeaturedCategories();
   return {
     props: {
       productsList: products.data.data.data,
-      categories: categories.data.data
+      categories: categories.data.data,
+      ...(locale && await serverSideTranslations(locale, ['heroSection', 'common', 'cart', 'auth']))
     },
     revalidate: 10,
   }

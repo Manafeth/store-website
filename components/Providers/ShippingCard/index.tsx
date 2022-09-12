@@ -21,24 +21,19 @@ const ShippingCard: FC<Props> = ({  data }) => {
   }
 
   return (
-    <ButtonBase
-      onClick={handleClick}
-      sx={{ width: '100%' }}
-    >
-      <Card sx={{ width: '100%', backgroundColor: data.id === checkoutData.shipmentProviderId ? '#F3F3F3': null, mb: 3 }}>
-        <CardActionArea>
-          <CardContent>
-            <Box sx={{display:'flex', gap:'20px'}}>
-            <Avatar src={data.imageFilePath?.orignialUrl || ''} alt='category' sx={{ width: '60px', height: '33px', borderRadius: '2px' }}>
-                    C
-            </Avatar>
-                <Typography>{data.name}</Typography>
-            </Box>
-          
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </ButtonBase>
+    <Card sx={{ width: '100%', backgroundColor: data.id === checkoutData.shipmentProviderId ? '#F3F3F3': null, mb: 3 }} onClick={handleClick}>
+      <CardActionArea>
+        <CardContent>
+          <Box sx={{display:'flex', gap:'20px'}}>
+          <Avatar src={data.imageFilePath?.orignialUrl || ''} alt='category' sx={{ width: '60px', height: '33px', borderRadius: '2px' }}>
+                  C
+          </Avatar>
+              <Typography>{data.name}</Typography>
+          </Box>
+        
+        </CardContent>
+      </CardActionArea>
+    </Card>
   )
 }
 

@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import OrderTimeline from '../../../components/OrderTimeline';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { OrderData } from '../../../types/cart';
 import { useCart } from '../../../contexts/CartContext';
 import Avatar from '@mui/material/Avatar';
@@ -17,6 +17,9 @@ import StatusText from '../../../components/StatusText';
 import { invoiceStatusEnums, orderStatusEnums } from '../../../constants/statuses';
 import paths from '../../../constants/paths';
 import { useRouter } from 'next/router';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { getAllActiveOrders } from '../../../services/profile.services';
 
 const OrderDetails = () => {
   const [t, i18n] = useTranslation();
@@ -115,7 +118,7 @@ const OrderDetails = () => {
               component='h1'
               sx={{ fontWeight: 'bold', mb: 3 }}
             >
-              {t('settings.orderDetails')}
+              {t('settings:orderDetails')}
             </Typography>
 
             <Typography
@@ -123,7 +126,7 @@ const OrderDetails = () => {
               component='h1'
               sx={{ fontWeight: '700', fontSize: '20px', mb: 3 }}
             >
-              {t('checkOut.inovice')} {orderData.invoiceId}
+              {t('checkout:inovice')} {orderData.invoiceId}
             </Typography>
             <Grid container spacing='40px'>
               <Grid item xs={6}>
@@ -132,7 +135,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', mb: 2 }}
                 >
-                  {t('common.date')}
+                  {t('common:date')}
                 </Typography>
                 <Typography
                   variant='h5'
@@ -148,7 +151,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', mb: 2 }}
                 >
-                  {t('common.phoneNumber')}
+                  {t('common:phoneNumber')}
                 </Typography>
                 <Typography
                   variant='h5'
@@ -166,7 +169,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', mb: 2 }}
                 >
-                  {t('checkOut.paymnetMethod')}
+                  {t('checkout:paymnetMethod')}
                 </Typography>
                 <Typography
                   variant='h5'
@@ -182,7 +185,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', mb: 2 }}
                 >
-                  {t('checkOut.paymentStatus')}
+                  {t('checkout:paymentStatus')}
                 </Typography>
                 <Typography
                   variant='h5'
@@ -201,7 +204,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', mb: 2 }}
                 >
-                  {t('checkOut.shippingMethod')}
+                  {t('checkout:shippingMethod')}
                 </Typography>
                 <Box sx={{ mb: 4 }}>
                   <Avatar
@@ -219,7 +222,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '600', mb: 2 }}
                 >
-                  {t('checkOut.shippingStatus')}
+                  {t('checkout:shippingStatus')}
                 </Typography>
                 <Typography
                   variant='h5'
@@ -238,7 +241,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '500', mb: 2 }}
                 >
-                  {t('cart.total')}
+                  {t('cat:total')}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -247,7 +250,7 @@ const OrderDetails = () => {
                   component='h1'
                   sx={{ fontWeight: '800', mb: 2 }}
                 >
-                  {t('common.sar')} 4,567.32
+                  {t('common:sar')} 4,567.32
                 </Typography>
               </Grid>
             </Grid>
@@ -257,7 +260,7 @@ const OrderDetails = () => {
               component='h1'
               sx={{ fontWeight: '600', mb: 2 }}
             >
-              {t('checkOut.orderTimeline')}
+              {t('checkout:orderTimeline')}
             </Typography>
             {orderData.orderChangeLogs.map((item) => {
               return (
@@ -279,7 +282,7 @@ const OrderDetails = () => {
                     sx={{ width: '219px', height: '44px' }}
                     type='submit'
                   >
-                    {t('settings.viewInvoice')}
+                    {t('settings:viewInvoice')}
                   </Button>
                 </Link>
               ) : (
@@ -288,7 +291,7 @@ const OrderDetails = () => {
                   sx={{ width: '219px', height: '44px' }}
                   disabled
                 >
-                  {t('settings.viewInvoice')}
+                  {t('settings:viewInvoice')}
                 </Button>
               )}
             </Box>
@@ -298,5 +301,32 @@ const OrderDetails = () => {
     </MainLayout>
   );
 };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {
+        params: {
+          orderId: "1"
+        }
+      },
+      {
+        params: {
+          orderId: "2"
+        }
+      }
+    ],
+    fallback: 'blocking'
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(locale && await serverSideTranslations(locale, ['settings', 'checkout', 'common', 'cart', 'auth']))
+    },
+    revalidate: 10,
+  }
+}
 
 export default OrderDetails;

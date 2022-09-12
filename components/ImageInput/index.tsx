@@ -3,7 +3,7 @@ import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Image from 'next/image';import { useTranslation } from "react-i18next";
+import Image from 'next/image';import { useTranslation } from "next-i18next";
 
 interface Props {
   image?: string | null;
@@ -98,7 +98,7 @@ const ImageInput: FC<Props> = ({ image, removeImage, isInvalid, handleImage, ima
                 color: '#242424',
               }}
             >
-               {t('common.browse')}
+               {t('common:browse')}
             </Box>
           </Box>
         </Box>

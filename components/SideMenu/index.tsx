@@ -9,7 +9,7 @@ import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import { useProfileModal } from '../../contexts/ProfileContext';
 import ListMenuItem from './components/ListMenuItem';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 
 const SideMenu = () => {
@@ -23,11 +23,11 @@ const SideMenu = () => {
     }, []);
 
   const listItemSideBar = [
-    { id: 1, name: t('settings.editAccount'), link: paths.editAccount },
-    { id: 2, name: t('settings.orders'), link: paths.profileOrders},
-    { id: 3, name: t('settings.wishlist'), link: paths.whishList},
-    { id: 4, name: t('settings.setting'), link: paths.addressSettings },
-    { id: 5, name: t('settings.logout'), onClick: logout},
+    { id: 1, name: t('settings:editAccount'), link: paths.editAccount },
+    { id: 2, name: t('settings:orders'), link: paths.profileOrders},
+    { id: 3, name: t('settings:wishlist'), link: paths.whishList},
+    { id: 4, name: t('settings:setting'), link: paths.addressSettings },
+    { id: 5, name: t('settings:logout'), onClick: logout},
   ];
   return (
     <Box sx={{ minHeight: '100%' }}>

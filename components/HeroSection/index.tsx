@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 import Image from 'next/image';
 import hero from '../../assets/images/hero.png';
@@ -28,7 +28,7 @@ const HeroSection = () => {
                         mb: {xs: 1, sm: 2}
                     }}
                 >
-                    {t('heroSection.summerYear')}
+                    {t('heroSection:summerYear')}
                 </Typography>
                 <Typography
                     sx={{
@@ -40,7 +40,7 @@ const HeroSection = () => {
                         mb: {xs: 1, sm: 2}
                     }}
                 >
-                    {t('heroSection.discount')}
+                    {t('heroSection:discount')}
                 </Typography>
                 <Typography
                     sx={{
@@ -52,11 +52,11 @@ const HeroSection = () => {
                         maxWidth: {xs: 226, sm: 376}
                     }}
                 >
-                     {t('heroSection.description')}
+                     {t('heroSection:description')}
                 </Typography>
                 <Link href='/'>
                     <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }}>
-                    {t('heroSection.shopNow')}
+                    {t('heroSection:shopNow')}
                     </Button>
                 </Link>
             </Container>

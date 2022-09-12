@@ -15,7 +15,7 @@ import { CodeData, LoginData, ProfileData } from '../../types/auth';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import isEmail from 'validator/lib/isEmail';
 import { LoadingButton } from '@mui/lab';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { LOADING, SUCCESS } from '../../constants';
 
 interface Props {
@@ -167,7 +167,7 @@ const AuthModal: FC<Props> = () => {
                     type="submit"
                     loading={[sendPhoneNumberStatus, verifyStatus, updateProfileStatus].includes(LOADING)}
                 >
-                         {t('common.next')}
+                         {t('common:next')}
                 </LoadingButton>
             </Box>
         </Drawer>

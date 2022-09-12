@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useCart } from '../../contexts/CartContext';
 
 const OrderSummary = () => {
@@ -21,10 +21,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-          {t('cart.subTotal')}
+          {t('cat:subTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          {t('common.sar')} {subTotal}
+          {t('common:sar')} {subTotal}
         </Typography>
       </Box>
       <Box
@@ -35,10 +35,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-        {t('checkOut.checkoutAttributsTotal')}
+        {t('checkout:checkoutAttributsTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          {t('common.sar')} {checkoutAttributsTotal}
+          {t('common:sar')} {checkoutAttributsTotal}
         </Typography>
       </Box>
       <Box
@@ -49,10 +49,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-          {t('cart.total')}
+          {t('cat:total')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          {t('common.sar')} {result}
+          {t('common:sar')} {result}
         </Typography>
       </Box>
     </Box>

@@ -17,7 +17,8 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useAlert } from '../../../contexts/AlertContext';
 import Head from 'next/head';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -104,7 +105,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
             <Typography variant='h2' sx={{ mb: 3, cursor: 'pointer' }}>
-            {t('settings.relatedProducts')}
+            {t('settings:relatedProducts')}
             </Typography>
             <Divider sx={{ mb: 3 }} />
             <Grid container spacing={3} rowSpacing={3.75}>
@@ -151,7 +152,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
       props: {
         productDetials: product.data.data,
-        realtedProducts: realtedProducts.data.data
+        realtedProducts: realtedProducts.data.data,
+        ...(await serverSideTranslations(context.locale || '', ['settings', 'common', 'cart', 'auth']))
       },
       revalidate: 10,
     }

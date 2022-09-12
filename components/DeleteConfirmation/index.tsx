@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
     open: boolean;
@@ -51,7 +51,7 @@ const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove,
             sx={{ mr: 3 }}
             onClick={onClose}
           >
-           {t('common.no')}
+           {t('common:no')}
           </Button>
           <Button
             variant="contained"

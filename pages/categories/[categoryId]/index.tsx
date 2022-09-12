@@ -18,8 +18,9 @@ import { getAllCategories, getCategoryDetails } from '../../../services/categori
 import { getProductsByCategory } from '../../../services/products.services';
 import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../../types/products';
 import { useRouter } from 'next/router';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import productStatusMenu from '../../../constants/ProductStatusValues';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface Products {
   data: ProductData[],
@@ -148,7 +149,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   component='h1'
                   sx={{ mb: 5, fontWeight: '700', color: 'text.primary' }}
                 >
-                   {t('common.showingAll')} {products.data.length} {t('common.results')} 
+                   {t('common:showingAll')} {products.data.length} {t('common:results')} 
                 </Typography>
                 <TextField
                   id='outlined-basic'
@@ -161,7 +162,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   onChange={handleSort}
                   value={params.productStatus || 0}
                 >
-                  <MenuItem value={0} disabled>{t('common.popularity')}</MenuItem>
+                  <MenuItem value={0} disabled>{t('common:popularity')}</MenuItem>
                   {productStatusMenu.map((item) => {
                     return (
                       <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
@@ -220,7 +221,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
       props: {
         categoryData: category.data.data,
-        categoryDetails: categoryDetails.data.data
+        categoryDetails: categoryDetails.data.data,
+        ...(await serverSideTranslations(context.locale || '', ['heroSection', 'common', 'cart', 'auth']))
       },
       revalidate: 10,
     }

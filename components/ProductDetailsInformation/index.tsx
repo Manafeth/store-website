@@ -12,7 +12,7 @@ import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.svg';
 import CartIcon from '../../assets/images/icons/cart-icon.svg';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { ProductData } from '../../types/products';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import CheckoutAttributes from './components/CheckoutAttributes';
 import Attributes from './components/Attributes';
 import { ProductCartData } from '../../types/cart';
@@ -98,7 +98,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         </Typography>
       </Box> */}
       <Typography variant='h2' component='span' sx={{ mb: 1, display: 'block' }}>
-        {t('common.sar')} {productDetials.salePrice}
+        {t('common:sar')} {productDetials.salePrice}
       </Typography>
       <Box sx={{ display: 'flex', gap:'10px', mb: 4 }}>
         <Typography
@@ -106,7 +106,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
           component='h1'
           sx={{ mb: 0, color: 'text.secondary', fontWeight: '700' }}
         >
-           {t('common.availability')} :
+           {t('common:availability')} :
         </Typography>
         <Typography
           variant='h6'
@@ -145,7 +145,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
           onClick={handleAddCheckoutAttribute}
           disabled={state.checkOutAttributes.length > 0}
         >
-           {t('common.selectOptions')}
+           {t('common:selectOptions')}
         </Button>
         <Box sx={{display:'flex' }}>
           <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }}>
