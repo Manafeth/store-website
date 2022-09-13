@@ -68,7 +68,12 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
   useEffect(() => {
     setState((prevState) => ({
       ...prevState,
-      productId: productDetials.id
+      productId: productDetials.id,
+      options: productDetials.attributes.reduce((acc: number[], atrribute) => {
+        if (atrribute.options[0]?.id)
+          return [...acc, atrribute.options[0]?.id];
+        return acc;
+      }, [])
     }))
   }, [productDetials])
 

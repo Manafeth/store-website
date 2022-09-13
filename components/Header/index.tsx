@@ -227,27 +227,30 @@ const Header = () => {
               sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
             />
 
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                mr: {xs: 1, sm: 2, md: 4}
-              }}
-            >
-              <Image src={HeartIcon} alt='heart icon' width='16' height='15' />
+            <Link href={paths.whishList}>
               <Box
                 sx={{
-                  fontWeight: 400,
-                  fontSize: '12px',
-                  lineHeight: '16px',
-                  letterSpacing: '0.2px',
-                  color: '#323940',
-                  ml: 0.5
+                  display: 'flex',
+                  alignItems: 'center',
+                  mr: {xs: 1, sm: 2, md: 4},
+                  cursor: 'pointer'
                 }}
               >
-                1
+                <Image src={HeartIcon} alt='heart icon' width='16' height='15' />
+                <Box
+                  sx={{
+                    fontWeight: 400,
+                    fontSize: '12px',
+                    lineHeight: '16px',
+                    letterSpacing: '0.2px',
+                    color: '#323940',
+                    ml: 0.5
+                  }}
+                >
+                  1
+                </Box>
               </Box>
-            </Box>
+            </Link>
             <Box
               sx={{
                 display: 'flex',
