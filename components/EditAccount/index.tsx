@@ -26,6 +26,7 @@ interface Props {
   setState: Dispatch<SetStateAction<customerData>>;
   state: customerData;
   loading: boolean;
+  isSubmitted: boolean;
 }
 
 const EditAccount: FC<Props> = ({
@@ -34,6 +35,7 @@ const EditAccount: FC<Props> = ({
   setState,
   state,
   loading,
+  isSubmitted,
 }) => {
   const [image, setImage] = useState('');
   const [t] = useTranslation();
@@ -138,6 +140,7 @@ const EditAccount: FC<Props> = ({
         value={state.fullName}
         name='fullName'
         onChange={handleInput}
+        error={isSubmitted && !state.fullName}
         InputProps={{
           style: {
             fontSize: '14px',
@@ -162,6 +165,7 @@ const EditAccount: FC<Props> = ({
         value={state.email}
         name='email'
         onChange={handleInput}
+        error={isSubmitted && !state.email}
         sx={{ mb: 3 }}
         InputProps={{
           style: {

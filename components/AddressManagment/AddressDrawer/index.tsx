@@ -14,7 +14,6 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useProfileModal } from '../../../contexts/ProfileContext';
 import { AddressData } from '../../../types/profile';
 import { GOOGLE_MAP_KEY, LOADING, SUCCESS } from '../../../constants';
@@ -24,6 +23,7 @@ import Marker from '../../Marker';
 import { useTranslation } from "next-i18next";
 import mapMarkupIcon from '../../../assets/images/icons/map-markup.svg';
 import { LoadingButton } from '@mui/lab';
+
 
 interface Props {
   open: boolean;
@@ -176,7 +176,7 @@ const AddressDrawer: FC<Props> = ({
   }, [updateAddressStatus]);
 
 
-  const renderMarker = (selectedAddress?.latitude || 0) > 0 && (selectedAddress?.longitude || 0)> 0;
+  const renderMarker = state.latitude > 0 && state.longitude > 0;
   const loading = createAddressStatus === LOADING || updateAddressStatus === LOADING;
 
   return (
@@ -329,8 +329,8 @@ const AddressDrawer: FC<Props> = ({
               {renderMarker ? (
                 <Marker
                   position={{
-                    lat: selectedAddress?.latitude || 0,
-                    lng: selectedAddress?.longitude || 0,
+                    lat: state.latitude,
+                    lng: state.longitude,
                   }}
                   icon={mapMarkupIcon}
                 />

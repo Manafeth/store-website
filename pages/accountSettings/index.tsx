@@ -23,6 +23,8 @@ const settingAccount = () => {
   };
    // eslint-disable-next-line react-hooks/rules-of-hooks
    const [state, setState] = useState<customerData>(initialState);
+     // eslint-disable-next-line react-hooks/rules-of-hooks
+   const [isSubmitted, setIsSubmitted] = useState(false);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fetchCustomerProfileData, customerData,updateProfileData,updateStatus } = useProfileModal();
 
@@ -42,14 +44,17 @@ const settingAccount = () => {
   }
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    updateProfileData(state).then(()=>{
+    const payload = {
+      ...state,
+    }
+    updateProfileData(payload).then(()=>{
       setState((prevState) => ({
           ...prevState,
           image: null
       }));
     }).catch(()=>{
-
     })
+
   }
   return (
     <MainLayout>
@@ -60,6 +65,7 @@ const settingAccount = () => {
           setState={setState}
           state={state}
           loading={updateStatus === LOADING}
+          isSubmitted={isSubmitted}
         />
       </ProfileLayout>
     </MainLayout>
