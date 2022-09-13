@@ -204,6 +204,13 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
             }
           }
         }
+      },
+      MuiModal: {
+        styleOverrides: {
+          root: {
+            direction: theme.direction,
+          },
+        },
       }
     },
   });
