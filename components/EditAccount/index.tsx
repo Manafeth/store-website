@@ -135,6 +135,7 @@ const EditAccount: FC<Props> = ({
         id='outlined-basic'
         variant='outlined'
         placeholder={customerData.fullName}
+        value={state.fullName}
         name='fullName'
         onChange={handleInput}
         InputProps={{
@@ -145,7 +146,7 @@ const EditAccount: FC<Props> = ({
           },
         }}
       />
-      <Typography variant='h1' component='h2' sx={{ mb: 3, mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
+      <Typography variant='h1' component='h2' sx={{ mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
         {t('common:contact')}
       </Typography>
       <Box component='label'
@@ -158,6 +159,7 @@ const EditAccount: FC<Props> = ({
         id='outlined-basic'
         variant='outlined'
         placeholder={customerData.email}
+        value={state.email}
         name='email'
         onChange={handleInput}
         sx={{ mb: 3 }}
