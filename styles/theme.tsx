@@ -118,6 +118,18 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         2200:' #737373',
         2400:'#F8F8F8',
       },
+      buttons: {
+        blueDarker: '#29D2FC',
+        blueLighter: '#e9faff',
+        readyLighter: '#e9f2f5',
+        readyDarker: '#287C9B',
+        shippedLighter: '#e8f9f7',
+        shippedDarker: '#1FC3B2',
+        cancelledLighter: '#fff0f1',
+        cancelledDarker: '#FE6D73',
+        cancelLighter: '#fff5ec',
+        cancelDarker: '#FF9B45',
+      },
     },
   } as ThemeOptions);
 

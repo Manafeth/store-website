@@ -7,9 +7,9 @@ import Image from 'next/image';
 import Divider from '@mui/material/Divider';
 import { activeOrderData } from '../../../../types/profile';
 import moment from 'moment';
-import { useTranslation } from "react-i18next";
 import StatusText from '../../../StatusText';
 import { orderStatusEnums } from '../../../../constants/statuses';
+import { useTranslation } from 'next-i18next';
 
 
 interface Props {
@@ -80,7 +80,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
         justifyContent: 'left',
       }}
     >
-      <Typography variant='h2' component='h1' sx={{ mb: 5 }}>
+      <Typography variant='h2' component='h1' sx={{ mb: 1.5 }}>
       {t('settings:noOrder')} : #{data.id}
       </Typography>
       <Box
@@ -88,13 +88,13 @@ const ActiveOrders: FC<Props> = ({ data }) => {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          padding: '10px 20px',
+          padding: '10px',
           gap: '10px',
           width: '400px',
           height: '47px',
           backgroundColor: 'grey.1600',
           justifyContent: 'space-between',
-          mb: 2,
+          mb: 1.5,
         }}
       >
         {/* <Typography>{data.status}</Typography> */}
@@ -111,10 +111,10 @@ const ActiveOrders: FC<Props> = ({ data }) => {
       >
        {moment(data.createdAt).format('DD MMMM  YYYY hh:MM A')}
       </Typography>
-      <Typography variant='h3' sx={{ mb: 5, fontWeight: '600' }}>
+      <Typography variant='h2' sx={{ mb: 2, fontWeight: '600' }}>
       {t('common:sar')} {data.total}
       </Typography>
-      <Divider sx={{ mb: 3, width:'400px' }} />
+      <Divider sx={{ mb: 2, width:'400px' }} />
     </Box>
   );
 };

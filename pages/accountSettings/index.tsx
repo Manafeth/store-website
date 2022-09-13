@@ -21,16 +21,25 @@ const settingAccount = () => {
     dateOfBirth: null
   
   };
+   // eslint-disable-next-line react-hooks/rules-of-hooks
+   const [state, setState] = useState<customerData>(initialState);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fetchCustomerProfileData, customerData,updateProfileData,updateStatus } = useProfileModal();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [state, setState] = useState<customerData>(initialState);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchCustomerProfileData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  function isFormValid() {
+    return (
+      state.fullName
+      && state.email
+      && state.phoneNumber
+      && state.countryId
+      && state.cityId
+    );
+  }
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     updateProfileData(state).then(()=>{
