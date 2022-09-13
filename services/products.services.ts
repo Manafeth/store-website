@@ -1,31 +1,51 @@
 import { ProductByCategoryParams } from '../types/products';
 import { axiosInstance } from './axiosInstance';
 
-function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string }) {
+function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string }, locale?: string) {
   return axiosInstance.get(
     'Product/MostPurchasedProducts',
-    {params},
+    {
+      params,
+      headers: locale ? {
+        'Accept-Language': locale,
+      } : {}
+    },
   );
 }
 
-function getProductDetails(id: string) {
+function getProductDetails(id: string, locale?: string) {
   return axiosInstance.get(
     'Product/Get',
-    {params: {id}},
+    {
+      params: {id},
+      headers: locale ? {
+        'Accept-Language': locale,
+      } : {}
+    },
   );
 }
 
-function getRelatedProductDetails(productId: string) {
+function getRelatedProductDetails(productId: string, locale?: string) {
   return axiosInstance.get(
     'Product/GetRelatedProduct',
-    {params: {productId}},
+    {
+      params: {productId},
+      headers: locale ? {
+        'Accept-Language': locale,
+      } : {}
+    },
   );
 }
 
-function getProductsByCategory(params: ProductByCategoryParams) {
+function getProductsByCategory(params: ProductByCategoryParams, locale?: string) {
   return axiosInstance.get(
     'Product/GetProductCategories',
-    {params}
+    {
+      params,
+      headers: locale ? {
+        'Accept-Language': locale,
+      } : {}
+    }
   );
 }
 

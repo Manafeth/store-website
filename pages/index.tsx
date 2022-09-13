@@ -43,8 +43,8 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''});
-  const categories = await getFeaturedCategories();
+  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, locale);
+  const categories = await getFeaturedCategories(locale);
   return {
     props: {
       productsList: products.data.data.data,
