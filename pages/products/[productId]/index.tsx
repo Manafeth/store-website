@@ -146,8 +146,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { productId } = context.params as IParams;
-    const product = await getProductDetails(productId);
-    const realtedProducts = await getRelatedProductDetails(productId);
+    const product = await getProductDetails(productId, context.locale);
+    const realtedProducts = await getRelatedProductDetails(productId, context.locale);
 
     return {
       props: {

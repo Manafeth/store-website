@@ -43,8 +43,8 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const localization = await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']);
-    const categories = await getFeaturedCategories();
-    const allCategories = await getAllCategories();
+    const categories = await getFeaturedCategories(locale);
+    const allCategories = await getAllCategories(locale);
     
     return {
         props: {
