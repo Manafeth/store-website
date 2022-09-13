@@ -1,3 +1,5 @@
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import React, { FormEvent, useEffect, useState } from 'react'
 import EditAccount from '../../components/EditAccount'
 import { LOADING } from '../../constants'
@@ -53,6 +55,15 @@ const settingAccount = () => {
       </ProfileLayout>
     </MainLayout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(locale && await serverSideTranslations(locale, ['settings', 'common', 'cart', 'auth']))
+    },
+    revalidate: 10,
+  }
 }
 
 export default settingAccount 

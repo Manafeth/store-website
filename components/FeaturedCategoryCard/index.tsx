@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 import Link from 'next/link';
 import { CategoryData } from '../../types/categories';
@@ -40,7 +40,7 @@ const FeaturedCategoryCard: FC<Props> = ({ isVertical, data }) => {
               variant='h3'
               component='span'
             >
-              {data.itemsCount}  {t('common.items')}
+              {data.itemsCount}  {t('common:items')}
             </Typography>
           </Box>
       </Box>

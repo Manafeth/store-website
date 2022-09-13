@@ -1,4 +1,5 @@
 import React from 'react'
+import { GetStaticProps, NextPage } from 'next'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
@@ -7,8 +8,8 @@ import HeroSection from '../../components/HeroSection'
 import FeaturedCategoriesSection from '../../components/FeaturedCategoriesSection'
 import CategoryCard from '../../components/CategoryCard'
 import { getAllCategories, getFeaturedCategories } from '../../services/categories.services'
-import { NextPage } from 'next'
 import { CategoryData } from '../../types/categories'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 interface Props {
     categories: CategoryData[],
@@ -16,7 +17,6 @@ interface Props {
 }
   
 const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
-
   return (
     <MainLayout>
         <HeroSection />
@@ -41,16 +41,18 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+    const localization = await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']);
     const categories = await getFeaturedCategories();
     const allCategories = await getAllCategories();
     
     return {
-      props: {
-        categories: categories.data.data,
-        allCategories: allCategories.data.data
-      },
-      revalidate: 10,
+        props: {
+            ...localization,
+            categories: categories.data.data,
+            allCategories: allCategories.data.data
+        },
+        revalidate: 10,
     }
 }
   

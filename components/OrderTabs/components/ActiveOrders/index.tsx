@@ -81,7 +81,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
       }}
     >
       <Typography variant='h2' component='h1' sx={{ mb: 5 }}>
-      {t('settings.noOrder')} : #{data.id}
+      {t('settings:noOrder')} : #{data.id}
       </Typography>
       <Box
         sx={{
@@ -112,7 +112,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
        {moment(data.createdAt).format('DD MMMM  YYYY hh:MM A')}
       </Typography>
       <Typography variant='h3' sx={{ mb: 5, fontWeight: '600' }}>
-      {t('common.sar')} {data.total}
+      {t('common:sar')} {data.total}
       </Typography>
       <Divider sx={{ mb: 3, width:'400px' }} />
     </Box>

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 interface Props {
   handleNext?: () => void;
   handleBack: () => void;
@@ -24,13 +24,13 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      {t('checkOut.paymentDetail')}
+      {t('checkout:paymentDetail')}
       </Typography>
       <Box
         component='label'
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
-         {t('checkOut.promocode')}
+         {t('checkout:promocode')}
       </Box>
 
       <TextField
@@ -42,7 +42,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
         InputProps={{ endAdornment: <Button>Apply</Button> }}
       />
       <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
-         {t('checkOut.nameOnCard')}
+         {t('checkout:nameOnCard')}
       </Box>
 
       <TextField
@@ -53,7 +53,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
         sx={{ mb: 3 }}
       />
       <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
-      {t('checkOut.cardNumber')}
+      {t('checkout:cardNumber')}
       </Box>
 
       <TextField
@@ -115,7 +115,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
           }}
           onClick={handleBack}
         >
-          {t('common.back')}
+          {t('common:back')}
         </Button>
         <Button
           variant='contained'
@@ -123,7 +123,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
           type='submit'
           onClick={handleNext}
         >
-           {t('common.next')}
+           {t('common:next')}
         </Button>
       </Box>
     </Box>

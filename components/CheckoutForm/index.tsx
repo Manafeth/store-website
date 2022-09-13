@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 interface Props {
   handleNext: () => void;
 }
@@ -23,7 +23,7 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      {t('checkOut.checkOut')}
+      {t('checkout:checkOut')}
       </Typography>
 
       <Grid container spacing='40px' sx={{ mb: 3 }}>

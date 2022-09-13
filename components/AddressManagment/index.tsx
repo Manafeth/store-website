@@ -16,7 +16,7 @@ import addIcon from '../../assets/images/icons/add-icon.svg';
 import DeleteConfirmationMdoal from '../DeleteConfirmation';
 import AddressDrawer from './AddressDrawer';
 import { LOADING, SUCCESS } from '../../constants';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const AddressManagment = () => {
   const initialState = {
@@ -100,7 +100,7 @@ const AddressManagment = () => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' }  }}>
-        {t('settings.addressManagment')}
+        {t('settings:addressManagment')}
       </Typography>
       
       <Box
@@ -113,7 +113,7 @@ const AddressManagment = () => {
         }}
       >
         <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }  }}>
-          {t('settings.homeAddress')}
+          {t('settings:homeAddress')}
         </Typography>
         <Button
           variant='contained'
@@ -129,7 +129,7 @@ const AddressManagment = () => {
           }}
           onClick={onOpen}
         >
-          {t('settings.addNewAddress')}
+          {t('settings:addNewAddress')}
         </Button>
       </Box>
 
@@ -158,10 +158,10 @@ const AddressManagment = () => {
       }) : (
         <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
           <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
-          {t('settings.oops')}
+          {t('settings:oops')}
           </Typography>
           <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
-          {t('settings.noAddress')}
+          {t('settings:noAddress')}
           </Typography>
         </Box>
       )}

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import blackHeart from '../../assets/images/icons/fill-heart.png';
 import { wishListData } from '../../types/profile';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 interface Props {
   data: wishListData;
 }
@@ -69,7 +69,7 @@ const ProductItem: FC<Props> = ({ data }) => {
           </Box> */}
         </Box>
         <Typography variant='h2' component='p' sx={{ fontWeight: 'bold' }}>
-          {t('common.sar')} {data.salePrice}
+          {t('common:sar')} {data.salePrice}
         </Typography>
       </Box>
     </Box>

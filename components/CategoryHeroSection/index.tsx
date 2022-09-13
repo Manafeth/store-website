@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import Image from 'next/image';
 import hero from '../../assets/images/category-hero.png';
 import Link from 'next/link';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const CategoryHeroSection = () => {
     const [t] = useTranslation();
@@ -29,7 +29,7 @@ const CategoryHeroSection = () => {
                         fontSize: { xs: '12px', sm: '16px'},
                     }}
                 >
-                 {t('heroSection.summerYear')}
+                 {t('heroSection:summerYear')}
                 </Typography>
                 <Typography
                     sx={{
@@ -41,7 +41,7 @@ const CategoryHeroSection = () => {
                         mb: { xs: 1, sm: 2 },
                     }}
                 >
-                      {t('heroSection.off')}
+                      {t('heroSection:off')}
                 </Typography>
                 <Box sx={{width:{xs: '50%', sm: '40%'}}}>
                 <Typography
@@ -55,12 +55,12 @@ const CategoryHeroSection = () => {
                         fontSize: { xs: '12px', sm: '16px'},
                     }}
                 >
-                    {t('heroSection.description')}
+                    {t('heroSection:description')}
                 </Typography>
                 </Box>
                 <Link href='/'>
                     <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }}>
-                    {t('heroSection.shopNow')}
+                    {t('heroSection:shopNow')}
                     </Button>
                 </Link>
             </Container>

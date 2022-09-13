@@ -23,7 +23,7 @@ import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import CartDrawer from '../CartDrawer';
 import { useCommon } from '../../contexts/CommonContext';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useCart } from '../../contexts/CartContext';
 
 
@@ -64,9 +64,8 @@ const Header = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isloggedIn])
   const pages = [
-    {page: t('common.home'), link: paths.home},
-    {page: t('common.categories'), link: paths.categories},
-    {page: t('common.contactUs'), link: paths.contactUs}
+    {page: t('common:home'), link: paths.home},
+    {page: t('common:categories'), link: paths.categories},
   ];
 
   return (
@@ -86,8 +85,8 @@ const Header = () => {
                   S
                 </Avatar>
                 <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
-                {t('common.welcomeTo')}, <br />
-                  {storeInfo.name}  {t('common.store')}
+                {t('common:welcomeTo')}, <br />
+                  {storeInfo.name}  {t('common:store')}
                 </Box>
               </Box>
             </Box>
@@ -294,7 +293,7 @@ const Header = () => {
               <Button
                 onClick={handleOpenAuthModal}
               >
-                 {t('common.login')}
+                 {t('common:login')}
               </Button>
             )}
             
