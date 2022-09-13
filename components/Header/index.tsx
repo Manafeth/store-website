@@ -37,7 +37,7 @@ const Header = () => {
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
   const { fetchCartProducts, cartData } = useCart();
 
-  const {storeInfo, fetchStoreInfo} = useCommon()
+  const { storeInfo, fetchStoreInfo } = useCommon();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -62,7 +62,8 @@ const Header = () => {
       fetchCartProducts()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isloggedIn])
+  }, [isloggedIn]);
+
   const pages = [
     {page: t('common:home'), link: paths.home},
     {page: t('common:categories'), link: paths.categories},
@@ -226,72 +227,73 @@ const Header = () => {
               placeholder='Search product, categories, services....'
               sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
             />
-
-            <Link href={paths.whishList}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  mr: {xs: 1, sm: 2, md: 4},
-                  cursor: 'pointer'
-                }}
-              >
-                <Image src={HeartIcon} alt='heart icon' width='16' height='15' />
-                <Box
-                  sx={{
-                    fontWeight: 400,
-                    fontSize: '12px',
-                    lineHeight: '16px',
-                    letterSpacing: '0.2px',
-                    color: '#323940',
-                    ml: 0.5
-                  }}
-                >
-                  1
-                </Box>
-              </Box>
-            </Link>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                mr: {xs: 1, sm: 1.5, md: 2.5},
-                cursor: 'pointer'
-              }}
-              onClick={onOpen}
-            >
-              <Image src={CartIcon} alt='cart icon' width='15' height='15' />
-              <Box
-                sx={{
-                  fontWeight: 400,
-                  fontSize: '12px',
-                  lineHeight: '16px',
-                  letterSpacing: '0.2px',
-                  color: '#323940',
-                  ml: 0.5
-                }}
-              >
-                {cartData.length}
-              </Box>
-            </Box>
             {isloggedIn ? (
-              <Link href={paths.editAccount}>
+              <>
+                <Link href={paths.whishList}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      mr: {xs: 1, sm: 2, md: 4},
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <Image src={HeartIcon} alt='heart icon' width='16' height='15' />
+                    <Box
+                      sx={{
+                        fontWeight: 400,
+                        fontSize: '12px',
+                        lineHeight: '16px',
+                        letterSpacing: '0.2px',
+                        color: '#323940',
+                        ml: 0.5
+                      }}
+                    >
+                      1
+                    </Box>
+                  </Box>
+                </Link>
                 <Box
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    fontWeight: 400,
-                    fontSize: '12px',
-                    lineHeight: '16px',
-                    letterSpacing: '0.2px',
-                    color: '#323940',
+                    mr: {xs: 1, sm: 1.5, md: 2.5},
                     cursor: 'pointer'
                   }}
+                  onClick={onOpen}
                 >
-                  <Avatar alt="Remy Sharp" src={profileData.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
-                  {profileData.fullName}
+                  <Image src={CartIcon} alt='cart icon' width='15' height='15' />
+                  <Box
+                    sx={{
+                      fontWeight: 400,
+                      fontSize: '12px',
+                      lineHeight: '16px',
+                      letterSpacing: '0.2px',
+                      color: '#323940',
+                      ml: 0.5
+                    }}
+                  >
+                    {cartData.length}
+                  </Box>
                 </Box>
-              </Link>
+                <Link href={paths.editAccount}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontWeight: 400,
+                      fontSize: '12px',
+                      lineHeight: '16px',
+                      letterSpacing: '0.2px',
+                      color: '#323940',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <Avatar alt="Remy Sharp" src={profileData.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
+                    {profileData.fullName}
+                  </Box>
+                </Link>
+              </>
             ) : (
               <Button
                 onClick={handleOpenAuthModal}
