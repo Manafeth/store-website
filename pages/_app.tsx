@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import ThemeProvider from '../styles/theme'
@@ -8,8 +9,20 @@ import { ProfileModalProvider } from '../contexts/ProfileContext';
 import { CommonContextProvider } from '../contexts/CommonContext';
 import { AlertProvider } from '../contexts/AlertContext';
 import { CartModalProvider } from '../contexts/CartContext';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  
+
+  useEffect(() => {
+    const { locale } = router;
+    if (locale)
+      localStorage.setItem('userLanguage', locale)  
+  }, [router])
+  
+
   return (
     <ThemeProvider>
       <Head>

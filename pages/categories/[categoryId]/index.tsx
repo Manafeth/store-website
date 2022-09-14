@@ -216,8 +216,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { categoryId } = context.params as IParams;
-    const category = await getCategoryDetails(categoryId);
-    const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 });
+    const category = await getCategoryDetails(categoryId, context.locale);
+    const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 }, context.locale);
     return {
       props: {
         categoryData: category.data.data,

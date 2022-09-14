@@ -16,6 +16,8 @@ interface Props {
 
 const CustomThemeProvider: FC<Props> = ({ children }) => {
   const { i18n } = useTranslation();
+  const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
+
   let theme = createTheme({
     typography: {
       fontSize: 16,
@@ -214,19 +216,25 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
             }
           }
         }
+      },
+      MuiModal: {
+        styleOverrides: {
+          root: {
+            direction: theme.direction,
+          },
+        },
       }
     },
   });
 
   
   const cacheRtl = createCache({
-    key: `mui${i18n.dir()}`,
-    stylisPlugins: i18n.dir() === 'rtl' ? [prefixer, rtlPlugin] : [],
+    key: `mui${direction}`,
+    stylisPlugins: direction === 'rtl' ? [prefixer, rtlPlugin] : [],
   });
 
-
   return (
-    <ThemeProvider theme={{ ...theme, direction: i18n.dir() }}>
+    <ThemeProvider theme={{ ...theme, direction: direction }}>
       <CacheProvider value={cacheRtl}>
         <Box
           sx={{
@@ -235,7 +243,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
               fontFamily: theme.typography.fontFamily
             }
           }}
-          dir={i18n.dir()}
+          dir={direction}
         >
           {children}
         </Box>
