@@ -14,7 +14,7 @@ import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import editIcon from '../../assets/images/icons/edit-icon.svg';
 import addIcon from '../../assets/images/icons/add-icon.svg';
 import DeleteConfirmationMdoal from '../DeleteConfirmation';
-import AddressDrawer from './AddressDrawer';
+import AddressDrawer from './components/AddressDrawer';
 import { LOADING, SUCCESS } from '../../constants';
 import { useTranslation } from "next-i18next";
 
