@@ -39,22 +39,24 @@ const settingAccount = () => {
       && state.email
       && state.phoneNumber
       && state.countryId
-      && state.cityId
     );
   }
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    const payload = {
-      ...state,
+    if(isFormValid()) {
+      const payload = {
+        ...state,
+      }
+      updateProfileData(payload).then(()=>{
+        setState((prevState) => ({
+            ...prevState,
+            image: null
+        }));
+      }).catch(()=>{
+      })
+    } else {
+      setIsSubmitted(true);
     }
-    updateProfileData(payload).then(()=>{
-      setState((prevState) => ({
-          ...prevState,
-          image: null
-      }));
-    }).catch(()=>{
-    })
-
   }
   return (
     <MainLayout>
