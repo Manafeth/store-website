@@ -57,6 +57,22 @@ const AuthModal: FC<Props> = () => {
     function handleClose() {
         handleCloseAuthModal();
         setTab(1);
+        setLoginData({
+            countryId: 0,
+            phoneNumber: ''
+        })
+        setCode({
+            'field-1': '',
+            'field-2': '',
+            'field-3': '',
+            'field-4': '',
+        })
+
+        setAccountData({
+            fullName: '',
+            email: '',
+            image: null
+        })
     }
 
     function handleSubmit(ev: FormEvent<HTMLFormElement>) {
@@ -111,8 +127,19 @@ const AuthModal: FC<Props> = () => {
     }, [sendPhoneNumberStatus])
     
     useEffect(() => {
-        if (verifyStatus === SUCCESS)
+        if (verifyStatus === SUCCESS) {
             setTab(3);
+            setLoginData({
+                countryId: 0,
+                phoneNumber: ''
+            })
+            setCode({
+                'field-1': '',
+                'field-2': '',
+                'field-3': '',
+                'field-4': '',
+            })
+        }
     }, [verifyStatus])
 
     useEffect(() => {
