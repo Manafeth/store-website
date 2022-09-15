@@ -17,7 +17,7 @@ export const orderStatusEnums = [
   ];
 
   export const addressTagsEnums = [
-    { label: 'Work', labelAr: 'عمل', value: 1 },
-    { label: 'Home', labelAr: 'مسكن', value: 2 },
-    { label: 'Others', labelAr: 'آخر', value: 3 },
+    { label: 'common:work', value: 1 },
+    { label: 'common:home', value: 2 },
+    { label: 'common:others', value: 3 },
   ];

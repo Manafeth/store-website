@@ -20,6 +20,8 @@ import { useTranslation } from 'next-i18next';
 import mapMarkupIcon from '../../../../assets/images/icons/map-markup.svg';
 import { LoadingButton } from '@mui/lab';
 import Input from '@mui/material/Input';
+import { addressTagsEnums } from '../../../../constants/statuses';
+import { getAllCities } from '../../../../services/common.services';
 
 
 interface Props {
@@ -36,8 +38,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
     updateAddressStatus,
     getAddressDetails,
     addressDetails,
-    addressData,
   } = useProfileModal();
+  const { cityData, countryData } = useProfileModal();
 
   const initialState = {
     id: 0,
@@ -51,8 +53,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
 
   const [state, setState] = useState<AddressData>(initialState);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { cityData, countryData } = useProfileModal();
-  const [tags, setTags] = useState<string[]>([]);
+  const [country, setCountry] = useState(0);
   const [t] = useTranslation();
   const renderMarker = state.latitude > 0 && state.longitude > 0;
   const loading =
@@ -71,7 +72,12 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           address: addressDetails.address,
           street: addressDetails.street,
           cityId: addressDetails.cityId,
+          type: addressDetails.type,
+          latitude: addressDetails.latitude,
+          longitude: addressDetails.longitude,
         }));
+        if (addressDetails?.countryId)
+          setCountry(addressDetails.countryId)
       }
     }, [addressDetails]);
   
@@ -102,14 +108,6 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
       [ev.target.name]: ev.target.value,
     }));
   }
-  const addTags = (
-    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    if (event.key === 'Enter' && event.target.value !== '') {
-      setTags([...tags, event.target.value]);
-      event.target.value = '';
-    }
-  };
 
   function renderMapStatus(status: Status) {
     return <h1>{status}</h1>;
@@ -176,12 +174,28 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
   }
 
 
-  function  handleSelectAddressTag(id: number | any) {
+  function  handleSelectAddressTag(id: number) {
     setState((prevState) => ({
       ...prevState,
       type: id,
     }));
   }
+
+  function handleCountry(ev: ChangeEvent<HTMLInputElement>) {
+    setCountry(+ev.target.value);
+  }
+
+  useEffect(() => {
+    if (country) {
+      getAllCities(country);
+      setState((prevState) => ({
+        ...prevState,
+        cityId: 0
+      }))
+    }
+  }, [country])
+  
+
  
   return (
     <Drawer
@@ -214,149 +228,41 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
         onSubmit={handleSubmit}
         sx={{ display: 'flex', flexDirection: 'column' }}
       >
-        <Input
-          placeholder='Enter your address type'
-          name='address'
-          sx={{ mb: 3 }}
-          onKeyUp={addTags}
-        />
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-          {addressData?.length > 0 &&
-            addressData.map((item) => {
-              if (item.type === 0) {
-                return null;
-              }
-              if (item.type === 1) {
-                return (
-                  item.id === state.type ? (
-                  <Button
-                    variant='outlined'
-                    sx={{ width: 'auto', height: '44px' }}
-                    type='submit'
-                    key={item.id}
-                    endIcon={
-                      <Image
-                        src={closeIcon}
-                        width='24'
-                        height='24'
-                        alt='close icon'
-                        onClick={handleClose}
-                      />
-                    }
-                  >
-                    Work
-                  
-                  </Button>
-                      ):(
-                    <Button
-                    key={item.id}
-                    variant="contained"
-                    color="secondary"
-                    endIcon={<Box sx={{ color: 'success.main', display: 'inline-flex' }} component="span">
-                        <Image
-                        src={AddIcon}
-                        width='24'
-                        height='24'
-                        alt='add icon'
-                      />
-                      </Box>}
-                    sx={{ mr: 3, mb: 3, fontSize: '14px', p: 2, minWidth: 90 }}
-                    onClick={function testddd() {
-                      handleSelectAddressTag(item.id);
-                    }}
-                  >
-                    Work
-                  </Button>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 3.5 }}>
+          {addressTagsEnums.map((item) => {
+            const isActive = item.value === state.type 
+            return (
+              <Button
+                variant={isActive ? 'outlined' : 'contained'}
+                sx={{ width: 'auto', height: '44px' }}
+                key={item.value}
+                endIcon={
+                  isActive ? (
+                    <Image
+                      src={CheckIcon}
+                      width='22'
+                      height='22'
+                      alt='check icon'
+                    />
+                  ) : (
+                    <Image
+                      src={AddIcon}
+                      width='18'
+                      height='18'
+                      alt='add icon'
+                    />
                   )
-                
-                );
-              }
-              if (item.type === 2) {
-                return (
-                  item.id === state.type ? (
-                  <Button
-                    variant='outlined'
-                    sx={{ width: 'auto', height: '44px' }}
-                    type='submit'
-                    key={item.id}
-                    endIcon={
-                      <Image
-                        src={CheckIcon}
-                        width='24'
-                        height='24'
-                        alt='check icon'
-                      />
-                    }
-                  >
-                    Home
-                  </Button>
-                  ):(
-                    <Button
-                    key={item.id}
-                    variant="contained"
-                    color="secondary"
-                    endIcon={<Box sx={{ color: 'success.main', display: 'inline-flex' }} component="span">
-                        <Image
-                        src={AddIcon}
-                        width='20'
-                        height='20'
-                        alt='add icon'
-                      />
-                      </Box>}
-                    sx={{ mr: 3, mb: 3, fontSize: '14px', p: 2, minWidth: 90 }}
-                    onClick={function testddd() {
-                      handleSelectAddressTag(item.id);
-                    }}
-                  >
-                    Home
-                  </Button>
-                  )
-                );
-              }
-              if (item.type === 3) {
-                return (
-                  item.id === state.type ? (
-                  <Button
-                    variant='outlined'
-                    sx={{ width: 'auto', height: '44px' }}
-                    type='submit'
-                    key={item.id}
-                    endIcon={
-                      <Image
-                        src={closeIcon}
-                        width='24'
-                        height='24'
-                        alt='close icon'
-                        onClick={handleClose}
-                      />
-                    }
-                  >
-                    Others
-                  </Button>
-                   ):(
-                    <Button
-                    key={item.id}
-                    variant="contained"
-                    color="secondary"
-                    endIcon={<Box sx={{ color: 'success.main', display: 'inline-flex' }} component="span">
-                        <Image
-                        src={AddIcon}
-                        width='24'
-                        height='24'
-                        alt='add icon'
-                      />
-                      </Box>}
-                    sx={{ mr: 3, mb: 3, fontSize: '14px', p: 2, minWidth: 90 }}
-                    onClick={function testddd() {
-                      handleSelectAddressTag(item.id);
-                    }}
-                  >
-                     Others
-                  </Button>
-                  )
-                );
-              }
-            })}
+                }
+                color={isActive ? 'primary' : "secondary"}
+                onClick={function testddd() {
+                  if (!isActive)
+                    handleSelectAddressTag(item.value);
+                }}
+              >
+                {t(item.label)}
+              </Button>
+            )
+          })}
         </Box>
         <TextField
           variant='standard'
@@ -443,8 +349,9 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           margin='normal'
           sx={{ mb: 4 }}
           // eslint-disable-next-line react/jsx-no-bind
-          onChange={handleInput}
+          onChange={handleCountry}
           name='country'
+          value={country}
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
             {t('common:selectItem')}
@@ -475,7 +382,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
                     lat: state.latitude,
                     lng: state.longitude,
                   }}
-                  icon={mapMarkupIcon}
+                  // icon={mapMarkupIcon}
                 />
               ) : (
                 <span />
