@@ -101,7 +101,7 @@ const CompleteProfile: FC<Props> = ({ accountData, setAccountData, isInvalid }) 
         InputProps={{
           endAdornment: (
             <InputAdornment position="end" sx={{ position: 'absolute', right: '0', top: -6 }}>
-                   {t('common.optional')}
+              {t('common:optional')}
             </InputAdornment>
           ),
         }}

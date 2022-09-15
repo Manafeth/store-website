@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
-import { createOrder, getAllCartProducts, getAllProviders, getInvoice, getOrder } from '../services/cart.services';
+import { checkCouponValidation, createOrder, getAllCartProducts, getAllProviders, getInvoice, getOrder } from '../services/cart.services';
 import { CartModalState, CheckoutData, InvocieData, OrderData, paymentProvidersData, productData, shipmentsProvidersData } from '../types/cart';
 import { useAlert } from './AlertContext';
 
@@ -26,13 +26,14 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       orderId: 0,
       invoiceId: 0
     })
-    const [checkoutData, setCheckoutData] = useState<CheckoutData>({
+    const initialState = {
       shipmentProviderId: 0,
       paymentProviderId: 0,
       couponCode: "",
       addressId: 0,
       type: 1
-    });
+    }
+    const [checkoutData, setCheckoutData] = useState<CheckoutData>(initialState);
 
     const [orderData, setOrderData] = useState<OrderData>({
       id:0,
@@ -80,6 +81,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
 
 
   const [createOrderStatus, setCreateOrderStatus] = useState('');
+  const [isCodeValid, setIsCodeValid] = useState(false);
 
   const { sendAlert } = useAlert();
 
@@ -124,6 +126,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       setCreateOrderStatus(SUCCESS)
       setOrderAndInvoice(response.data.data);
       sendAlert(response.data?.message, SUCCESS);
+      setCheckoutData(initialState);
     } catch(error: any) {
       setCreateOrderStatus(ERROR)
       sendAlert(error.response?.data?.Message, ERROR);
@@ -143,6 +146,17 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
      setInvoiceData(response.data.data)
     } catch(error) {
       Promise.reject(error);
+    }
+  }
+
+  async function checkCouponCodeValidation(code: string) {
+    setIsCodeValid(false)
+    try {
+      const response = await checkCouponValidation(code);
+      if (response.data.isSuccess)
+        setIsCodeValid(true)
+    } catch(error) {
+      setIsCodeValid(false)
     }
   }
 
@@ -166,7 +180,9 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     updateCheckoutData,
     createOrderTrigger,
     fetchInvoiceDetails,
-    clearOrderStatus
+    clearOrderStatus,
+    checkCouponCodeValidation,
+    isCodeValid
   };
 
   return (
