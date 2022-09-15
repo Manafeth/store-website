@@ -14,7 +14,7 @@ import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import editIcon from '../../assets/images/icons/edit-icon.svg';
 import addIcon from '../../assets/images/icons/add-icon.svg';
 import DeleteConfirmationMdoal from '../DeleteConfirmation';
-import AddressDrawer from './AddressDrawer';
+import AddressDrawer from './components/AddressDrawer';
 import { LOADING, SUCCESS } from '../../constants';
 import { useTranslation } from "next-i18next";
 
@@ -123,7 +123,6 @@ const AddressManagment = () => {
           }
           sx={{
             py: '11px',
-            mr: { xs: 3, lg: 4 },
             width: 'auto',
             height: '38px',
             fontSize: { xs: '12px', md: '14px' },

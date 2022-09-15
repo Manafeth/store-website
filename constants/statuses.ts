@@ -15,3 +15,9 @@ export const orderStatusEnums = [
     { label: 'Post', labelAr: 'قيد التنفيذ', color: 'paymentStatus.post', value: 1 },
     { label: 'Paid', labelAr: 'مدفوعة', color: 'paymentStatus.paid', value: 2 },
   ];
+
+  export const addressTagsEnums = [
+    { label: 'common:work', value: 1 },
+    { label: 'common:home', value: 2 },
+    { label: 'common:others', value: 3 },
+  ];

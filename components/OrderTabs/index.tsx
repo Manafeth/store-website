@@ -26,7 +26,7 @@ const OrderTabs = () => {
     <Box>
       <Tabs handleTabs={handleTabs} activeTab={activeTab} />
       {activeTab === 1 && (
-        <Typography
+        <Box
           sx={{
             fontSize: "13px",
             lineHeight: "16px",
@@ -39,11 +39,11 @@ const OrderTabs = () => {
           <ActiveOrders data={item} key={item.id}/>
           );
         })}
-        </Typography>
+        </Box>
       )}
 
       {activeTab === 2 && (
-        <Typography
+        <Box
           sx={{
             fontSize: "13px",
             lineHeight: "16px",
@@ -56,7 +56,7 @@ const OrderTabs = () => {
           <ActiveOrders data={item} key={item.id}/>
           );
         })}
-        </Typography>
+        </Box>
       )}
     </Box>
   );

@@ -27,6 +27,7 @@ export type AddressData = {
   street: string,
   latitude: number,
   longitude: number,
+  countryId?: number,
 }
 
 export type cityData = {

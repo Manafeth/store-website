@@ -26,6 +26,7 @@ interface Props {
   setState: Dispatch<SetStateAction<customerData>>;
   state: customerData;
   loading: boolean;
+  isSubmitted: boolean;
 }
 
 const EditAccount: FC<Props> = ({
@@ -34,6 +35,7 @@ const EditAccount: FC<Props> = ({
   setState,
   state,
   loading,
+  isSubmitted,
 }) => {
   const [image, setImage] = useState('');
   const [t] = useTranslation();
@@ -135,8 +137,10 @@ const EditAccount: FC<Props> = ({
         id='outlined-basic'
         variant='outlined'
         placeholder={customerData.fullName}
+        value={state.fullName}
         name='fullName'
         onChange={handleInput}
+        error={isSubmitted && !state.fullName}
         InputProps={{
           style: {
             fontSize: '14px',
@@ -145,7 +149,7 @@ const EditAccount: FC<Props> = ({
           },
         }}
       />
-      <Typography variant='h1' component='h2' sx={{ mb: 3, mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
+      <Typography variant='h1' component='h2' sx={{ mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
         {t('common:contact')}
       </Typography>
       <Box component='label'
@@ -158,8 +162,10 @@ const EditAccount: FC<Props> = ({
         id='outlined-basic'
         variant='outlined'
         placeholder={customerData.email}
+        value={state.email}
         name='email'
         onChange={handleInput}
+        error={isSubmitted && !state.email}
         sx={{ mb: 3 }}
         InputProps={{
           style: {
