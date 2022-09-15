@@ -46,7 +46,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
     cityId: 0,
     address: '',
     street: '',
-    type: 0,
+    type: 2,
     latitude: 0,
     longitude: 0,
   };
