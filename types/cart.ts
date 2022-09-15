@@ -116,5 +116,7 @@ export type CartModalState = {
     }
     createOrderStatus:string,
     invoiceData:InvocieData,
-    clearOrderStatus: () => void
+    clearOrderStatus: () => void,
+    checkCouponCodeValidation: (_: string) => Promise<void>,
+    isCodeValid: boolean
   }

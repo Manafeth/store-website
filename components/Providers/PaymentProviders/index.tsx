@@ -18,10 +18,25 @@ interface Props {
   loading?: boolean;
 }
 
+let timer: ReturnType<typeof setTimeout>;
+
 const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   const [t] = useTranslation();
-  const { paymnetData, fetchPaymentProviders, createOrderTrigger, updateCheckoutData, checkoutData, orderAndInvoice, createOrderStatus, clearOrderStatus } = useCart();
-  const router = useRouter()
+  const [isInvalid, setIsInvalid] = useState(false);
+  const {
+    paymnetData,
+    fetchPaymentProviders,
+    createOrderTrigger,
+    updateCheckoutData,
+    checkoutData,
+    orderAndInvoice,
+    createOrderStatus,
+    clearOrderStatus,
+    checkCouponCodeValidation,
+    isCodeValid
+  } = useCart();
+
+  const router = useRouter();
 
   useEffect(() => {
     fetchPaymentProviders(checkoutData.addressId);
@@ -29,12 +44,21 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   }, []);
 
   function handleInputChange(ev: ChangeEvent<HTMLInputElement>) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      checkCouponCodeValidation(ev.target.value)
+    }, 300);
     updateCheckoutData('couponCode', ev.target.value)
   }
 
  
   function handleClick() {
-    createOrderTrigger()
+    if (checkoutData.couponCode && !isCodeValid) {
+      setIsInvalid(true)
+    } else {
+      createOrderTrigger()
+      setIsInvalid(false)
+    }
   }
 
   useEffect(() => {
@@ -45,7 +69,6 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createOrderStatus, orderAndInvoice.orderId, router])
   
-
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
@@ -74,6 +97,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
         name="fullName"
         value={checkoutData.couponCode}
         fullWidth
+        error={isInvalid && (!!checkoutData.couponCode && !isCodeValid)}
       />
 
       <Box

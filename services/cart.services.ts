@@ -53,11 +53,20 @@ function getInvoice(id: number | string | string[]) {
   );
 }
 
+function checkCouponValidation(code: string) {
+  return axiosInstance.post(
+    'Order/CheckCouponValidation',
+    undefined,
+    { params: {code} }
+  );
+}
+
 export {
     addProductToCart,
     getAllCartProducts,
     getAllProviders,
     getOrder,
     createOrder,
-    getInvoice
+    getInvoice,
+    checkCouponValidation
 }
