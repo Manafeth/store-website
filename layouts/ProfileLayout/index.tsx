@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import React, { FC, ReactElement  } from "react";
+import AuthComponent from "../../components/AuthComponent";
 import SideMenu from "../../components/SideMenu";
 interface Props {
     children: ReactElement
@@ -10,6 +11,7 @@ interface Props {
 
 const SettingLayout: FC<Props> = ({ children }) => {
   return (
+    <AuthComponent>
       <Box sx={{mt:5}}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing="40px">
@@ -22,6 +24,7 @@ const SettingLayout: FC<Props> = ({ children }) => {
           </Grid>
         </Container>
       </Box>
+    </AuthComponent>
   );
 };
 
