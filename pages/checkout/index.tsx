@@ -26,6 +26,7 @@ import ShippingProviders from '../../components/Providers/ShippingProviders';
 import { LOADING, SUCCESS } from '../../constants';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import AuthComponent from '../../components/AuthComponent';
 
 
 const steps = [
@@ -90,67 +91,69 @@ const Checkout = () => {
     );
   }
   return (
-    <MainLayout>
-      <Box component='section'>
-        <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 }, mt: 5, maxWidth: 1050 }}>
-        <Container maxWidth={false} sx={{ maxWidth: 800 }}>
-          <Stepper nonLinear activeStep={activeStep}>
-            {steps.map((step, index) => (
-              <Step key={step.id}>
-                <StepLabel StepIconComponent={ColorlibStepIcon} color='inherit' onClick={handleStep(index)}>
-                  <Box sx={{display:'flex',flexDirection:'column'}}>
-                {step.name} 
-                  <Box sx={{textAlign:'left'}}>
-                  {step.info}
-                  </Box>
-                  </Box>
-                </StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          </Container>
-          <Grid container spacing='40px' mt={5} justifyContent='space-between'>
-            <Grid item xs={12} md={5.7}>
-            {activeStep === 0 && (
-               <DeliveryAddress
-               handleNext={handleNext}
-               handleBack={handleBack}/>
-               
-            )}
-
-            {activeStep === 1 && (
-              <ShippingProviders
+    <AuthComponent>
+      <MainLayout>
+        <Box component='section'>
+          <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 }, mt: 5, maxWidth: 1050 }}>
+          <Container maxWidth={false} sx={{ maxWidth: 800 }}>
+            <Stepper nonLinear activeStep={activeStep}>
+              {steps.map((step, index) => (
+                <Step key={step.id}>
+                  <StepLabel StepIconComponent={ColorlibStepIcon} color='inherit' onClick={handleStep(index)}>
+                    <Box sx={{display:'flex',flexDirection:'column'}}>
+                  {step.name} 
+                    <Box sx={{textAlign:'left'}}>
+                    {step.info}
+                    </Box>
+                    </Box>
+                  </StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            </Container>
+            <Grid container spacing='40px' mt={5} justifyContent='space-between'>
+              <Grid item xs={12} md={5.7}>
+              {activeStep === 0 && (
+                <DeliveryAddress
                 handleNext={handleNext}
-                handleBack={handleBack} />
-            )}
+                handleBack={handleBack}/>
+                
+              )}
 
-            {activeStep === 2 && (
-                <PaymentProviders
-                handleBack={handleBack}
-                loading={createOrderStatus === LOADING } />
-            )}
+              {activeStep === 1 && (
+                <ShippingProviders
+                  handleNext={handleNext}
+                  handleBack={handleBack} />
+              )}
+
+              {activeStep === 2 && (
+                  <PaymentProviders
+                  handleBack={handleBack}
+                  loading={createOrderStatus === LOADING } />
+              )}
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
+                  {t('checkout:orderSummery')}
+                </Typography>
+              
+                <OrderSummary/>
+          
+                <Divider />
+                <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
+                {t('common:items')}
+                </Typography>
+                {cartData?.map((item) => {
+                  return(
+                <CartItem data={item} key={item.id}/>
+                );
+              })}
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={5}>
-              <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-                {t('checkout:orderSummery')}
-              </Typography>
-             
-              <OrderSummary/>
-         
-              <Divider />
-              <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
-              {t('common:items')}
-              </Typography>
-              {cartData?.map((item) => {
-                 return(
-              <CartItem data={item} key={item.id}/>
-              );
-            })}
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-    </MainLayout>
+          </Container>
+        </Box>
+      </MainLayout>
+    </AuthComponent>
   );
 };
 

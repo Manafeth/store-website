@@ -19,6 +19,7 @@ import paths from '../../../constants/paths';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import AuthComponent from '../../../components/AuthComponent';
 
 const OrderDetails = () => {
   const [t, i18n] = useTranslation();
@@ -36,190 +37,192 @@ const OrderDetails = () => {
   const orderStatus = orderStatusEnums.find((item) => +item.value === orderData.status);
 
   return (
-    <MainLayout>
-      <Box component='section'>
-        <Container maxWidth={false} sx={{ maxWidth: 1050, mt: 5 }}>
-          <>
-            <Typography
-              variant='h2'
-              component='h1'
-              sx={{ fontWeight: 'bold', mb: 3 }}
-            >
-              {t('settings:orderDetails')}
-            </Typography>
+    <AuthComponent>
+      <MainLayout>
+        <Box component='section'>
+          <Container maxWidth={false} sx={{ maxWidth: 1050, mt: 5 }}>
+            <>
+              <Typography
+                variant='h2'
+                component='h1'
+                sx={{ fontWeight: 'bold', mb: 3 }}
+              >
+                {t('settings:orderDetails')}
+              </Typography>
 
-            <Typography
-              variant='h2'
-              component='h1'
-              sx={{ fontWeight: '700', fontSize: '20px', mb: 3 }}
-            >
-              {t('checkout:inovice')} {orderData.invoiceId}
-            </Typography>
-            <Grid container spacing='40px'>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
-                >
-                  {t('common:date')}
-                </Typography>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
-                >
-                  {moment(orderData.orderDate).format('DD MMMM  YYYY hh:MM A')}
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
-                >
-                  {t('common:phoneNumber')}
-                </Typography>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
-                >
-                  {orderData.phoneNumber}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container spacing='40px'>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
-                >
-                  {t('checkout:paymnetMethod')}
-                </Typography>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
-                >
-                  {orderData.paymentProvider}
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
-                >
-                  {t('checkout:paymentStatus')}
-                </Typography>
-              
-                <StatusText
-                  title={t(invoiceStatus?.label || '')}
-                  color={invoiceStatus?.color || ''}
-                />
-              </Grid>
-            </Grid>
-            <Grid container spacing='40px'>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
-                >
-                  {t('checkout:shippingMethod')}
-                </Typography>
-                <Box sx={{ mb: 4 }}>
-                  <Avatar
-                    src={orderData.shipmentProviderImage?.orignialUrl || ''}
-                    alt='category'
-                    sx={{ width: '51', height: '38', borderRadius: 0 }}
+              <Typography
+                variant='h2'
+                component='h1'
+                sx={{ fontWeight: '700', fontSize: '20px', mb: 3 }}
+              >
+                {t('checkout:inovice')} {orderData.invoiceId}
+              </Typography>
+              <Grid container spacing='40px'>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', mb: 2 }}
                   >
-                    C
-                  </Avatar>
-                </Box>
+                    {t('common:date')}
+                  </Typography>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
+                  >
+                    {moment(orderData.orderDate).format('DD MMMM  YYYY hh:MM A')}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', mb: 2 }}
+                  >
+                    {t('common:phoneNumber')}
+                  </Typography>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
+                  >
+                    {orderData.phoneNumber}
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
-                >
-                  {t('checkout:shippingStatus')}
-                </Typography>
-                <StatusText
-                  title={t(orderStatus?.label || '')}
-                  color={orderStatus?.color || ''}
-                />
+              <Grid container spacing='40px'>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', mb: 2 }}
+                  >
+                    {t('checkout:paymnetMethod')}
+                  </Typography>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
+                  >
+                    {orderData.paymentProvider}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', mb: 2 }}
+                  >
+                    {t('checkout:paymentStatus')}
+                  </Typography>
+                
+                  <StatusText
+                    title={t(invoiceStatus?.label || '')}
+                    color={invoiceStatus?.color || ''}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
-            <Divider sx={{ width: '70%', mb: 4 }} />
-            <Grid container spacing='40px'>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h3'
-                  component='h1'
-                  sx={{ fontWeight: '500', mb: 2 }}
-                >
-                  {t('cat:total')}
-                </Typography>
+              <Grid container spacing='40px'>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', mb: 2 }}
+                  >
+                    {t('checkout:shippingMethod')}
+                  </Typography>
+                  <Box sx={{ mb: 4 }}>
+                    <Avatar
+                      src={orderData.shipmentProviderImage?.orignialUrl || ''}
+                      alt='category'
+                      sx={{ width: '51', height: '38', borderRadius: 0 }}
+                    >
+                      C
+                    </Avatar>
+                  </Box>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h5'
+                    component='h1'
+                    sx={{ fontWeight: '600', mb: 2 }}
+                  >
+                    {t('checkout:shippingStatus')}
+                  </Typography>
+                  <StatusText
+                    title={t(orderStatus?.label || '')}
+                    color={orderStatus?.color || ''}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  variant='h3'
-                  component='h1'
-                  sx={{ fontWeight: '800', mb: 2 }}
-                >
-                  {t('common:sar')} 4,567.32
-                </Typography>
+              <Divider sx={{ width: '70%', mb: 4 }} />
+              <Grid container spacing='40px'>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h3'
+                    component='h1'
+                    sx={{ fontWeight: '500', mb: 2 }}
+                  >
+                    {t('cat:total')}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography
+                    variant='h3'
+                    component='h1'
+                    sx={{ fontWeight: '800', mb: 2 }}
+                  >
+                    {t('common:sar')} 4,567.32
+                  </Typography>
+                </Grid>
               </Grid>
-            </Grid>
-            <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
-            <Typography
-              variant='h3'
-              component='h1'
-              sx={{ fontWeight: '600', mb: 2 }}
-            >
-              {t('checkout:orderTimeline')}
-            </Typography>
-            {orderData.orderChangeLogs.map((item) => {
-              return (
-                <OrderTimeline key={item.id} data={item} />
-              )
-            })}
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: { xs: 'space-between', sm: 'flex-start' },
-                pt: 7,
-                pb: 5,
-              }}
-            >
-              {orderData.invoiceId ? (
-                <Link href={paths.invoiceDetails(orderData.invoiceId)}>
+              <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
+              <Typography
+                variant='h3'
+                component='h1'
+                sx={{ fontWeight: '600', mb: 2 }}
+              >
+                {t('checkout:orderTimeline')}
+              </Typography>
+              {orderData.orderChangeLogs.map((item) => {
+                return (
+                  <OrderTimeline key={item.id} data={item} />
+                )
+              })}
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: { xs: 'space-between', sm: 'flex-start' },
+                  pt: 7,
+                  pb: 5,
+                }}
+              >
+                {orderData.invoiceId ? (
+                  <Link href={paths.invoiceDetails(orderData.invoiceId)}>
+                    <Button
+                      variant='contained'
+                      sx={{ width: '219px', height: '44px' }}
+                      type='submit'
+                    >
+                      {t('settings:viewInvoice')}
+                    </Button>
+                  </Link>
+                ) : (
                   <Button
                     variant='contained'
                     sx={{ width: '219px', height: '44px' }}
-                    type='submit'
+                    disabled
                   >
                     {t('settings:viewInvoice')}
                   </Button>
-                </Link>
-              ) : (
-                <Button
-                  variant='contained'
-                  sx={{ width: '219px', height: '44px' }}
-                  disabled
-                >
-                  {t('settings:viewInvoice')}
-                </Button>
-              )}
-            </Box>
-          </>
-        </Container>
-      </Box>
-    </MainLayout>
+                )}
+              </Box>
+            </>
+          </Container>
+        </Box>
+      </MainLayout>
+    </AuthComponent>
   );
 };
 
