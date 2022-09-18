@@ -13,7 +13,6 @@ const StatusText: FC<Props> = ({ title, color }) => (
     sx={{
       'color': color,
       'fontWeight': 'bold',
-      'p': '9px 28px',
       'fontSize': '12px',
     }}
   >

@@ -19,7 +19,6 @@ import paths from '../../../constants/paths';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAllActiveOrders } from '../../../services/profile.services';
 
 const OrderDetails = () => {
   const [t, i18n] = useTranslation();
@@ -33,81 +32,9 @@ const OrderDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
 
-  function renderOrderStatus(fieldValue: number) {
-    // eslint-disable-next-line default-case
-    switch (fieldValue) {
-      case 1:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[0].labelAr : orderStatusEnums[0].label}
-          color="buttons.blueDarker"
-        />;
-      case 2:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[1].labelAr : orderStatusEnums[1].label}
-          color="warning.main"
-        />;
-      case 3:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[2].labelAr : orderStatusEnums[2].label}
-          color="buttons.readyDarker"
-        />;
-      case 4:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[3].labelAr : orderStatusEnums[3].label}
-          color="buttons.shippedDarker"
-        />;
+  const invoiceStatus = invoiceStatusEnums.find((item) => +item.value === orderData.paymentStatus);
+  const orderStatus = orderStatusEnums.find((item) => +item.value === orderData.status);
 
-      case 5:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[4].labelAr : orderStatusEnums[4].label}
-          color="success.main"
-        />;
-      case 6:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[5].labelAr : orderStatusEnums[5].label}
-          color="buttons.cancelledDarker"
-        />;
-      case 7:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[6].labelAr : orderStatusEnums[6].label}
-          color="buttons.cancelledDarker"
-        />;
-
-      case 8:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[7].labelAr : orderStatusEnums[7].label}
-          color="warning.main"
-        />;
-
-      case 9:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[8].labelAr : orderStatusEnums[8].label}
-          color="primary.main"
-        />;
-    }
-  }
-  function renderInvoiceStatus(fieldValue: number) {
-    // eslint-disable-next-line default-case
-    switch (fieldValue) {
-      case 1:
-        return <StatusText
-          title={i18n.language === 'ar' ? invoiceStatusEnums[0].labelAr : orderStatusEnums[0].label}
-          color="buttons.blueDarker"
-        />;
-      case 2:
-        return <StatusText
-          title={i18n.language === 'ar' ? invoiceStatusEnums[1].labelAr : orderStatusEnums[1].label}
-          color="warning.main"
-        />;
-      case 3:
-        return <StatusText
-          title={i18n.language === 'ar' ? invoiceStatusEnums[2].labelAr : orderStatusEnums[2].label}
-          color="buttons.readyDarker"
-        />;
-    }
-  }
-  
-  
   return (
     <MainLayout>
       <Box component='section'>
@@ -187,13 +114,11 @@ const OrderDetails = () => {
                 >
                   {t('checkout:paymentStatus')}
                 </Typography>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', color: 'success.main', mb: 4 }}
-                >
-                   {renderInvoiceStatus(orderData.paymentStatus)}
-                </Typography>
+              
+                <StatusText
+                  title={t(invoiceStatus?.label || '')}
+                  color={invoiceStatus?.color || ''}
+                />
               </Grid>
             </Grid>
             <Grid container spacing='40px'>
@@ -223,13 +148,10 @@ const OrderDetails = () => {
                 >
                   {t('checkout:shippingStatus')}
                 </Typography>
-                <Typography
-                  variant='h5'
-                  component='h1'
-                  sx={{ fontWeight: '600', color: 'success.main', mb: 4 }}
-                >
-                  {renderOrderStatus(orderData.status)}
-                </Typography>
+                <StatusText
+                  title={t(orderStatus?.label || '')}
+                  color={orderStatus?.color || ''}
+                />
               </Grid>
             </Grid>
             <Divider sx={{ width: '70%', mb: 4 }} />

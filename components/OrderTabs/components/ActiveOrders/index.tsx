@@ -17,60 +17,8 @@ interface Props {
 }
 
 const ActiveOrders: FC<Props> = ({ data }) => {
-  const [t, i18n] = useTranslation();
-  function renderOrderStatus(fieldValue: number) {
-    // eslint-disable-next-line default-case
-    switch (fieldValue) {
-      case 1:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[0].labelAr : orderStatusEnums[0].label}
-          color="buttons.blueDarker"
-        />;
-      case 2:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[1].labelAr : orderStatusEnums[1].label}
-          color="warning.main"
-        />;
-      case 3:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[2].labelAr : orderStatusEnums[2].label}
-          color="buttons.readyDarker"
-        />;
-      case 4:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[3].labelAr : orderStatusEnums[3].label}
-          color="buttons.shippedDarker"
-        />;
-
-      case 5:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[4].labelAr : orderStatusEnums[4].label}
-          color="success.main"
-        />;
-      case 6:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[5].labelAr : orderStatusEnums[5].label}
-          color="buttons.cancelledDarker"
-        />;
-      case 7:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[6].labelAr : orderStatusEnums[6].label}
-          color="buttons.cancelledDarker"
-        />;
-
-      case 8:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[7].labelAr : orderStatusEnums[7].label}
-          color="warning.main"
-        />;
-
-      case 9:
-        return <StatusText
-          title={i18n.language === 'ar' ? orderStatusEnums[8].labelAr : orderStatusEnums[8].label}
-          color="primary.main"
-        />;
-    }
-  }
+  const [t] = useTranslation();
+ const orderStatus = orderStatusEnums.find((item) => +item.value === data.status);
   return (
     <Box
       sx={{
@@ -97,8 +45,10 @@ const ActiveOrders: FC<Props> = ({ data }) => {
           mb: 1.5,
         }}
       >
-        {/* <Typography>{data.status}</Typography> */}
-        <Typography> {renderOrderStatus(data.status)}</Typography>
+        <StatusText
+          title={t(orderStatus?.label || '')}
+          color={orderStatus?.color || ''}
+        />
         {data.status === 5 ? (
           <Image src={carIcon} alt='car iocn' />
         ) : (
