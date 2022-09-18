@@ -43,5 +43,17 @@
     "date":"تاريخ",
     "compliantsNumber": "هاتف الشكاوي",
     "compliantsEmail": "بريد الشكاوي",
-    "myOrders":"طلباتي"
+    "myOrders":"طلباتي",
+    "new": "جديد",
+    "underPreparation": "تحت الإعداد",
+    "readyForShipping": "جاهز للشحن",
+    "shipped": "تم الشحن",
+    "delivered": "تم توصيل الطلب",
+    "cancelledByStore": "إلغائها من قبل التاجر",
+    "cancelledByCustomer": "إلغائها من قبل العميل",
+    "autoCancelled": "إلغاء تلقائي",
+    "complete": "مكتمل",
+    "draft": "غير مدفوعة",
+    "post": "قيد التنفيذ",
+    "paid": "مدفوعة"
 }

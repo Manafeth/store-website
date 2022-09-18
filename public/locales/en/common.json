@@ -44,5 +44,17 @@
     "date":"Date",
     "compliantsNumber": "Compliants number",
     "compliantsEmail":"Compliants email",
-    "myOrders":"My Orders"
+    "myOrders":"My Orders",
+    "new": "New",
+    "underPreparation": "UnderPreparation",
+    "readyForShipping": "ReadyForShipping",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelledByStore": "CancelledByStore",
+    "cancelledByCustomer": "CancelledByCustomer",
+    "autoCancelled": "AutoCancelled",
+    "complete": "Complete",
+    "draft": "Draft",
+    "post": "Post",
+    "paid": "Paid"
 }
