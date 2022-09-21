@@ -19,6 +19,7 @@ import { useAlert } from '../../../contexts/AlertContext';
 import Head from 'next/head';
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useProfile } from '../../../contexts/ProfileContext';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -29,6 +30,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
   // const router = useRouter();
   const [t] = useTranslation();
   const {sendAlert} = useAlert();
+  const { fetchWishListData } = useProfile();
   const [productData, setProductData] = useState<ProductData>({
     id: 0,
     name: '',
@@ -53,6 +55,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
         ...prevState,
         isInWishList: !prevState.isInWishList
       }))
+      fetchWishListData();
     }).catch((error: any) => {
       sendAlert(error.response.data.Message, 'error')
     });

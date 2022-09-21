@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { useProfileModal } from '../../../../contexts/ProfileContext';
+import { useProfile } from '../../../../contexts/ProfileContext';
 import { AddressData } from '../../../../types/profile';
 import { GOOGLE_MAP_KEY, LOADING, SUCCESS } from '../../../../constants';
 import { Status, Wrapper } from '@googlemaps/react-wrapper';
@@ -38,8 +38,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
     updateAddressStatus,
     getAddressDetails,
     addressDetails,
-  } = useProfileModal();
-  const { cityData, countryData } = useProfileModal();
+  } = useProfile();
+  const { cityData, countryData } = useProfile();
 
   const initialState = {
     id: 0,

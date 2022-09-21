@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
+import MuiLink from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import carIcon from '../../../../assets/images/icons/car-icon.png';
 import clockIcon from '../../../../assets/images/icons/clock-icon.png';
@@ -10,6 +11,8 @@ import moment from 'moment';
 import StatusText from '../../../StatusText';
 import { orderStatusEnums } from '../../../../constants/statuses';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import paths from '../../../../constants/paths';
 
 
 interface Props {
@@ -29,7 +32,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
       }}
     >
       <Typography variant='h2' component='h1' sx={{ mb: 1.5 }}>
-      {t('settings:noOrder')} : #{data.id}
+      {t('settings:noOrder')} : <Link href={paths.orderDetails(data.id)}><MuiLink>#{data.id}</MuiLink></Link>
       </Typography>
       <Box
         sx={{

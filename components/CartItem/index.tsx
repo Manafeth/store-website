@@ -6,10 +6,11 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { FC } from 'react';
-import { productData } from '../../types/cart';
+
 import Avatar from '@mui/material/Avatar';
+import { ProductData } from '../../types/products';
 interface Props {
-  data: productData;
+  data: ProductData;
 }
 
 const CartItem: FC<Props> = ({data}) => {
@@ -30,7 +31,7 @@ const CartItem: FC<Props> = ({data}) => {
             component='h1'
             sx={{ mb: 2, fontWeight: '700', mt: 2 }}
           >
-          {data.nameEn}
+          {data.name}
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography variant='h5' component='h1' sx={{ mb: 2 }}>

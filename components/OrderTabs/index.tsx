@@ -1,14 +1,14 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React, { useState, MouseEvent, useEffect } from "react";
-import { useProfileModal } from "../../contexts/ProfileContext";
+import { useProfile } from "../../contexts/ProfileContext";
 import ActiveOrders from "./components/ActiveOrders";
 import Tabs from "./components/Tabs/Tabs";
 
 const OrderTabs = () => {
   const [activeTab, setActiveTab] = useState(1);
-  const { fetchActiveOrderData, activeOrderData } = useProfileModal();
-  const { fetchArchiveedOrderData,  archiveedOrderData } = useProfileModal();
+  const { fetchActiveOrderData, activeOrderData } = useProfile();
+  const { fetchArchiveedOrderData,  archiveedOrderData } = useProfile();
   useEffect(() => {
     fetchActiveOrderData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

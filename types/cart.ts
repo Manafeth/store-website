@@ -1,3 +1,5 @@
+import { ProductData } from "./products"
+
 export type ProductCartData = {
     productId: number,
     quantity: number,
@@ -8,26 +10,7 @@ export type ProductCartData = {
     }[]
 }
 
-export type productData = {
-    id:number,
-    nameEn:string,
-    nameAr:string,
-    salePrice:number,
-    quantity: number,
-    maxQuantity: number,
-    productId:number,
-    total: number,
-    subTotal:number,
-    checkoutAttributsTotal:number,
-    mainImageFilePath?: {
-    orignialUrl: string,
-    thumbUrl: string,
-    },
-    checkOutAttributes: [],
-    attributes: null
-}
-
-export type shipmentsProvidersData = {
+export type ShipmentsProvidersData = {
     id:number,
     name:string,
     imageFilePath?: {
@@ -36,7 +19,7 @@ export type shipmentsProvidersData = {
         },
 }
 
-export type paymentProvidersData = {
+export type PaymentProvidersData = {
     id:number,
     name:string,
     providerCategory:number,
@@ -46,7 +29,7 @@ export type paymentProvidersData = {
         },
 }
 
-export type orderChangeLogsData = {
+export type OrderChangeLogsData = {
     id:number,
     new:number,
     changeAt:string,
@@ -64,7 +47,7 @@ export type OrderData = {
         orignialUrl: string,
         thumbUrl: string,
         },
-    orderChangeLogs:orderChangeLogsData[]
+    orderChangeLogs: OrderChangeLogsData[]
 }
 
 export type CheckoutData = {
@@ -103,9 +86,9 @@ export type CartModalState = {
     fetchPaymentProviders: (id:number) => Promise<void>,
     fetchOrderDetails: (id: number | string | string[]) => Promise<void>,
     fetchInvoiceDetails: (id: number | string | string[]) => Promise<void>,
-    cartData: productData[],
-    shipmentData: shipmentsProvidersData[],
-    paymnetData: paymentProvidersData[],
+    cartData: ProductData[],
+    shipmentData: ShipmentsProvidersData[],
+    paymnetData: PaymentProvidersData[],
     orderData: OrderData,
     updateCheckoutData: (_:string, v: any) => void,
     createOrderTrigger: () => Promise<void>,
@@ -119,4 +102,4 @@ export type CartModalState = {
     clearOrderStatus: () => void,
     checkCouponCodeValidation: (_: string) => Promise<void>,
     isCodeValid: boolean
-  }
+}

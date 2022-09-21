@@ -8,7 +8,8 @@ import React, {
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
 import { checkCouponValidation, createOrder, getAllCartProducts, getAllProviders, getInvoice, getOrder } from '../services/cart.services';
-import { CartModalState, CheckoutData, InvocieData, OrderData, paymentProvidersData, productData, shipmentsProvidersData } from '../types/cart';
+import { CartModalState, CheckoutData, InvocieData, OrderData, PaymentProvidersData, ShipmentsProvidersData } from '../types/cart';
+import { ProductData } from '../types/products';
 import { useAlert } from './AlertContext';
 
 
@@ -19,9 +20,9 @@ interface Props {
 const CartModalContext = createContext({} as CartModalState);
 
 export const CartModalProvider: FC<Props> = ({ children }) => {
-    const [cartData, setCartData] = useState<productData[]>([]);
-    const [shipmentData, setShipmentData] = useState<shipmentsProvidersData[]>([]);
-    const [paymnetData, setPaymnetData] = useState<paymentProvidersData[]>([]);
+    const [cartData, setCartData] = useState<ProductData[]>([]);
+    const [shipmentData, setShipmentData] = useState<ShipmentsProvidersData[]>([]);
+    const [paymnetData, setPaymnetData] = useState<PaymentProvidersData[]>([]);
     const [orderAndInvoice, setOrderAndInvoice] = useState({
       orderId: 0,
       invoiceId: 0

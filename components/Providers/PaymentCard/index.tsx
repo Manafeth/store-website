@@ -4,12 +4,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import Box from '@mui/material/Box';
-import { paymentProvidersData, shipmentsProvidersData } from '../../../types/cart';
+import { PaymentProvidersData } from '../../../types/cart';
 import Avatar from '@mui/material/Avatar';
 import { useCart } from '../../../contexts/CartContext';
 
 interface Props {
-    data:paymentProvidersData;
+    data: PaymentProvidersData;
   }
 
 const PaymentCard: FC<Props> = ({ data }) => {

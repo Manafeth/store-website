@@ -17,7 +17,7 @@ import AuthComponent from '../../../components/AuthComponent';
 
 const InvoiceDetails = () => {
   const [t] = useTranslation();
-  const { fetchInvoiceDetails, orderAndInvoice,invoiceData } = useCart();
+  const { fetchInvoiceDetails, invoiceData } = useCart();
   const router = useRouter();
 
   const { invoiceId } = router.query;

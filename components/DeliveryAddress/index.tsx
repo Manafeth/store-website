@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useProfileModal } from '../../contexts/ProfileContext';
+import { useProfile } from '../../contexts/ProfileContext';
 import AddressCard from './components';
 import { useTranslation } from "next-i18next";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
-  const { fetchAllAddressData, addressData } = useProfileModal();
+  const { fetchAllAddressData, addressData } = useProfile();
   const { checkoutData } = useCart();
   const [t] = useTranslation();
   useEffect(() => {

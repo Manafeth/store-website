@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useEffect } from 'react';
 import ProductItem from '../../components/ProductItem';
-import { useProfileModal } from '../../contexts/ProfileContext';
+import { useProfile } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import { useTranslation } from "next-i18next";
@@ -10,7 +10,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
 
 const WishListProduct = () => {
-  const { fetchWishListData, wishListData } = useProfileModal();
+  const { fetchWishListData, wishListData } = useProfile();
   const [t] = useTranslation();
   useEffect(() => {
     fetchWishListData();
