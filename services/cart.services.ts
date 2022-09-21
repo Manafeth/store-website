@@ -1,5 +1,6 @@
 
-import { CheckoutData, ProductCartData } from '../types/cart';
+import { CheckoutData, StcPaymentData, PaymentData, ProductCartData, BankFilesData } from '../types/cart';
+import convertToFormData from '../utils/convertToFormData';
 import { axiosInstance } from './axiosInstance';
 
 function addProductToCart(data: ProductCartData) {
@@ -61,6 +62,35 @@ function checkCouponValidation(code: string) {
   );
 }
 
+function createPaymentGateway(data: PaymentData) {
+  return axiosInstance.post(
+    'PaymentGateway/CreatePaymentGateway',
+    data
+  );
+}
+
+function stcPaymentConfirmation(data: StcPaymentData) {
+  return axiosInstance.post(
+    'StcPay/DirectPaymentConfirmation',
+    data
+  );
+}
+
+function uploadBankFiles(bankFilesdata: BankFilesData) {
+  const data = convertToFormData(bankFilesdata);
+  return axiosInstance.post(
+    'Bank/UploadBankTransferFiles',
+    data
+  );
+}
+
+function getBankFiles(invoiceId: number) {
+  return axiosInstance.get(
+    'Bank/GetBankTransferFiles',
+    {params: { invoiceId }}
+  );
+}
+
 export {
     addProductToCart,
     getAllCartProducts,
@@ -68,5 +98,9 @@ export {
     getOrder,
     createOrder,
     getInvoice,
-    checkCouponValidation
+    checkCouponValidation,
+    createPaymentGateway,
+    stcPaymentConfirmation,
+    uploadBankFiles,
+    getBankFiles
 }

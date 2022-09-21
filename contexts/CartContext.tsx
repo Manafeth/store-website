@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
-import { checkCouponValidation, createOrder, getAllCartProducts, getAllProviders, getInvoice, getOrder } from '../services/cart.services';
-import { CartModalState, CheckoutData, InvocieData, OrderData, PaymentProvidersData, ShipmentsProvidersData } from '../types/cart';
+import { checkCouponValidation, createOrder, createPaymentGateway, getAllCartProducts, getAllProviders, getBankFiles, getInvoice, getOrder, stcPaymentConfirmation, uploadBankFiles } from '../services/cart.services';
+import { CartModalState, CheckoutData, StcPaymentData, InvocieData, OrderData, PaymentData, PaymentProvidersData, ShipmentsProvidersData, BankFilesData } from '../types/cart';
 import { ProductData } from '../types/products';
 import { useAlert } from './AlertContext';
 
@@ -54,7 +54,9 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
           new:0,
           changeAt:'',
         }
-      ]
+      ],
+      providerCategory: 0,
+      providerType: 0
     });
     const [invoiceData, setInvoiceData] = useState<InvocieData>({
       id:0,
@@ -83,7 +85,14 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
 
   const [createOrderStatus, setCreateOrderStatus] = useState('');
   const [isCodeValid, setIsCodeValid] = useState(false);
-
+  const [paymentStatus, setPaymentStatus] = useState('');
+  const [stcPaymentStatus, setStcPaymentStatus] = useState('');
+  const [bankFilesStatus, setBankFilesStatus] = useState('');
+  const [bankFilesData, setBankFilesData] = useState({
+    orignialUrl: "",
+    thumbUrl: "",
+    fileExtension: ""
+  })
   const { sendAlert } = useAlert();
 
   async function fetchCartProducts() {
@@ -161,6 +170,59 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     }
   }
 
+  async function createPayment(data: PaymentData) {
+    setPaymentStatus(LOADING)
+    try {
+      const response = await createPaymentGateway(data);
+      const result = response.data.data
+      if (result.category === 2) {
+        const link = document.createElement("a")
+        link.href = result.result
+        link.target = "_blank"
+        link.click()
+        document.removeChild(link)
+      }
+      sendAlert(response.data?.message, SUCCESS);
+      setPaymentStatus(SUCCESS)
+    } catch(error: any) {
+      sendAlert(error.response?.data?.Message, ERROR);
+      setPaymentStatus(ERROR)
+    }
+  }
+
+  async function createStcPayment(data: StcPaymentData) {
+    setStcPaymentStatus(LOADING)
+    try {
+      await stcPaymentConfirmation(data);
+      setStcPaymentStatus(SUCCESS)
+      fetchOrderDetails(orderData.id)
+    } catch(error: any) {
+      sendAlert(error.response?.data?.Message, ERROR);
+      setStcPaymentStatus(ERROR)
+    }
+  }
+  
+  async function fetchBankFiles(invoiceId?: number) {
+    const response = await getBankFiles(invoiceId || orderData.invoiceId);
+    setBankFilesData(response.data.data)
+  }
+
+  async function createBankFiles(data: BankFilesData, invoiceId?: number) {
+    setBankFilesStatus(LOADING)
+    try {
+      const response = await uploadBankFiles(data);
+      setBankFilesStatus(SUCCESS);
+      sendAlert(response.data?.message, SUCCESS);
+      fetchBankFiles(invoiceId || orderData.invoiceId)
+    } catch(error: any) {
+      sendAlert(error.response?.data?.Message, ERROR);
+      setBankFilesStatus(ERROR)
+    }
+  }
+  
+
+  
+
   function clearOrderStatus() {
     setCreateOrderStatus('');
   }
@@ -183,7 +245,15 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     fetchInvoiceDetails,
     clearOrderStatus,
     checkCouponCodeValidation,
-    isCodeValid
+    isCodeValid,
+    paymentStatus,
+    createPayment,
+    createStcPayment,
+    stcPaymentStatus,
+    fetchBankFiles,
+    createBankFiles,
+    bankFilesStatus,
+    bankFilesData,
   };
 
   return (

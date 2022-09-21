@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MainLayout from '../../../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -9,7 +9,6 @@ import OrderTimeline from '../../../components/OrderTimeline';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import { OrderData } from '../../../types/cart';
 import { useCart } from '../../../contexts/CartContext';
 import Avatar from '@mui/material/Avatar';
 import moment from 'moment';
@@ -20,12 +19,19 @@ import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import AuthComponent from '../../../components/AuthComponent';
+import StcPayment from '../../../components/StcPayment';
+import BankPayment from '../../../components/BankPayment';
 
 const OrderDetails = () => {
-  const [t, i18n] = useTranslation();
-  const { fetchOrderDetails, orderData } = useCart();
+  const [t] = useTranslation();
+  const { fetchOrderDetails, orderData, createPayment } = useCart();
   const router = useRouter()
   const { orderId } = router.query
+
+  function handlePayment() {
+    if (orderId)
+      createPayment({ orderId: orderData.id })
+  }
 
   useEffect(() => {
     if (orderId)
@@ -35,16 +41,15 @@ const OrderDetails = () => {
 
   const invoiceStatus = invoiceStatusEnums.find((item) => +item.value === orderData.paymentStatus);
   const orderStatus = orderStatusEnums.find((item) => +item.value === orderData.status);
-
+  
   return (
     <AuthComponent>
       <MainLayout>
-        <Box component='section'>
-          <Container maxWidth={false} sx={{ maxWidth: 1050, mt: 5 }}>
-            <>
+        <Container maxWidth={false} sx={{ maxWidth: 1050, mt: 5 }}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} md={6}>
               <Typography
                 variant='h2'
-                component='h1'
                 sx={{ fontWeight: 'bold', mb: 3 }}
               >
                 {t('settings:orderDetails')}
@@ -52,7 +57,6 @@ const OrderDetails = () => {
 
               <Typography
                 variant='h2'
-                component='h1'
                 sx={{ fontWeight: '700', fontSize: '20px', mb: 3 }}
               >
                 {t('checkout:inovice')} {orderData.invoiceId}
@@ -61,14 +65,12 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', mb: 2 }}
                   >
                     {t('common:date')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
                   >
                     {moment(orderData.orderDate).format('DD MMMM  YYYY hh:MM A')}
@@ -77,14 +79,12 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', mb: 2 }}
                   >
                     {t('common:phoneNumber')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
                   >
                     {orderData.phoneNumber}
@@ -95,14 +95,12 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', mb: 2 }}
                   >
                     {t('checkout:paymnetMethod')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
                   >
                     {orderData.paymentProvider}
@@ -111,7 +109,6 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', mb: 2 }}
                   >
                     {t('checkout:paymentStatus')}
@@ -127,7 +124,6 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', mb: 2 }}
                   >
                     {t('checkout:shippingMethod')}
@@ -145,7 +141,6 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    component='h1'
                     sx={{ fontWeight: '600', mb: 2 }}
                   >
                     {t('checkout:shippingStatus')}
@@ -161,7 +156,6 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h3'
-                    component='h1'
                     sx={{ fontWeight: '500', mb: 2 }}
                   >
                     {t('cat:total')}
@@ -170,57 +164,67 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h3'
-                    component='h1'
                     sx={{ fontWeight: '800', mb: 2 }}
                   >
                     {t('common:sar')} 4,567.32
                   </Typography>
                 </Grid>
               </Grid>
+              {orderData.providerType === 2 && orderData.providerCategory === 2 && (
+                <Button variant='contained' onClick={handlePayment}>
+                  Pay and confirm payment
+                </Button>
+              )}
               <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
-              <Typography
-                variant='h3'
-                component='h1'
-                sx={{ fontWeight: '600', mb: 2 }}
+            </Grid>
+            <Grid item xs={12} md={6} sx={{ borderLeft: !(orderData.providerType === 2 && orderData.providerCategory === 2 ) ? '1px solid #E7E7E7' : 0 }}>
+              {orderData.providerType === 1 && (
+                <BankPayment orderData={orderData} />
+              )}
+              {orderData.providerType === 2 && orderData.providerCategory === 3  && (
+                <StcPayment />
+              )}
+            </Grid>
+          </Grid>
+          <Typography
+            variant='h3'
+            sx={{ fontWeight: '600', mb: 2 }}
+          >
+            {t('checkout:orderTimeline')}
+          </Typography>
+          {orderData.orderChangeLogs.map((item) => {
+            return (
+              <OrderTimeline key={item.id} data={item} />
+            )
+          })}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: { xs: 'space-between', sm: 'flex-start' },
+              pt: 7,
+              pb: 5,
+            }}
+          >
+            {orderData.invoiceId ? (
+              <Link href={paths.invoiceDetails(orderData.invoiceId)}>
+                <Button
+                  variant='contained'
+                  sx={{ width: '219px', height: '44px' }}
+                >
+                  {t('settings:viewInvoice')}
+                </Button>
+              </Link>
+            ) : (
+              <Button
+                variant='contained'
+                sx={{ width: '219px', height: '44px' }}
+                disabled
               >
-                {t('checkout:orderTimeline')}
-              </Typography>
-              {orderData.orderChangeLogs.map((item) => {
-                return (
-                  <OrderTimeline key={item.id} data={item} />
-                )
-              })}
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: { xs: 'space-between', sm: 'flex-start' },
-                  pt: 7,
-                  pb: 5,
-                }}
-              >
-                {orderData.invoiceId ? (
-                  <Link href={paths.invoiceDetails(orderData.invoiceId)}>
-                    <Button
-                      variant='contained'
-                      sx={{ width: '219px', height: '44px' }}
-                      type='submit'
-                    >
-                      {t('settings:viewInvoice')}
-                    </Button>
-                  </Link>
-                ) : (
-                  <Button
-                    variant='contained'
-                    sx={{ width: '219px', height: '44px' }}
-                    disabled
-                  >
-                    {t('settings:viewInvoice')}
-                  </Button>
-                )}
-              </Box>
-            </>
-          </Container>
-        </Box>
+                {t('settings:viewInvoice')}
+              </Button>
+            )}
+          </Box>
+        </Container>
       </MainLayout>
     </AuthComponent>
   );

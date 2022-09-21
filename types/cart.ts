@@ -47,7 +47,18 @@ export type OrderData = {
         orignialUrl: string,
         thumbUrl: string,
         },
-    orderChangeLogs: OrderChangeLogsData[]
+    orderChangeLogs: OrderChangeLogsData[],
+    providerType: number,
+    providerCategory: number,
+    bankId?: number,
+    bankName?: string,
+    holderName?: string,
+    accountNumber?: string,
+    iban?: string,
+    isInProcessing?: boolean,
+    otpReference?: string,
+    stcPayPmtReference?: string
+
 }
 
 export type CheckoutData = {
@@ -80,6 +91,23 @@ export type InvocieData = {
     invoiceItems:InvoiceItems[],
 }
 
+export type PaymentData = {
+    orderId: number,
+    mobileNumber?: string
+}
+
+export type StcPaymentData = {
+    invoiceId: number,
+    otpReference: string,
+    otpValue: string,
+    stcPayPmtReference: string
+}
+
+export type BankFilesData = {
+    image: File | null,
+    invoiceId: number
+}
+
 export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
     fetchShipmentsProviders:(id:number) => Promise<void>,
@@ -101,5 +129,17 @@ export type CartModalState = {
     invoiceData:InvocieData,
     clearOrderStatus: () => void,
     checkCouponCodeValidation: (_: string) => Promise<void>,
-    isCodeValid: boolean
+    isCodeValid: boolean,
+    paymentStatus: string,
+    createPayment: (_: PaymentData) => Promise<void>,
+    createStcPayment: (_: StcPaymentData) => Promise<void>,
+    stcPaymentStatus: string,
+    fetchBankFiles: (_?:number) => Promise<void>,
+    createBankFiles: (_: BankFilesData, invoiceId?:number) => Promise<void>,
+    bankFilesStatus: string
+    bankFilesData: {
+        orignialUrl: string,
+        thumbUrl: string,
+        fileExtension: string
+    }
 }
