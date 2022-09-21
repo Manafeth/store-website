@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import React, { FormEvent, useEffect, useState } from 'react'
 import EditAccount from '../../components/EditAccount'
 import { LOADING } from '../../constants'
-import { useProfileModal } from '../../contexts/ProfileContext'
+import { useProfile } from '../../contexts/ProfileContext'
 import MainLayout from '../../layouts/MainLayout'
 import ProfileLayout from '../../layouts/ProfileLayout'
 import { customerData } from '../../types/profile'
@@ -26,7 +26,7 @@ const settingAccount = () => {
      // eslint-disable-next-line react-hooks/rules-of-hooks
    const [isSubmitted, setIsSubmitted] = useState(false);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { fetchCustomerProfileData, customerData,updateProfileData,updateStatus } = useProfileModal();
+  const { fetchCustomerProfileData, customerData,updateProfileData,updateStatus } = useProfile();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {

@@ -1,3 +1,5 @@
+import { ProductData } from "./products"
+
 export type ProductCartData = {
     productId: number,
     quantity: number,
@@ -8,26 +10,7 @@ export type ProductCartData = {
     }[]
 }
 
-export type productData = {
-    id:number,
-    nameEn:string,
-    nameAr:string,
-    salePrice:number,
-    quantity: number,
-    maxQuantity: number,
-    productId:number,
-    total: number,
-    subTotal:number,
-    checkoutAttributsTotal:number,
-    mainImageFilePath?: {
-    orignialUrl: string,
-    thumbUrl: string,
-    },
-    checkOutAttributes: [],
-    attributes: null
-}
-
-export type shipmentsProvidersData = {
+export type ShipmentsProvidersData = {
     id:number,
     name:string,
     imageFilePath?: {
@@ -36,7 +19,7 @@ export type shipmentsProvidersData = {
         },
 }
 
-export type paymentProvidersData = {
+export type PaymentProvidersData = {
     id:number,
     name:string,
     providerCategory:number,
@@ -46,7 +29,7 @@ export type paymentProvidersData = {
         },
 }
 
-export type orderChangeLogsData = {
+export type OrderChangeLogsData = {
     id:number,
     new:number,
     changeAt:string,
@@ -64,7 +47,18 @@ export type OrderData = {
         orignialUrl: string,
         thumbUrl: string,
         },
-    orderChangeLogs:orderChangeLogsData[]
+    orderChangeLogs: OrderChangeLogsData[],
+    providerType: number,
+    providerCategory: number,
+    bankId?: number,
+    bankName?: string,
+    holderName?: string,
+    accountNumber?: string,
+    iban?: string,
+    isInProcessing?: boolean,
+    otpReference?: string,
+    stcPayPmtReference?: string
+
 }
 
 export type CheckoutData = {
@@ -97,15 +91,32 @@ export type InvocieData = {
     invoiceItems:InvoiceItems[],
 }
 
+export type PaymentData = {
+    orderId: number,
+    mobileNumber?: string
+}
+
+export type StcPaymentData = {
+    invoiceId: number,
+    otpReference: string,
+    otpValue: string,
+    stcPayPmtReference: string
+}
+
+export type BankFilesData = {
+    image: File | null,
+    invoiceId: number
+}
+
 export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
     fetchShipmentsProviders:(id:number) => Promise<void>,
     fetchPaymentProviders: (id:number) => Promise<void>,
     fetchOrderDetails: (id: number | string | string[]) => Promise<void>,
     fetchInvoiceDetails: (id: number | string | string[]) => Promise<void>,
-    cartData: productData[],
-    shipmentData: shipmentsProvidersData[],
-    paymnetData: paymentProvidersData[],
+    cartData: ProductData[],
+    shipmentData: ShipmentsProvidersData[],
+    paymnetData: PaymentProvidersData[],
     orderData: OrderData,
     updateCheckoutData: (_:string, v: any) => void,
     createOrderTrigger: () => Promise<void>,
@@ -118,5 +129,17 @@ export type CartModalState = {
     invoiceData:InvocieData,
     clearOrderStatus: () => void,
     checkCouponCodeValidation: (_: string) => Promise<void>,
-    isCodeValid: boolean
-  }
+    isCodeValid: boolean,
+    paymentStatus: string,
+    createPayment: (_: PaymentData) => Promise<void>,
+    createStcPayment: (_: StcPaymentData) => Promise<void>,
+    stcPaymentStatus: string,
+    fetchBankFiles: (_?:number) => Promise<void>,
+    createBankFiles: (_: BankFilesData, invoiceId?:number) => Promise<void>,
+    bankFilesStatus: string
+    bankFilesData: {
+        orignialUrl: string,
+        thumbUrl: string,
+        fileExtension: string
+    }
+}

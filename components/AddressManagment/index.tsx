@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
 import { AddressData } from '../../types/profile';
-import { useProfileModal } from '../../contexts/ProfileContext';
+import { useProfile } from '../../contexts/ProfileContext';
 import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import editIcon from '../../assets/images/icons/edit-icon.svg';
@@ -41,7 +41,7 @@ const AddressManagment = () => {
     addressData,
     deleteAddressData,
     removeStatus,
-  } = useProfileModal();
+  } = useProfile();
 
   function handleDeleteConfirmationOpen() {
     setDeleteConfirmationState(true);

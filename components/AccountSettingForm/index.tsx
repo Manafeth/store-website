@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { emailNotificationData } from '../../types/profile';
 import IconButton from '@mui/material/IconButton';
 import { useTranslation } from 'next-i18next';
-import { useProfileModal } from '../../contexts/ProfileContext';
+import { useProfile } from '../../contexts/ProfileContext';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
   const { i18n } = useTranslation();
   const [t] = useTranslation();
-  const {triggerUpdateEmailNotification} = useProfileModal();
+  const {triggerUpdateEmailNotification} = useProfile();
   const router = useRouter();
 
   function setLangaugeToEnglish() {

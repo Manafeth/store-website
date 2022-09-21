@@ -7,9 +7,9 @@ import { useCart } from '../../contexts/CartContext';
 const OrderSummary = () => {
   const [t] = useTranslation();
   const { cartData } = useCart();
-  const result = cartData.reduce((total, currentValue) => total = total + currentValue.total,0);
-  const subTotal = cartData.reduce((total, currentValue) => total = total + currentValue.subTotal,0);
-  const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + currentValue.checkoutAttributsTotal,0);
+  const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0),0);
+  const subTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0),0);
+  const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.checkoutAttributsTotal || 0),0);
 
   return (
     <Box>

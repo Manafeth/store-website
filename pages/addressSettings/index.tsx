@@ -4,13 +4,13 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import AcccoutSettingForm from "../../components/AccountSettingForm";
 import { LOADING } from "../../constants";
-import { useProfileModal } from "../../contexts/ProfileContext";
+import { useProfile } from "../../contexts/ProfileContext";
 import MainLayout from "../../layouts/MainLayout";
 import ProfileLayout from "../../layouts/ProfileLayout";
 
 
 const Setting = () => {
-  const { fetchEmailNotificationData,  emailNotificationData,createStatus} = useProfileModal();
+  const { fetchEmailNotificationData,  emailNotificationData,createStatus} = useProfile();
   useEffect(() => {
     fetchEmailNotificationData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

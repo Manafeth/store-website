@@ -246,4 +246,4 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
   );
 };
 
-export const useProfileModal = () => useContext(ProfileModalContext);
+export const useProfile = () => useContext(ProfileModalContext);

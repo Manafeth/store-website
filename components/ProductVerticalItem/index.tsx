@@ -17,6 +17,7 @@ import paths from '../../constants/paths';
 import { toggleProductInWishList } from '../../services/products.services';
 import { useAlert } from '../../contexts/AlertContext';
 import { useTranslation } from "next-i18next";
+import { useProfile } from '../../contexts/ProfileContext';
 interface Props {
   data: ProductData
 }
@@ -41,6 +42,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
   });
 
   const { sendAlert } = useAlert();
+  const { fetchWishListData } = useProfile();
   const [t] = useTranslation();
 
   function handleTogglingProductInWishList() {
@@ -49,6 +51,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
         ...prevState,
         isInWishList: !prevState.isInWishList
       }))
+      fetchWishListData()
     }).catch((error: any) => {
       sendAlert(error.response.data.Message, 'error')
     });

@@ -6,6 +6,8 @@ import { FC } from 'react';
 import blackHeart from '../../assets/images/icons/fill-heart.png';
 import { wishListData } from '../../types/profile';
 import { useTranslation } from "next-i18next";
+import Link from 'next/link';
+import paths from '../../constants/paths';
 interface Props {
   data: wishListData;
 }
@@ -19,13 +21,15 @@ const ProductItem: FC<Props> = ({ data }) => {
           position: 'relative',
         }}
       >
-        <Avatar
-          src={data.imagesFilePath?.orignialUrl || ''}
-          alt='product'
-          sx={{ width: '120px', height: '134px', borderRadius: 0 }}
-        >
-          P
-        </Avatar>
+        <Link href={paths.productDetails(data.id)}>
+          <Avatar
+            src={data.imagesFilePath?.orignialUrl || ''}
+            alt='product'
+            sx={{ width: '120px', height: '134px', borderRadius: 0, cursor: 'pointer' }}
+          >
+            P
+          </Avatar>
+        </Link>
         <Box
           sx={{
             width: '44px',
@@ -42,13 +46,15 @@ const ProductItem: FC<Props> = ({ data }) => {
         </Box>
       </Box>
       <Box>
-        <Typography
-          variant='h2'
-          component='h3'
-          sx={{ mb: 2, fontWeight: '400', fontSize: '20px' }}
-        >
-          {data.name}
-        </Typography>
+        <Link href={paths.productDetails(data.id)}>
+          <Typography
+            variant='h2'
+            component='h3'
+            sx={{ mb: 2, fontWeight: '400', fontSize: '20px', cursor: 'pointer' }}
+          >
+            {data.name}
+          </Typography>
+        </Link>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography
             variant='h5'

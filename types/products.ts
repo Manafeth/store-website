@@ -22,32 +22,36 @@ export type checkOutAttributes = {
   id: number;
   nameAr: string;
   nameEn: string;
+  name: string | null,
   price: number;
 }
 
 export type ProductData =  {
-    id: number,
-    name: string,
-    salePrice: number,
-    quantity: number,
-    category: string,
-    priceAfterDiscount: number,
-    shortDescription: string,
-    description: string | null,
-    pageTitle: string | null,
-    metaDescription: string | null,
-    isInWishList: boolean,
-    mainImageFilePath?: {
-      orignialUrl: string,
-      thumbUrl: string,
-    },
-    imagesFilePath: {
-      orignialUrl: string,
-      thumbUrl: string,
-    }[],
-    attributes: ProductAttributesData[],
-    checkOutAttributes: checkOutAttributes[],
-    subProducts: []
+  id: number,
+  name: string,
+  salePrice: number,
+  quantity: number,
+  category: string,
+  priceAfterDiscount: number,
+  shortDescription: string,
+  description: string | null,
+  pageTitle: string | null,
+  metaDescription: string | null,
+  isInWishList: boolean,
+  mainImageFilePath?: {
+    orignialUrl: string,
+    thumbUrl: string,
+  },
+  imagesFilePath: {
+    orignialUrl: string,
+    thumbUrl: string,
+  }[],
+  attributes: ProductAttributesData[],
+  checkOutAttributes: checkOutAttributes[],
+  subProducts: [],
+  total?: number,
+  subTotal?: number,
+  checkoutAttributsTotal?: number,
 }
 
 

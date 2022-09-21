@@ -103,7 +103,7 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
                       value={option?.id}
                       sx={{ fontSize: '14px', fontWeight: 'bold' }}
                     >
-                      {option?.nameEn}
+                      {option?.name}
                     </MenuItem>
                   ))}
               </TextField>

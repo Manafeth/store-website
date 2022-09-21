@@ -4,13 +4,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import Box from '@mui/material/Box';
-import { shipmentsProvidersData } from '../../../types/cart';
+import { ShipmentsProvidersData } from '../../../types/cart';
 import Avatar from '@mui/material/Avatar';
 import ButtonBase from '@mui/material/ButtonBase';
 import { useCart } from '../../../contexts/CartContext';
 
 interface Props {
-    data: shipmentsProvidersData;
+    data: ShipmentsProvidersData;
   }
 
 const ShippingCard: FC<Props> = ({  data }) => {

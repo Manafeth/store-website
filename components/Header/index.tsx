@@ -25,6 +25,7 @@ import CartDrawer from '../CartDrawer';
 import { useCommon } from '../../contexts/CommonContext';
 import { useTranslation } from "next-i18next";
 import { useCart } from '../../contexts/CartContext';
+import { useProfile } from '../../contexts/ProfileContext';
 
 
 
@@ -38,6 +39,8 @@ const Header = () => {
   const { fetchCartProducts, cartData } = useCart();
 
   const { storeInfo, fetchStoreInfo } = useCommon();
+
+  const { fetchWishListData, wishListData } = useProfile();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -58,8 +61,9 @@ const Header = () => {
   useEffect(() => {
     fetchStoreInfo();
     if (isloggedIn) {
-      fetchAccountData()
-      fetchCartProducts()
+      fetchAccountData();
+      fetchCartProducts();
+      fetchWishListData();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isloggedIn]);
@@ -249,7 +253,7 @@ const Header = () => {
                         ml: 0.5
                       }}
                     >
-                      1
+                      {wishListData.length}
                     </Box>
                   </Box>
                 </Link>

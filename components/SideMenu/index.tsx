@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
 import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
-import { useProfileModal } from '../../contexts/ProfileContext';
+import { useProfile } from '../../contexts/ProfileContext';
 import ListMenuItem from './components/ListMenuItem';
 import { useTranslation } from "next-i18next";
 
@@ -15,7 +15,7 @@ import { useTranslation } from "next-i18next";
 const SideMenu = () => {
   const { logout } = useAuthModal();
   const [t] = useTranslation();
-  const { fetchCustomerProfileData, customerData } = useProfileModal();
+  const { fetchCustomerProfileData, customerData } = useProfile();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       fetchCustomerProfileData();
