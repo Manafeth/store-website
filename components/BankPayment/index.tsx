@@ -9,13 +9,15 @@ import { OrderData } from '../../types/cart';
 import { useCart } from '../../contexts/CartContext';
 import EditIcon from '../../assets/images/icons/edit-icon.svg';
 import Image from 'next/image';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { LOADING } from '../../constants';
 
 interface Props {
     orderData: OrderData
 }
 
 const BankPayment: FC<Props> = ({ orderData }) => {
-    const { fetchBankFiles, createBankFiles, bankFilesData } = useCart();
+    const { fetchBankFiles, createBankFiles, bankFilesData, bankFilesStatus } = useCart();
 
     function handleFile(ev: ChangeEvent<HTMLInputElement>) {
         if (ev.target?.files && ev.target?.files[0])
@@ -36,28 +38,28 @@ const BankPayment: FC<Props> = ({ orderData }) => {
             <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>Payment details:</Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.75 }}>
                 <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Bank Name</Typography>
-                <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankName}</Typography>
+                <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankInfo?.bankName}</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.75 }}>
                 <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Holder Name</Typography>
-                <Typography variant='h5' component='span' sx={{ fontWeight: '600'}}>{orderData.holderName}</Typography>
+                <Typography variant='h5' component='span' sx={{ fontWeight: '600'}}>{orderData.bankInfo?.holderName}</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.75 }}>
                 <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Account Number</Typography>
-                <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.accountNumber}</Typography>
+                <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankInfo?.accountNumber}</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>IBan</Typography>
-                <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.iban}</Typography>
+                <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankInfo?.iban}</Typography>
             </Box>
             <Divider sx={{ mt: 4, mb: 2.5 }} />
             
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Recipt File</Typography>
-                {bankFilesData.orignialUrl ? (
+                {bankFilesData?.orignialUrl ? (
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Link href={bankFilesData.orignialUrl} target='_blank' rel="noreferrer">
-                            <Typography variant='h5' component='span' sx={{ fontWeight: '600', mr: 1.25 }}>reciptFile{bankFilesData.fileExtension && `.${bankFilesData.fileExtension}`}</Typography>
+                        <Link href={bankFilesData?.orignialUrl} target='_blank' rel="noreferrer">
+                            <Typography variant='h5' component='span' sx={{ fontWeight: '600', mr: 1.25 }}>reciptFile{bankFilesData?.fileExtension && `.${bankFilesData?.fileExtension}`}</Typography>
                         </Link>
                         <Box
                             component='label'
@@ -68,9 +70,9 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                         >
                             {/* @ts-ignore */}
                             <Input id="bank-file-2" type="file" sx={{ display: 'none' }} onChange={handleFile} />
-                            <Button color='secondary' variant='contained' sx={{ minWidth: 0, p: 0.5, borderRadius: 2 }} component='span'>
+                            <LoadingButton color='secondary' variant='contained' sx={{ minWidth: 0, p: 0.5, borderRadius: 2 }} component='span' loading={bankFilesStatus === LOADING}>
                                 <Image src={EditIcon} width={15} height={15} alt='edit' />
-                            </Button>
+                            </LoadingButton>
                         </Box>
                         
                     </Box>
@@ -84,12 +86,13 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                     >
                         {/* @ts-ignore */}
                         <Input id="bank-file" type="file" sx={{ display: 'none' }} onChange={handleFile} />
-                        <Button
+                        <LoadingButton
                             variant='contained'
                             component='span'
+                            loading={bankFilesStatus === LOADING}
                         >
                             Attatch receipt file
-                        </Button>
+                        </LoadingButton>
                     </Box>
                 )}
             </Box>

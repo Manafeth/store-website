@@ -50,15 +50,15 @@ export type OrderData = {
     orderChangeLogs: OrderChangeLogsData[],
     providerType: number,
     providerCategory: number,
-    bankId?: number,
-    bankName?: string,
-    holderName?: string,
-    accountNumber?: string,
-    iban?: string,
-    isInProcessing?: boolean,
-    otpReference?: string,
-    stcPayPmtReference?: string
-
+    bankInfo?: {
+        bankId?: number,
+        bankName?: string,
+        holderName?: string,
+        accountNumber?: string,
+        iban?: string,
+        isInProcessing?: boolean,
+    },
+    totalCost: number
 }
 
 export type CheckoutData = {
@@ -132,7 +132,7 @@ export type CartModalState = {
     isCodeValid: boolean,
     paymentStatus: string,
     createPayment: (_: PaymentData) => Promise<void>,
-    createStcPayment: (_: StcPaymentData) => Promise<void>,
+    createStcPayment: (_: { invoiceId: number, otpValue: string}) => Promise<void>,
     stcPaymentStatus: string,
     fetchBankFiles: (_?:number) => Promise<void>,
     createBankFiles: (_: BankFilesData, invoiceId?:number) => Promise<void>,

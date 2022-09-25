@@ -21,10 +21,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import AuthComponent from '../../../components/AuthComponent';
 import StcPayment from '../../../components/StcPayment';
 import BankPayment from '../../../components/BankPayment';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { LOADING } from '../../../constants';
 
 const OrderDetails = () => {
   const [t] = useTranslation();
-  const { fetchOrderDetails, orderData, createPayment } = useCart();
+  const { fetchOrderDetails, orderData, createPayment, paymentStatus } = useCart();
   const router = useRouter()
   const { orderId } = router.query
 
@@ -41,7 +43,7 @@ const OrderDetails = () => {
 
   const invoiceStatus = invoiceStatusEnums.find((item) => +item.value === orderData.paymentStatus);
   const orderStatus = orderStatusEnums.find((item) => +item.value === orderData.status);
-  
+  const isInActive = [2, 3].includes(orderData.paymentStatus) || [6, 7, 8, 9].includes(orderData.status);
   return (
     <AuthComponent>
       <MainLayout>
@@ -73,7 +75,7 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
                   >
-                    {moment(orderData.orderDate).format('DD MMMM  YYYY hh:MM A')}
+                    {moment(orderData.orderDate).format('DD MMM  YYYY hh:MM A')}
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
@@ -166,25 +168,27 @@ const OrderDetails = () => {
                     variant='h3'
                     sx={{ fontWeight: '800', mb: 2 }}
                   >
-                    {t('common:sar')} 4,567.32
+                    {t('common:sar')} {orderData.totalCost}
                   </Typography>
                 </Grid>
               </Grid>
-              {orderData.providerType === 2 && orderData.providerCategory === 2 && (
-                <Button variant='contained' onClick={handlePayment}>
+              {orderData.providerType === 2 && orderData.providerCategory === 2 && !isInActive && (
+                <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING}>
                   Pay and confirm payment
-                </Button>
+                </LoadingButton>
               )}
               <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
             </Grid>
-            <Grid item xs={12} md={6} sx={{ borderLeft: !(orderData.providerType === 2 && orderData.providerCategory === 2 ) ? '1px solid #E7E7E7' : 0 }}>
-              {orderData.providerType === 1 && (
-                <BankPayment orderData={orderData} />
-              )}
-              {orderData.providerType === 2 && orderData.providerCategory === 3  && (
-                <StcPayment />
-              )}
-            </Grid>
+            {!isInActive && (
+              <Grid item xs={12} md={6} sx={{ borderLeft: !(orderData.providerType === 2 && orderData.providerCategory === 2 ) ? '1px solid #E7E7E7' : 0 }}>
+                {orderData.providerType === 1 && (
+                  <BankPayment orderData={orderData} />
+                )}
+                {orderData.providerType === 2 && orderData.providerCategory === 3  && (
+                  <StcPayment />
+                )}
+              </Grid>
+            )}
           </Grid>
           <Typography
             variant='h3'
