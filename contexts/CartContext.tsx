@@ -56,7 +56,8 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
         }
       ],
       providerCategory: 0,
-      providerType: 0
+      providerType: 0,
+      totalCost: 0
     });
     const [invoiceData, setInvoiceData] = useState<InvocieData>({
       id:0,
@@ -92,6 +93,10 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     orignialUrl: "",
     thumbUrl: "",
     fileExtension: ""
+  })
+  const [paymentRes, setPaymentRes] = useState({
+    otpReference: '',
+    stcPayPmtReference: '',
   })
   const { sendAlert } = useAlert();
 
@@ -182,6 +187,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
         link.click()
         document.removeChild(link)
       }
+      setPaymentRes(result.result.directPaymentAuthorizeV4ResponseMessage)
       sendAlert(response.data?.message, SUCCESS);
       setPaymentStatus(SUCCESS)
     } catch(error: any) {
@@ -190,11 +196,16 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     }
   }
 
-  async function createStcPayment(data: StcPaymentData) {
+  async function createStcPayment(data: {otpValue: string, invoiceId: number}) {
     setStcPaymentStatus(LOADING)
     try {
-      await stcPaymentConfirmation(data);
+      const response= await stcPaymentConfirmation({
+        ...data,
+        otpReference: paymentRes.otpReference,
+        stcPayPmtReference: paymentRes.stcPayPmtReference
+      });
       setStcPaymentStatus(SUCCESS)
+      sendAlert(response.data?.message, SUCCESS);
       fetchOrderDetails(orderData.id)
     } catch(error: any) {
       sendAlert(error.response?.data?.Message, ERROR);

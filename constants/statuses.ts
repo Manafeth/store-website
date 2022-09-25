@@ -8,7 +8,7 @@ export const orderStatusEnums = [
     { label: 'common:cancelledByCustomer', labelAr: 'إلغائها من قبل العميل', color: 'buttons.cancelledDarker', value: 7 },
     { label: 'common:autoCancelled', labelAr: 'إلغاء تلقائي', color: 'warning.main', value: 8 },
     { label: 'common:completed', labelAr: 'مكتمل', color: 'primary.main', value: 9 },
-  ];
+];
 
   export const invoiceStatusEnums = [
     { label: 'common:draft', color: 'buttons.blueDarker', value: 0 },
