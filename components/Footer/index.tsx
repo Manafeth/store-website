@@ -6,7 +6,7 @@ import MuiLink from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 
 import Image from 'next/image';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo.svg';
 import facebook from '../../assets/images/icons/facebook-icon.png';
 import instagram from '../../assets/images/icons/instagram-icon.png';
 import twitter from '../../assets/images/icons/twitter-icon.png';
