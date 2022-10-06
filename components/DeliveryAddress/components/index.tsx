@@ -9,12 +9,16 @@ import Typography from '@mui/material/Typography';
 import React, { ChangeEvent, FC, useState } from 'react';
 import { useCart } from '../../../contexts/CartContext';
 import { AddressData } from '../../../types/profile';
+import Button from '@mui/material/Button';
+import { useTranslation } from 'next-i18next';
+import { addressTagsEnums } from '../../../constants/statuses';
 interface Props {
   data: AddressData;
 }
 
 const AddressCard: FC<Props> = ({ data }) => {
   const { updateCheckoutData, checkoutData } = useCart();
+  const [t] = useTranslation();
 
   function handleChange() {
     updateCheckoutData('addressId', data.id);
@@ -29,9 +33,17 @@ const AddressCard: FC<Props> = ({ data }) => {
             value={data.address}
             control={<Radio onChange={handleChange} checked={data.id === checkoutData.addressId}  />}
             label={
-              <Typography sx={{ fontSize: '24px', fontweight: '600' }}>
-                {data.id}
-              </Typography>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2}}>
+              {addressTagsEnums.map((item) => {
+                if(item.value === data.type )
+                return (
+                  <Box
+                    key={item.value}>
+                    {t(item.label)}
+                  </Box>
+                )
+              })}
+            </Box>
             }
           />
         </FormControl>

@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
-import logoImage from '../../assets/images/logo.png'
+import logoImage from '../../assets/images/logo.svg'
 import SearchIcon from '../../assets/images/icons/search.png'
 import HeartIcon from '../../assets/images/icons/heart.png'
 import CartIcon from '../../assets/images/icons/cart.png'
