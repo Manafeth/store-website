@@ -6,14 +6,18 @@ import Box from '@mui/material/Box';
 import { useCart } from '../../contexts/CartContext';
 import { LOADING, SUCCESS } from '../../constants';
 import LoadingButton from '@mui/lab/LoadingButton';
+import isNumeric from 'validator/lib/isNumeric';
+import { useTranslation } from 'next-i18next';
 
 const StcPayment = () => {
     const [step, setStep] = useState(1);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [code, setCode] = useState('');
     const [isInvalid, setIsInvalid] = useState(false);
+    const [t] = useTranslation();
     const { createPayment, orderData, paymentStatus, createStcPayment, stcPaymentStatus } = useCart();
     function handleInput(ev: ChangeEvent<HTMLInputElement>) {
+        if (isNumeric(ev.target.value) || ev.target.value === '' || ev.target.value === null)
         setPhoneNumber(ev.target.value);
     }
 
@@ -77,10 +81,12 @@ const StcPayment = () => {
                             fontWeight: 300,
                             fontSize: '14px',
                             lineHeight: '21px',
-                            }
+                            },
+                            inputProps:{ maxLength: 10 }
                         }}
                         sx={{ mb: 6 }}
                         onChange={handleInput}
+                        placeholder="05X XXX-XXX"
                         error={isInvalid && !phoneNumber}
                         value={phoneNumber}
                     />
@@ -115,7 +121,7 @@ const StcPayment = () => {
                 type='submit'
                 loading={[paymentStatus, stcPaymentStatus].includes(LOADING)}
             >
-                Next
+                {t('common:next')}
             </LoadingButton>
         </Box>
     )

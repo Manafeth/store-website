@@ -8,6 +8,7 @@ import { ProductCartData } from '../../../types/cart';
 import AddIcon from '../../../assets/images/icons/filled-add-icon.svg';
 import Image from 'next/image';
 import { useAlert } from '../../../contexts/AlertContext';
+import { useTranslation } from "next-i18next";
 
 interface Props {
     productDetials: ProductData,
@@ -17,6 +18,7 @@ interface Props {
 
 const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, setState }) => {
   const { sendAlert } = useAlert()
+  const [t] = useTranslation();
   function handleAddCheckoutAttribute() {
     if (checkoutAttributes.length < productDetials.checkOutAttributes.length) {
       setState((prevState) => ({
@@ -95,7 +97,7 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
                 }
               >
                 <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-                  Select Item
+                {t('common:selectItem')}
                 </MenuItem>
                   {options?.map((option) => (
                     <MenuItem

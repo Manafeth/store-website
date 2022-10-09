@@ -155,7 +155,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   id='outlined-basic'
                   select
                   variant='outlined'
-                  label='Popularity'
+                  label={t('common:popularity')}
                   margin='normal'
                   name='popularity'
                   sx={{ mb: 4, width: '141px' }}

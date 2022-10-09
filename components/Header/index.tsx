@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -41,6 +41,11 @@ const Header = () => {
   const { storeInfo, fetchStoreInfo } = useCommon();
 
   const { fetchWishListData, wishListData } = useProfile();
+  const pages = [
+    {page: t('common:home'), link: paths.home},
+    {page: t('common:categories'), link: paths.categories},
+  ];
+  
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -58,20 +63,12 @@ const Header = () => {
     setOpen(false);
   }
 
-  useEffect(() => {
-    fetchStoreInfo();
-    if (isloggedIn) {
-      fetchAccountData();
-      fetchCartProducts();
-      fetchWishListData();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isloggedIn]);
 
-  const pages = [
-    {page: t('common:home'), link: paths.home},
-    {page: t('common:categories'), link: paths.categories},
-  ];
+
+  function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
+    console.log('search',ev.target.value)
+  }
+  
 
   return (
     <AppBar position="static" color='inherit' sx={{ boxShadow: '0' }}>
@@ -228,7 +225,8 @@ const Header = () => {
                   }
                 }
               }}
-              placeholder='Search product, categories, services....'
+              placeholder={t('common:searchPlaceHolder')}
+              onChange={handleSearch}
               sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
             />
             {isloggedIn ? (

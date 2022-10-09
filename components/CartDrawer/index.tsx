@@ -53,7 +53,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Typography variant='h1' component='h2'>
-        {t('cat:myBag')} ({cartData.length})
+        {t('cart:myBag')} ({cartData.length})
         </Typography>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -78,6 +78,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           pb: 5,
         }}
       >
+         <Link href='/'>
         <Button
           variant='contained'
           color='secondary'
@@ -90,8 +91,9 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           }}
           onClick={handleClose}
         >
-          {t('cat:continueShopping')}
+          {t('cart:continueShopping')}
         </Button>
+        </Link>
         {cartData.length > 0 ? (
           <Link href='/checkout'>
             <Button
@@ -99,7 +101,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
               sx={{ width: 'auto', height: '44px' }}
               type='submit'
             >
-                {t('cat:continueToPayment')}
+                {t('cart:continueToPayment')}
             </Button>
           </Link>
         ) : (
@@ -108,7 +110,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             sx={{ width: 'auto', height: '44px' }}
             disabled
           >
-              {t('cat:continueToPayment')}
+              {t('cart:continueToPayment')}
           </Button>
         )}
         

@@ -174,7 +174,7 @@ const OrderDetails = () => {
               </Grid>
               {orderData.providerType === 2 && orderData.providerCategory === 2 && !isInActive && (
                 <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING}>
-                  Pay and confirm payment
+                 {t('checkout:payConfirmPayment')}
                 </LoadingButton>
               )}
               <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />

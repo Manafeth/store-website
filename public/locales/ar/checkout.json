@@ -25,5 +25,6 @@
     "placeOrder":"مكان الامر",
     "netValue":"صافي القيمة",
     "discount":"تخفيض",
-    "vatPercentage":"نسبة ضريبة القيمة المضافة"
+    "vatPercentage":"نسبة ضريبة القيمة المضافة",
+    "payConfirmPayment":"دفع وتأكيد الدفع"
 }

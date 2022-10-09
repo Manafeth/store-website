@@ -16,7 +16,7 @@
     "shippingMethod":"Shipping method",
     "shippingStatus":"Shipping status",
     "orderTimeline":"Order timeline",
-    "checkoutAttributsTotal":"CheckoutAttributsTotal",
+    "checkoutAttributsTotal":"Checkout Attributs Total",
     "deliveryAddress":"Delivery Address",
     "shippingProviders":"Shipping Providers",
     "shippingDiscription":"These are available shipping methods, please select suitable one for you",
@@ -25,5 +25,6 @@
     "placeOrder":"Place Order",
     "netValue":"Net Value",
     "discount":"Discount",
-    "vatPercentage":"Vat Percentage"
+    "vatPercentage":"Vat Percentage",
+    "payConfirmPayment":"Pay and confirm payment"
 }
