@@ -35,7 +35,7 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-        {t('common:checkoutAttributsTotal')}
+        {t('checkout:checkoutAttributsTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
           {t('common:sar')} {checkoutAttributsTotal}

@@ -66,12 +66,12 @@ const StcPayment = () => {
 
     return (
         <Box component='form' onSubmit={handleSubmit}>
-            <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '30px', fontWeight: 'bold', m: 0 }}>Pay and Confirm your Payment</Typography>
-            <Typography sx={{ fontSize: '17px', lineHeight: '150%', m: 0 }}>please make sure to make bank transfer and attach file to confirm your payment process.</Typography>
+            <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '30px', fontWeight: 'bold', m: 0 }}>{t('checkout:payConfirmYourPayment')}</Typography>
+            <Typography sx={{ fontSize: '17px', lineHeight: '150%', m: 0 }}>{t('checkout:payemntDescription')}</Typography>
             <Divider sx={{ mt: 2, mb: 1.25 }} />
             {step === 1  && (
                 <>
-                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>Mobile Number</Typography>
+                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>{t('checkout:mobileNumber')}</Typography>
                     <TextField
                         fullWidth
                         InputProps={{
@@ -95,8 +95,8 @@ const StcPayment = () => {
            
            {step === 2  && (
                 <>
-                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>Varification Code</Typography>
-                    <Typography sx={{ fontSize: '17px', lineHeight: '150%', mt: 0, mb: 2.5 }}>A verification code has been sent to your phone <b>(+966) {phoneNumber}</b></Typography>
+                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>{t('checkout:verifiy')}</Typography>
+                    <Typography sx={{ fontSize: '17px', lineHeight: '150%', mt: 0, mb: 2.5 }}>{t('checkout:verificationCode')} <b>(+966) {phoneNumber}</b></Typography>
                     <TextField
                         fullWidth
                         InputProps={{

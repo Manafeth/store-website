@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import validator from 'validator';
-import { CodeData } from '../../../types/auth';
+import { CodeData, LoginData } from '../../../types/auth';
 import { useTranslation } from 'next-i18next';
 
 interface CodeInputProps {
@@ -48,9 +48,10 @@ interface Props {
     setCode: Dispatch<SetStateAction<CodeData>>;
     code: CodeData;
     isInvalid: boolean;
+    loginData: LoginData;
 }
 
-const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
+const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid,loginData }) => {
     const [t] = useTranslation();
     function handleCodeInput(ev: ChangeEvent<HTMLInputElement>) {
         const { value, name } = ev.target;
@@ -127,7 +128,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
             </Typography>
 
             <Typography variant='h6' sx={{ mb: 4, lineHeight: '30px', fontWeight: 500, letterSpacing: '0.2px' }}>
-            {t('auth:confirmationMessage')} +96605666888777
+            {t('auth:confirmationMessage')}{loginData.phoneNumber}
             </Typography>
 
             <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>

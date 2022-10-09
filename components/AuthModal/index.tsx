@@ -174,6 +174,7 @@ const AuthModal: FC<Props> = () => {
                 )}
                 {tab === 2 && (
                     <VerifyPhoneNumber
+                        loginData={loginData}
                         isInvalid={isInvalid}
                         code={code}
                         setCode={setCode}

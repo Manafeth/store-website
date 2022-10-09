@@ -11,12 +11,14 @@ import EditIcon from '../../assets/images/icons/edit-icon.svg';
 import Image from 'next/image';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { LOADING } from '../../constants';
+import { useTranslation } from 'next-i18next';
 
 interface Props {
     orderData: OrderData
 }
 
 const BankPayment: FC<Props> = ({ orderData }) => {
+    const [t] = useTranslation();
     const { fetchBankFiles, createBankFiles, bankFilesData, bankFilesStatus } = useCart();
 
     function handleFile(ev: ChangeEvent<HTMLInputElement>) {
@@ -32,34 +34,34 @@ const BankPayment: FC<Props> = ({ orderData }) => {
     
     return (
         <>
-            <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '30px', fontWeight: 'bold', m: 0 }}>Pay and Confirm your Payment</Typography>
-            <Typography sx={{ fontSize: '17px', lineHeight: '150%', m: 0 }}>please make sure to make bank transfer and attach file to confirm your payment process.</Typography>
+            <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '30px', fontWeight: 'bold', m: 0 }}>{t('checkout:payConfirmYourPayment')}</Typography>
+            <Typography sx={{ fontSize: '17px', lineHeight: '150%', m: 0 }}>{t('checkout:payemntDescription')}</Typography>
             <Divider sx={{ mt: 2, mb: 1.25 }} />
-            <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>Payment details:</Typography>
+            <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>{t('checkout:paymentDetail')}:</Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.75 }}>
-                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Bank Name</Typography>
+                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>{t('checkout:bankName')}</Typography>
                 <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankInfo?.bankName}</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.75 }}>
-                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Holder Name</Typography>
+                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>{t('checkout:holderName')}</Typography>
                 <Typography variant='h5' component='span' sx={{ fontWeight: '600'}}>{orderData.bankInfo?.holderName}</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.75 }}>
-                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Account Number</Typography>
+                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>{t('checkout:accountNumber')}</Typography>
                 <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankInfo?.accountNumber}</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>IBan</Typography>
+                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>{t('checkout:iBan')}</Typography>
                 <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankInfo?.iban}</Typography>
             </Box>
             <Divider sx={{ mt: 4, mb: 2.5 }} />
             
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>Recipt File</Typography>
+                <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>{t('checkout:reciptFile')}</Typography>
                 {bankFilesData?.orignialUrl ? (
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Link href={bankFilesData?.orignialUrl} target='_blank' rel="noreferrer">
-                            <Typography variant='h5' component='span' sx={{ fontWeight: '600', mr: 1.25 }}>reciptFile{bankFilesData?.fileExtension && `.${bankFilesData?.fileExtension}`}</Typography>
+                            <Typography variant='h5' component='span' sx={{ fontWeight: '600', mr: 1.25 }}>{t('checkout:reciptFileData')}{bankFilesData?.fileExtension && `.${bankFilesData?.fileExtension}`}</Typography>
                         </Link>
                         <Box
                             component='label'
@@ -91,7 +93,7 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                             component='span'
                             loading={bankFilesStatus === LOADING}
                         >
-                            Attatch receipt file
+                            {t('checkout:attatchReceiptFile')}
                         </LoadingButton>
                     </Box>
                 )}
