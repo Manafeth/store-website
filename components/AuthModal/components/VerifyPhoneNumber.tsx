@@ -128,7 +128,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid,loginData }) =>
             </Typography>
 
             <Typography variant='h6' sx={{ mb: 4, lineHeight: '30px', fontWeight: 500, letterSpacing: '0.2px' }}>
-            {t('auth:confirmationMessage')}{loginData.phoneNumber}
+            {t('auth:confirmationMessage')} {loginData.phoneNumber}
             </Typography>
 
             <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
