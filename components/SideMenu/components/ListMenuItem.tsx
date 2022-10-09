@@ -32,6 +32,7 @@ const ListMenuItem: FC<Props> = ({ data }) => {
           width: { md: '350px' },
           height: { xs: '50px', md: '67px' },
           borderRadius: '8px',
+          marginBottom:'10px',
           px: router.pathname === data.link ? 2.5 : 0,
           '&:hover': {
             px:  2.5,

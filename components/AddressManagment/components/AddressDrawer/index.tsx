@@ -268,7 +268,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
         </Box>
         <TextField
           variant='standard'
-          placeholder='Address'
+          placeholder={t('settings.address')}
           name='address'
           value={state.address}
           sx={{ mb: 3 }}
