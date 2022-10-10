@@ -1,14 +1,27 @@
+export type AttributesOptionData = {
+  id?: number,
+  name: string | null,
+}
+export type AttributesData = {
+  id?: number,
+  name: string | null,
+  nameEn: string | null,
+  nameAr: string | null,
+  options: AttributesOptionData[],
+  type: number
+}
 export type wishListData = {
   id: number,
   name: string,
   salePrice: number,
+  isInWishList: boolean,
   imagesFilePath?: {
     orignialUrl: string,
     thumbUrl: string,
   },
   type: number,
   category: string,
-  attributes: null,
+  attributes: AttributesData[],
 }
 export type activeOrderData = {
   id: number,
