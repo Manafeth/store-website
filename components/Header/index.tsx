@@ -26,6 +26,8 @@ import { useCommon } from '../../contexts/CommonContext';
 import { useTranslation } from "next-i18next";
 import { useCart } from '../../contexts/CartContext';
 import { useProfile } from '../../contexts/ProfileContext';
+import {  Products } from '../../types/products';
+import { getMostPurchasedProducts } from '../../services/products.services';
 
 
 
@@ -41,12 +43,32 @@ const Header = () => {
   const { storeInfo, fetchStoreInfo } = useCommon();
 
   const { fetchWishListData, wishListData } = useProfile();
+  const [params, setParams] = useState({
+    generalSearch: '',
+    page: 1,
+    pageSize: 10,
+  })
+  const [products, setProducts] = useState<Products>({
+    data: [],
+    totalCount: 0,
+    page: 1,
+    pageSize: 12,
+    totalPages: 0,
+  });
   const pages = [
     {page: t('common:home'), link: paths.home},
     {page: t('common:categories'), link: paths.categories},
   ];
   
-
+  async function getSearchProducts(data:any) {
+      const payload = {
+        page: data.page || params.page,
+        pageSize: data.pageSize || params.pageSize,
+        generalSearch: data.generalSearch || params.generalSearch,
+      }
+      const productsData = await getMostPurchasedProducts(payload);
+      setProducts(productsData.data.data.products);
+  }
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -66,6 +88,12 @@ const Header = () => {
 
 
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
+    setParams((prevState) => ({
+      ...prevState,
+      generalSearch: ev.target.value,
+      page: 1,
+    }))
+    getSearchProducts({generalSearch: ev.target.value, page: 1})
     console.log('search',ev.target.value)
   }
   
