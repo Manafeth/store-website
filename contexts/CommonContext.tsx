@@ -2,7 +2,8 @@ import React, { createContext, useContext, ReactElement, FC, useEffect, useState
 import { getStoreInfo } from '../services/common.services';
 import { CommonContextState, StoreInfoData } from '../types/common';
 import FloatingWhatsApp from 'react-floating-whatsapp'
-
+import  { getMostPurchasedProducts } from '../services/products.services';
+import { ProductData } from '../types/products';
 interface Props {
   children: ReactElement | ReactElement[];
 }
@@ -20,6 +21,9 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         complaintNumber: '',
         supportEmail: ''
     })
+
+
+    const [mostPurchasedProducts, setMostPurchasedProducts] = useState<ProductData[]>([])
     
     async function fetchStoreInfo() {
         try {
@@ -30,9 +34,20 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         }
     }
 
+    async function fetchMostPurchasedProducts(params: { page: number, pageSize: number, generalSearch: string }) {
+      try {
+        const response = await getMostPurchasedProducts(params)
+        setMostPurchasedProducts(response.data.data.data)
+      } catch (error) {
+        Promise.reject(error)
+      }
+    }
+
   const state: CommonContextState = {
     storeInfo,
-    fetchStoreInfo
+    fetchStoreInfo,
+    mostPurchasedProducts,
+    fetchMostPurchasedProducts
   };
   
   return (

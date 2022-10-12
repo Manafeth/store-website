@@ -2,18 +2,51 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
-import { FC } from 'react';
-import blackHeart from '../../assets/images/icons/fill-heart.png';
+import { FC,useState } from 'react';
+import HeartIcon from '../../assets/images/icons/heart-icon.svg';
+import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.svg';
 import { wishListData } from '../../types/profile';
 import { useTranslation } from "next-i18next";
 import Link from 'next/link';
 import paths from '../../constants/paths';
+import IconButton from '@mui/material/IconButton';
+import { toggleProductInWishList } from '../../services/products.services';
+import { useAlert } from '../../contexts/AlertContext';
+import { useProfile } from '../../contexts/ProfileContext';
+import { ProductData } from '../../types/products';
 interface Props {
   data: wishListData;
 }
 
 const ProductItem: FC<Props> = ({ data }) => {
   const [t] = useTranslation();
+  const { sendAlert } = useAlert();
+  const { fetchWishListData } = useProfile();
+  const [productWishList, setProductWishList] = useState<wishListData>({
+    id: 0,
+    name: '',
+    salePrice: 0,
+    isInWishList: false,
+    imagesFilePath:{
+      orignialUrl:'',
+      thumbUrl: '',
+    },
+    type: 0,
+    category:'',
+    attributes: [],
+  });
+  function handleTogglingProductInWishList() {
+    toggleProductInWishList(data.id).then(() => {
+      setProductWishList((prevState) => ({
+        ...prevState,
+        isInWishList: !prevState.isInWishList
+      }))
+      fetchWishListData()
+    }).catch((error: any) => {
+      sendAlert(error.response.data.Message, 'error')
+    });
+  }
+
   return (
     <Box sx={{ display: 'flex', gap: '25px', mt:2 , mb:2 }}>
       <Box
@@ -32,17 +65,14 @@ const ProductItem: FC<Props> = ({ data }) => {
         </Link>
         <Box
           sx={{
-            width: '44px',
-            height: '44px',
-            backgroundColor: 'background.light',
             position: 'absolute',
-            bottom: '8px',
-            right: '8px',
-            textAlign: 'center',
-            lineHeight: '3.5',
+            top: '7px',
+            right: '7px'
           }}
         >
-          <Image src={blackHeart} alt='instagram' width='22' height='22' />
+          <IconButton onClick={handleTogglingProductInWishList}>
+            <Image src={data.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40} />
+          </IconButton>
         </Box>
       </Box>
       <Box>

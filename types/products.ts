@@ -67,3 +67,11 @@ export type ProductByCategoryParams = {
 }
 
 
+ export interface Products {
+  data: ProductData[],
+  totalCount: number,
+  totalPages: number,
+  page: number,
+  pageSize: number,
+}
+

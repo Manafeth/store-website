@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -26,6 +26,8 @@ import { useCommon } from '../../contexts/CommonContext';
 import { useTranslation } from "next-i18next";
 import { useCart } from '../../contexts/CartContext';
 import { useProfile } from '../../contexts/ProfileContext';
+import {  Products } from '../../types/products';
+import { getMostPurchasedProducts } from '../../services/products.services';
 
 
 
@@ -38,9 +40,15 @@ const Header = () => {
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
   const { fetchCartProducts, cartData } = useCart();
 
-  const { storeInfo, fetchStoreInfo } = useCommon();
+  const { storeInfo, fetchStoreInfo, fetchMostPurchasedProducts } = useCommon();
 
   const { fetchWishListData, wishListData } = useProfile();
+
+  const pages = [
+    {page: t('common:home'), link: paths.home},
+    {page: t('common:categories'), link: paths.categories},
+  ];
+  
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -49,6 +57,14 @@ const Header = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  let timer: ReturnType<typeof setTimeout>;
+
+  function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: ev.target.value })
+    }, 500);
+  }
 
   function onOpen() {
     setOpen(true);
@@ -68,13 +84,8 @@ const Header = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isloggedIn]);
 
-  const pages = [
-    {page: t('common:home'), link: paths.home},
-    {page: t('common:categories'), link: paths.categories},
-  ];
-
   return (
-    <AppBar position="static" color='inherit' sx={{ boxShadow: '0' }}>
+    <AppBar position="fixed" color='inherit' sx={{ boxShadow: '0' }}>
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: { xs: 64, sm: 91 } }}>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -228,7 +239,8 @@ const Header = () => {
                   }
                 }
               }}
-              placeholder='Search product, categories, services....'
+              placeholder={t('common:searchPlaceHolder')}
+              onChange={handleSearch}
               sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
             />
             {isloggedIn ? (

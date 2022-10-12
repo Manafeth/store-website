@@ -2,6 +2,7 @@
     "welcomeTo":"Welcome to",
     "store":"store",
     "home":"Home",
+    "homeLabel":"home",
     "login":"Login",
     "beuandCompany":"Manafeth is a Saudi company with a global vision that seeks to help the retail sector start its e-commerce business by providing various solutions that enable e-store owners to launch and manage their stores smoothly.",
     "beaundTeam":"Designed and developed with love by Manafeth team",
@@ -29,6 +30,7 @@
     "allCategories":"All categories",
     "estimatedDelivery":"Estimated Delivery & Handling",
     "no":"no",
+    "yes":"yes",
     "filter":"Filter",
     "search":"search",
     "filterByPrice":"Filter By Price",
@@ -56,5 +58,11 @@
     "complete": "Complete",
     "draft": "Draft",
     "post": "Post",
-    "paid": "Paid"
+    "paid": "Paid",
+    "searchPlaceHolder":"Search product, categories, services....",
+    "removeAlert":"Remove alert!",
+    "areYouSure":"Are You Sure you want to delete this item",
+    "work":"work",
+    "others":"others"
+
 }

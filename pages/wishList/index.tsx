@@ -26,7 +26,7 @@ const WishListProduct = () => {
           >
               {t('settings:wishlistProduct')}
           </Typography>
-          {wishListData?.map((item) => {
+          { wishListData?.map((item) => {
             return(
               <Box key={item.id} mb={3}>
                 <ProductItem data={item} />

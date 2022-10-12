@@ -97,6 +97,16 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateAddressStatus]);
 
+    useEffect(() => {
+      if (country) {
+        getAllCities(country);
+        setState((prevState) => ({
+          ...prevState,
+          cityId: 0
+        }))
+      }
+    }, [country])
+
   function handleClose() {
     onClose();
     setState(initialState);
@@ -185,15 +195,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
     setCountry(+ev.target.value);
   }
 
-  useEffect(() => {
-    if (country) {
-      getAllCities(country);
-      setState((prevState) => ({
-        ...prevState,
-        cityId: 0
-      }))
-    }
-  }, [country])
+ 
   
 
  
@@ -266,7 +268,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
         </Box>
         <TextField
           variant='standard'
-          placeholder='Address'
+          placeholder={t('settings.address')}
           name='address'
           value={state.address}
           sx={{ mb: 3 }}
@@ -303,6 +305,41 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             marginTop: '16px',
           }}
         >
+          {t('settings:country')}
+        </Box>
+
+        <TextField
+          select
+          variant='standard'
+          margin='normal'
+          sx={{ mb: 4 }}
+          // eslint-disable-next-line react/jsx-no-bind
+          onChange={handleCountry}
+          name='country'
+          value={country}
+        >
+          <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+            {t('common:selectItem')}
+          </MenuItem>
+          {countryData?.length > 0 &&
+            countryData?.map((option) => (
+              <MenuItem
+                key={option.id}
+                value={option?.id}
+                sx={{ fontSize: '14px', fontWeight: 'bold' }}
+              >
+                {option?.name}
+              </MenuItem>
+            ))}
+        </TextField>
+        <Box
+          component='label'
+          style={{
+            color: 'primary.dark',
+            fontWeight: '500',
+            marginTop: '16px',
+          }}
+        >
           {t('settings:city')}
         </Box>
 
@@ -322,42 +359,6 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           </MenuItem>
           {cityData?.length > 0 &&
             cityData?.map((option) => (
-              <MenuItem
-                key={option.id}
-                value={option?.id}
-                sx={{ fontSize: '14px', fontWeight: 'bold' }}
-              >
-                {option?.name}
-              </MenuItem>
-            ))}
-        </TextField>
-
-        <Box
-          component='label'
-          style={{
-            color: 'primary.dark',
-            fontWeight: '500',
-            marginTop: '16px',
-          }}
-        >
-          {t('settings:country')}
-        </Box>
-
-        <TextField
-          select
-          variant='standard'
-          margin='normal'
-          sx={{ mb: 4 }}
-          // eslint-disable-next-line react/jsx-no-bind
-          onChange={handleCountry}
-          name='country'
-          value={country}
-        >
-          <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-            {t('common:selectItem')}
-          </MenuItem>
-          {countryData?.length > 0 &&
-            countryData?.map((option) => (
               <MenuItem
                 key={option.id}
                 value={option?.id}

@@ -4,8 +4,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import validator from 'validator';
-import { CodeData } from '../../../types/auth';
+import { CodeData, LoginData } from '../../../types/auth';
 import { useTranslation } from 'next-i18next';
+import { useAuthModal } from '../../../contexts/AuthModalContext';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { LOADING } from '../../../constants';
 
 interface CodeInputProps {
   error?: boolean;
@@ -48,9 +51,13 @@ interface Props {
     setCode: Dispatch<SetStateAction<CodeData>>;
     code: CodeData;
     isInvalid: boolean;
+    login: () => void
+    loginData: LoginData;
 }
 
-const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
+const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginData }) => {
+    const { sendPhoneNumberStatus } = useAuthModal();
+
     const [t] = useTranslation();
     function handleCodeInput(ev: ChangeEvent<HTMLInputElement>) {
         const { value, name } = ev.target;
@@ -127,7 +134,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
             </Typography>
 
             <Typography variant='h6' sx={{ mb: 4, lineHeight: '30px', fontWeight: 500, letterSpacing: '0.2px' }}>
-            {t('auth:confirmationMessage')} +96605666888777
+            {t('auth:confirmationMessage')} {loginData.phoneNumber}
             </Typography>
 
             <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
@@ -171,7 +178,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid }) => {
                 />
             </Box>
             <Typography variant='h5' component='p' sx={{ mb: 5.25, letterSpacing: '0.1px' }}>
-            {t('auth:reciveCode')} <Button sx={{ p: 0, textTransform: 'none', minWidth: 0 }}>Resend</Button>
+            {t('auth:reciveCode')} <LoadingButton loading={sendPhoneNumberStatus === LOADING} sx={{ p: 0, textTransform: 'none', minWidth: 0 }} onClick={login}>Resend</LoadingButton>
             </Typography>
         </Box>
     )

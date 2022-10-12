@@ -21,7 +21,7 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-          {t('cat:subTotal')}
+          {t('cart:subTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
           {t('common:sar')} {subTotal}
@@ -49,7 +49,7 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1'>
-          {t('cat:total')}
+          {t('cart:total')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
           {t('common:sar')} {result}
