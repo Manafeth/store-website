@@ -75,15 +75,19 @@ const AuthModal: FC<Props> = () => {
         })
     }
 
+    function login() {
+        sendPhoneNumber(loginData).then(() => {
+            setIsInvalid(false);
+        }).catch(() => {
+            setIsInvalid(false);
+        });
+    }
+
     function handleSubmit(ev: FormEvent<HTMLFormElement>) {
         ev.preventDefault();
         if (tab === 1) {
             if (loginData.phoneNumber && loginData.countryId) {
-                sendPhoneNumber(loginData).then(() => {
-                    setIsInvalid(false);
-                }).catch(() => {
-                    setIsInvalid(false);
-                });
+                login()
             } else {
                 setIsInvalid(true)
             }
@@ -178,6 +182,7 @@ const AuthModal: FC<Props> = () => {
                         isInvalid={isInvalid}
                         code={code}
                         setCode={setCode}
+                        login={login}
                     />
                 )}
                 {tab === 3 && (

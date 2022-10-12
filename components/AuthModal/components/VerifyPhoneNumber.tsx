@@ -6,6 +6,9 @@ import Input from '@mui/material/Input';
 import validator from 'validator';
 import { CodeData, LoginData } from '../../../types/auth';
 import { useTranslation } from 'next-i18next';
+import { useAuthModal } from '../../../contexts/AuthModalContext';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { LOADING } from '../../../constants';
 
 interface CodeInputProps {
   error?: boolean;
@@ -48,10 +51,13 @@ interface Props {
     setCode: Dispatch<SetStateAction<CodeData>>;
     code: CodeData;
     isInvalid: boolean;
+    login: () => void
     loginData: LoginData;
 }
 
-const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid,loginData }) => {
+const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginData }) => {
+    const { sendPhoneNumberStatus } = useAuthModal();
+
     const [t] = useTranslation();
     function handleCodeInput(ev: ChangeEvent<HTMLInputElement>) {
         const { value, name } = ev.target;
@@ -172,7 +178,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid,loginData }) =>
                 />
             </Box>
             <Typography variant='h5' component='p' sx={{ mb: 5.25, letterSpacing: '0.1px' }}>
-            {t('auth:reciveCode')} <Button sx={{ p: 0, textTransform: 'none', minWidth: 0 }}>Resend</Button>
+            {t('auth:reciveCode')} <LoadingButton loading={sendPhoneNumberStatus === LOADING} sx={{ p: 0, textTransform: 'none', minWidth: 0 }} onClick={login}>Resend</LoadingButton>
             </Typography>
         </Box>
     )

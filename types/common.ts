@@ -1,3 +1,5 @@
+import { ProductData } from "./products"
+
 export type CountryData = {
     code: string,
     countryPrefix: string,
@@ -21,7 +23,9 @@ export type StoreInfoData = {
 
 export type CommonContextState = {
     storeInfo: StoreInfoData,
-    fetchStoreInfo: () => Promise<void>
+    fetchStoreInfo: () => Promise<void>,
+    mostPurchasedProducts: ProductData[],
+    fetchMostPurchasedProducts: (params: { page: number, pageSize: number, generalSearch: string }) => Promise<void>,
 }
 
 

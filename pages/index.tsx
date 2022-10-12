@@ -12,12 +12,25 @@ import { ProductData } from '../types/products';
 import { CategoryData } from '../types/categories';
 import ProductVerticalItem from '../components/ProductVerticalItem';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useEffect, useState } from 'react';
+import { useCommon } from '../contexts/CommonContext';
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[]
 }
 
 const Home: NextPage<Props> = ({ productsList, categories }) => {
+  const { mostPurchasedProducts } = useCommon()
+  const [products, setProducts] = useState<ProductData[]>([]);
+
+  useEffect(() => {
+    setProducts(mostPurchasedProducts);
+  }, [mostPurchasedProducts])
+
+  useEffect(() => {
+    setProducts(productsList);
+  }, [productsList])
+  
   return (
     <MainLayout>
       <HeroSection />
@@ -28,7 +41,7 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
           <Divider />
           <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }}>
-            {productsList.map((item) => {
+            {products.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>
                   <ProductVerticalItem data={item} />
