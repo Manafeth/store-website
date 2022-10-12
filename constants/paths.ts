@@ -8,6 +8,7 @@ const paths = {
   contactUs: '/contactUs',
   checkout:'/checkout',
   termsOfUse:'/termsOfUse',
+  privacyPolicy:'/privacyPolicy',
   productDetails: (id: string | number) => `/products/${id}`,
   categoryDetails: (id: string | number) => `/categories/${id}`,
   orderDetails: (id: string | number) => `/orders/${id}`,

@@ -102,3 +102,14 @@ export const orderStatusEnums = [
     { id: 2, name: "terms:cancellationTwo"},
     { id: 3, name: "terms:cancellationThree"},
   ];
+
+  export const Information= [
+    { id: 1, name: "privacy:informationOne"},
+    { id: 2, name: "privacy:informationTwo"},
+    { id: 3, name: "privacy:informationThree"},
+  ];
+  export const Store= [
+    { id: 1, name: "privacy:storeOne"},
+    { id: 2, name: "privacy:storeTwo"},
+    { id: 3, name: "privacy:storeThree"},
+  ];
