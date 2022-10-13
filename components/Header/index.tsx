@@ -28,6 +28,7 @@ import { useCart } from '../../contexts/CartContext';
 import { useProfile } from '../../contexts/ProfileContext';
 import {  Products } from '../../types/products';
 import { getMostPurchasedProducts } from '../../services/products.services';
+import LanguageMenu from '../LanguageMenu';
 
 
 
@@ -291,8 +292,9 @@ const Header = () => {
                     }}
                   >
                     {cartData.length}
-                  </Box>
+                  </Box>  
                 </Box>
+                <LanguageMenu />
                 <Link href={paths.editAccount}>
                   <Box
                     sx={{
