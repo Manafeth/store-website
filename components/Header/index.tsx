@@ -47,6 +47,7 @@ const Header = () => {
   const pages = [
     {page: t('common:home'), link: paths.home},
     {page: t('common:categories'), link: paths.categories},
+    {page: t('common:contactUs'), link: paths.contactUs},
   ];
   
 
