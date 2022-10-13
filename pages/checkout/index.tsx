@@ -69,9 +69,7 @@ const Checkout = () => {
   function handleBack() {
     setActiveStep(activeStep - 1);
   }
-  const handleStep = (step: number) => () => {
-    setActiveStep(step);
-  };
+  
   function handleNext() {
     setActiveStep(activeStep + 1);
   }
@@ -96,10 +94,10 @@ const Checkout = () => {
         <Box component='section'>
           <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 }, mt: 5, maxWidth: 1050 }}>
           <Container maxWidth={false} sx={{ maxWidth: 800 }}>
-            <Stepper nonLinear activeStep={activeStep}>
+            <Stepper  activeStep={activeStep}>
               {steps.map((step, index) => (
                 <Step key={step.id}>
-                  <StepLabel StepIconComponent={ColorlibStepIcon} color='inherit' onClick={handleStep(index)}>
+                  <StepLabel StepIconComponent={ColorlibStepIcon} color='inherit'>
                     <Box sx={{display:'flex',flexDirection:'column'}}>
                   {step.name} 
                     <Box sx={{textAlign:'left'}}>
