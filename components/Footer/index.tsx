@@ -116,14 +116,14 @@ const Footer = () => {
                 </Typography>
                 <List sx={{ py: 0 }}>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                      <Link href='/'>
+                      <Link href={paths.privacyPolicy}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
                         {t('common:privacyPolicy')}
                         </MuiLink>
                       </Link>
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                      <Link href='/'>
+                      <Link href={paths.termsOfUse}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
                         {t('common:termsOfUse')}
                         </MuiLink>

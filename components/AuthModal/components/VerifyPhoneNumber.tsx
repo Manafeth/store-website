@@ -178,7 +178,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginDa
                 />
             </Box>
             <Typography variant='h5' component='p' sx={{ mb: 5.25, letterSpacing: '0.1px' }}>
-            {t('auth:reciveCode')} <LoadingButton loading={sendPhoneNumberStatus === LOADING} sx={{ p: 0, textTransform: 'none', minWidth: 0 }} onClick={login}>Resend</LoadingButton>
+            {t('auth:reciveCode')} <LoadingButton loading={sendPhoneNumberStatus === LOADING} sx={{ p: 0, textTransform: 'none', minWidth: 0 }} onClick={login}>{t('auth:resend')}</LoadingButton>
             </Typography>
         </Box>
     )
