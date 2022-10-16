@@ -18,22 +18,11 @@ interface Props {
 }
 
 const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
-  const { i18n } = useTranslation();
   const [t] = useTranslation();
   const {triggerUpdateEmailNotification} = useProfile();
   const router = useRouter();
 
-  function setLangaugeToEnglish() {
-    localStorage.setItem('userLanguage', 'en');
-    const { pathname, asPath, query } = router;
-    router.push({ pathname, query }, asPath, { locale: 'en' }); 
-  };
 
-  function setLangaugeToArabic() {
-    localStorage.setItem('userLanguage', 'ar');
-    const { pathname, asPath, query } = router;
-    router.push({ pathname, query }, asPath, { locale: 'ar' }); 
-  }
 
   function handleChecked(event: ChangeEvent<HTMLInputElement>) {
     const payload = {
@@ -43,7 +32,6 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
     triggerUpdateEmailNotification(payload)
   }
 
- 
   return (
     <Box
       sx={{
@@ -95,33 +83,6 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
             {t('common:edit')}
           </IconButton> 
         </Link>
-      </Box>
-
-      <Divider sx={{ mb: 5 }} />
-
-      <Box sx={{ display: 'flex' }}>
-        <Typography variant='h2' component='span'>
-        {t('common:language')}
-        </Typography>
-      </Box>
-
-      <Box sx={{ display: 'flex' }}>
-        <FormControlLabel
-          control={<Checkbox color='success'  
-          checked={i18n.language === 'en'} 
-          onChange={setLangaugeToEnglish} />}
-          label='English'
-          sx={{ flex: '0.77', 'color': i18n.language === 'en' ? 'success.main' : '', }}
-        />
-        <FormControlLabel
-          control={<Checkbox color='success'
-          checked={i18n.language === 'ar'} 
-           onChange={setLangaugeToArabic}/>}
-          label='العربية'
-          sx={{ 'color': i18n.language === 'ar' ? 'success.main' : '',
-           
-          }}
-        />
       </Box>
     </Box>
   );
