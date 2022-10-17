@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -38,7 +38,6 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [t] = useTranslation();
-
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
   const { fetchCartProducts, cartData } = useCart();
 
@@ -66,8 +65,14 @@ const Header = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: ev.target.value })
-    }, 500);
 
+      const id = 'recent-products';
+      const yOffset = -91; 
+      const element = document.getElementById(id);
+      // @ts-ignore
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }, 500);
   }
 
   function onOpen() {
@@ -247,7 +252,7 @@ const Header = () => {
               onChange={handleSearch}
               sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
             />
-            {isloggedIn ? (
+            {isloggedIn && (
               <>
                 <Link href={paths.whishList}>
                   <Box
@@ -296,25 +301,27 @@ const Header = () => {
                     {cartData.length}
                   </Box>  
                 </Box>
-                <LanguageMenu />
-                <Link href={paths.editAccount}>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontWeight: 400,
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      letterSpacing: '0.2px',
-                      color: '#323940',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <Avatar alt="Remy Sharp" src={profileData.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
-                    {profileData.fullName}
-                  </Box>
-                </Link>
               </>
+            )}
+            <LanguageMenu />
+            {isloggedIn ? (
+              <Link href={paths.editAccount}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontWeight: 400,
+                    fontSize: '12px',
+                    lineHeight: '16px',
+                    letterSpacing: '0.2px',
+                    color: '#323940',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Avatar alt="Remy Sharp" src={profileData.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
+                  {profileData.fullName}
+                </Box>
+              </Link>
             ) : (
               <Button
                 onClick={handleOpenAuthModal}

@@ -40,7 +40,7 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
       <Box component='section' >
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
           <Divider />
-          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }}>
+          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }} id='recent-products'>
             {products.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>
