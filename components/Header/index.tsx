@@ -38,6 +38,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [t] = useTranslation();
+
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
   const { fetchCartProducts, cartData } = useCart();
 
@@ -66,6 +67,7 @@ const Header = () => {
     timer = setTimeout(() => {
       fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: ev.target.value })
     }, 500);
+
   }
 
   function onOpen() {

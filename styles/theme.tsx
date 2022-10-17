@@ -98,13 +98,15 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         light: '#FFFFFF',
         grayDisabled: '#F6F6F6',
         main:'#e8f4f7',
+        secondary:'#FFCB77'
       },
       text: {
         primary: '#252B42',
         secondary: '#737373',
         grey: '#858585',
         disabled: '#BDBDBD',
-        light:'#f3f3f3'
+        light:'#f3f3f3',
+        dark:'#394032'
       },
       grey: {
         0: '#ffffff',

@@ -17,6 +17,7 @@ import isEmail from 'validator/lib/isEmail';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from "next-i18next";
 import { LOADING, SUCCESS } from '../../constants';
+import Link from 'next/link';
 
 interface Props {
 
@@ -200,7 +201,11 @@ const AuthModal: FC<Props> = () => {
                     type="submit"
                     loading={[sendPhoneNumberStatus, verifyStatus, updateProfileStatus].includes(LOADING)}
                 >
-                         {t('common:next')}
+                    {!updateProfileStatus ? (t('common:next'))
+                    :(
+                        <Link href="/accountSettings"><a> {(t('common:next'))} </a></Link>
+                    )}
+                         {/* {t('common:next')} */}
                 </LoadingButton>
             </Box>
         </Drawer>
