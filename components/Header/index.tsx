@@ -28,6 +28,7 @@ import { useCart } from '../../contexts/CartContext';
 import { useProfile } from '../../contexts/ProfileContext';
 import {  Products } from '../../types/products';
 import { getMostPurchasedProducts } from '../../services/products.services';
+import LanguageMenu from '../LanguageMenu';
 
 
 
@@ -37,6 +38,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [t] = useTranslation();
+
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
   const { fetchCartProducts, cartData } = useCart();
 
@@ -47,6 +49,7 @@ const Header = () => {
   const pages = [
     {page: t('common:home'), link: paths.home},
     {page: t('common:categories'), link: paths.categories},
+    {page: t('common:contactUs'), link: paths.contactUs},
   ];
   
 
@@ -64,6 +67,7 @@ const Header = () => {
     timer = setTimeout(() => {
       fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: ev.target.value })
     }, 500);
+
   }
 
   function onOpen() {
@@ -290,8 +294,9 @@ const Header = () => {
                     }}
                   >
                     {cartData.length}
-                  </Box>
+                  </Box>  
                 </Box>
+                <LanguageMenu />
                 <Link href={paths.editAccount}>
                   <Box
                     sx={{

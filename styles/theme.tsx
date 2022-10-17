@@ -65,7 +65,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
     palette: {
       primary: {
         light: '#39403233',
-        main: '#394032',
+        main: '#1995AD',
         dark: '#000000',
         contrastText: '#fff',
       },
@@ -97,13 +97,16 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         default: '#FFFFFF',
         light: '#FFFFFF',
         grayDisabled: '#F6F6F6',
+        main:'#e8f4f7',
+        secondary:'#FFCB77'
       },
       text: {
         primary: '#252B42',
         secondary: '#737373',
         grey: '#858585',
         disabled: '#BDBDBD',
-        light:'#f3f3f3'
+        light:'#f3f3f3',
+        dark:'#394032'
       },
       grey: {
         0: '#ffffff',
