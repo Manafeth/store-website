@@ -201,11 +201,7 @@ const AuthModal: FC<Props> = () => {
                     type="submit"
                     loading={[sendPhoneNumberStatus, verifyStatus, updateProfileStatus].includes(LOADING)}
                 >
-                    {!updateProfileStatus ? (t('common:next'))
-                    :(
-                        <Link href="/accountSettings"><a> {(t('common:next'))} </a></Link>
-                    )}
-                         {/* {t('common:next')} */}
+                    {t('common:next')}
                 </LoadingButton>
             </Box>
         </Drawer>
