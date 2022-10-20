@@ -100,7 +100,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
             height: 40,
           }}
         >
-          <MenuItem value={0} disabled />
+          <MenuItem value={0} disabled >please select</MenuItem>
           {countries.map((item) => {
             return (
               <MenuItem key={item.id} value={item.id} sx={{ pr: 1.25 }}>
@@ -113,7 +113,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
                     lineHeight: '20px',
                     letterSpacing: '0.4px',
                   }}>
-                    {item.countryPrefix}
+                    {item?.countryPrefix}
                   </Box>
                 </Box>
               </MenuItem>

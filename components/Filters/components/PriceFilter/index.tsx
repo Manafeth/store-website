@@ -59,7 +59,7 @@ function valuetext(value: number) {
             size="small"
             onChange={handlePriceFrom}
             inputProps={{
-              step: 10,
+              step: 100,
               min: 0,
               type: 'number',
               'aria-labelledby': 'input-slider',

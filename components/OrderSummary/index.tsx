@@ -48,7 +48,7 @@ const OrderSummary = () => {
           mb: 3,
         }}
       >
-        <Typography variant='h5' component='h1'>
+        <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
           {t('cart:total')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
