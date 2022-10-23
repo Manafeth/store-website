@@ -10,6 +10,8 @@ import isNumeric from 'validator/lib/isNumeric';
 import { getCountries } from '../../services/common.services';
 import { CountryData } from '../../types/common';
 import InputLabel from '@mui/material/InputLabel';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 
 interface Props {
   onChange: (data: { countryId: number; phoneNumber: string }) => void;
@@ -81,13 +83,13 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           label="Phone"
-          IconComponent="span"
           error={countryError}
-          endAdornment={
-            <Box sx={{ px: 1, minWidth: 32, minHeight: 16 }} component="span">
-              <Image src={arrowDown} width='16' height='8' alt='arrow down' />
-            </Box>
-          }
+          IconComponent={ExpandMoreIcon}
+          // endAdornment={
+          //   <Box sx={{ px: 1, minWidth: 32, minHeight: 16 }} component="span">
+          //     <Image src={arrowDown} width='16' height='8' alt='arrow down' />
+          //   </Box>
+          // }
           disabled={isDisabled}
           onChange={handleSelect}
           value={JSON.stringify(countryId)}
