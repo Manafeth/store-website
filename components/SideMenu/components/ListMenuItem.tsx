@@ -44,8 +44,6 @@ const ListMenuItem: FC<Props> = ({ data }) => {
         onClick={handleClick}
       >
         <ListItemText primary={data.name} sx={{ opacity: 1 }} />
-        {/* <Image src={ArrowRight} alt='Arrow right' /> */}
-        {/* {i18n.language === 'en' && <Typography sx={{ ml: 4,}}><Image src={ArrowRight} alt='checked icon' /></Typography>} */}
         {i18n.language === 'ar'? (
            <Typography sx={{ ml: 4, transform:'rotate(180deg)'}}><Image src={ArrowRight} alt='checked icon' /></Typography>
         ):(

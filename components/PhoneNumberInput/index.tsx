@@ -9,6 +9,7 @@ import arrowDown from '../../assets/images/icons/arrow-down.png';
 import isNumeric from 'validator/lib/isNumeric';
 import { getCountries } from '../../services/common.services';
 import { CountryData } from '../../types/common';
+import InputLabel from '@mui/material/InputLabel';
 
 interface Props {
   onChange: (data: { countryId: number; phoneNumber: string }) => void;
