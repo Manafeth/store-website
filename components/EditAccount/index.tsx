@@ -92,6 +92,7 @@ const EditAccount: FC<Props> = ({
       }}
       component='form'
       onSubmit={handleSubmit}
+      noValidate
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
         {t('settings:editAccount')}
