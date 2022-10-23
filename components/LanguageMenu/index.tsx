@@ -63,6 +63,7 @@ const LanguageMenu = () => {
             '&.Mui-selected': {
               backgroundColor: 'white',
             },
+            'fontSize':'14px'
           }}
         >
           English {i18n.language === 'en' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
@@ -76,6 +77,7 @@ const LanguageMenu = () => {
             '&.Mui-selected': {
               backgroundColor: 'white',
             },
+            'fontSize':'14px'
           }}
         >
           العربية {i18n.language === 'ar' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}

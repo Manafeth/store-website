@@ -22,6 +22,7 @@ interface Props {
 const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError, isDisabled }) => {
   const [countryId, setCountry] = useState(0);
   const [phoneNumber, setPhone] = useState('');
+  const [isInvalid, setIsInvalid] = useState(false);
   const [countries, setCountires] = useState<CountryData[]>([]);
 
   function handleSelect(ev: SelectChangeEvent) {
@@ -57,7 +58,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
   }, [value]);
 
   useEffect(() => {
-    if (!value && countries.length) {
+    if (!value?.countryId && countries.length) {
       const countryID = countries[0]?.id;
       setCountry(countryID);
       onChange({
@@ -100,7 +101,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
             height: 40,
           }}
         >
-          <MenuItem value={0} disabled >please select</MenuItem>
+          <MenuItem value={0} disabled />
           {countries.map((item) => {
             return (
               <MenuItem key={item.id} value={item.id} sx={{ pr: 1.25 }}>
@@ -129,7 +130,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
             px: 2,
             height: 40
           }}
-          error={error}
+          error={error && !phoneNumber}
           inputProps={{ maxLength: 10 }}
           placeholder="05X XXX-XXX"
           disabled={isDisabled}

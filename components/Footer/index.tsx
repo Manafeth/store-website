@@ -73,7 +73,7 @@ const Footer = () => {
               </Link>
             </Box>
           </Box>
-          <Box>
+          <Box sx={{ flexGrow: 1, maxWidth: 320 }}>
             <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
               <Box pr={{ md: 2}}  mb={5}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>

@@ -51,6 +51,7 @@ function valuetext(value: number) {
           valueLabelDisplay="auto"
           onChange={handleSliderChange}
           value={[params.priceFrom || 0, params.priceTo || 0]}
+          max={1000}
         />
         <Box sx={{display:'flex', gap:'10px', mb:1}}>
           <TextField 

@@ -39,7 +39,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
         maxWidth: {md: 400}
       }}
     >
-      <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
+      <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '32px' },fontWeight:'700' }}>
         {t('settings:accountSetting')}
       </Typography>
 
@@ -51,7 +51,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
           justifyContent: 'space-between'
         }}
       >
-        <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' } }}>
+        <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }, fontWeight:'700' }}>
           {t('settings:emailNotification')}
         </Typography>
         <Switch color='success' 
@@ -66,6 +66,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
         sx={{
           color: 'text.secondary',
           fontSize: '16px',
+          fontWeight:'400',
           mb: 5,
         }}
       >
