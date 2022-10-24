@@ -25,8 +25,8 @@ interface Props {
 const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError, isDisabled }) => {
   const [countryId, setCountry] = useState(0);
   const [phoneNumber, setPhone] = useState('');
-  const [isInvalid, setIsInvalid] = useState(false);
   const [countries, setCountires] = useState<CountryData[]>([]);
+  const [isError, setIsError] = useState(false);
 
   function handleSelect(ev: SelectChangeEvent) {
     setCountry(+ev.target.value);
@@ -37,8 +37,9 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
   }
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
-    if (isNumeric(ev.target.value) || ev.target.value === '' || ev.target.value === null) {
+    if (isNumeric(ev.target.value) || ev.target.value === '' || ev.target.value === null || (ev.target.value.length > 10)) {
       setPhone(ev.target.value);
+      setIsError(true);
       onChange({
         countryId,
         phoneNumber: ev.target.value,
@@ -133,7 +134,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
             px: 2,
             height: 40
           }}
-          error={error && !phoneNumber}
+          error={error && isError && !phoneNumber}
           inputProps={{ maxLength: 10, minLength:9}}
           placeholder="05X XXX-XXX"
           disabled={isDisabled}
