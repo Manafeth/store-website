@@ -9,6 +9,9 @@ import arrowDown from '../../assets/images/icons/arrow-down.png';
 import isNumeric from 'validator/lib/isNumeric';
 import { getCountries } from '../../services/common.services';
 import { CountryData } from '../../types/common';
+import InputLabel from '@mui/material/InputLabel';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 
 interface Props {
   onChange: (data: { countryId: number; phoneNumber: string }) => void;
@@ -23,6 +26,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
   const [countryId, setCountry] = useState(0);
   const [phoneNumber, setPhone] = useState('');
   const [countries, setCountires] = useState<CountryData[]>([]);
+  const [isError, setIsError] = useState(false);
 
   function handleSelect(ev: SelectChangeEvent) {
     setCountry(+ev.target.value);
@@ -33,8 +37,9 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
   }
 
   function handleInput(ev: ChangeEvent<HTMLInputElement>) {
-    if (isNumeric(ev.target.value) || ev.target.value === '' || ev.target.value === null) {
+    if (isNumeric(ev.target.value) || ev.target.value === '' || ev.target.value === null || (ev.target.value.length > 10)) {
       setPhone(ev.target.value);
+      setIsError(true);
       onChange({
         countryId,
         phoneNumber: ev.target.value,
@@ -57,7 +62,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
   }, [value]);
 
   useEffect(() => {
-    if (!value && countries.length) {
+    if (!value?.countryId && countries.length) {
       const countryID = countries[0]?.id;
       setCountry(countryID);
       onChange({
@@ -79,13 +84,13 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           label="Phone"
-          IconComponent="span"
           error={countryError}
-          endAdornment={
-            <Box sx={{ px: 1, minWidth: 32, minHeight: 16 }} component="span">
-              <Image src={arrowDown} width='16' height='8' alt='arrow down' />
-            </Box>
-          }
+          IconComponent={ExpandMoreIcon}
+          // endAdornment={
+          //   <Box sx={{ px: 1, minWidth: 32, minHeight: 16 }} component="span">
+          //     <Image src={arrowDown} width='16' height='8' alt='arrow down' />
+          //   </Box>
+          // }
           disabled={isDisabled}
           onChange={handleSelect}
           value={JSON.stringify(countryId)}
@@ -113,7 +118,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
                     lineHeight: '20px',
                     letterSpacing: '0.4px',
                   }}>
-                    {item.countryPrefix}
+                    {item?.countryPrefix}
                   </Box>
                 </Box>
               </MenuItem>
@@ -129,8 +134,8 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
             px: 2,
             height: 40
           }}
-          error={error}
-          inputProps={{ maxLength: 10 }}
+          error={error && isError && !phoneNumber}
+          inputProps={{ maxLength: 10, minLength:9}}
           placeholder="05X XXX-XXX"
           disabled={isDisabled}
           onChange={handleInput}

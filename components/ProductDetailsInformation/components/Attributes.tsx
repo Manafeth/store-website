@@ -48,7 +48,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
-                            flexWrap: 'wrap'
+                            flexWrap: {xs:'wrap', sm:'wrap', md:'nowrap',lg:'nowrap'}
                         }}
                     >
                     {item.options.map((option) => {

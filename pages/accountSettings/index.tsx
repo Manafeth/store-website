@@ -25,6 +25,8 @@ const settingAccount = () => {
    const [state, setState] = useState<customerData>(initialState);
      // eslint-disable-next-line react-hooks/rules-of-hooks
    const [isSubmitted, setIsSubmitted] = useState(false);
+   // eslint-disable-next-line react-hooks/rules-of-hooks
+   const [errorMsg, setErrorMsg] = useState<string>('');
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fetchCustomerProfileData, customerData,updateProfileData,updateStatus } = useProfile();
 
@@ -43,7 +45,9 @@ const settingAccount = () => {
   }
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    if(isFormValid()) {
+    if(!isFormValid()) {
+       setIsSubmitted(true);  
+    } else {
       const payload = {
         ...state,
       }
@@ -54,8 +58,6 @@ const settingAccount = () => {
         }));
       }).catch(()=>{
       })
-    } else {
-      setIsSubmitted(true);
     }
   }
   return (

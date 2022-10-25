@@ -23,8 +23,9 @@ const ContactUsForm = () => {
         sx={{
           mb: 5,
           mt: 5,
-          fontSize: { xs: '14px', md: '20px' },
-          color: 'grey.800',
+          fontSize: { xs: '14px', md: '17px' },
+          fontWeight:'400',
+          color: 'standard.color',
         }}
       >
         {t('contact:contactText')}
@@ -45,6 +46,7 @@ const ContactUsForm = () => {
                 '&::placeholder': {
                   color: 'p.color',
                   fontWeight: '400',
+                  fontSize:'20px'
                 },
               },
             },
@@ -65,6 +67,7 @@ const ContactUsForm = () => {
                 '&::placeholder': {
                   color: 'p.color',
                   fontWeight: '400',
+                  fontSize:'20px'
                 },
               },
             },
@@ -72,20 +75,24 @@ const ContactUsForm = () => {
         />
         <FormLabel>{t('contact:message')}</FormLabel>
         <TextareaAutosize
-          aria-label='minimum height'
+          aria-label='empty textarea'
           minRows={8}
           placeholder={t('contact:messageText')}
-          style={{ width: '100%', marginTop:'16px', color:'#b2b2b2',fontWeight:'400',fontSize:'18px' }}
+          style={{ width: '100%', marginTop:'16px',fontSize:'18px',fontWeight:'400',
+          color:'p.color',paddingLeft:'10px',
+        paddingTop:'10px'}}
         />
         <Box sx={{mt:3,textAlign:'center',mb:5}}>
           <Button
           variant='contained'
           color='primary'
           sx={{
-            py: '11px',
+            py: '2px',
             width: '311px',
             height: '72px',
-            fontSize: { xs: '12px', md: '14px' },
+            borderRadius:'12px',
+            fontSize: { xs: '12px', md: '25px' },
+            fontWeight:'500'
           }}
         >
           {t('contact:submit')}

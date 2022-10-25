@@ -147,7 +147,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                 <Typography
                   variant='h6'
                   component='h1'
-                  sx={{ mb: 5, fontWeight: '700', color: 'text.primary' }}
+                  sx={{ mb: 5, fontWeight: '700', color: 'text.secondary' }}
                 >
                    {t('common:showingAll')} {products.data.length} {t('common:results')} 
                 </Typography>
@@ -158,7 +158,10 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   label={t('common:popularity')}
                   margin='normal'
                   name='popularity'
-                  sx={{ mb: 4, width: '141px' }}
+                  sx={{ mb: 4, width: '141px', fontSize:'14px',
+                  '& .MuiSelect-select':{
+                    fontSize: '14px',
+                  } }}
                   onChange={handleSort}
                   value={params.productStatus || 0}
                 >

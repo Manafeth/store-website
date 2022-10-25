@@ -92,6 +92,7 @@ const EditAccount: FC<Props> = ({
       }}
       component='form'
       onSubmit={handleSubmit}
+      noValidate
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
         {t('settings:editAccount')}
@@ -185,6 +186,8 @@ const EditAccount: FC<Props> = ({
         sx={{ mb: 3, fontSize: '14px', fontWeight: '400', color: 'grey.1800' }}
         onChange={handlePhoneInput}
         value={{ phoneNumber: state.phoneNumber, countryId: state.countryId }}
+        countryError={isSubmitted && !state.countryId}
+        error={isSubmitted && !state.phoneNumber}
       />
       <Box
         sx={{

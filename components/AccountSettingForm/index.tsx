@@ -39,7 +39,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
         maxWidth: {md: 400}
       }}
     >
-      <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
+      <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '32px' },fontWeight:'700',fontFamily: 'Urbanist' }}>
         {t('settings:accountSetting')}
       </Typography>
 
@@ -51,7 +51,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
           justifyContent: 'space-between'
         }}
       >
-        <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' } }}>
+        <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }, fontWeight:'700',fontFamily: 'Urbanist' }}>
           {t('settings:emailNotification')}
         </Typography>
         <Switch color='success' 
@@ -66,7 +66,9 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
         sx={{
           color: 'text.secondary',
           fontSize: '16px',
+          fontWeight:'400',
           mb: 5,
+          fontFamily: 'Urbanist'
         }}
       >
       {t('settings:emailTextOne')}{t('settings:emailtextTwo')}
@@ -75,11 +77,11 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
       <Divider sx={{ mb: 5 }} />
 
       <Box sx={{display:'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
-        <Typography variant='h2' sx={{ mb: 5,flex: '0.7', fontSize: { xs: '20px', md: '24px' } }}>
+        <Typography variant='h2' sx={{ mb: 5,flex: '0.7', fontSize: { xs: '20px', md: '24px' },fontFamily: 'Urbanist' }}>
           {t('settings:shippingAddress')}
         </Typography>
         <Link href='/addressManagment'>
-          <IconButton sx={{fontSize:'16px'}}>
+          <IconButton sx={{fontSize:'16px',fontFamily: 'Urbanist'}}>
             {t('common:edit')}
           </IconButton> 
         </Link>

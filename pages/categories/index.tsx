@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { GetStaticProps, NextPage } from 'next'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -17,10 +17,22 @@ interface Props {
 }
   
 const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
+    const categoriesSections = useRef(null);
+
+    useEffect(() => {
+        if (categoriesSections?.current) {
+            const yOffset = -91; 
+            const element = categoriesSections.current;
+            // @ts-ignore
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
+        }
+    }, [categoriesSections])
+    
   return (
     <MainLayout>
         <HeroSection />
-        <Box pt={2.25} pb={5}>
+        <Box pt={2.25} pb={5} ref={categoriesSections}>
             <FeaturedCategoriesSection categories={categories} />
         </Box>
 

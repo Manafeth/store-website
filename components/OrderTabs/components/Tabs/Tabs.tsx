@@ -22,13 +22,16 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
     'width': { xs: '100%', sm: 'auto' },
     'mb': { xs: 3, sm: 0 },
     'backgroundColor':'transparent',
-    'borderRadius':'0px'
+    'borderRadius':'0px',
   };
   const tabStyle = {
     ...sharedStyle,
     '&, &:hover': {
-      backgroundColor: 'transparent', color: 'primary.main',
-      borderBottom:'2px solid #262D33'
+      backgroundColor: 'transparent', color: 'grey.1800',
+      borderBottom:'2px solid #262D33',
+      display: 'inline-block',
+      width: 'auto',
+      margin: 'auto',
     },
     '&:hover': {
       opacity: 0.9,

@@ -33,6 +33,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         '"Apple Color Emoji"',
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
+        'Urbanist'
       ].join(','),
       h1: {
         fontSize: '32px',

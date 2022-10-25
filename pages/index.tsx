@@ -34,7 +34,7 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
   return (
     <MainLayout>
       <HeroSection />
-      <Box pt={{xs: 6, md: 22.25}} pb={{xs: 6, md: 11.25}}>
+      <Box pt={{xs: 6, md: 6.25}} pb={{xs: 6, md: 6.25}}>
         <FeaturedCategoriesSection categories={categories} />
       </Box>
       <Box component='section' >

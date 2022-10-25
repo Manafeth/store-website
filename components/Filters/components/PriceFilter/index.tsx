@@ -51,20 +51,22 @@ function valuetext(value: number) {
           valueLabelDisplay="auto"
           onChange={handleSliderChange}
           value={[params.priceFrom || 0, params.priceTo || 0]}
+          max={1000}
         />
-        <Box sx={{display:'flex', gap:'10px', mb:1}}>
+        <Box sx={{display:'flex', gap:'5px', mb:1}}>
           <TextField 
             id="outlined-basic"
             value={params.priceFrom}
             size="small"
             onChange={handlePriceFrom}
             inputProps={{
-              step: 10,
+              step: 100,
               min: 0,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
           />
+          <Box width={350}>
           <TextField 
             id="outlined-basic"
             value={params.priceTo}
@@ -72,11 +74,17 @@ function valuetext(value: number) {
             onChange={handlePriceTo}
             inputProps={{
               step: 10,
-              max: 100,
+              max: 1000,
               type: 'number',
               'aria-labelledby': 'input-slider',
+              sx: {
+                '&::muiltr-1n69e1z-MuiInputBase-input-MuiOutlinedInput-input': {
+                  padding:'8.5px 20px'
+                }
+              }
             }}
           />
+          </Box>
         </Box>
       </Box>
     </Box>

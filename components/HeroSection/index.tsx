@@ -7,15 +7,23 @@ import { useTranslation } from "next-i18next";
 
 import Image from 'next/image';
 import hero from '../../assets/images/hero.png';
+import heroReflect from '../../assets/images/hero-reflect.png';
 import Link from 'next/link';
 
 const HeroSection = () => {
     const [t] = useTranslation();
+    const { i18n } = useTranslation();
   return (
     <Box component='section' sx={{ position: 'relative' }}>
-        <Box sx={{ display: 'flex' }}>
-            <Image src={hero} alt="hero" />
-        </Box>
+        {i18n.language === 'ar'? (
+            <Box sx={{ display: 'flex' }}>
+            <Image src={heroReflect} alt="hero" />
+            </Box>
+        ):(
+             <Box sx={{ display: 'flex' }}>
+             <Image src={hero} alt="hero" />
+             </Box>
+        )}
         <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.25)', display: 'flex', alignItems: 'center' }}>
             <Container sx={{ maxWidth: 1050 }}>
                 <Typography
