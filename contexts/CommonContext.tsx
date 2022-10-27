@@ -5,7 +5,6 @@ import FloatingWhatsApp from 'react-floating-whatsapp'
 import  { getMostPurchasedProducts } from '../services/products.services';
 import { ProductData } from '../types/products';
 import { useRouter } from 'next/router';
-import paths from '../constants/paths';
 interface Props {
   children: ReactElement | ReactElement[];
 }
