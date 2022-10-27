@@ -4,6 +4,7 @@ import { CommonContextState, StoreInfoData } from '../types/common';
 import FloatingWhatsApp from 'react-floating-whatsapp'
 import  { getMostPurchasedProducts } from '../services/products.services';
 import { ProductData } from '../types/products';
+import { useRouter } from 'next/router';
 interface Props {
   children: ReactElement | ReactElement[];
 }
@@ -22,16 +23,18 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         supportEmail: ''
     })
 
+    const router = useRouter();
 
     const [mostPurchasedProducts, setMostPurchasedProducts] = useState<ProductData[]>([])
     
     async function fetchStoreInfo() {
-        try {
-            const response = await getStoreInfo();
-            setStoreInfo(response.data.data)
-        } catch (error) {
-            Promise.reject(error)
-        }
+      try {
+        const response = await getStoreInfo();
+        setStoreInfo(response.data.data)
+      } catch (error) {
+        Promise.reject(error)
+        router.push('/404')
+      }
     }
 
     async function fetchMostPurchasedProducts(params: { page: number, pageSize: number, generalSearch: string }) {
