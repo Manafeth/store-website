@@ -218,7 +218,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
         }}
       >
         <Typography variant='h2' component='h2'>
-          {!selectedAddress ? 'Add new address' : 'Update address'}
+          {!selectedAddress ? t('settings:addNewAddress') : t('settings:updateAddress')}
         </Typography>
         <IconButton onClick={handleClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -268,7 +268,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
         </Box>
         <TextField
           variant='standard'
-          placeholder={t('settings.address')}
+          placeholder={t('settings:address')}
           name='address'
           value={state.address}
           sx={{ mb: 3 }}
