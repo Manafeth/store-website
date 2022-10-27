@@ -67,6 +67,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
       primary: {
         light: '#39403233',
         main: '#1995AD',
+        hover:'#0D788C',
         dark: '#000000',
         contrastText: '#fff',
       },

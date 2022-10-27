@@ -197,7 +197,10 @@ const AuthModal: FC<Props> = () => {
                     variant='contained'
                     endIcon={<Image src={rightArrow} width='16' height='10' alt='right arrow' />}
                     fullWidth
-                    sx={{ borderRadius: 2 }}
+                    sx={{ borderRadius: 2 ,
+                        "&:hover": {
+                            backgroundColor: "primary.hover"
+                          }}}
                     type="submit"
                     loading={[sendPhoneNumberStatus, verifyStatus, updateProfileStatus].includes(LOADING)}
                 >
