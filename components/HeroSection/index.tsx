@@ -63,7 +63,11 @@ const HeroSection = () => {
                      {t('heroSection:description')}
                 </Typography>
                 <Link href='/'>
-                    <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }}>
+                    <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2},
+                     "&:hover": {
+                        backgroundColor: "primary.hover"
+                      }
+                }}>
                     {t('heroSection:shopNow')}
                     </Button>
                 </Link>

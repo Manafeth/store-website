@@ -145,7 +145,10 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px', mr: 2.5 }}
+          sx={{ width: 'auto', height: '44px', mr: 2.5 ,
+           "&:hover": {
+            backgroundColor: "primary.hover"
+          }}}
           type='submit'
           onClick={handleAddCheckoutAttribute}
           disabled={state.checkOutAttributes.length > 0}

@@ -87,12 +87,12 @@ const ContactUsForm = () => {
           variant='contained'
           color='primary'
           sx={{
-            py: '2px',
             width: '311px',
             height: '72px',
             borderRadius:'12px',
             fontSize: { xs: '12px', md: '25px' },
-            fontWeight:'500'
+            fontWeight:'500',
+            textTransform: 'lowercase',
           }}
         >
           {t('contact:submit')}

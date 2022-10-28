@@ -42,7 +42,7 @@ const LanguageMenu = () => {
       <Box
         sx={{  cursor: 'pointer', color: 'primary.main',display: 'flex',
         alignItems: 'center',
-        mr: {xs: 1, sm: 1.5, md: 2.5},}}
+        mr: {xs: 1, sm: 1.5, md: 4},}}
         // eslint-disable-next-line react/jsx-no-bind
         onClick={handleClick}
       >

@@ -5,7 +5,6 @@ import MainLayout from '../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
 import { getMostPurchasedProducts } from '../services/products.services';
 import { getFeaturedCategories } from '../services/categories.services';
 import { ProductData } from '../types/products';
@@ -39,7 +38,6 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
       </Box>
       <Box component='section' >
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-          <Divider />
           <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }} id='recent-products'>
             {products.map((item) => {
               return (
