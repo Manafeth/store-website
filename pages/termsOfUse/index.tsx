@@ -254,6 +254,9 @@ const TermsOfUse = () => {
             sx={{
               width: '220px',
               height: '54px',
+              "&:hover": {
+               backgroundColor: "primary.hover",
+            }
             }}
             type='submit'
           >

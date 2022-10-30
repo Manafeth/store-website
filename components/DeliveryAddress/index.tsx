@@ -73,8 +73,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
               backgroundColor: ' background.grayDisabled',
               mr: '20px',
               fontSize:'14px',
-              fontWeight:'500',
-             
+              fontWeight:'500', 
             }}
             onClick={handleBack}
           >
@@ -82,7 +81,10 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
           </Button>
           <Button
             variant='contained'
-            sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px'}}
+            sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px', 
+            "&:hover": {
+              backgroundColor: "primary.hover",
+           }}}
             type='submit'
             onClick={handleNext}
             disabled={!checkoutData.addressId || loading}

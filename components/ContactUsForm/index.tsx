@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import FormLabel from '@mui/material/FormLabel';
+import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Button from '@mui/material/Button';
 import { useTranslation } from 'next-i18next';
@@ -31,12 +31,12 @@ const ContactUsForm = () => {
         {t('contact:contactText')}
       </Typography>
       <Box>
-        <FormLabel>{t('contact:yourName')}</FormLabel>
+        <InputLabel>{t('contact:yourName')}</InputLabel>
         <TextField
           id='fullWidth'
           placeholder={t('contact:enterYourName')}
           fullWidth
-          sx={{ mb: 2, mt: 2 }}
+          sx={{ mb: 3, mt: 1 }}
           InputLabelProps={{ shrink: true }}
           type='text'
           name='name'
@@ -52,12 +52,12 @@ const ContactUsForm = () => {
             },
           }}
         />
-        <FormLabel>{t('contact:contactEmail')}</FormLabel>
+        <InputLabel>{t('contact:contactEmail')}</InputLabel>
         <TextField
           id='fullWidth'
           placeholder={t('contact:enterYourEmail')}
           fullWidth
-          sx={{ mb: 2, mt: 2 }}
+          sx={{ mb: 3, mt: 1 }}
           InputLabelProps={{ shrink: true }}
           type='email'
           name='email'
@@ -73,14 +73,14 @@ const ContactUsForm = () => {
             },
           }}
         />
-        <FormLabel>{t('contact:message')}</FormLabel>
+        <InputLabel>{t('contact:message')}</InputLabel>
         <TextareaAutosize
           aria-label='empty textarea'
           minRows={8}
           placeholder={t('contact:messageText')}
-          style={{ width: '100%', marginTop:'16px',fontSize:'18px',fontWeight:'400',
-          color:'p.color',paddingLeft:'10px',
-        paddingTop:'10px'}}
+          style={{ width: '100%', marginTop:'8px',fontSize:'18px',fontWeight:'400',
+          color:'red',paddingLeft:'10px',
+        paddingTop:'10px',border: '0.2px solid #c9c9c9',borderRadius: '8px'}}
         />
         <Box sx={{mt:3,textAlign:'center',mb:5}}>
           <Button
