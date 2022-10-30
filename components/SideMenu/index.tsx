@@ -40,7 +40,7 @@ const SideMenu = () => {
           gap: '30px'
         }}
       >
-        <Avatar  src={customerData?.imageFilePath?.thumbUrl || ''}></Avatar>
+        <Avatar  src={customerData?.imageFilePath?.thumbUrl || ''} sx={{ width: 40, height: 40 }}></Avatar>
         <Typography
           variant='h2'
           component='h1'

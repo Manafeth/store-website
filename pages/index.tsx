@@ -5,7 +5,6 @@ import MainLayout from '../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
 import { getMostPurchasedProducts } from '../services/products.services';
 import { getFeaturedCategories } from '../services/categories.services';
 import { ProductData } from '../types/products';
@@ -15,6 +14,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useEffect, useState, useRef } from 'react';
 import { useCommon } from '../contexts/CommonContext';
 import { useRouter } from 'next/router';
+import Divider from '@mui/material/Divider';
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[]

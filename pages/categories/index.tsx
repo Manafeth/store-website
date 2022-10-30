@@ -11,6 +11,7 @@ import { getAllCategories, getFeaturedCategories } from '../../services/categori
 import { CategoryData } from '../../types/categories'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
+
 interface Props {
     categories: CategoryData[],
     allCategories: CategoryData[]

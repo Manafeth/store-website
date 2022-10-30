@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import FormLabel from '@mui/material/FormLabel';
+import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useTranslation } from 'next-i18next';
@@ -12,6 +12,7 @@ import { LOADING } from '../../constants';
 import { ContactUsData } from '../../types/contactUs';
 import { useCommon } from '../../contexts/CommonContext';
 import isEmail from 'validator/lib/isEmail';
+import FormLabel from '@mui/material/FormLabel';
 
 const ContactUsForm = () => {
   const [t] = useTranslation();
@@ -82,7 +83,7 @@ const ContactUsForm = () => {
           id='fullWidth'
           placeholder={t('contact:enterYourName')}
           fullWidth
-          sx={{ mb: 2, mt: 2 }}
+          sx={{ mb: 3, mt: 1 }}
           InputLabelProps={{ shrink: true }}
           type='text'
           name='name'
@@ -100,12 +101,12 @@ const ContactUsForm = () => {
           error={isInvalid && !state.name}
           onChange={handleInputChange}
         />
-        <FormLabel>{t('contact:contactEmail')}</FormLabel>
+        <InputLabel>{t('contact:contactEmail')}</InputLabel>
         <TextField
           id='fullWidth'
           placeholder={t('contact:enterYourEmail')}
           fullWidth
-          sx={{ mb: 2, mt: 2 }}
+          sx={{ mb: 3, mt: 1 }}
           InputLabelProps={{ shrink: true }}
           type='email'
           name='email'
@@ -155,12 +156,12 @@ const ContactUsForm = () => {
           variant='contained'
           color='primary'
           sx={{
-            py: '2px',
             width: '311px',
             height: '72px',
             borderRadius:'12px',
             fontSize: { xs: '12px', md: '25px' },
-            fontWeight:'500'
+            fontWeight:'500',
+            textTransform: 'lowercase',
           }}
           loading={createLoader === LOADING}
           type='submit'

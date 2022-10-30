@@ -33,13 +33,13 @@ const InvoiceDetails = () => {
       <MainLayout>
         <Box component='section' sx={{ mt: 5 }}>
           <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
-            <Typography variant='h1' component='h1' sx={{ mb: 3 }}>
+            <Typography variant='h1' component='h1' sx={{ mb: 3, fontFamily: 'Urbanist'}}>
             {t('checkout:inovice')}  {invoiceData.id}
             </Typography>
             <Typography
               variant='h6'
               component='h1'
-              sx={{ fontWeight: '700', mb: 3, color: 'text.grey' }}
+              sx={{ fontWeight: '700', mb: 3, color: 'text.grey', fontFamily: 'Urbanist' }}
             >
               {t('checkout:viewInvoice')}
             </Typography>
@@ -48,14 +48,14 @@ const InvoiceDetails = () => {
                 <Typography
                   variant='h5'
                   component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
+                  sx={{ fontWeight: '600', mb: 2, fontFamily: 'Urbanist'}}
                 >
                   {t('checkout:billTo')}
                 </Typography>
                 <Typography
                   variant='h5'
                   component='h1'
-                  sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
+                  sx={{ fontWeight: '600', color: 'text.grey', mb: 4, fontFamily: 'Urbanist' }}
                 >
                 {invoiceData?.account?.title}
                 </Typography>
@@ -64,7 +64,7 @@ const InvoiceDetails = () => {
                 <Typography
                   variant='h5'
                   component='h1'
-                  sx={{ fontWeight: '600', mb: 2 }}
+                  sx={{ fontWeight: '600', mb: 2, fontFamily: 'Urbanist'}}
                 >
                   {t('checkout:amount')}
                 </Typography>

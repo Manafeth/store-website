@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'next-i18next';
 import { useCart } from '../../contexts/CartContext';
+import Container from '@mui/material/Container';
 
 interface Props {
   open: boolean;
@@ -53,10 +54,10 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Box sx={{display:'flex', alignItems:'baseline', gap:1}}>
-        <Typography variant='h1' component='h2'>
+        <Typography variant='h1' component='h2' sx={{ fontFamily: 'Urbanist'}}>
         {t('cart:myBag')} 
         </Typography>
-        <Box sx={{fontSize:'25px', fontWeight:'700'}}>({cartData.length})</Box>
+        <Box sx={{fontSize:'25px', fontWeight:'700', fontFamily: 'Urbanist'}}>({cartData.length})</Box>
         </Box>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -65,13 +66,17 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       <Box>
       {cartData?.map((item) => {
                  return(
+                  <>
         <CartItem data={item} key={item.id} />
+        <Divider sx={{ mt: 3, mb: 3 }} />
+        </>
         );
       })}
-        <Divider sx={{ mt: 3, mb: 3 }} />
+        
       </Box>
-
+      <Box sx={{width:'60%'}}>
       <OrderSummary />
+      </Box>
 
       <Box
         sx={{
@@ -86,10 +91,10 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           variant='contained'
           color='secondary'
           sx={{
-            color: 'secondary.contrastText',
+            color: 'primary.main',
             width: 'auto',
             height: '44px',
-            backgroundColor: ' background.grayDisabled',
+            backgroundColor: 'secondary.main',
             mr: '20px',
             textTransform: 'lowercase'
           }}
@@ -102,7 +107,10 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           <Link href='/checkout'>
             <Button
               variant='contained'
-              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase' }}
+              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
+              "&:hover": {
+                backgroundColor: "primary.hover",
+             }}}
               type='submit'
             >
                 {t('cart:continueToPayment')}

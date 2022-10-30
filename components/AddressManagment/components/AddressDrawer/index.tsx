@@ -217,8 +217,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           pb: 7,
         }}
       >
-        <Typography variant='h2' component='h2'>
-          {!selectedAddress ? 'Add new address' : 'Update address'}
+        <Typography variant='h2' component='h2' sx={{fontFamily: 'Urbanist'}}>
+          {!selectedAddress ? t('settings:addNewAddress') : t('settings:updateAddress')}
         </Typography>
         <IconButton onClick={handleClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -236,21 +236,21 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             return (
               <Button
                 variant={isActive ? 'outlined' : 'contained'}
-                sx={{ width: 'auto', height: '44px' }}
+                sx={{ width: 'auto', height: '44px',fontSize:'12px',fontWeight:'400' }}
                 key={item.value}
                 endIcon={
                   isActive ? (
                     <Image
                       src={CheckIcon}
-                      width='22'
-                      height='22'
+                      width='14'
+                      height='14'
                       alt='check icon'
                     />
                   ) : (
                     <Image
                       src={AddIcon}
-                      width='18'
-                      height='18'
+                      width='12'
+                      height='12'
                       alt='add icon'
                     />
                   )
@@ -266,9 +266,21 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             )
           })}
         </Box>
+        <Box
+          component='label'
+          style={{
+            color: 'primary.dark',
+            fontWeight: '500',
+            fontSize:'14px',
+            marginTop: '16px',
+            fontFamily: 'Urbanist'
+          }}
+        >
+          {t('settings:address')}
+        </Box>
         <TextField
           variant='standard'
-          placeholder={t('settings.address')}
+          placeholder={t('settings:address')}
           name='address'
           value={state.address}
           sx={{ mb: 3 }}
@@ -282,6 +294,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             color: 'primary.dark',
             fontWeight: '500',
             marginTop: '16px',
+            fontSize:'14px',
+            fontFamily: 'Urbanist'
           }}
         >
           {t('settings:street')}
@@ -303,6 +317,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             color: 'primary.dark',
             fontWeight: '500',
             marginTop: '16px',
+            fontSize:'14px',
+            fontFamily: 'Urbanist'
           }}
         >
           {t('settings:country')}
@@ -338,6 +354,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             color: 'primary.dark',
             fontWeight: '500',
             marginTop: '16px',
+            fontSize:'14px',
+            fontFamily: 'Urbanist'
           }}
         >
           {t('settings:city')}
@@ -425,7 +443,10 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
 
             <LoadingButton
               variant='contained'
-              sx={{ width: 'auto', height: '44px' }}
+              sx={{ width: 'auto', height: '44px',
+              "&:hover": {
+                backgroundColor: "primary.hover"
+              } }}
               type='submit'
               loading={loading}
             >

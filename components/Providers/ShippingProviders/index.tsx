@@ -64,7 +64,10 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
         </Button>
         <Button
           variant='contained'
-          sx={{ width: '219px', height: '44px' }}
+          sx={{ width: '219px', height: '44px',
+          "&:hover": {
+            backgroundColor: "primary.hover",
+         } }}
           type='submit'
           onClick={handleNext}
           disabled={!checkoutData.shipmentProviderId}

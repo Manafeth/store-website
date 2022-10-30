@@ -13,7 +13,7 @@ export const orderStatusEnums = [
   export const invoiceStatusEnums = [
     { label: 'common:draft', color: 'buttons.blueDarker', value: 0 },
     { label: 'common:post', color: 'warning.main', value: 1 },
-    { label: 'common:paid', color: 'buttons.readyDarker', value: 2 },
+    { label: 'common:paid', color: 'buttons.shippedDarker', value: 2 },
   ];
 
   export const addressTagsEnums = [

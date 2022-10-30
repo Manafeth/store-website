@@ -10,6 +10,7 @@ import { FC } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { ProductData } from '../../types/products';
 import { useTranslation } from 'next-i18next';
+import { Divider } from '@mui/material';
 interface Props {
   data: ProductData;
 }

@@ -39,11 +39,11 @@ const ListMenuItem: FC<Props> = ({ data }) => {
           px: router.pathname === data.link ? 2.5 : 0,
           '&:hover': {
             px:  2.5,
-          }
+          },
         }}
         onClick={handleClick}
       >
-        <ListItemText primary={data.name} sx={{ opacity: 1 }} />
+        <ListItemText primary={data.name} disableTypography={true} sx={{ opacity: 1, fontSize:'18px', fontWeight:'700',fontFamily: 'Urbanist' }} />
         {i18n.language === 'ar'? (
            <Typography sx={{ ml: 4, transform:'rotate(180deg)'}}><Image src={ArrowRight} alt='checked icon' /></Typography>
         ):(

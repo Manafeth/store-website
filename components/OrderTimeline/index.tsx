@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { OrderData } from '../../types/cart';
 import moment from 'moment';
+import { orderStatusEnums } from '../../constants/statuses';
+import StatusText from '../StatusText';
+import { useTranslation } from 'next-i18next';
 interface Props {
   data: {
     id: number,
@@ -18,6 +21,8 @@ interface Props {
 }
 
 const OrderTimeline: FC<Props> = ({ data }) => {
+  const [t] = useTranslation();
+  const orderStatus = orderStatusEnums.find((item) => +item.value === data.new);
   return (
     <>
       <Timeline
@@ -29,8 +34,8 @@ const OrderTimeline: FC<Props> = ({ data }) => {
       >
         <TimelineItem>
           <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
+            <TimelineDot  sx={{backgroundColor:'buttons.shippedDarker'}}/>
+            <TimelineConnector sx={{backgroundColor:'buttons.shippedDarker'}} />
           </TimelineSeparator>
           <TimelineContent>
             <Grid container spacing='40px'>
@@ -40,7 +45,10 @@ const OrderTimeline: FC<Props> = ({ data }) => {
                   component='h1'
                   sx={{ color: 'primary.dark' }}
                 >
-                  Order placed
+                   <StatusText
+                    title={t(orderStatus?.label || '')}
+                    color={orderStatus?.color || ''}
+                  />
                 </Typography>
               </Grid>
               <Grid item xs={6}>

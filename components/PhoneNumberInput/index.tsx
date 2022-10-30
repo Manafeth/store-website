@@ -135,7 +135,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
             height: 40
           }}
           error={error && isError && !phoneNumber}
-          inputProps={{ maxLength: 10, minLength:9}}
+          inputProps={{ maxLength: 10, minLength:10}}
           placeholder="05X XXX-XXX"
           disabled={isDisabled}
           onChange={handleInput}

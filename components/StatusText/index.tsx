@@ -14,6 +14,7 @@ const StatusText: FC<Props> = ({ title, color }) => (
       'color': color,
       'fontWeight': 'bold',
       'fontSize': '12px',
+      'fontFamily': 'Urbanist'
     }}
   >
     {title}

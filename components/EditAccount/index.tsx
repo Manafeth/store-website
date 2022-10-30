@@ -94,7 +94,7 @@ const EditAccount: FC<Props> = ({
       onSubmit={handleSubmit}
       noValidate
     >
-      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' } }}>
+      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' },fontFamily: 'Urbanist' }}>
         {t('settings:editAccount')}
       </Typography>
       <Box
@@ -102,7 +102,7 @@ const EditAccount: FC<Props> = ({
           display: 'flex',
           justifyContent: 'left',
           alignItems: 'center',
-          gap: '30px',
+          gap: '50px',
           mb: 4,
         }}
       >
@@ -113,13 +113,14 @@ const EditAccount: FC<Props> = ({
               : customerData?.imageFilePath?.thumbUrl || ''
           }
           alt='product'
-          sx={{ width: '100', height: '100' }}
+          sx={{ width: 60, height: 60 }}
         ></Avatar>
         <Button
           variant='outlined'
+          color='inherit'
           component='label'
-          sx={{ fontSize: '14px', color: 'grey.2000', fontWeight: '400' }}
-          endIcon={<Image src={uploadIcon} alt='upload Iocn' />}
+          sx={{ fontSize: '14px', color: 'grey.2000', fontWeight: '400', width:'100%' }}
+          endIcon={<Image src={uploadIcon} alt='upload Iocn'/>}
         >
           {t('settings:uploadPhoto')}
           <input
@@ -212,7 +213,11 @@ const EditAccount: FC<Props> = ({
         </Button> */}
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px' }}
+          sx={{ width: 'auto', height: '44px',
+          "&:hover": {
+            backgroundColor: "primary.hover"
+          }
+         }}
           type='submit'
           disabled={loading}
         >

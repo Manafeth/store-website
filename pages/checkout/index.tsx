@@ -49,12 +49,12 @@ const ColorlibStepIconRoot = styled('div')<{
   alignItems: 'center',
   ...(ownerState.active && {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(0,0,0) 0%, rgb(0,0,0) 50%, rgb(0,0,0) 100%)',
+      'linear-gradient( 136deg, rgb(25,149,173) 0%, rgb(25,149,173) 50%, rgb(25,149,173) 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(0,0,0) 0%, rgb(0,0,0) 50%, rgb(0,0,0) 100%)',
+      'linear-gradient( 136deg, rgb(25,149,173) 0%, rgb(25,149,173) 50%, rgb(25,149,173) 100%)',
   }),
 }));
 const Checkout = () => {
@@ -99,8 +99,10 @@ const Checkout = () => {
                 <Step key={step.id}>
                   <StepLabel StepIconComponent={ColorlibStepIcon} color='inherit'>
                     <Box sx={{display:'flex',flexDirection:'column'}}>
-                  {step.name} 
-                    <Box sx={{textAlign:'left'}}>
+                      <Typography variant='h3' sx={{fontWeight:'700', color:'grey.2200', fontFamily: 'Urbanist'}}>
+                        {step.name} 
+                       </Typography>
+                    <Box sx={{textAlign:'left', fontSize:'18px',fontWeight:'700',fontFamily: 'Urbanist'}}>
                     {step.info}
                     </Box>
                     </Box>
@@ -141,9 +143,13 @@ const Checkout = () => {
                 <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
                 {t('common:items')}
                 </Typography>
-                {cartData?.map((item) => {
+                {cartData?.map((item, index) => {
                   return(
+                  <>
                 <CartItem data={item} key={item.id}/>
+                {index < cartData.length -1 && <Divider sx={{mb:1}}/>}
+                
+                </>
                 );
               })}
               </Grid>
