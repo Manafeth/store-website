@@ -41,7 +41,7 @@ const Header = () => {
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
   const { fetchCartProducts, cartData } = useCart();
 
-  const { storeInfo, fetchStoreInfo, fetchMostPurchasedProducts } = useCommon();
+  const { storeInfo, fetchStoreInfo } = useCommon();
 
   const { fetchWishListData, wishListData } = useProfile();
 
@@ -63,15 +63,13 @@ const Header = () => {
 
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
     clearTimeout(timer);
-    timer = setTimeout(() => {
-      fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: ev.target.value })
-
-      const id = 'recent-products';
-      const yOffset = -91; 
-      const element = document.getElementById(id);
-      // @ts-ignore
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({top: y, behavior: 'smooth'});
+      timer = setTimeout(() => {
+      router.push({
+        pathname: paths.home,
+        query: {
+          search: ev.target.value
+        }
+      })
     }, 500);
   }
 

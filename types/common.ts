@@ -25,7 +25,7 @@ export type CommonContextState = {
     storeInfo: StoreInfoData,
     fetchStoreInfo: () => Promise<void>,
     mostPurchasedProducts: ProductData[],
-    fetchMostPurchasedProducts: (params: { page: number, pageSize: number, generalSearch: string }) => Promise<void>,
+    fetchMostPurchasedProducts: (params: { page: number, pageSize: number, generalSearch: string | string[] | undefined }) => Promise<void>,
 }
 
 
