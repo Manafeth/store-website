@@ -119,9 +119,6 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
             mr: '20px',
             fontSize: '14px',
             fontWeight: '500',
-            "&:hover": {
-              backgroundColor: "primary.hover"
-            }
           }}
           onClick={handleBack}
         >

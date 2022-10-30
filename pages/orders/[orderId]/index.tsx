@@ -51,15 +51,15 @@ const OrderDetails = () => {
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
               <Typography
-                variant='h2'
-                sx={{ fontWeight: 'bold', mb: 3 }}
+                variant='h1'
+                sx={{ fontWeight: 'bold', mb: 3,fontFamily: 'Urbanist' }}
               >
                 {t('settings:orderDetails')}
               </Typography>
 
               <Typography
                 variant='h2'
-                sx={{ fontWeight: '700', fontSize: '20px', mb: 3 }}
+                sx={{ fontWeight: '700', fontSize: '20px', mb: 3,fontFamily: 'Urbanist' }}
               >
                 {t('checkout:inovice')} {orderData.invoiceId}
               </Typography>
@@ -67,13 +67,13 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2 }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
                     {t('common:date')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4,fontFamily: 'Urbanist' }}
                   >
                     {moment(orderData.orderDate).format('DD MMM  YYYY hh:MM A')}
                   </Typography>
@@ -81,13 +81,13 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2 }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
                     {t('common:phoneNumber')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 ,fontFamily: 'Urbanist'}}
                   >
                     {orderData.phoneNumber}
                   </Typography>
@@ -97,13 +97,13 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2 }}
+                    sx={{ fontWeight: '600', mb: 2 ,fontFamily: 'Urbanist'}}
                   >
                     {t('checkout:paymnetMethod')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 }}
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4,fontFamily: 'Urbanist' }}
                   >
                     {orderData.paymentProvider}
                   </Typography>
@@ -111,7 +111,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2 }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
                     {t('checkout:paymentStatus')}
                   </Typography>
@@ -126,7 +126,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2 }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
                     {t('checkout:shippingMethod')}
                   </Typography>
@@ -143,7 +143,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2 }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
                     {t('checkout:shippingStatus')}
                   </Typography>
@@ -157,8 +157,8 @@ const OrderDetails = () => {
               <Grid container spacing='40px'>
                 <Grid item xs={6}>
                   <Typography
-                    variant='h3'
-                    sx={{ fontWeight: '500', mb: 2 }}
+                    variant='h5'
+                    sx={{ fontWeight: '500', mb: 2,fontFamily: 'Urbanist' }}
                   >
                     {t('cat:total')}
                   </Typography>
@@ -166,7 +166,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h3'
-                    sx={{ fontWeight: '800', mb: 2 }}
+                    sx={{ fontWeight: '900', mb: 2,fontFamily: 'Urbanist',color:'grey.1800' }}
                   >
                     {t('common:sar')} {orderData.totalCost}
                   </Typography>
@@ -194,8 +194,8 @@ const OrderDetails = () => {
             )}
           </Grid>
           <Typography
-            variant='h3'
-            sx={{ fontWeight: '600', mb: 2 }}
+            variant='h5'
+            sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
           >
             {t('checkout:orderTimeline')}
           </Typography>

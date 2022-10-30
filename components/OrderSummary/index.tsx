@@ -17,6 +17,7 @@ const OrderSummary = () => {
         sx={{
           display: 'flex',
           mb: 3,
+          justifyContent:'space-between'
         }}
       >
         <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
@@ -30,6 +31,7 @@ const OrderSummary = () => {
         sx={{
           display: 'flex',
           mb: 3,
+          justifyContent:'space-between'
         }}
       >
         <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
@@ -43,6 +45,7 @@ const OrderSummary = () => {
         sx={{
           display: 'flex',
           mb: 3,
+          justifyContent:'space-between'
         }}
       >
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>

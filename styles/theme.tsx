@@ -131,7 +131,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         readyLighter: '#e9f2f5',
         readyDarker: '#287C9B',
         shippedLighter: '#e8f9f7',
-        shippedDarker: '#1FC3B2',
+        shippedDarker: '#2DC071',
         cancelledLighter: '#fff0f1',
         cancelledDarker: '#FE6D73',
         cancelLighter: '#fff5ec',
