@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Button from '@mui/material/Button';
 import { useTranslation } from 'next-i18next';
+import FormLabel from '@mui/material/FormLabel';
 
 const ContactUsForm = () => {
   const [t] = useTranslation();
@@ -73,15 +74,31 @@ const ContactUsForm = () => {
             },
           }}
         />
-        <InputLabel>{t('contact:message')}</InputLabel>
-        <TextareaAutosize
-          aria-label='empty textarea'
-          minRows={8}
-          placeholder={t('contact:messageText')}
-          style={{ width: '100%', marginTop:'8px',fontSize:'18px',fontWeight:'400',
-          color:'red',paddingLeft:'10px',
-        paddingTop:'10px',border: '0.2px solid #c9c9c9',borderRadius: '8px'}}
-        />
+        <FormLabel>{t('contact:message')}</FormLabel>
+        <Box sx={{
+            'textarea': {
+              width: '100%', marginTop:'16px',fontSize:'18px',fontWeight:'400',
+              color:'p.color',paddingLeft:'10px',
+              paddingTop:'10px',
+              borderRadius: 1,
+              borderColor: '#c4c4c4'
+            },
+            'textarea::placeholder': {
+              color: '#afb1b9'
+            },
+            'textarea:focus-visible': {
+              outline: '0',
+              borderColor: 'primary.main'
+            }
+          }}
+        >
+         <TextareaAutosize
+            aria-label='empty textarea'
+            minRows={8}
+            placeholder={t('contact:messageText')}
+          /> 
+        </Box>
+        
         <Box sx={{mt:3,textAlign:'center',mb:5}}>
           <Button
           variant='contained'
