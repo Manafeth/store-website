@@ -32,7 +32,8 @@ const AuthModal: FC<Props> = () => {
         updateAccountData,
         sendPhoneNumberStatus,
         verifyStatus,
-        updateProfileStatus
+        updateProfileStatus,
+        userData
     } = useAuthModal();
     const [tab, setTab] = useState(1);
     const [t] = useTranslation();
@@ -133,7 +134,6 @@ const AuthModal: FC<Props> = () => {
     
     useEffect(() => {
         if (verifyStatus === SUCCESS) {
-            setTab(3);
             setLoginData({
                 countryId: 0,
                 phoneNumber: ''
@@ -144,6 +144,12 @@ const AuthModal: FC<Props> = () => {
                 'field-3': '',
                 'field-4': '',
             })
+
+            if(!userData.isCompleteProfile) {
+                setTab(3);
+            } else {
+                handleClose();
+            }
         }
     }, [verifyStatus])
 

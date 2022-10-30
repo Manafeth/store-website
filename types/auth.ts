@@ -30,6 +30,8 @@ export type ProfileData = {
         orignialUrl: string,
         thumbUrl: string,
     },
+    isCompleteProfile?:boolean, 
+    phoneNumber?: string
 }
 
 export type AuthModalState = {
@@ -45,5 +47,6 @@ export type AuthModalState = {
     verifyStatus: string,
     updateProfileStatus: string,
     logout: () => void,
-    isloggedIn: boolean
+    isloggedIn: boolean,
+    userData: ProfileData
 }
