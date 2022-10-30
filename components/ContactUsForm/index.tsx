@@ -1,16 +1,62 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { useTranslation } from 'next-i18next';
+import { useContactUs } from '../../contexts/ContactUs';
+import { LOADING } from '../../constants';
+import { ContactUsData } from '../../types/contactUs';
+import { useCommon } from '../../contexts/CommonContext';
+import isEmail from 'validator/lib/isEmail';
 import FormLabel from '@mui/material/FormLabel';
 
 const ContactUsForm = () => {
   const [t] = useTranslation();
+  const [state, setState] = useState<ContactUsData>({
+    name: '',
+    email: '',
+    message: '',
+    storeId: 0
+  });
+  const [isInvalid, setIsInvalid] = useState(false);
+  const {createLoader, createContactFunction} = useContactUs();
+  const {storeInfo, fetchStoreInfo} = useCommon()
+  
+  function handleInputChange(ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setState((prevState) => ({
+      ...prevState,
+      [ev.target.name]: ev.target.value
+    }))
+  }
+
+  function handleSubmit(ev: FormEvent<HTMLFormElement>) {
+    ev.preventDefault();
+    if (!state.name || !state.email || !state.message || !isEmail(state.email)) {
+      setIsInvalid(true);
+    } else {
+      createContactFunction(state)
+    }
+  }
+
+  useEffect(() => {
+    fetchStoreInfo();
+  }, [])
+  
+
+  useEffect(() => {
+    if (storeInfo?.id) {
+      setState((prevState) => ({
+        ...prevState,
+        storeId: storeInfo.id || 0
+      }))
+    }
+  }, [storeInfo])
+  
+
   return (
     <Container sx={{ mt: 5 }}>
       <Typography
@@ -31,8 +77,8 @@ const ContactUsForm = () => {
       >
         {t('contact:contactText')}
       </Typography>
-      <Box>
-        <InputLabel>{t('contact:yourName')}</InputLabel>
+      <Box component='form' onSubmit={handleSubmit}>
+        <FormLabel>{t('contact:yourName')}</FormLabel>
         <TextField
           id='fullWidth'
           placeholder={t('contact:enterYourName')}
@@ -52,6 +98,8 @@ const ContactUsForm = () => {
               },
             },
           }}
+          error={isInvalid && !state.name}
+          onChange={handleInputChange}
         />
         <InputLabel>{t('contact:contactEmail')}</InputLabel>
         <TextField
@@ -73,6 +121,8 @@ const ContactUsForm = () => {
               },
             },
           }}
+          error={isInvalid && (!state.email || !isEmail(state.email))}
+          onChange={handleInputChange}
         />
         <FormLabel>{t('contact:message')}</FormLabel>
         <Box sx={{
@@ -81,14 +131,14 @@ const ContactUsForm = () => {
               color:'p.color',paddingLeft:'10px',
               paddingTop:'10px',
               borderRadius: 1,
-              borderColor: '#c4c4c4'
+              borderColor: isInvalid && !state.message ? 'error.main' : '#c4c4c4',
             },
             'textarea::placeholder': {
               color: '#afb1b9'
             },
             'textarea:focus-visible': {
               outline: '0',
-              borderColor: 'primary.main'
+              borderColor: isInvalid && !state.message ? 'error.main' : 'primary.main',
             }
           }}
         >
@@ -96,11 +146,13 @@ const ContactUsForm = () => {
             aria-label='empty textarea'
             minRows={8}
             placeholder={t('contact:messageText')}
+            name='message'
+            onChange={handleInputChange}
           /> 
         </Box>
         
         <Box sx={{mt:3,textAlign:'center',mb:5}}>
-          <Button
+          <LoadingButton
           variant='contained'
           color='primary'
           sx={{
@@ -111,9 +163,11 @@ const ContactUsForm = () => {
             fontWeight:'500',
             textTransform: 'lowercase',
           }}
+          loading={createLoader === LOADING}
+          type='submit'
         >
           {t('contact:submit')}
-        </Button>
+        </LoadingButton>
         </Box>
       </Box>
     </Container>

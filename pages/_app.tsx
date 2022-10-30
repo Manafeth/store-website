@@ -9,8 +9,8 @@ import { ProfileModalProvider } from '../contexts/ProfileContext';
 import { CommonContextProvider } from '../contexts/CommonContext';
 import { AlertProvider } from '../contexts/AlertContext';
 import { CartModalProvider } from '../contexts/CartContext';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { ContactUsProvider } from '../contexts/ContactUs';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -34,7 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <AuthModalProvider>
             <ProfileModalProvider>
               <CartModalProvider>
-              <Component {...pageProps} />
+                <ContactUsProvider>
+                  <Component {...pageProps} />
+                </ContactUsProvider>
               </CartModalProvider>
             </ProfileModalProvider>
           </AuthModalProvider>
