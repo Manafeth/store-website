@@ -5,9 +5,11 @@ import contactUs from '../../assets/images/contact-us.svg';
 import ContactUsForm from '../../components/ContactUsForm';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import MainLayout from '../../layouts/MainLayout';
 
 const ContactUs = () => {
   return (
+    <MainLayout>
     <ContactUsLayout
       image={
         <Image
@@ -21,6 +23,7 @@ const ContactUs = () => {
     >
       <ContactUsForm />
     </ContactUsLayout>
+    </MainLayout>
   );
 };
 
