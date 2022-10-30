@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import MainLayout from '../../layouts/MainLayout'
-import HeroSection from '../../components/HeroSection'
+// import HeroSection from '../../components/HeroSection'
 import FeaturedCategoriesSection from '../../components/FeaturedCategoriesSection'
 import CategoryCard from '../../components/CategoryCard'
 import { getAllCategories, getFeaturedCategories } from '../../services/categories.services'
@@ -31,7 +31,7 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
     
   return (
     <MainLayout>
-        <HeroSection />
+        {/* <HeroSection /> */}
         <Box pt={2.25} pb={5} ref={categoriesSections}>
             <FeaturedCategoriesSection categories={categories} />
         </Box>

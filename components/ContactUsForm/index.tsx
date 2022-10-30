@@ -74,14 +74,30 @@ const ContactUsForm = () => {
           }}
         />
         <FormLabel>{t('contact:message')}</FormLabel>
-        <TextareaAutosize
-          aria-label='empty textarea'
-          minRows={8}
-          placeholder={t('contact:messageText')}
-          style={{ width: '100%', marginTop:'16px',fontSize:'18px',fontWeight:'400',
-          color:'p.color',paddingLeft:'10px',
-        paddingTop:'10px'}}
-        />
+        <Box sx={{
+            'textarea': {
+              width: '100%', marginTop:'16px',fontSize:'18px',fontWeight:'400',
+              color:'p.color',paddingLeft:'10px',
+              paddingTop:'10px',
+              borderRadius: 1,
+              borderColor: '#c4c4c4'
+            },
+            'textarea::placeholder': {
+              color: '#afb1b9'
+            },
+            'textarea:focus-visible': {
+              outline: '0',
+              borderColor: 'primary.main'
+            }
+          }}
+        >
+         <TextareaAutosize
+            aria-label='empty textarea'
+            minRows={8}
+            placeholder={t('contact:messageText')}
+          /> 
+        </Box>
+        
         <Box sx={{mt:3,textAlign:'center',mb:5}}>
           <Button
           variant='contained'
