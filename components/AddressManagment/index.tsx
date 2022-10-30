@@ -126,6 +126,9 @@ const AddressManagment = () => {
             width: 'auto',
             height: '38px',
             fontSize: { xs: '12px', md: '14px' },
+            "&:hover": {
+              backgroundColor: "primary.hover"
+            }
           }}
           onClick={onOpen}
         >

@@ -212,7 +212,11 @@ const EditAccount: FC<Props> = ({
         </Button> */}
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px' }}
+          sx={{ width: 'auto', height: '44px',
+          "&:hover": {
+            backgroundColor: "primary.hover"
+          }
+         }}
           type='submit'
           disabled={loading}
         >

@@ -173,7 +173,10 @@ const OrderDetails = () => {
                 </Grid>
               </Grid>
               {orderData.providerType === 2 && orderData.providerCategory === 2 && !isInActive && (
-                <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING}>
+                <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
+                   "&:hover": {
+                  backgroundColor: "primary.hover"
+                }}}>
                  {t('checkout:payConfirmPayment')}
                 </LoadingButton>
               )}
@@ -213,7 +216,10 @@ const OrderDetails = () => {
               <Link href={paths.invoiceDetails(orderData.invoiceId)}>
                 <Button
                   variant='contained'
-                  sx={{ width: '219px', height: '44px' }}
+                  sx={{ width: '219px', height: '44px',
+                  "&:hover": {
+                    backgroundColor: "primary.hover"
+                  } }}
                 >
                   {t('settings:viewInvoice')}
                 </Button>

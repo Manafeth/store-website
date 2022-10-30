@@ -26,7 +26,8 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();
   const { fetchCartProducts, cartData } = useCart();
   useEffect(() => {
-    if (open) fetchCartProducts();
+    if (open)
+      fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
@@ -52,33 +53,26 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           pb: 7,
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1 }}>
-          <Typography
-            variant='h1'
-            component='h2'
-            sx={{ fontFamily: 'Urbanist' }}
-          >
-            {t('cart:myBag')}
-          </Typography>
-          <Box
-            sx={{ fontSize: '25px', fontWeight: '700', fontFamily: 'Urbanist' }}
-          >
-            ({cartData.length})
-          </Box>
+        <Box sx={{display:'flex', alignItems:'baseline', gap:1}}>
+        <Typography variant='h1' component='h2' sx={{ fontFamily: 'Urbanist'}}>
+        {t('cart:myBag')} 
+        </Typography>
+        <Box sx={{fontSize:'25px', fontWeight:'700', fontFamily: 'Urbanist'}}>({cartData.length})</Box>
         </Box>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
         </IconButton>
       </Box>
       <Box>
-        {cartData?.map((item) => {
-          return (
-            <>
-              <CartItem data={item} key={item.id} />
-              <Divider sx={{ mt: 3, mb: 3 }} />
-            </>
-          );
-        })}
+      {cartData?.map((item) => {
+                 return(
+                  <>
+        <CartItem data={item} key={item.id} />
+        <Divider sx={{ mt: 3, mb: 3 }} />
+        </>
+        );
+      })}
+        
       </Box>
       <OrderSummary />
 
@@ -90,49 +84,46 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           pb: 5,
         }}
       >
-        <Link href='/'>
-          <Button
-            variant='contained'
-            color='secondary'
-            sx={{
-              color: 'secondary.contrastText',
-              width: 'auto',
-              height: '44px',
-              backgroundColor: ' background.grayDisabled',
-              mr: '20px',
-              textTransform: 'lowercase',
-            }}
-            onClick={handleClose}
-          >
-            {t('cart:continueShopping')}
-          </Button>
+         <Link href='/'>
+        <Button
+          variant='contained'
+          color='secondary'
+          sx={{
+            color: 'secondary.contrastText',
+            width: 'auto',
+            height: '44px',
+            backgroundColor: ' background.grayDisabled',
+            mr: '20px',
+            textTransform: 'lowercase'
+          }}
+          onClick={handleClose}
+        >
+          {t('cart:continueShopping')}
+        </Button>
         </Link>
         {cartData.length > 0 ? (
           <Link href='/checkout'>
             <Button
               variant='contained'
-              sx={{
-                width: 'auto',
-                height: '44px',
-                textTransform: 'lowercase',
-                '&:hover': {
-                  backgroundColor: 'primary.hover',
-                },
-              }}
+              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
+              "&:hover": {
+                backgroundColor: "primary.hover",
+             }}}
               type='submit'
             >
-              {t('cart:continueToPayment')}
+                {t('cart:continueToPayment')}
             </Button>
           </Link>
         ) : (
           <Button
             variant='contained'
-            sx={{ width: 'auto', height: '44px', textTransform: 'lowercase' }}
+            sx={{ width: 'auto', height: '44px',textTransform: 'lowercase' }}
             disabled
           >
-            {t('cart:continueToPayment')}
+              {t('cart:continueToPayment')}
           </Button>
         )}
+        
       </Box>
     </Drawer>
   );

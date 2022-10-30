@@ -39,7 +39,7 @@ const ListMenuItem: FC<Props> = ({ data }) => {
           px: router.pathname === data.link ? 2.5 : 0,
           '&:hover': {
             px:  2.5,
-          }
+          },
         }}
         onClick={handleClick}
       >

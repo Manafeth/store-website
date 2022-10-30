@@ -16,11 +16,11 @@ const OrderSummary = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
           mb: 3,
+          gap:'252px'
         }}
       >
-        <Typography variant='h5' component='h1'>
+        <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
           {t('cart:subTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
@@ -30,11 +30,11 @@ const OrderSummary = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
           mb: 3,
+          gap:'128px',
         }}
       >
-        <Typography variant='h5' component='h1'>
+        <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
         {t('checkout:checkoutAttributsTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
@@ -44,8 +44,8 @@ const OrderSummary = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
           mb: 3,
+          gap:'278px'
         }}
       >
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
