@@ -29,6 +29,16 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   const [sendPhoneNumberStatus, setSendPhoneNumberStatus] = useState('')
   const [verifyStatus, setVerifyStatus] = useState('')
   const [updateProfileStatus, setUpdateProfileStatus] = useState('')
+  const [userData, setUserData] = useState<ProfileData>({
+    fullName: '',
+    email: '',
+    mainImageFilePath: {
+      orignialUrl: '',
+      thumbUrl: '',
+    },
+    isCompleteProfile: false,
+    phoneNumber: ''
+  })
 
   const { sendAlert } = useAlert();
   const router = useRouter();
@@ -62,6 +72,7 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
       localStorage.setItem('accessToken', response?.data?.data?.token?.accessToken);
       setVerifyStatus(SUCCESS);
       setIsloggedIn(true);
+      setUserData(response.data.data.profile)
       sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
       setVerifyStatus(ERROR);
@@ -130,7 +141,8 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
     verifyStatus,
     updateProfileStatus,
     logout,
-    isloggedIn
+    isloggedIn,
+    userData
   };
   
   return (
