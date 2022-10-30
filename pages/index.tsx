@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 import FeaturedCategoriesSection from '../components/FeaturedCategoriesSection';
-import HeroSection from '../components/HeroSection';
+// import HeroSection from '../components/HeroSection';
 import MainLayout from '../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -33,7 +33,7 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
   
   return (
     <MainLayout>
-      <HeroSection />
+      {/* <HeroSection /> */}
       <Box pt={{xs: 6, md: 6.25}} pb={{xs: 6, md: 6.25}}>
         <FeaturedCategoriesSection categories={categories} />
       </Box>
