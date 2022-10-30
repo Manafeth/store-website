@@ -74,7 +74,9 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       })}
         
       </Box>
+      <Box sx={{width:'60%'}}>
       <OrderSummary />
+      </Box>
 
       <Box
         sx={{
@@ -89,10 +91,10 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           variant='contained'
           color='secondary'
           sx={{
-            color: 'secondary.contrastText',
+            color: 'primary.main',
             width: 'auto',
             height: '44px',
-            backgroundColor: ' background.grayDisabled',
+            backgroundColor: 'secondary.main',
             mr: '20px',
             textTransform: 'lowercase'
           }}

@@ -139,7 +139,9 @@ const AddressManagment = () => {
       {addressData.length > 0 ? addressData.map((item) => {
         return (
           <Card key={item.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderRadius: 2, px: 2, py: 1, mb: 2 }}>
+            <Typography variant="h5">
             {item.address}
+            </Typography>
             <Box>
               <IconButton
                 onClick={function () {
