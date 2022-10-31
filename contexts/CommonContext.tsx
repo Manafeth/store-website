@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactElement, FC, useEffect, useState } from 'react';
-import { getStoreInfo } from '../services/common.services';
+import { getSlides, getStoreInfo } from '../services/common.services';
 import { CommonContextState, StoreInfoData } from '../types/common';
 import FloatingWhatsApp from 'react-floating-whatsapp'
 import  { getMostPurchasedProducts } from '../services/products.services';
@@ -23,6 +23,8 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         supportEmail: ''
     })
 
+    const [slides, setSlides] = useState<[]>([])
+
     const router = useRouter();
 
     const [mostPurchasedProducts, setMostPurchasedProducts] = useState<ProductData[]>([])
@@ -37,7 +39,7 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
       }
     }
 
-    async function fetchMostPurchasedProducts(params: { page: number, pageSize: number, generalSearch: string }) {
+    async function fetchMostPurchasedProducts(params: { page: number, pageSize: number, generalSearch: string | string[] | undefined }) {
       try {
         const response = await getMostPurchasedProducts(params)
         setMostPurchasedProducts(response.data.data.data)
@@ -46,11 +48,23 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
       }
     }
 
+    async function fetchSlides() {
+      try {
+        const response = await getSlides();
+        setSlides(response.data.data)
+      } catch (error) {
+        Promise.reject(error)
+      }
+    }
+    
+
   const state: CommonContextState = {
     storeInfo,
     fetchStoreInfo,
     mostPurchasedProducts,
-    fetchMostPurchasedProducts
+    fetchMostPurchasedProducts,
+    slides,
+    fetchSlides
   };
   
   return (

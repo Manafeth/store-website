@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import MainLayout from '../../../layouts/MainLayout';
-// import HeroSection from '../../../components/HeroSection';
+import HeroSection from '../../../components/HeroSection';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-// import CategoryHeroSection from '../../../components/CategoryHeroSection';
+import CategoryHeroSection from '../../../components/CategoryHeroSection';
 import ProductVerticalItem from '../../../components/ProductVerticalItem';
 import Filters from '../../../components/Filters';
 import ProductPagination from '../../../components/Pagination';
@@ -21,6 +21,8 @@ import { useRouter } from 'next/router';
 import { useTranslation } from "next-i18next";
 import productStatusMenu from '../../../constants/ProductStatusValues';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getSlides } from '../../../services/common.services';
+import { SlideData } from '../../../types/common';
 
 interface Products {
   data: ProductData[],
@@ -36,10 +38,11 @@ interface Props {
     itemsCount: number,
     categories: CategoryData[],
     attributes: []
-  }
+  },
+  slides: SlideData[]
 }
 
-const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => {
+const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slides }) => {
   const router = useRouter();
   const [t] = useTranslation();
 
@@ -123,7 +126,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
   
   return (
     <MainLayout>
-      {/* <HeroSection /> */}
+      <HeroSection targetSectionId='products-sec' slides={slides} />
       <Box component='footer' py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing={3} rowSpacing={3.75}>
@@ -173,8 +176,8 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   })}
                 </TextField>
               </Box>
-              {/* <CategoryHeroSection /> */}
-              <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }}>
+              <CategoryHeroSection targetSectionId='products-sec' slides={slides} />
+              <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
                 {products.data.map((item) => {
                   return (
                     <Grid item xs={12} sm={6} lg={4} key={item.id}>
@@ -221,10 +224,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { categoryId } = context.params as IParams;
     const category = await getCategoryDetails(categoryId, context.locale);
     const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 }, context.locale);
+    const slidesResponse = await getSlides(context.locale);
     return {
       props: {
         categoryData: category.data.data,
         categoryDetails: categoryDetails.data.data,
+        slides: slidesResponse.data.data,
         ...(await serverSideTranslations(context.locale || '', ['heroSection', 'common', 'cart', 'auth']))
       },
       revalidate: 10,

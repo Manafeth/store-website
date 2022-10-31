@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 import FeaturedCategoriesSection from '../components/FeaturedCategoriesSection';
-// import HeroSection from '../components/HeroSection';
+import HeroSection from '../components/HeroSection';
 import MainLayout from '../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -15,18 +15,20 @@ import { useEffect, useState, useRef } from 'react';
 import { useCommon } from '../contexts/CommonContext';
 import { useRouter } from 'next/router';
 import Divider from '@mui/material/Divider';
+import { SlideData } from '../types/common';
+import { getSlides } from '../services/common.services';
 interface Props {
   productsList: ProductData[],
-  categories: CategoryData[]
+  categories: CategoryData[],
+  slides: SlideData[]
 }
 
-const Home: NextPage<Props> = ({ productsList, categories }) => {
-  const { mostPurchasedProducts } = useCommon();
+const Home: NextPage<Props> = ({ productsList, categories, slides }) => {
+  const { mostPurchasedProducts, fetchMostPurchasedProducts } = useCommon();
   const [products, setProducts] = useState<ProductData[]>([]);
   const ref = useRef(null);
   const router = useRouter();
   const { search } = router.query;
-  const { fetchMostPurchasedProducts } = useCommon();
 
   function scrollToProducts() {
     const yOffset = -91; 
@@ -52,16 +54,17 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
   }, [search])
   
   
+  
   return (
     <MainLayout>
-      {/* <HeroSection /> */}
+      <HeroSection targetSectionId='recent-products' slides={slides} />
       <Box pt={{xs: 6, md: 6.25}} pb={{xs: 6, md: 6.25}}>
         <FeaturedCategoriesSection categories={categories} />
       </Box>
-      <Box component='section' >
+      <Box component='section'>
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
           <Divider />
-          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }} ref={ref}>
+          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }} ref={ref} id='recent-products'>
             {products.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>
@@ -79,10 +82,13 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, locale);
   const categories = await getFeaturedCategories(locale);
+  const slidesResponse = await getSlides(locale);
+  
   return {
     props: {
       productsList: products.data.data.data,
       categories: categories.data.data,
+      slides: slidesResponse.data.data,
       ...(locale && await serverSideTranslations(locale, ['heroSection', 'common', 'cart', 'auth']))
     },
     revalidate: 10,

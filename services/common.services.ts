@@ -19,8 +19,20 @@ function getStoreInfo() {
   );
 }
 
+function getSlides(locale?: string) {
+  return axiosInstance.get(
+    'Announcement/GetAllSliders',
+    {
+      headers: locale ? {
+        'Accept-Language': locale,
+      } : {}
+    }
+  );
+}
+
 export {
     getCountries,
     getAllCities,
-    getStoreInfo
+    getStoreInfo,
+    getSlides
 };

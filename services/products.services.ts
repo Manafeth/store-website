@@ -1,7 +1,7 @@
 import { ProductByCategoryParams } from '../types/products';
 import { axiosInstance } from './axiosInstance';
 
-function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string }, locale?: string) {
+function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string | string[] | undefined }, locale?: string) {
   return axiosInstance.get(
     'Product/MostPurchasedProducts',
     {

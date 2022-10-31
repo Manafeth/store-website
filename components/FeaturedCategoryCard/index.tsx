@@ -20,7 +20,7 @@ const FeaturedCategoryCard: FC<Props> = ({ isVertical, data }) => {
         sx={{
           position: 'relative',
           // height: isVertical ? {xs: 300, md: 559} : {xs: 150, md: 274.5},
-          width: '416.59px',
+          width: '100%',
           height: '280px',
           cursor: 'pointer',
           backgroundRepeat: 'no-repeat',
@@ -34,8 +34,9 @@ const FeaturedCategoryCard: FC<Props> = ({ isVertical, data }) => {
           sx={{
             position: 'absolute',
             bottom: '29px',
-            left: '62px',
-            width: '285px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
             height: '48px',
             p: 4,
             backgroundColor: 'rgba(255,255,255,0.5)',
