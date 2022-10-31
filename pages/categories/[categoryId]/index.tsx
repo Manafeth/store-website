@@ -21,6 +21,8 @@ import { useRouter } from 'next/router';
 import { useTranslation } from "next-i18next";
 import productStatusMenu from '../../../constants/ProductStatusValues';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getSlides } from '../../../services/common.services';
+import { SlideData } from '../../../types/common';
 
 interface Products {
   data: ProductData[],
@@ -36,10 +38,11 @@ interface Props {
     itemsCount: number,
     categories: CategoryData[],
     attributes: []
-  }
+  },
+  slides: SlideData[]
 }
 
-const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => {
+const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slides }) => {
   const router = useRouter();
   const [t] = useTranslation();
 
@@ -123,7 +126,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
   
   return (
     <MainLayout>
-      <HeroSection targetSectionId='products-sec' />
+      <HeroSection targetSectionId='products-sec' slides={slides} />
       <Box component='footer' py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing={3} rowSpacing={3.75}>
@@ -173,7 +176,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   })}
                 </TextField>
               </Box>
-              <CategoryHeroSection targetSectionId='products-sec' />
+              <CategoryHeroSection targetSectionId='products-sec' slides={slides} />
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
                 {products.data.map((item) => {
                   return (
@@ -221,10 +224,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { categoryId } = context.params as IParams;
     const category = await getCategoryDetails(categoryId, context.locale);
     const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 }, context.locale);
+    const slidesResponse = await getSlides(context.locale);
     return {
       props: {
         categoryData: category.data.data,
         categoryDetails: categoryDetails.data.data,
+        slides: slidesResponse.data.data,
         ...(await serverSideTranslations(context.locale || '', ['heroSection', 'common', 'cart', 'auth']))
       },
       revalidate: 10,

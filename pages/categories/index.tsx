@@ -10,14 +10,17 @@ import CategoryCard from '../../components/CategoryCard'
 import { getAllCategories, getFeaturedCategories } from '../../services/categories.services'
 import { CategoryData } from '../../types/categories'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { getSlides } from '../../services/common.services'
+import { SlideData } from '../../types/common'
 
 
 interface Props {
     categories: CategoryData[],
-    allCategories: CategoryData[]
+    allCategories: CategoryData[],
+    slides: SlideData[]
 }
   
-const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
+const Categories: NextPage<Props>  = ({ categories, allCategories, slides }) => {
     const categoriesSections = useRef(null);
 
     useEffect(() => {
@@ -32,7 +35,7 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
     
   return (
     <MainLayout>
-        <HeroSection targetSectionId='categroires-sec' />
+        <HeroSection targetSectionId='categroires-sec' slides={slides} />
         <Box pt={2.25} pb={5} ref={categoriesSections}>
             <FeaturedCategoriesSection categories={categories} />
         </Box>
@@ -58,11 +61,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const localization = await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']);
     const categories = await getFeaturedCategories(locale);
     const allCategories = await getAllCategories(locale);
-    
+    const slidesResponse = await getSlides(locale);
     return {
         props: {
             ...localization,
             categories: categories.data.data,
+            slides: slidesResponse.data.data,
             allCategories: allCategories.data.data
         },
         revalidate: 10,

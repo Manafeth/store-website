@@ -5,16 +5,15 @@ import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 
 import { useTranslation } from "next-i18next";
-import { useCommon } from '../../contexts/CommonContext';
 import Carousel from 'react-material-ui-carousel';
+import { SlideData } from '../../types/common';
 interface Props {
-    targetSectionId: string
+    targetSectionId: string,
+    slides: SlideData[]
 }
 
-const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
+const CategoryHeroSection: FC<Props> = ({ targetSectionId, slides }) => {
     const [t] = useTranslation();
-    const { fetchSlides, slides } = useCommon();
-
     function scrollToProducts() {
         const yOffset = -91; 
         const element = document.getElementById(targetSectionId);
@@ -23,9 +22,6 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
         window.scrollTo({top: y, behavior: 'smooth'});
     }
 
-    useEffect(() => {
-        fetchSlides()
-    }, [])
   return (
     <Box component='section' sx={{ position: 'relative' }}>
         <Carousel>
