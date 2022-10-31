@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import MainLayout from '../../../layouts/MainLayout';
-// import HeroSection from '../../../components/HeroSection';
+import HeroSection from '../../../components/HeroSection';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-// import CategoryHeroSection from '../../../components/CategoryHeroSection';
+import CategoryHeroSection from '../../../components/CategoryHeroSection';
 import ProductVerticalItem from '../../../components/ProductVerticalItem';
 import Filters from '../../../components/Filters';
 import ProductPagination from '../../../components/Pagination';
@@ -123,7 +123,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
   
   return (
     <MainLayout>
-      {/* <HeroSection /> */}
+      <HeroSection targetSectionId='products-sec' />
       <Box component='footer' py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing={3} rowSpacing={3.75}>
@@ -173,8 +173,8 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails }) => 
                   })}
                 </TextField>
               </Box>
-              {/* <CategoryHeroSection /> */}
-              <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }}>
+              <CategoryHeroSection targetSectionId='products-sec' />
+              <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
                 {products.data.map((item) => {
                   return (
                     <Grid item xs={12} sm={6} lg={4} key={item.id}>

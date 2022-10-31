@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 import FeaturedCategoriesSection from '../components/FeaturedCategoriesSection';
-// import HeroSection from '../components/HeroSection';
+import HeroSection from '../components/HeroSection';
 import MainLayout from '../layouts/MainLayout';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -21,12 +21,11 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ productsList, categories }) => {
-  const { mostPurchasedProducts } = useCommon();
+  const { mostPurchasedProducts, fetchMostPurchasedProducts } = useCommon();
   const [products, setProducts] = useState<ProductData[]>([]);
   const ref = useRef(null);
   const router = useRouter();
   const { search } = router.query;
-  const { fetchMostPurchasedProducts } = useCommon();
 
   function scrollToProducts() {
     const yOffset = -91; 
@@ -52,16 +51,17 @@ const Home: NextPage<Props> = ({ productsList, categories }) => {
   }, [search])
   
   
+  
   return (
     <MainLayout>
-      {/* <HeroSection /> */}
+      <HeroSection targetSectionId='recent-products' />
       <Box pt={{xs: 6, md: 6.25}} pb={{xs: 6, md: 6.25}}>
         <FeaturedCategoriesSection categories={categories} />
       </Box>
-      <Box component='section' >
+      <Box component='section'>
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
           <Divider />
-          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }} ref={ref}>
+          <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }} ref={ref} id='recent-products'>
             {products.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>

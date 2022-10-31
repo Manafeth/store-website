@@ -25,6 +25,8 @@
     "react-dom": "18.2.0",
     "react-floating-whatsapp": "^4.0.5",
     "react-image-gallery": "^1.2.9",
+    "react-material-ui-carousel": "^3.4.2",
+    "react-responsive-carousel": "^3.2.23",
     "stylis": "^4.1.1",
     "stylis-plugin-rtl": "^2.1.1",
     "validator": "^13.7.0"

@@ -19,8 +19,15 @@ function getStoreInfo() {
   );
 }
 
+function getSlides() {
+  return axiosInstance.get(
+    'Announcement/GetAllSliders',
+  );
+}
+
 export {
     getCountries,
     getAllCities,
-    getStoreInfo
+    getStoreInfo,
+    getSlides
 };
