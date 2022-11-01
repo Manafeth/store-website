@@ -59,8 +59,8 @@ const Categories: NextPage<Props>  = ({ categories, allCategories, slides }) => 
 
 export const getServerSideProps: GetServerSideProps = async ({ locale, req }) => {
     const headers = {
-      'Accept-Language': locale,
-        'referer': req?.headers?.referer || ''
+        'Accept-Language': locale,
+        'referer': `https://${req?.headers?.host || ''}`
     }
     const localization = await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']);
     const categories = await getFeaturedCategories(headers);
