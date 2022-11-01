@@ -2,7 +2,6 @@ import { ProductByCategoryParams } from '../types/products';
 import { axiosInstance } from './axiosInstance';
 
 function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string | string[] | undefined }, headers?: { [key: string]: any }) {
-  console.log('headers', headers)
   return axiosInstance.get(
     'Product/MostPurchasedProducts',
     {

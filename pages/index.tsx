@@ -23,7 +23,7 @@ interface Props {
   slides: SlideData[]
 }
 
-const Home: NextPage<Props> = ({ productsList, categories, slides }) => {
+const HomePage: NextPage<Props> = ({ productsList, categories, slides }) => {
   const { mostPurchasedProducts, fetchMostPurchasedProducts } = useCommon();
   const [products, setProducts] = useState<ProductData[]>([]);
   const ref = useRef(null);
@@ -51,8 +51,7 @@ const Home: NextPage<Props> = ({ productsList, categories, slides }) => {
       fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: search })
       scrollToProducts()
     }
-  }, [search])
-  
+  }, [search])  
   
   
   return (
@@ -82,7 +81,7 @@ const Home: NextPage<Props> = ({ productsList, categories, slides }) => {
 export const getServerSideProps: GetServerSideProps = async ({ locale, req }) => {
   const headers = {
     'Accept-Language': locale,
-    'referer': `https://${req?.headers?.host || ''}`
+    'referer': req?.headers?.referer || ''
   }
 
   const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
@@ -95,10 +94,9 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, req }) =>
       categories: categories.data.data,
       slides: slidesResponse.data.data,
       ...('en' && await serverSideTranslations('en', ['heroSection', 'common', 'cart', 'auth']))
-    },
+    }
   }
 }
 
 
-export default Home;
-
+export default HomePage;
