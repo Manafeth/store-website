@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
@@ -57,19 +57,22 @@ const Categories: NextPage<Props>  = ({ categories, allCategories, slides }) => 
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, req }) => {
+    const headers = {
+      'Accept-Language': locale,
+      'referer': req.headers.referer
+    }
     const localization = await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']);
-    const categories = await getFeaturedCategories(locale);
-    const allCategories = await getAllCategories(locale);
-    const slidesResponse = await getSlides(locale);
+    const categories = await getFeaturedCategories(headers);
+    const allCategories = await getAllCategories(headers);
+    const slidesResponse = await getSlides(headers);
     return {
         props: {
             ...localization,
             categories: categories.data.data,
             slides: slidesResponse.data.data,
             allCategories: allCategories.data.data
-        },
-        revalidate: 10,
+        }
     }
 }
   

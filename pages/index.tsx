@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import FeaturedCategoriesSection from '../components/FeaturedCategoriesSection';
 import HeroSection from '../components/HeroSection';
 import MainLayout from '../layouts/MainLayout';
@@ -79,19 +79,22 @@ const Home: NextPage<Props> = ({ productsList, categories, slides }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, locale);
-  const categories = await getFeaturedCategories(locale);
-  const slidesResponse = await getSlides(locale);
+export const getServerSideProps: GetServerSideProps = async ({ locale, req }) => {
+  const headers = {
+    'Accept-Language': locale,
+    'referer': req.headers.referer
+  }
+  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
+  const categories = await getFeaturedCategories(headers);
+  const slidesResponse = await getSlides(headers);
   
   return {
     props: {
       productsList: products.data.data.data,
       categories: categories.data.data,
       slides: slidesResponse.data.data,
-      ...(locale && await serverSideTranslations(locale, ['heroSection', 'common', 'cart', 'auth']))
+      ...('en' && await serverSideTranslations('en', ['heroSection', 'common', 'cart', 'auth']))
     },
-    revalidate: 10,
   }
 }
 
