@@ -1,36 +1,30 @@
 
 import { axiosInstance } from './axiosInstance';
 
-function getFeaturedCategories (locale?: string) {
+function getFeaturedCategories (headers?: {[key: string]: any}) {
   return axiosInstance.get(
     'CustomerCategory/GetAll',
     {
-      headers: locale ? {
-        'Accept-Language': locale,
-      } : {}
+      headers: headers || {}
     }
   );
 }
 
-function getAllCategories (locale?: string) {
+function getAllCategories (headers?: {[key: string]: any}) {
   return axiosInstance.get(
     'CustomerCategory/GetAllCategories',
     {
-      headers: locale ? {
-        'Accept-Language': locale,
-      } : {}
+      headers: headers || {}
     }
   );
 }
 
-function getCategoryDetails (id: string | number, locale?: string) {
+function getCategoryDetails (id: string | number, headers?: {[key: string]: any}) {
   return axiosInstance.get(
     'CustomerCategory/Get',
     {
       params: { id },
-      headers: locale ? {
-        'Accept-Language': locale,
-      } : {}
+      headers: headers || {}
     }
   );
 }

@@ -1,50 +1,43 @@
 import { ProductByCategoryParams } from '../types/products';
 import { axiosInstance } from './axiosInstance';
 
-function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string | string[] | undefined }, locale?: string) {
+function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string | string[] | undefined }, headers?: { [key: string]: any }) {
+  console.log('headers', headers)
   return axiosInstance.get(
     'Product/MostPurchasedProducts',
     {
       params,
-      headers: locale ? {
-        'Accept-Language': locale,
-      } : {}
+      headers: headers || {}
     },
   );
 }
 
-function getProductDetails(id: string, locale?: string) {
+function getProductDetails(id: string, headers?: { [key: string]: any }) {
   return axiosInstance.get(
     'Product/Get',
     {
       params: {id},
-      headers: locale ? {
-        'Accept-Language': locale,
-      } : {}
+      headers: headers || {}
     },
   );
 }
 
-function getRelatedProductDetails(productId: string, locale?: string) {
+function getRelatedProductDetails(productId: string, headers?: { [key: string]: any }) {
   return axiosInstance.get(
     'Product/GetRelatedProduct',
     {
       params: {productId},
-      headers: locale ? {
-        'Accept-Language': locale,
-      } : {}
+      headers: headers || {}
     },
   );
 }
 
-function getProductsByCategory(params: ProductByCategoryParams, locale?: string) {
+function getProductsByCategory(params: ProductByCategoryParams, headers?: { [key: string]: any }) {
   return axiosInstance.get(
     'Product/GetProductCategories',
     {
       params,
-      headers: locale ? {
-        'Accept-Language': locale,
-      } : {}
+      headers: headers || {}
     }
   );
 }
