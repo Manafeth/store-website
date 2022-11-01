@@ -21,6 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (locale)
       localStorage.setItem('userLanguage', locale)  
   }, [router])
+
+  useEffect(() => {
+    router.push(router.pathname)
+  }, [])
+  
   
 
   return (
