@@ -19,11 +19,13 @@ function getStoreInfo() {
   );
 }
 
-function getSlides(headers?: { [key: string]: any }) {
+function getSlides(locale?: string) {
   return axiosInstance.get(
     'Announcement/GetAllSliders',
     {
-      headers: headers || {}
+      headers: locale ? {
+        'Accept-Language': locale,
+      } : {}
     }
   );
 }

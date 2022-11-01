@@ -12,7 +12,8 @@ import ProductDetailsInformation from '../../../components/ProductDetailsInforma
 import MainLayout from '../../../layouts/MainLayout';
 import { getMostPurchasedProducts, getProductDetails, getRelatedProductDetails, toggleProductInWishList } from '../../../services/products.services';
 import { ProductData } from '../../../types/products';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
+// import { useRouter } from 'next/router';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useAlert } from '../../../contexts/AlertContext';
 import Head from 'next/head';
@@ -26,6 +27,7 @@ interface Props {
 }
 
 const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) => {
+  // const router = useRouter();
   const [t] = useTranslation();
   const {sendAlert} = useAlert();
   const { fetchWishListData } = useProfile();
@@ -131,24 +133,39 @@ interface IParams extends ParsedUrlQuery {
   productId: string
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale, req, params }) => {
-  const headers = {
-    'Accept-Language': locale,
-    'referer': `https://${req?.headers?.host || ''}`
-  }
-
-  const { productId } = params as IParams;
-  const product = await getProductDetails(productId, headers);
-  const realtedProducts = await getRelatedProductDetails(productId, headers);
-
+export const getStaticPaths: GetStaticPaths = async () => {
+  const products = await getMostPurchasedProducts();
+  const paths = products.data.data.data.map((product: ProductData) => ({
+    params: {
+      productId: JSON.stringify(product.id)
+    }
+  }))
   return {
-    props: {
-      productDetials: product.data.data,
-      realtedProducts: realtedProducts.data.data,
-      ...(await serverSideTranslations(locale || '', ['settings', 'common', 'cart', 'auth']))
-    },
+    paths,
+    fallback: 'blocking'
   }
-
 }
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  try {
+    const { productId } = context.params as IParams;
+    const product = await getProductDetails(productId, context.locale);
+    const realtedProducts = await getRelatedProductDetails(productId, context.locale);
+
+    return {
+      props: {
+        productDetials: product.data.data,
+        realtedProducts: realtedProducts.data.data,
+        ...(await serverSideTranslations(context.locale || '', ['settings', 'common', 'cart', 'auth']))
+      },
+      revalidate: 10,
+    }
+  } catch(err) {
+    return {
+      notFound: true,
+    }
+  }
+}
+
 
 export default ProductDetails;

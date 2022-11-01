@@ -11,7 +11,7 @@ import CategoryHeroSection from '../../../components/CategoryHeroSection';
 import ProductVerticalItem from '../../../components/ProductVerticalItem';
 import Filters from '../../../components/Filters';
 import ProductPagination from '../../../components/Pagination';
-import { GetServerSideProps, GetStaticPaths, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { CategoryData } from '../../../types/categories';
 import { getAllCategories, getCategoryDetails } from '../../../services/categories.services';
@@ -83,6 +83,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
         payload.priceTo = data.priceTo || params.priceTo
       if (data.productStatus || params.productStatus)
         payload.productStatus = data.productStatus || params.productStatus
+        console.log('payload', payload)
       const productsData = await getProductsByCategory(payload);
       setAttributes(productsData.data.data.attributes)
       setCategories(productsData.data.data.categories)
@@ -205,21 +206,37 @@ interface IParams extends ParsedUrlQuery {
   categoryId: string
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale, req, params }) => {
-  const headers = {
-    'Accept-Language': locale,
-    'referer': `https://${req?.headers?.host || ''}`
-  }
-  const { categoryId } = params as IParams;
-  const category = await getCategoryDetails(categoryId, headers);
-  const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 }, headers);
-  const slidesResponse = await getSlides(headers);
+export const getStaticPaths: GetStaticPaths = async () => {
+  const categorys = await getAllCategories();
+  const paths = categorys.data.data.map((category: CategoryData) => ({
+    params: {
+      categoryId: JSON.stringify(category.id)
+    }
+  }))
   return {
-    props: {
-      categoryData: category.data.data,
-      categoryDetails: categoryDetails.data.data,
-      slides: slidesResponse.data.data,
-      ...(await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']))
+    paths,
+    fallback: 'blocking'
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  try {
+    const { categoryId } = context.params as IParams;
+    const category = await getCategoryDetails(categoryId, context.locale);
+    const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 }, context.locale);
+    const slidesResponse = await getSlides(context.locale);
+    return {
+      props: {
+        categoryData: category.data.data,
+        categoryDetails: categoryDetails.data.data,
+        slides: slidesResponse.data.data,
+        ...(await serverSideTranslations(context.locale || '', ['heroSection', 'common', 'cart', 'auth']))
+      },
+      revalidate: 10,
+    }
+  } catch(err) {
+    return {
+      notFound: true,
     }
   }
 }
