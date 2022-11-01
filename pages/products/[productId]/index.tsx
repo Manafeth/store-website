@@ -134,7 +134,7 @@ interface IParams extends ParsedUrlQuery {
 export const getServerSideProps: GetServerSideProps = async ({ locale, req, params }) => {
   const headers = {
     'Accept-Language': locale,
-    'referer': req.headers.referer
+    'referer': req?.headers?.referer || ''
   }
 
   const { productId } = params as IParams;

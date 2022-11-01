@@ -82,8 +82,9 @@ const Home: NextPage<Props> = ({ productsList, categories, slides }) => {
 export const getServerSideProps: GetServerSideProps = async ({ locale, req }) => {
   const headers = {
     'Accept-Language': locale,
-    'referer': req.headers.referer
+    'referer': req?.headers?.referer || ''
   }
+  
   const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
   const categories = await getFeaturedCategories(headers);
   const slidesResponse = await getSlides(headers);
