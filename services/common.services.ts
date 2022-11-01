@@ -1,28 +1,37 @@
 import { axiosInstance } from './axiosInstance';
 
-function getCountries() {
+function getCountries(storeId: number) {
   return axiosInstance.get(
     'Country/GetAll',
+    {params: {storeId}}
   );
 }
-function getAllCities(countryId?: number) {
+function getAllCities(storeId: number, countryId?: number) {
   return axiosInstance.get('City/GetAll', {
     params: {
       countryId,
+      storeId
     },
   });
 }
 
-function getStoreInfo() {
+function getStoreInfo(locale?: string) {
   return axiosInstance.get(
     'Auth/GetStoreInfo',
+    {
+      headers: locale ? {
+        'Accept-Language': locale,
+        'referer': 'http://localhost:3000'
+      } : {}
+    }
   );
 }
 
-function getSlides(locale?: string) {
+function getSlides(storeId: number, locale?: string) {
   return axiosInstance.get(
     'Announcement/GetAllSliders',
     {
+      params: { storeId },
       headers: locale ? {
         'Accept-Language': locale,
       } : {}

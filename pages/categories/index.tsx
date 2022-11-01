@@ -10,7 +10,7 @@ import CategoryCard from '../../components/CategoryCard'
 import { getAllCategories, getFeaturedCategories } from '../../services/categories.services'
 import { CategoryData } from '../../types/categories'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getSlides } from '../../services/common.services'
+import { getSlides, getStoreInfo } from '../../services/common.services'
 import { SlideData } from '../../types/common'
 
 
@@ -58,10 +58,12 @@ const Categories: NextPage<Props>  = ({ categories, allCategories, slides }) => 
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+    const storeRes = await getStoreInfo(locale);
+    const storeId = storeRes.data.data.id;
     const localization = await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']);
-    const categories = await getFeaturedCategories(locale);
+    const categories = await getFeaturedCategories(storeId, locale);
     const allCategories = await getAllCategories(locale);
-    const slidesResponse = await getSlides(locale);
+    const slidesResponse = await getSlides(storeId, locale);
     return {
         props: {
             ...localization,

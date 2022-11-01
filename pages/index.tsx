@@ -16,7 +16,7 @@ import { useCommon } from '../contexts/CommonContext';
 import { useRouter } from 'next/router';
 import Divider from '@mui/material/Divider';
 import { SlideData } from '../types/common';
-import { getSlides } from '../services/common.services';
+import { getSlides, getStoreInfo } from '../services/common.services';
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[],
@@ -80,9 +80,11 @@ const Home: NextPage<Props> = ({ productsList, categories, slides }) => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, locale);
-  const categories = await getFeaturedCategories(locale);
-  const slidesResponse = await getSlides(locale);
+  const storeRes = await getStoreInfo(locale);
+  const storeId = storeRes.data.data.id;
+  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: '', storeId}, locale);
+  const categories = await getFeaturedCategories(storeId, locale);
+  const slidesResponse = await getSlides(storeId, locale);
   
   return {
     props: {

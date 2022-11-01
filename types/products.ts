@@ -63,7 +63,8 @@ export type ProductByCategoryParams = {
   productStatus?: number,
   generalSearch?: string,
   page?: number,
-  pageSize?: number
+  pageSize?: number,
+  storeId?: number
 }
 
 

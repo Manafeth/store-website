@@ -20,6 +20,7 @@ import Head from 'next/head';
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useProfile } from '../../../contexts/ProfileContext';
+import { getStoreInfo } from '../../../services/common.services';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -149,8 +150,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { productId } = context.params as IParams;
-    const product = await getProductDetails(productId, context.locale);
-    const realtedProducts = await getRelatedProductDetails(productId, context.locale);
+    const storeRes = await getStoreInfo(context.locale);
+    const storeId = storeRes.data.data.id;
+    const product = await getProductDetails(storeId, productId, context.locale);
+    const realtedProducts = await getRelatedProductDetails(storeId, productId, context.locale);
 
     return {
       props: {

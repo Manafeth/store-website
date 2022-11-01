@@ -22,6 +22,7 @@ import { LoadingButton } from '@mui/lab';
 import Input from '@mui/material/Input';
 import { addressTagsEnums } from '../../../../constants/statuses';
 import { getAllCities } from '../../../../services/common.services';
+import { useCommon } from '../../../../contexts/CommonContext';
 
 
 interface Props {
@@ -58,7 +59,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
   const renderMarker = state.latitude > 0 && state.longitude > 0;
   const loading =
     createAddressStatus === LOADING || updateAddressStatus === LOADING;
-
+  const {storeInfo} = useCommon();
     useEffect(() => {
       if (selectedAddress && selectedAddress.id && open)
         getAddressDetails(selectedAddress.id);
@@ -99,7 +100,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
 
     useEffect(() => {
       if (country) {
-        getAllCities(country);
+        getAllCities(storeInfo.id || 0, country);
         setState((prevState) => ({
           ...prevState,
           cityId: 0

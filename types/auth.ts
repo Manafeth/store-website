@@ -8,6 +8,7 @@ export type CodeData = {
 export type LoginData = {
     phoneNumber: string,
     countryId: number,
+    storeId?: number,
     notificationInfo?: {
         deviceID: string,
         type: 1,
@@ -20,6 +21,7 @@ export type VerifyOtpData = {
     phoneNumber: string,
     countryId: number,
     otp: string,
+    storeId?: number,
 }
 
 export type ProfileData = {

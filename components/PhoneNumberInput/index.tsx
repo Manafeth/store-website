@@ -11,6 +11,7 @@ import { getCountries } from '../../services/common.services';
 import { CountryData } from '../../types/common';
 import InputLabel from '@mui/material/InputLabel';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useCommon } from '../../contexts/CommonContext';
 
 
 interface Props {
@@ -27,6 +28,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
   const [phoneNumber, setPhone] = useState('');
   const [countries, setCountires] = useState<CountryData[]>([]);
   const [isError, setIsError] = useState(false);
+  const {storeInfo} = useCommon();
 
   function handleSelect(ev: SelectChangeEvent) {
     setCountry(+ev.target.value);
@@ -49,7 +51,7 @@ const PhoneNumberInput: FC<Props> = ({ onChange, value, sx, error, countryError,
 
 
   function fetchCountires() {
-    getCountries().then((response) => {
+    getCountries(storeInfo.id || 0).then((response) => {
       setCountires(response?.data?.data)
     })
   }

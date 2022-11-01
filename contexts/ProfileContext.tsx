@@ -11,6 +11,7 @@ import { getAllCities, getCountries } from '../services/common.services';
 import { createAddress, deleteAddress, getAddress, getAllActiveOrders, getAllAddress, getAllArchiveed, getCustomerProfileData, getEmailNotificationData, getProfileWishListData, updateAddress, updateCustomerProfile, updateEmailNotification } from '../services/profile.services';
 import { activeOrderData, AddressData, ProfileModalState, wishListData,cityData, countryData, customerData, emailNotificationData} from '../types/profile';
 import { useAlert } from './AlertContext';
+import { useCommon } from './CommonContext';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -32,7 +33,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [removeStatus, setRemoveStatus] = useState('');
   const [status, setStatus] = useState('');
   const { sendAlert } = useAlert();
-
+  const {storeInfo} = useCommon();
 
 const [customerData, setCustomerData] = useState<customerData>({
   imageFilePath: {
@@ -103,7 +104,7 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
   }
   async function  fetchAllCityData() {
     try {
-      const response = await getAllCities();
+      const response = await getAllCities(storeInfo.id || 0);
       setCityData(response.data.data);
     } catch (error) {
       Promise.reject(error);
@@ -111,7 +112,7 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
   }
   async function fetchAllCountryData() {
     try {
-      const response = await  getCountries();
+      const response = await  getCountries(storeInfo.id || 0);
       setCountryData(response.data.data);
     } catch (error) {
       Promise.reject(error);

@@ -21,8 +21,9 @@ import { useRouter } from 'next/router';
 import { useTranslation } from "next-i18next";
 import productStatusMenu from '../../../constants/ProductStatusValues';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { getSlides } from '../../../services/common.services';
+import { getSlides, getStoreInfo } from '../../../services/common.services';
 import { SlideData } from '../../../types/common';
+import { useCommon } from '../../../contexts/CommonContext';
 
 interface Products {
   data: ProductData[],
@@ -45,6 +46,7 @@ interface Props {
 const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slides }) => {
   const router = useRouter();
   const [t] = useTranslation();
+  const {storeInfo} = useCommon();
 
   const { categoryId } = router.query
   const [products, setProducts] = useState<Products>({
@@ -75,7 +77,8 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
         pageSize: data.pageSize || params.pageSize,
         generalSearch: data.generalSearch || params.generalSearch,
         categoryId,
-        options: data.options || params.options
+        options: data.options || params.options,
+        storeId: storeInfo.id
       }
       if (data.priceFrom || params.priceFrom)
         payload.priceFrom = data.priceFrom || params.priceFrom
@@ -222,9 +225,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { categoryId } = context.params as IParams;
-    const category = await getCategoryDetails(categoryId, context.locale);
-    const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 }, context.locale);
-    const slidesResponse = await getSlides(context.locale);
+    const storeRes = await getStoreInfo(context.locale);
+    const storeId = storeRes.data.data.id;
+    const category = await getCategoryDetails(storeId, categoryId, context.locale);
+    const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12, storeId }, context.locale);
+    const slidesResponse = await getSlides(storeId, context.locale);
     return {
       props: {
         categoryData: category.data.data,

@@ -7,6 +7,7 @@ import { completeProfile, getProfileData, login, verifyOtp } from '../services/a
 import { AuthModalState, LoginData, ProfileData, VerifyOtpData } from '../types/auth';
 import getAccessToken from '../utils/getToken';
 import { useAlert } from './AlertContext';
+import { useCommon } from './CommonContext';
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -41,6 +42,8 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   })
 
   const { sendAlert } = useAlert();
+
+  const {storeInfo} = useCommon();
   const router = useRouter();
 
   function handleOpenAuthModal() {
@@ -54,7 +57,7 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   async function sendPhoneNumber(data: LoginData) {
     setSendPhoneNumberStatus(LOADING);
     try {
-      const response = await login(data);
+      const response = await login({...data, storeId: storeInfo.id || 0});
       setSendPhoneNumberStatus(SUCCESS);
       sendAlert(response.data?.message, SUCCESS)
     } catch(error: any) {
@@ -67,7 +70,7 @@ export const AuthModalProvider: FC<Props> = ({ children }) => {
   async function verifyPhoneNumber(data: VerifyOtpData) {
     setVerifyStatus(LOADING);
     try {
-      const response = await verifyOtp(data);
+      const response = await verifyOtp({...data, storeId: storeInfo.id || 0});
       localStorage.setItem('userData', JSON.stringify(response?.data?.data?.profile));
       localStorage.setItem('accessToken', response?.data?.data?.token?.accessToken);
       setVerifyStatus(SUCCESS);

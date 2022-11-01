@@ -1,7 +1,7 @@
 import { ProductByCategoryParams } from '../types/products';
 import { axiosInstance } from './axiosInstance';
 
-function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string | string[] | undefined }, locale?: string) {
+function getMostPurchasedProducts (params?: { page: number, pageSize: number, generalSearch: string | string[] | undefined, storeId: number }, locale?: string) {
   return axiosInstance.get(
     'Product/MostPurchasedProducts',
     {
@@ -13,11 +13,11 @@ function getMostPurchasedProducts (params?: { page: number, pageSize: number, ge
   );
 }
 
-function getProductDetails(id: string, locale?: string) {
+function getProductDetails(storeId: number, id: string, locale?: string) {
   return axiosInstance.get(
     'Product/Get',
     {
-      params: {id},
+      params: {storeId, id},
       headers: locale ? {
         'Accept-Language': locale,
       } : {}
@@ -25,11 +25,11 @@ function getProductDetails(id: string, locale?: string) {
   );
 }
 
-function getRelatedProductDetails(productId: string, locale?: string) {
+function getRelatedProductDetails(storeId: number, productId: string, locale?: string) {
   return axiosInstance.get(
     'Product/GetRelatedProduct',
     {
-      params: {productId},
+      params: {storeId, productId},
       headers: locale ? {
         'Accept-Language': locale,
       } : {}

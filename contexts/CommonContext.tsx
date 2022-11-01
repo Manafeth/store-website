@@ -41,7 +41,7 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
 
     async function fetchMostPurchasedProducts(params: { page: number, pageSize: number, generalSearch: string | string[] | undefined }) {
       try {
-        const response = await getMostPurchasedProducts(params)
+        const response = await getMostPurchasedProducts({...params, storeId: storeInfo.id || 0})
         setMostPurchasedProducts(response.data.data.data)
       } catch (error) {
         Promise.reject(error)
@@ -50,7 +50,7 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
 
     async function fetchSlides() {
       try {
-        const response = await getSlides();
+        const response = await getSlides(storeInfo.id || 0);
         setSlides(response.data.data)
       } catch (error) {
         Promise.reject(error)
