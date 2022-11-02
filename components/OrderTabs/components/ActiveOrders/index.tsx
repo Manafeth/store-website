@@ -10,7 +10,7 @@ import { activeOrderData } from '../../../../types/profile';
 import moment from 'moment';
 import StatusText from '../../../StatusText';
 import { orderStatusEnums } from '../../../../constants/statuses';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import paths from '../../../../constants/paths';
 
@@ -20,7 +20,8 @@ interface Props {
 }
 
 const ActiveOrders: FC<Props> = ({ data }) => {
-  const [t] = useTranslation();
+  const {t:CT} = useTranslation('common');
+  const {t:ST} = useTranslation('settings');
  const orderStatus = orderStatusEnums.find((item) => +item.value === data.status);
   return (
     <Box
@@ -32,7 +33,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
       }}
     >
       <Typography variant='h2' component='h1' sx={{ mb: 1.5 }}>
-      {t('settings:noOrder')} : <Link href={paths.orderDetails(data.id)}><MuiLink>#{data.id}</MuiLink></Link>
+      {ST('noOrder')} : <Link href={paths.orderDetails(data.id)}><MuiLink>#{data.id}</MuiLink></Link>
       </Typography>
       <Box
         sx={{
@@ -49,7 +50,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
         }}
       >
         <StatusText
-          title={t(orderStatus?.label || '')}
+          title={CT(orderStatus?.label || '')}
           color={orderStatus?.color || ''}
         />
         {data.status === 5 ? (
@@ -65,7 +66,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
        {moment(data.createdAt).format('DD MMMM  YYYY hh:MM A')}
       </Typography>
       <Typography variant='h2' sx={{ mb: 2, fontWeight: '600' }}>
-      {t('common:sar')} {data.total}
+      {CT('sar')} {data.total}
       </Typography>
       <Divider sx={{ mb: 2, width:'400px' }} />
     </Box>

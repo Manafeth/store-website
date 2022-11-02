@@ -19,7 +19,7 @@ function getAllCategories (headers?: {[key: string]: any}) {
   );
 }
 
-function getCategoryDetails (id: string | number, headers?: {[key: string]: any}) {
+function getCategoryDetails (id: string | string[] | undefined | number, headers?: {[key: string]: any}) {
   return axiosInstance.get(
     'CustomerCategory/Get',
     {

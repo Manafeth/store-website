@@ -4,14 +4,14 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   image: ReactElement;
   children: ReactElement;
 }
 const ContactUsLayout: FC<Props> = ({ image, children }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation();
 
   return (
     <Container maxWidth={false} disableGutters>

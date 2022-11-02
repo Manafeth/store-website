@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import { CodeData, LoginData } from '../../../types/auth';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useAuthModal } from '../../../contexts/AuthModalContext';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { LOADING } from '../../../constants';
@@ -57,7 +57,7 @@ interface Props {
 const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginData }) => {
     const { sendPhoneNumberStatus } = useAuthModal();
 
-    const [t] = useTranslation();
+    const {t} = useTranslation('auth');
     function handleCodeInput(ev: ChangeEvent<HTMLInputElement>) {
         const { value, name } = ev.target;
         if (isNumeric(value) || !value) {
@@ -125,19 +125,19 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginDa
     return (
         <Box>
             <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
-            {t('auth:verifyPhoneNumber')}
+            {t('verifyPhoneNumber')}
             </Typography>
 
             <Typography variant='h2' sx={{ mb: 1, lineHeight: '30px', letterSpacing: '0.2px' }}>
-            {t('auth:verificationCode')}
+            {t('verificationCode')}
             </Typography>
 
             <Typography variant='h6' sx={{ mb: 4, lineHeight: '30px', fontWeight: 500, letterSpacing: '0.2px' }}>
-            {t('auth:confirmationMessage')}<Box sx={{fontStyle: 'italic'}}>{loginData.phoneNumber}</Box>
+            {t('confirmationMessage')}<Box sx={{fontStyle: 'italic'}}>{loginData.phoneNumber}</Box>
             </Typography>
 
             <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
-            {t('auth:yourCode')}
+            {t('yourCode')}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
                 <CodeInput
@@ -177,7 +177,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginDa
                 />
             </Box>
             <Typography variant='h5' component='p' sx={{ mb: 5.25, letterSpacing: '0.1px' }}>
-            {t('auth:reciveCode')} <LoadingButton loading={sendPhoneNumberStatus === LOADING} sx={{ p: 0, textTransform: 'none', minWidth: 0 }} onClick={login}>{t('auth:resend')}</LoadingButton>
+            {t('reciveCode')} <LoadingButton loading={sendPhoneNumberStatus === LOADING} sx={{ p: 0, textTransform: 'none', minWidth: 0 }} onClick={login}>{t('auth.resend')}</LoadingButton>
             </Typography>
         </Box>
     )

@@ -6,7 +6,7 @@ import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { prefixer } from 'stylis';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   children: ReactNode;
@@ -15,14 +15,14 @@ interface Props {
 
 
 const CustomThemeProvider: FC<Props> = ({ children }) => {
-  const { i18n } = useTranslation();
-  const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const { lang } = useTranslation();
+  const direction = lang === 'ar' ? 'rtl' : 'ltr';
 
   let theme = createTheme({
     typography: {
       fontSize: 16,
       fontFamily: [
-        (i18n.language === 'ar' ? 'Cairo' : 'Poppins'),
+        (lang === 'ar' ? 'Cairo' : 'Poppins'),
         'Poppins',
         'sans-serif',
         'BlinkMacSystemFont',

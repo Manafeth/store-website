@@ -11,7 +11,7 @@ import { OrderData } from '../../types/cart';
 import moment from 'moment';
 import { orderStatusEnums } from '../../constants/statuses';
 import StatusText from '../StatusText';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 interface Props {
   data: {
     id: number,
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const OrderTimeline: FC<Props> = ({ data }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   const orderStatus = orderStatusEnums.find((item) => +item.value === data.new);
   return (
     <>

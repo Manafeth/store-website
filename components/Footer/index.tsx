@@ -13,13 +13,13 @@ import facebook from '../../assets/images/icons/facebook-icon.png';
 import instagram from '../../assets/images/icons/instagram-icon.png';
 import twitter from '../../assets/images/icons/twitter-icon.png';
 import Link from 'next/link';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import paths from '../../constants/paths';
 import { useCommon } from '../../contexts/CommonContext';
 
 
 const Footer = () => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   const { storeInfo } = useCommon()
   return (
     <Box component='footer' py={12.5}>
@@ -32,13 +32,13 @@ const Footer = () => {
               </MuiLink>
             </Link>
             <Typography sx={{ fontSize: '13px', lineHeight: '16px', letterSpacing: '0.2px', mb: 2.5}}>
-            {t('common:beuandCompany')}
+            {t('beuandCompany')}
             </Typography>
             <Grid container spacing={5} sx={{ mb: 2.5 }}>
               <Grid item xs={12} sm={6}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
-                    {t('common:compliantsNumber')}
+                    {t('compliantsNumber')}
                   </Typography>
                   <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
                     {storeInfo.complaintNumber}
@@ -48,7 +48,7 @@ const Footer = () => {
               <Grid item xs={12} sm={6}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
-                    {t('common:compliantsEmail')}
+                    {t('compliantsEmail')}
                   </Typography>
                   <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
                     {storeInfo.supportEmail}
@@ -78,34 +78,34 @@ const Footer = () => {
             <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
               <Box pr={{ md: 2}}  mb={5}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>
-                {t('common:quickAccess')}
+                {t('quickAccess')}
                 </Typography>
                 <List sx={{ py: 0 }}>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.categories}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:categories')}
+                        {t('categories')}
                         </MuiLink>
                       </Link>
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.whishList}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:wishlist')}
+                        {t('wishlist')}
                         </MuiLink>
                       </Link>
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.profileOrders}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:myOrders')}
+                        {t('myOrders')}
                         </MuiLink>
                       </Link>
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.editAccount}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:settings')}
+                        {t('settings')}
                         </MuiLink>
                       </Link>
                     </ListItem>
@@ -113,34 +113,34 @@ const Footer = () => {
               </Box>
               <Box mb={5}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>
-                {t('common:legal')}
+                {t('legal')}
                 </Typography>
                 <List sx={{ py: 0 }}>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.privacyPolicy}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:privacyPolicy')}
+                        {t('privacyPolicy')}
                         </MuiLink>
                       </Link>
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.termsOfUse}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:termsOfUse')}
+                        {t('termsOfUse')}
                         </MuiLink>
                       </Link>
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href='/'>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:refundPolicy')}
+                        {t('refundPolicy')}
                         </MuiLink>
                       </Link>
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href='/'>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('common:faq')}
+                        {t('faq')}
                         </MuiLink>
                       </Link>
                     </ListItem>
@@ -148,7 +148,7 @@ const Footer = () => {
               </Box>
             </Box>
             <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary', mb: { xs: 5, md: 0 } }}>
-              {t('common:beaundTeam')}
+              {t('beaundTeam')}
             </Typography>
           </Box>
         </Box>

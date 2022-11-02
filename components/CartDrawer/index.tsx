@@ -13,7 +13,7 @@ import OrderSummary from '../OrderSummary';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
 import Container from '@mui/material/Container';
 
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('cart');
   const { fetchCartProducts, cartData } = useCart();
   useEffect(() => {
     if (open)
@@ -55,7 +55,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       >
         <Box sx={{display:'flex', alignItems:'baseline', gap:1}}>
         <Typography variant='h1' component='h2' sx={{ fontFamily: 'Urbanist'}}>
-        {t('cart:myBag')} 
+        {t('myBag')} 
         </Typography>
         <Box sx={{fontSize:'25px', fontWeight:'700', fontFamily: 'Urbanist'}}>({cartData.length})</Box>
         </Box>
@@ -100,7 +100,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           }}
           onClick={handleClose}
         >
-          {t('cart:continueShopping')}
+          {t('continueShopping')}
         </Button>
         </Link>
         {cartData.length > 0 ? (
@@ -113,7 +113,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
              }}}
               type='submit'
             >
-                {t('cart:continueToPayment')}
+                {t('continueToPayment')}
             </Button>
           </Link>
         ) : (
@@ -122,7 +122,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
             sx={{ width: 'auto', height: '44px',textTransform: 'lowercase' }}
             disabled
           >
-              {t('cart:continueToPayment')}
+              {t('continueToPayment')}
           </Button>
         )}
         

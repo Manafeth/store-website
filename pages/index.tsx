@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage, NextPageContext } from 'next';
 import FeaturedCategoriesSection from '../components/FeaturedCategoriesSection';
 import HeroSection from '../components/HeroSection';
 import MainLayout from '../layouts/MainLayout';
@@ -10,22 +10,19 @@ import { getFeaturedCategories } from '../services/categories.services';
 import { ProductData } from '../types/products';
 import { CategoryData } from '../types/categories';
 import ProductVerticalItem from '../components/ProductVerticalItem';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useEffect, useState, useRef } from 'react';
 import { useCommon } from '../contexts/CommonContext';
 import { useRouter } from 'next/router';
 import Divider from '@mui/material/Divider';
-import { SlideData } from '../types/common';
-import { getSlides } from '../services/common.services';
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[],
-  slides: SlideData[]
 }
 
-const HomePage: NextPage<Props> = ({ productsList, categories, slides }) => {
+const HomePage: NextPage<Props> = ({ productsList, categories }) => {
   const { mostPurchasedProducts, fetchMostPurchasedProducts } = useCommon();
-  const [products, setProducts] = useState<ProductData[]>([]);
+  const [products, setProducts] = useState(productsList);
+  const [categoriesList, setCategoriesList] = useState(categories);
   const ref = useRef(null);
   const router = useRouter();
   const { search } = router.query;
@@ -41,10 +38,6 @@ const HomePage: NextPage<Props> = ({ productsList, categories, slides }) => {
   useEffect(() => {
     setProducts(mostPurchasedProducts);
   }, [mostPurchasedProducts])
-
-  useEffect(() => {
-    setProducts(productsList);
-  }, [productsList]);
   
   useEffect(() => {
     if (search !== undefined) {
@@ -53,12 +46,26 @@ const HomePage: NextPage<Props> = ({ productsList, categories, slides }) => {
     }
   }, [search])  
   
+  useEffect(() => {
+    if (productsList.length === 0) {
+      getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}).then((res) => {
+        setProducts(res.data.data.data)
+      })
+    }
+
+    if (categories.length === 0) {
+      getFeaturedCategories().then((res) => {
+        setCategoriesList(res.data.data)
+      })
+    }
+  }, [productsList, categories])
+  
   
   return (
     <MainLayout>
-      <HeroSection targetSectionId='recent-products' slides={slides} />
+      <HeroSection targetSectionId='recent-products' />
       <Box pt={{xs: 6, md: 6.25}} pb={{xs: 6, md: 6.25}}>
-        <FeaturedCategoriesSection categories={categories} />
+        <FeaturedCategoriesSection categories={categoriesList} />
       </Box>
       <Box component='section'>
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
@@ -78,23 +85,19 @@ const HomePage: NextPage<Props> = ({ productsList, categories, slides }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale, req }) => {
-  const headers = {
-    'Accept-Language': locale,
-    'referer': req?.headers?.referer || ''
+HomePage.getInitialProps = async ({ req }: NextPageContext) => {
+  if (!req) {
+    return {
+      productsList: [],
+      categories: [],
+    }
   }
-
-  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
-  const categories = await getFeaturedCategories(headers);
-  const slidesResponse = await getSlides(headers);
+  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''});
+  const categories = await getFeaturedCategories();
   
   return {
-    props: {
-      productsList: products.data.data.data,
-      categories: categories.data.data,
-      slides: slidesResponse.data.data,
-      ...('en' && await serverSideTranslations('en', ['heroSection', 'common', 'cart', 'auth']))
-    }
+    productsList: products.data.data.data,
+    categories: categories.data.data,
   }
 }
 

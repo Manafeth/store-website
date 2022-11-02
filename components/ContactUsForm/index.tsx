@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useContactUs } from '../../contexts/ContactUs';
 import { LOADING } from '../../constants';
 import { ContactUsData } from '../../types/contactUs';
@@ -15,7 +15,7 @@ import isEmail from 'validator/lib/isEmail';
 import FormLabel from '@mui/material/FormLabel';
 
 const ContactUsForm = () => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('contact');
   const [state, setState] = useState<ContactUsData>({
     name: '',
     email: '',
@@ -64,7 +64,7 @@ const ContactUsForm = () => {
         component='h1'
         sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' }, textAlign: 'left' }}
       >
-        {t('contact:contactUs')}
+        {t('contactUs')}
       </Typography>
       <Typography
         sx={{
@@ -75,13 +75,13 @@ const ContactUsForm = () => {
           color: 'standard.color',
         }}
       >
-        {t('contact:contactText')}
+        {t('contactText')}
       </Typography>
       <Box component='form' onSubmit={handleSubmit}>
-        <FormLabel>{t('contact:yourName')}</FormLabel>
+        <FormLabel>{t('yourName')}</FormLabel>
         <TextField
           id='fullWidth'
-          placeholder={t('contact:enterYourName')}
+          placeholder={t('enterYourName')}
           fullWidth
           sx={{ mb: 3, mt: 1 }}
           InputLabelProps={{ shrink: true }}
@@ -101,10 +101,10 @@ const ContactUsForm = () => {
           error={isInvalid && !state.name}
           onChange={handleInputChange}
         />
-        <InputLabel>{t('contact:contactEmail')}</InputLabel>
+        <InputLabel>{t('contactEmail')}</InputLabel>
         <TextField
           id='fullWidth'
-          placeholder={t('contact:enterYourEmail')}
+          placeholder={t('enterYourEmail')}
           fullWidth
           sx={{ mb: 3, mt: 1 }}
           InputLabelProps={{ shrink: true }}
@@ -124,7 +124,7 @@ const ContactUsForm = () => {
           error={isInvalid && (!state.email || !isEmail(state.email))}
           onChange={handleInputChange}
         />
-        <FormLabel>{t('contact:message')}</FormLabel>
+        <FormLabel>{t('message')}</FormLabel>
         <Box sx={{
             'textarea': {
               width: '100%', marginTop:'16px',fontSize:'18px',fontWeight:'400',
@@ -145,7 +145,7 @@ const ContactUsForm = () => {
          <TextareaAutosize
             aria-label='empty textarea'
             minRows={8}
-            placeholder={t('contact:messageText')}
+            placeholder={t('messageText')}
             name='message'
             onChange={handleInputChange}
           /> 
@@ -166,7 +166,7 @@ const ContactUsForm = () => {
           loading={createLoader === LOADING}
           type='submit'
         >
-          {t('contact:submit')}
+          {t('submit')}
         </LoadingButton>
         </Box>
       </Box>

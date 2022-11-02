@@ -8,7 +8,7 @@ import { ProductCartData } from '../../../types/cart';
 import AddIcon from '../../../assets/images/icons/filled-add-icon.svg';
 import Image from 'next/image';
 import { useAlert } from '../../../contexts/AlertContext';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     productDetials: ProductData,
@@ -18,9 +18,9 @@ interface Props {
 
 const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, setState }) => {
   const { sendAlert } = useAlert()
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   function handleAddCheckoutAttribute() {
-    if (checkoutAttributes.length < productDetials.checkOutAttributes.length) {
+    if (checkoutAttributes?.length < productDetials.checkOutAttributes?.length) {
       setState((prevState) => ({
         ...prevState,
         checkOutAttributes: [
@@ -39,7 +39,7 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
   function handleSelectCheckoutAttribute(ev: ChangeEvent<HTMLInputElement>, checkOutAttributeId: number) {
     setState((prevState) => ({
       ...prevState,
-      checkOutAttributes: prevState.checkOutAttributes.map((item) => {
+      checkOutAttributes: prevState.checkOutAttributes?.map((item) => {
         if (item.checkOutAttributeId === checkOutAttributeId) {
           return { ...item, checkOutAttributeId: +ev.target.value };
         }
@@ -51,7 +51,7 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
   function handleValue(ev: ChangeEvent<HTMLInputElement>, checkOutAttributeId: number) {
     setState((prevState) => ({
       ...prevState,
-      checkOutAttributes: prevState.checkOutAttributes.map((item) => {
+      checkOutAttributes: prevState.checkOutAttributes?.map((item) => {
         if (item.checkOutAttributeId === checkOutAttributeId) {
           return { ...item, value: ev.target.value };
         }
@@ -63,8 +63,8 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
 
   return (
     <>
-      {checkoutAttributes.map((item, index) => {
-        const options = productDetials.checkOutAttributes?.filter((option) => option.id === item.checkOutAttributeId ? true : !checkoutAttributes.find((item) => item.checkOutAttributeId === option.id))
+      {checkoutAttributes?.map((item, index) => {
+        const options = productDetials.checkOutAttributes?.filter((option) => option.id === item.checkOutAttributeId ? true : !checkoutAttributes?.find((item) => item.checkOutAttributeId === option.id))
         return (
           <Grid
             container
@@ -97,7 +97,7 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
                 }
               >
                 <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-                {t('common:selectItem')}
+                {t('selectItem')}
                 </MenuItem>
                   {options?.map((option) => (
                     <MenuItem
@@ -135,12 +135,12 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
                 }
               />
             </Grid>
-            {(checkoutAttributes.length - 1) === index && (
+            {(checkoutAttributes?.length - 1) === index && (
             <Grid item xs={1}>
               <IconButton
                 sx={{ p: 0 }}
                 onClick={handleAddCheckoutAttribute}
-                disabled={!!checkoutAttributes.find(({checkOutAttributeId}) => checkOutAttributeId === 0)}
+                disabled={!!checkoutAttributes?.find(({checkOutAttributeId}) => checkOutAttributeId === 0)}
               >
                 <Image src={AddIcon} width={24} height={24} alt='add icon' />
               </IconButton>

@@ -10,15 +10,14 @@ import RelatedProductCard from '../../../components/ProductVerticalItem';
 import ProductGallery from '../../../components/ImageGallery';
 import ProductDetailsInformation from '../../../components/ProductDetailsInformation';
 import MainLayout from '../../../layouts/MainLayout';
-import { getMostPurchasedProducts, getProductDetails, getRelatedProductDetails, toggleProductInWishList } from '../../../services/products.services';
+import {  getProductDetails, getRelatedProductDetails, toggleProductInWishList } from '../../../services/products.services';
 import { ProductData } from '../../../types/products';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { ParsedUrlQuery } from 'querystring';
+import { NextPage, NextPageContext } from 'next';
 import { useAlert } from '../../../contexts/AlertContext';
 import Head from 'next/head';
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import useTranslation from 'next-translate/useTranslation';
 import { useProfile } from '../../../contexts/ProfileContext';
+import { useRouter } from 'next/router';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -26,27 +25,13 @@ interface Props {
 }
 
 const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('settings');
   const {sendAlert} = useAlert();
   const { fetchWishListData } = useProfile();
-  const [productData, setProductData] = useState<ProductData>({
-    id: 0,
-    name: '',
-    salePrice: 0,
-    quantity: 0,
-    category: '',
-    priceAfterDiscount: 0,
-    shortDescription: '',
-    description: '',
-    pageTitle: '',
-    metaDescription: '',
-    isInWishList: false,
-    imagesFilePath: [],
-    attributes: [],
-    checkOutAttributes: [],
-    subProducts: [],
-  })
-
+  const [productData, setProductData] = useState(productDetials);
+  const [productsList, setProductsList] = useState(realtedProducts);
+  const router = useRouter();
+  const { productId } = router.query;
   function handleTogglingProductInWishList() {
     toggleProductInWishList(productData.id).then(() => {
       setProductData((prevState) => ({
@@ -60,17 +45,22 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
   }
 
   useEffect(() => {
-    setProductData(productDetials);
-  }, [productDetials])
+    if (!productDetials.id) {
+      getProductDetails(productId).then((res) => {
+        setProductData(res.data.data)
+      })
+    }
+
+    if (realtedProducts.length === 0) {
+      getRelatedProductDetails(productId).then((res) => {
+        setProductsList(res.data.data)
+      })
+    }
+  }, [productDetials, realtedProducts])
   
 
   return (
     <MainLayout>
-      {/* {router.isFallback ? (
-        <Box display='flex' justifyContent='center' alignItems='center' minHeight='calc(100vh - 500px)'>
-          <CircularProgress />
-        </Box>
-      ) : ( */}
       <Head>
         <title>{productData.pageTitle || ''}</title>
         <meta name="description" content={productData.metaDescription || ''} />
@@ -106,11 +96,11 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
             <Typography variant='h2' sx={{ mb: 3, cursor: 'pointer' }}>
-            {t('settings:relatedProducts')}
+            {t('relatedProducts')}
             </Typography>
             <Divider sx={{ mb: 3 }} />
             <Grid container spacing={3} rowSpacing={3.75}>
-              {realtedProducts.map((item) => {
+              {productsList.map((item) => {
                 return (
                   <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
                     <RelatedProductCard data={item} />
@@ -126,29 +116,20 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
   );
 };
 
-
-interface IParams extends ParsedUrlQuery {
-  productId: string
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ locale, req, params }) => {
-  const headers = {
-    'Accept-Language': locale,
-    'referer': req?.headers?.referer || ''
+ProductDetails.getInitialProps = async ({ req, query }: NextPageContext) => {
+  if (!req) {
+    return {
+      productDetials: {},
+      realtedProducts: []
+    }
   }
-
-  const { productId } = params as IParams;
-  const product = await getProductDetails(productId, headers);
-  const realtedProducts = await getRelatedProductDetails(productId, headers);
-
-  return {
-    props: {
+    const {productId} = query
+    const product = await getProductDetails(productId);
+    const realtedProducts = await getRelatedProductDetails(productId);
+    return {
       productDetials: product.data.data,
       realtedProducts: realtedProducts.data.data,
-      ...(await serverSideTranslations(locale || '', ['settings', 'common', 'cart', 'auth']))
-    },
-  }
-
+    }
 }
 
 export default ProductDetails;

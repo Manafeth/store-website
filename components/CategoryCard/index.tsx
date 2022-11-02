@@ -7,14 +7,14 @@ import Link from 'next/link';
 
 import { CategoryData } from '../../types/categories';
 import paths from '../../constants/paths';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     data: CategoryData
 }
 
 const CategoryCard: FC<Props> = ({ data }) => {
-    const [t] = useTranslation();
+    const {t} = useTranslation('common');
   return (
     <Link href={paths.categoryDetails(data.id)}>
         <Box
@@ -62,7 +62,7 @@ const CategoryCard: FC<Props> = ({ data }) => {
                     component='span'
                     sx={{ color: 'regba(0,0,0,0,0.5)' }}
                 >
-                    {data.itemsCount} {t('common:items')}
+                    {data.itemsCount} {t('items')}
                 </Typography>
             </Box>
             </Box>

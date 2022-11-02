@@ -11,18 +11,15 @@ import CategoryHeroSection from '../../../components/CategoryHeroSection';
 import ProductVerticalItem from '../../../components/ProductVerticalItem';
 import Filters from '../../../components/Filters';
 import ProductPagination from '../../../components/Pagination';
-import { GetServerSideProps, GetStaticPaths, NextPage } from 'next';
+import { GetServerSideProps, NextPage, NextPageContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { CategoryData } from '../../../types/categories';
-import { getAllCategories, getCategoryDetails } from '../../../services/categories.services';
+import { getCategoryDetails } from '../../../services/categories.services';
 import { getProductsByCategory } from '../../../services/products.services';
 import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../../types/products';
 import { useRouter } from 'next/router';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import productStatusMenu from '../../../constants/ProductStatusValues';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { getSlides } from '../../../services/common.services';
-import { SlideData } from '../../../types/common';
 
 interface Products {
   data: ProductData[],
@@ -38,13 +35,12 @@ interface Props {
     itemsCount: number,
     categories: CategoryData[],
     attributes: []
-  },
-  slides: SlideData[]
+  }
 }
 
-const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slides }) => {
+const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails}) => {
   const router = useRouter();
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
 
   const { categoryId } = router.query
   const [products, setProducts] = useState<Products>({
@@ -66,7 +62,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
   })
 
   const [attributes, setAttributes] = useState<ProductAttributesData[]>([]);
-  const [categories, setCategories] = useState<CategoryData[]>([])
+  const [categories, setCategories] = useState<CategoryData[]>([]);
 
   async function getProducts(data: ProductByCategoryParams) {
     if (categoryId) {
@@ -108,24 +104,28 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
   }
 
   useEffect(() => {
-    if (categoryDetails.products) {
-      setProducts(categoryDetails.products);
-      setParams({
-        page: categoryDetails.products.page,
-        pageSize: categoryDetails.products.pageSize
-      })
+    if (!categoryDetails?.products?.data) {
+      getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }).then((res) => {
+        if (res.data.data.products) {
+          setProducts(res.data.data.products);
+          setParams({
+            page: res.data.data.products.page,
+            pageSize: res.data.data.products.pageSize
+          })
+        }
+    
+        if (res.data.data.attributes)
+          setAttributes(res.data.data.attributes)
+    
+        if (res.data.data.categories)
+          setCategories(res.data.data.categories)
+      });
     }
-
-    if (categoryDetails.attributes)
-      setAttributes(categoryDetails.attributes)
-
-    if (categoryDetails.categories)
-      setCategories(categoryDetails.categories)
   }, [categoryDetails])
   
   return (
     <MainLayout>
-      <HeroSection targetSectionId='products-sec' slides={slides} />
+      <HeroSection targetSectionId='products-sec' />
       <Box component='footer' py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing={3} rowSpacing={3.75}>
@@ -151,13 +151,13 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
                   component='h1'
                   sx={{ mb: 5, fontWeight: '700', color: 'text.secondary' }}
                 >
-                   {t('common:showingAll')} {products.data.length} {t('common:results')} 
+                   {t('showingAll')} {products.data.length} {t('results')} 
                 </Typography>
                 <TextField
                   id='outlined-basic'
                   select
                   variant='outlined'
-                  label={t('common:popularity')}
+                  label={t('popularity')}
                   margin='normal'
                   name='popularity'
                   sx={{ mb: 4, width: '141px', fontSize:'14px',
@@ -167,7 +167,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
                   onChange={handleSort}
                   value={params.productStatus || 0}
                 >
-                  <MenuItem value={0} disabled>{t('common:popularity')}</MenuItem>
+                  <MenuItem value={0} disabled>{t('popularity')}</MenuItem>
                   {productStatusMenu.map((item) => {
                     return (
                       <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
@@ -175,7 +175,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
                   })}
                 </TextField>
               </Box>
-              <CategoryHeroSection targetSectionId='products-sec' slides={slides} />
+              <CategoryHeroSection targetSectionId='products-sec' />
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
                 {products.data.map((item) => {
                   return (
@@ -201,27 +201,21 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, slide
 };
 
 
-interface IParams extends ParsedUrlQuery {
-  categoryId: string
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ locale, req, params }) => {
-  const headers = {
-    'Accept-Language': locale,
-    'referer': req?.headers?.referer || ''
-  }
-  const { categoryId } = params as IParams;
-  const category = await getCategoryDetails(categoryId, headers);
-  const categoryDetails = await getProductsByCategory({ categoryId, page: 1, pageSize: 12 }, headers);
-  const slidesResponse = await getSlides(headers);
-  return {
-    props: {
-      categoryData: category.data.data,
-      categoryDetails: categoryDetails.data.data,
-      slides: slidesResponse.data.data,
-      ...(await serverSideTranslations(locale || '', ['heroSection', 'common', 'cart', 'auth']))
+CategoryDetails.getInitialProps = async ({ req, query }: NextPageContext) => {
+  if (!req) {
+    return {
+      categoryData: [],
+      categoryDetails: { }
     }
   }
+    const {categoryId} = query
+    const category = await getCategoryDetails(categoryId);
+    const categoryDetails = await getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 });
+    
+    return {
+      categoryData: category.data.data,
+      categoryDetails: categoryDetails.data.data,
+    }
 }
 
 export default CategoryDetails;

@@ -23,11 +23,9 @@ import paths from '../../constants/paths';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import CartDrawer from '../CartDrawer';
 import { useCommon } from '../../contexts/CommonContext';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
 import { useProfile } from '../../contexts/ProfileContext';
-import {  Products } from '../../types/products';
-import { getMostPurchasedProducts } from '../../services/products.services';
 import LanguageMenu from '../LanguageMenu';
 
 
@@ -37,7 +35,7 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
   const { fetchCartProducts, cartData } = useCart();
 
@@ -46,9 +44,9 @@ const Header = () => {
   const { fetchWishListData, wishListData } = useProfile();
 
   const pages = [
-    {page: t('common:home'), link: paths.home},
-    {page: t('common:categories'), link: paths.categories},
-    {page: t('common:contactUs'), link: paths.contactUs},
+    {page: t('home'), link: paths.home},
+    {page: t('categories'), link: paths.categories},
+    {page: t('contactUs'), link: paths.contactUs},
   ];
   
 
@@ -108,8 +106,8 @@ const Header = () => {
                   S
                 </Avatar>
                 <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
-                {t('common:welcomeTo')}, <br />
-                  {storeInfo.name}  {t('common:store')}
+                {t('welcomeTo')}, <br />
+                  {storeInfo.name}  {t('store')}
                 </Box>
               </Box>
             </Box>
@@ -246,7 +244,7 @@ const Header = () => {
                   }
                 }
               }}
-              placeholder={t('common:searchPlaceHolder')}
+              placeholder={t('searchPlaceHolder')}
               onChange={handleSearch}
               sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
             />
@@ -324,7 +322,7 @@ const Header = () => {
               <Button
                 onClick={handleOpenAuthModal}
               >
-                 {t('common:login')}
+                 {t('login')}
               </Button>
             )}
             

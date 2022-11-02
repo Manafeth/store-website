@@ -7,14 +7,15 @@ import { useCart } from '../../contexts/CartContext';
 import { LOADING, SUCCESS } from '../../constants';
 import LoadingButton from '@mui/lab/LoadingButton';
 import isNumeric from 'validator/lib/isNumeric';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 const StcPayment = () => {
     const [step, setStep] = useState(1);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [code, setCode] = useState('');
     const [isInvalid, setIsInvalid] = useState(false);
-    const [t] = useTranslation();
+    const {t} = useTranslation('checkout');
+    const {t:CT} = useTranslation('common');
     const { createPayment, orderData, paymentStatus, createStcPayment, stcPaymentStatus } = useCart();
     function handleInput(ev: ChangeEvent<HTMLInputElement>) {
         if (isNumeric(ev.target.value) || ev.target.value === '' || ev.target.value === null)
@@ -66,12 +67,12 @@ const StcPayment = () => {
 
     return (
         <Box component='form' onSubmit={handleSubmit}>
-            <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '30px', fontWeight: 'bold', m: 0 }}>{t('checkout:payConfirmYourPayment')}</Typography>
-            <Typography sx={{ fontSize: '17px', lineHeight: '150%', m: 0 }}>{t('checkout:payemntDescription')}</Typography>
+            <Typography variant='h2' sx={{ fontSize: '20px', lineHeight: '30px', fontWeight: 'bold', m: 0 }}>{t('payConfirmYourPayment')}</Typography>
+            <Typography sx={{ fontSize: '17px', lineHeight: '150%', m: 0 }}>{t('payemntDescription')}</Typography>
             <Divider sx={{ mt: 2, mb: 1.25 }} />
             {step === 1  && (
                 <>
-                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>{t('checkout:mobileNumber')}</Typography>
+                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>{t('mobileNumber')}</Typography>
                     <TextField
                         fullWidth
                         InputProps={{
@@ -95,8 +96,8 @@ const StcPayment = () => {
            
            {step === 2  && (
                 <>
-                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>{t('checkout:verifiy')}</Typography>
-                    <Typography sx={{ fontSize: '17px', lineHeight: '150%', mt: 0, mb: 2.5 }}>{t('checkout:verificationCode')} <b>(+966) {phoneNumber}</b></Typography>
+                    <Typography variant='h2' sx={{ fontSize: '18px', lineHeight: '27px', fontWeight: 'bold', mt: 0, mb: 2.5 }}>{t('verifiy')}</Typography>
+                    <Typography sx={{ fontSize: '17px', lineHeight: '150%', mt: 0, mb: 2.5 }}>{t('verificationCode')} <b>(+966) {phoneNumber}</b></Typography>
                     <TextField
                         fullWidth
                         InputProps={{
@@ -121,7 +122,7 @@ const StcPayment = () => {
                 type='submit'
                 loading={[paymentStatus, stcPaymentStatus].includes(LOADING)}
             >
-                {t('common:next')}
+                {CT('next')}
             </LoadingButton>
         </Box>
     )

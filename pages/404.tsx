@@ -5,8 +5,6 @@ import React from 'react';
 import NotFound from '../assets/images/not-found.png';
 import Image from 'next/image';
 import NotFoundContent from '../components/NotFoundContent';
-import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 
 
@@ -33,14 +31,5 @@ const PageNotFound = () => (
     </Grid>
   </Container>
 );
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-    return {
-      props: {
-        ...(locale && await serverSideTranslations(locale, ['settings', 'common', 'cart', 'auth']))
-      },
-      revalidate: 10,
-    }
-  }
 
 export default PageNotFound;

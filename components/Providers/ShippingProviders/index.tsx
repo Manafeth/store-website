@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ShippingCard from '../ShippingCard';
 import { useCart } from '../../../contexts/CartContext';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 
 
 interface Props {
@@ -14,7 +14,8 @@ interface Props {
 
 const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   const { fetchShipmentsProviders, shipmentData, checkoutData } = useCart();
-  const [t] = useTranslation();
+  const {t: CT} = useTranslation('common');
+  const {t: COT} = useTranslation('checkout');
 
   useEffect(() => {
     fetchShipmentsProviders(checkoutData.addressId);
@@ -24,10 +25,10 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      {t('checkout:shippingProviders')}
+      {COT('shippingProviders')}
       </Typography>
       <Typography variant='h4' component='h1' sx={{ mb: 2 }}>
-      {t('checkout:shippingDiscription')}
+      {COT('shippingDiscription')}
       </Typography>
 
       {shipmentData.map((item) => {
@@ -60,7 +61,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           }}
           onClick={handleBack}
         >
-          {t('common:back')}
+          {CT('back')}
         </Button>
         <Button
           variant='contained'
@@ -72,7 +73,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
           onClick={handleNext}
           disabled={!checkoutData.shipmentProviderId}
         >
-           {t('common:next')}
+           {CT('next')}
         </Button>
       </Box>
     </Box>

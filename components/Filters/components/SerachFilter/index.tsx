@@ -4,7 +4,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
 import InputAdornment from '@mui/material/InputAdornment';
 import Image from 'next/image';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import SearchIcon from '../../../../assets/images/icons/search-icon.svg';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const FilterUtils: FC<Props> = ({ onSearch }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation();
   let timer: ReturnType<typeof setTimeout>;
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
     clearTimeout(timer);
@@ -37,7 +37,7 @@ const FilterUtils: FC<Props> = ({ onSearch }) => {
               <Image src={SearchIcon} alt='search' width='24' height='24' />
             </InputAdornment>
           }
-          placeholder={t('common:search')}
+          placeholder={t('common.search')}
           sx={{
             height: 50,
             width: 186,
