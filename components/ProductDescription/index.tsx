@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { ProductData } from '../../types/products';
-import { CardMedia } from '@mui/material';
 
 
 interface Props {

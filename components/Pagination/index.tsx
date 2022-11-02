@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import Box from '@mui/material/Box';
 import usePagination from '@mui/material/usePagination';
 import { styled } from '@mui/material/styles';

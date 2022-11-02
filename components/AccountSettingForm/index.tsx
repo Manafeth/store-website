@@ -1,10 +1,8 @@
 import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-import React, {ChangeEvent, FC, useState } from 'react';
+import React, {ChangeEvent, FC } from 'react';
 import Link from 'next/link';
 import { emailNotificationData } from '../../types/profile';
 import IconButton from '@mui/material/IconButton';

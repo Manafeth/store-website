@@ -17,9 +17,7 @@ import { Status, Wrapper } from '@googlemaps/react-wrapper';
 import GoogleMap from '../../../GoogleMap';
 import Marker from '../../../Marker';
 import { useTranslation } from 'next-i18next';
-import mapMarkupIcon from '../../../../assets/images/icons/map-markup.svg';
-import { LoadingButton } from '@mui/lab';
-import Input from '@mui/material/Input';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { addressTagsEnums } from '../../../../constants/statuses';
 import { getAllCities } from '../../../../services/common.services';
 

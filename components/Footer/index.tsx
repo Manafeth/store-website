@@ -4,6 +4,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import MuiLink from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 
 import Image from 'next/image';
 import logo from '../../assets/images/logo.svg';
@@ -11,7 +13,6 @@ import facebook from '../../assets/images/icons/facebook-icon.png';
 import instagram from '../../assets/images/icons/instagram-icon.png';
 import twitter from '../../assets/images/icons/twitter-icon.png';
 import Link from 'next/link';
-import { List, ListItem } from '@mui/material';
 import { useTranslation } from "next-i18next";
 import paths from '../../constants/paths';
 import { useCommon } from '../../contexts/CommonContext';

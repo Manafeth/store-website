@@ -14,7 +14,7 @@ import closeIcon from '../../assets/images/icons/close-icon.png';
 import { CodeData, LoginData, ProfileData } from '../../types/auth';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import isEmail from 'validator/lib/isEmail';
-import { LoadingButton } from '@mui/lab';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { useTranslation } from "next-i18next";
 import { LOADING, SUCCESS } from '../../constants';
 import Link from 'next/link';

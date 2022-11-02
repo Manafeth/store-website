@@ -1,14 +1,13 @@
 import React, { ChangeEvent, Dispatch, FC, FocusEvent, KeyboardEvent, SetStateAction } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
-import validator from 'validator';
 import { CodeData, LoginData } from '../../../types/auth';
 import { useTranslation } from 'next-i18next';
 import { useAuthModal } from '../../../contexts/AuthModalContext';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { LOADING } from '../../../constants';
+import isNumeric from 'validator/lib/isNumeric';
 
 interface CodeInputProps {
   error?: boolean;
@@ -61,7 +60,7 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginDa
     const [t] = useTranslation();
     function handleCodeInput(ev: ChangeEvent<HTMLInputElement>) {
         const { value, name } = ev.target;
-        if (validator.isNumeric(value) || !value) {
+        if (isNumeric(value) || !value) {
             if (value.length < 2) {
             setCode((prevCode) => ({ ...prevCode, [name]: value }));
             ev.target.select();

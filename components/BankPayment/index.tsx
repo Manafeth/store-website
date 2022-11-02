@@ -2,7 +2,6 @@ import React, { ChangeEvent, FC, useEffect } from 'react'
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import Link from '@mui/material/Link';
 import { OrderData } from '../../types/cart';
