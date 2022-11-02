@@ -116,16 +116,20 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
   );
 };
 
-ProductDetails.getInitialProps = async ({ req, query }: NextPageContext) => {
+ProductDetails.getInitialProps = async ({ locale, req, query }: NextPageContext) => {
   if (!req) {
     return {
       productDetials: {},
       realtedProducts: []
     }
   }
+  const headers = {
+    'referer': req?.headers?.referer || '',
+    'accepted-language': locale
+  }
     const {productId} = query
-    const product = await getProductDetails(productId);
-    const realtedProducts = await getRelatedProductDetails(productId);
+    const product = await getProductDetails(productId, headers);
+    const realtedProducts = await getRelatedProductDetails(productId, headers);
     return {
       productDetials: product.data.data,
       realtedProducts: realtedProducts.data.data,

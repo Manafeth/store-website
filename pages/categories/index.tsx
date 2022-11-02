@@ -70,15 +70,21 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
   )
 }
 
-Categories.getInitialProps = async ({req}: NextPageContext) => {
+Categories.getInitialProps = async ({req, locale}: NextPageContext) => {
     if (!req) {
         return {
             categories: [],
             allCategories: []
         }
     }
-    const categories = await getFeaturedCategories();
-    const allCategories = await getAllCategories();
+    
+    const headers = {
+        'referer': req?.headers?.referer || '',
+        'accepted-language': locale
+    }
+
+    const categories = await getFeaturedCategories(headers);
+    const allCategories = await getAllCategories(headers);
     return {
         categories: categories.data.data,
         allCategories: allCategories.data.data,

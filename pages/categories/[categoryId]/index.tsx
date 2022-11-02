@@ -11,8 +11,7 @@ import CategoryHeroSection from '../../../components/CategoryHeroSection';
 import ProductVerticalItem from '../../../components/ProductVerticalItem';
 import Filters from '../../../components/Filters';
 import ProductPagination from '../../../components/Pagination';
-import { GetServerSideProps, NextPage, NextPageContext } from 'next';
-import { ParsedUrlQuery } from 'querystring';
+import { NextPage, NextPageContext } from 'next';
 import { CategoryData } from '../../../types/categories';
 import { getCategoryDetails } from '../../../services/categories.services';
 import { getProductsByCategory } from '../../../services/products.services';
@@ -200,17 +199,20 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails}) => {
   );
 };
 
-
-CategoryDetails.getInitialProps = async ({ req, query }: NextPageContext) => {
+CategoryDetails.getInitialProps = async ({locale, req, query }: NextPageContext) => {
   if (!req) {
     return {
       categoryData: [],
       categoryDetails: { }
     }
   }
+  const headers = {
+    'referer': req?.headers?.referer || '',
+    'accepted-language': locale
+  }
     const {categoryId} = query
-    const category = await getCategoryDetails(categoryId);
-    const categoryDetails = await getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 });
+    const category = await getCategoryDetails(categoryId, headers);
+    const categoryDetails = await getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }, headers);
     
     return {
       categoryData: category.data.data,

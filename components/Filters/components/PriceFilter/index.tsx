@@ -13,7 +13,7 @@ interface Props {
 }
 
 const FilterByPrice: FC<Props> = ({ params, handlePriceFromInput, handlePriceToInput }) => {
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   
   function handleSliderChange (event: Event, newValue: number | number[]) {
     // @ts-ignore
@@ -41,7 +41,7 @@ function valuetext(value: number) {
         component='h1'
         sx={{ color:'text.primary', fontWeight:'700', fontSize:'16px'}}
       >
-         {t('common.filterByPrice')}
+         {t('filterByPrice')}
       </Typography>
       <Box sx={{ width: 150 }}>
         <Slider

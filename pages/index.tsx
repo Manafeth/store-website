@@ -85,15 +85,20 @@ const HomePage: NextPage<Props> = ({ productsList, categories }) => {
   )
 }
 
-HomePage.getInitialProps = async ({ req }: NextPageContext) => {
+HomePage.getInitialProps = async ({ req, locale }: NextPageContext) => {
   if (!req) {
     return {
       productsList: [],
       categories: [],
     }
   }
-  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''});
-  const categories = await getFeaturedCategories();
+
+  const headers = {
+    'referer': req?.headers?.referer || '',
+    'accepted-language': locale
+  }
+  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
+  const categories = await getFeaturedCategories(headers);
   
   return {
     productsList: products.data.data.data,
