@@ -3,5 +3,8 @@
     "off":"OFF",
     "discount":"Discount",
     "description":"We know how large objects will act, but things on a small scale",
-    "shopNow":"SHOP NOW"
+    "shopNow":"SHOP NOW",
+    "emptyStateTitle": "No offers yet!",
+    "emptyStateDescription": "Sorry there’s no offers has been added to the store yet, you can explore our products",
+    "explore": "Explore"
 }

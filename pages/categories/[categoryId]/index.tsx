@@ -206,18 +206,26 @@ CategoryDetails.getInitialProps = async ({locale, req, query }: NextPageContext)
       categoryDetails: { }
     }
   }
-  const headers = {
-    'referer': req?.headers?.referer || '',
-    'accepted-language': locale
-  }
-    const {categoryId} = query
-    const category = await getCategoryDetails(categoryId, headers);
-    const categoryDetails = await getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }, headers);
-    
-    return {
-      categoryData: category.data.data,
-      categoryDetails: categoryDetails.data.data,
+  try {
+    const headers = {
+      'referer': req?.headers?.referer || '',
+      'accepted-language': locale
     }
+      const {categoryId} = query
+      const category = await getCategoryDetails(categoryId, headers);
+      const categoryDetails = await getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }, headers);
+      
+      return {
+        categoryData: category.data.data,
+        categoryDetails: categoryDetails.data.data,
+      }
+  } catch(error: any) {
+    return {
+      categoryData: [],
+      categoryDetails: { }
+    }
+  }
+
 }
 
 export default CategoryDetails;

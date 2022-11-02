@@ -1,6 +1,6 @@
 import React, { createContext, useContext, ReactElement, FC, useEffect, useState } from 'react';
 import { getSlides, getStoreInfo } from '../services/common.services';
-import { CommonContextState, StoreInfoData } from '../types/common';
+import { CommonContextState, SlideData, StoreInfoData } from '../types/common';
 import  { getMostPurchasedProducts } from '../services/products.services';
 import { ProductData } from '../types/products';
 import { useRouter } from 'next/router';
@@ -23,7 +23,7 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         supportEmail: ''
     })
 
-    const [slides, setSlides] = useState<[]>([])
+    const [slides, setSlides] = useState<SlideData[]>([])
 
     const router = useRouter();
 
