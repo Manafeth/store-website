@@ -1,20 +1,19 @@
 import React, { useState, MouseEvent } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Image from 'next/image';
 import LangIocn from '../../assets/images//icons/lang-icon.svg';
 import CheckedIcon from '../../assets/images/icons/checked-icon.svg';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import Box from '@mui/material/Box';
 import router from 'next/router';
 
 const LanguageMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { i18n } = useTranslation();
+  const { lang } = useTranslation();
 
   function handleClick(event: MouseEvent<HTMLElement>) {
     setAnchorEl(event.currentTarget);
@@ -57,30 +56,30 @@ const LanguageMenu = () => {
       >
         <MenuItem
           onClick={setLangaugeToEnglish}
-          selected={i18n.language === 'en'}
+          selected={lang === 'en'}
           sx={{
-            'color': i18n.language === 'en' ? 'success.main' : '',
+            'color': lang === 'en' ? 'success.main' : '',
             '&.Mui-selected': {
               backgroundColor: 'white',
             },
             'fontSize':'14px'
           }}
         >
-          English {i18n.language === 'en' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
+          English {lang === 'en' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
         </MenuItem>
         <Divider sx={{ mx: 2 }} />
         <MenuItem
           onClick={setLangaugeToArabic}
-          selected={i18n.language === 'ar'}
+          selected={lang === 'ar'}
           sx={{
-            'color': i18n.language === 'ar' ? 'success.main' : '',
+            'color': lang === 'ar' ? 'success.main' : '',
             '&.Mui-selected': {
               backgroundColor: 'white',
             },
             'fontSize':'14px'
           }}
         >
-          العربية {i18n.language === 'ar' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
+          العربية {lang === 'ar' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
         </MenuItem>
       </Menu>
     </>

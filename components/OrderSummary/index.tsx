@@ -1,11 +1,14 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
 
 const OrderSummary = () => {
-  const [t] = useTranslation();
+  const {t: CAT} = useTranslation('cart');
+  const {t: CT} = useTranslation('common');
+  const {t: COT} = useTranslation('checkout');
+
   const { cartData } = useCart();
   const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0),0);
   const subTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0),0);
@@ -21,10 +24,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
-          {t('cart:subTotal')}
+          {CAT('subTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          {t('common:sar')} {subTotal}
+          {CT('sar')} {subTotal}
         </Typography>
       </Box>
       <Box
@@ -35,10 +38,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
-        {t('checkout:checkoutAttributsTotal')}
+        {COT('checkoutAttributsTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          {t('common:sar')} {checkoutAttributsTotal}
+          {CT('sar')} {checkoutAttributsTotal}
         </Typography>
       </Box>
       <Box
@@ -49,10 +52,10 @@ const OrderSummary = () => {
         }}
       >
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          {t('cart:total')}
+          {CAT('total')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
-          {t('common:sar')} {result}
+          {CT('sar')} {result}
         </Typography>
       </Box>
     </Box>

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { FormLabel } from '@mui/material';
+import FormLabel from '@mui/material/FormLabel';
 import { ProductAttributesData, ProductByCategoryParams } from '../../../../types/products';
 
 interface Props {

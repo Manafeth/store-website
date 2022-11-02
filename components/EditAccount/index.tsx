@@ -17,7 +17,7 @@ import Avatar from '@mui/material/Avatar';
 import PhoneNumberInput from '../PhoneNumberInput';
 import { customerData } from '../../types/profile';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   customerData: customerData;
@@ -38,7 +38,8 @@ const EditAccount: FC<Props> = ({
   isSubmitted,
 }) => {
   const [image, setImage] = useState('');
-  const [t] = useTranslation();
+  const {t: CT} = useTranslation('common');
+  const {t: ST} = useTranslation('settings');
 
   function handlePhoneInput({
     countryId,
@@ -95,7 +96,7 @@ const EditAccount: FC<Props> = ({
       noValidate
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' },fontFamily: 'Urbanist' }}>
-        {t('settings:editAccount')}
+        {ST('editAccount')}
       </Typography>
       <Box
         sx={{
@@ -122,7 +123,7 @@ const EditAccount: FC<Props> = ({
           sx={{ fontSize: '14px', color: 'grey.2000', fontWeight: '400', width:'100%' }}
           endIcon={<Image src={uploadIcon} alt='upload Iocn'/>}
         >
-          {t('settings:uploadPhoto')}
+          {ST('uploadPhoto')}
           <input
             hidden
             accept='image/*'
@@ -133,7 +134,7 @@ const EditAccount: FC<Props> = ({
         </Button>
       </Box>
       <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
-      {t('common:fullName')}
+      {CT('fullName')}
       </Box>
       <TextField
         id='outlined-basic'
@@ -152,12 +153,12 @@ const EditAccount: FC<Props> = ({
         }}
       />
       <Typography variant='h1' component='h2' sx={{ mt: 3, fontSize: { xs: '28px', md: '34px' } }}>
-        {t('common:contact')}
+        {CT('contact')}
       </Typography>
       <Box component='label'
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 2 }}
       >
-          {t('common:email')}
+          {CT('email')}
       </Box>
 
       <TextField
@@ -180,7 +181,7 @@ const EditAccount: FC<Props> = ({
       <Box component='label'
         sx={{ color: 'primary.dark', fontWeight: '500', mt: 1 }}
       >
-          {t('common:phoneNumber')}
+          {CT('phoneNumber')}
       </Box>
 
       <PhoneNumberInput
@@ -224,7 +225,7 @@ const EditAccount: FC<Props> = ({
           {loading ? (
             <CircularProgress size={25} color='info' />
           ) : (
-            t('common:saveChanges')
+            CT('saveChanges')
           )}
         </Button>
       </Box>

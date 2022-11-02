@@ -6,7 +6,7 @@ import { FC,useState } from 'react';
 import HeartIcon from '../../assets/images/icons/black-heart.svg';
 import FilledHeartIcon from '../../assets/images/icons/fill-black-heart.svg';
 import { wishListData } from '../../types/profile';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import paths from '../../constants/paths';
 import IconButton from '@mui/material/IconButton';
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const ProductItem: FC<Props> = ({ data }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   const { sendAlert } = useAlert();
   const { fetchWishListData } = useProfile();
   const [productWishList, setProductWishList] = useState<wishListData>({
@@ -105,7 +105,7 @@ const ProductItem: FC<Props> = ({ data }) => {
           </Box> */}
         </Box>
         <Typography variant='h2' component='p' sx={{ fontWeight: 'bold'}}>
-          {t('common:sar')} {data.salePrice}
+          {t('sar')} {data.salePrice}
         </Typography>
       </Box>
     </Box>

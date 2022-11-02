@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../types/products';
 import { CategoryData } from '../../types/categories';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 // import TagFilter from './components/TagFilter';
 
 
@@ -24,15 +24,15 @@ interface Props {
 }
 
 const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, params }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
 
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
+    getProducts({generalSearch: ev.target.value, page: 1});
     setParams((prevState) => ({
       ...prevState,
       generalSearch: ev.target.value,
       page: 1,
     }))
-    getProducts({generalSearch: ev.target.value, page: 1})
   }
 
   function handleColorAttribute(id: number) {
@@ -75,7 +75,7 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
           component='h1'
           sx={{ fontWeight: '700' }}
         >
-          {t('common:filter')} :
+          {t('filter')} :
         </Typography>
         <FilterUtils onSearch={handleSearch} />
       </Box>
@@ -120,7 +120,7 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
         }}
         onClick={handleFilterSubmit}
       >
-          {t('common:filter')}
+          {t('filter')}
       </Button>
     </>
   );

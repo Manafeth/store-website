@@ -1,14 +1,12 @@
 import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-import React, {ChangeEvent, FC, useState } from 'react';
+import React, {ChangeEvent, FC } from 'react';
 import Link from 'next/link';
 import { emailNotificationData } from '../../types/profile';
 import IconButton from '@mui/material/IconButton';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useProfile } from '../../contexts/ProfileContext';
 import { useRouter } from 'next/router';
 
@@ -18,7 +16,8 @@ interface Props {
 }
 
 const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
-  const [t] = useTranslation();
+  const {t: CT} = useTranslation('common');
+  const {t: ST} = useTranslation('settings');
   const {triggerUpdateEmailNotification} = useProfile();
   const router = useRouter();
 
@@ -40,7 +39,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
       }}
     >
       <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '32px' },fontWeight:'700',fontFamily: 'Urbanist' }}>
-        {t('settings:accountSetting')}
+        {ST('accountSetting')}
       </Typography>
 
       <Box
@@ -52,7 +51,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
         }}
       >
         <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }, fontWeight:'700',fontFamily: 'Urbanist' }}>
-          {t('settings:emailNotification')}
+          {ST('emailNotification')}
         </Typography>
         <Switch color='success' 
           checked={emailNotificationData.activityEmail}
@@ -71,18 +70,18 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
           fontFamily: 'Urbanist'
         }}
       >
-      {t('settings:emailTextOne')}{t('settings:emailtextTwo')}
+      {ST('emailTextOne')}{ST('emailtextTwo')}
       </Typography>
 
       <Divider sx={{ mb: 5 }} />
 
       <Box sx={{display:'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
         <Typography variant='h2' sx={{ mb: 5,flex: '0.7', fontSize: { xs: '20px', md: '24px' },fontFamily: 'Urbanist' }}>
-          {t('settings:shippingAddress')}
+          {ST('shippingAddress')}
         </Typography>
         <Link href='/addressManagment'>
           <IconButton sx={{fontSize:'16px',fontFamily: 'Urbanist'}}>
-            {t('common:edit')}
+            {CT('edit')}
           </IconButton> 
         </Link>
       </Box>

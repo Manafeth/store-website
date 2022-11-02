@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
     open: boolean;
@@ -28,7 +28,7 @@ const style = {
 };
 
 const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove, loading }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   return (
     <Modal
       open={open}
@@ -38,10 +38,10 @@ const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove,
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h3">
-        {t('common:removeAlert')}
+        {t('removeAlert')}
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 4 }}>
-        {t('common:areYouSure')} 
+        {t('areYouSure')} 
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 5 }}>
           <Button
@@ -51,7 +51,7 @@ const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove,
             sx={{ mr: 3 }}
             onClick={onClose}
           >
-           {t('common:no')}
+           {t('no')}
           </Button>
           <Button
             variant="contained"
@@ -61,7 +61,7 @@ const DeleteConfirmationMdoal: FC<Props> = ({ open, onClose, name, handleRemove,
             disabled={loading}
             sx={{ py: loading ? '9px' : '14px' }}
           >
-            {loading ? <CircularProgress size={25} color="info" /> : t('common:yes')}
+            {loading ? <CircularProgress size={25} color="info" /> : t('yes')}
           </Button>
         </Box>
       </Box>

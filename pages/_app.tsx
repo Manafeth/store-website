@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import ThemeProvider from '../styles/theme'
-import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { AuthModalProvider } from '../contexts/AuthModalContext';
 import { ProfileModalProvider } from '../contexts/ProfileContext';
@@ -21,12 +20,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (locale)
       localStorage.setItem('userLanguage', locale)  
   }, [router])
-
-  useEffect(() => {
-    router.push(router.pathname)
-  }, [])
-  
-  
 
   return (
     <ThemeProvider>
@@ -51,4 +44,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default appWithTranslation(MyApp)
+export default MyApp;

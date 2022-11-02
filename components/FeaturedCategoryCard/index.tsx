@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 import Link from 'next/link';
 import { CategoryData } from '../../types/categories';
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const FeaturedCategoryCard: FC<Props> = ({ isVertical, data }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   return (
     <Link href={paths.categoryDetails(data.id)}>
       <Box
@@ -65,7 +65,7 @@ const FeaturedCategoryCard: FC<Props> = ({ isVertical, data }) => {
               component='span'
               sx={{ color: 'regba(0,0,0,0,0.5)' }}
             >
-              {data.itemsCount} {t('common:items')}
+              {data.itemsCount} {t('items')}
             </Typography>
           </Box>
         </Box>

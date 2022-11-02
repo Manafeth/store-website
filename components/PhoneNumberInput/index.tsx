@@ -4,12 +4,9 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Image from 'next/image';
-import arrowDown from '../../assets/images/icons/arrow-down.png';
 import isNumeric from 'validator/lib/isNumeric';
 import { getCountries } from '../../services/common.services';
 import { CountryData } from '../../types/common';
-import InputLabel from '@mui/material/InputLabel';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 

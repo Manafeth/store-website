@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import PhoneNumberInput from '../../PhoneNumberInput';
 import { LoginData } from '../../../types/auth';
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 
 interface Props {
   loginData: LoginData;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const PhoneNumber: FC<Props> = ({ loginData, setLoginData, isInvalid }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('auth');
   
   function handleInput(data: { countryId: number; phoneNumber: string }) {
     setLoginData(data);
@@ -21,10 +21,10 @@ const PhoneNumber: FC<Props> = ({ loginData, setLoginData, isInvalid }) => {
   return (
     <Box>
         <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, letterSpacing: '0.1px' }}>
-        {t('auth:phoneNumber')}
+        {t('phoneNumber')}
         </Typography>
         <Typography variant='h2' sx={{ mb: 6, lineHeight: '30px', letterSpacing: '0.2px' }}>
-        {t('auth:signInStore')}
+        {t('signInStore')}
         </Typography>
         <PhoneNumberInput
           sx={{ mb: 9.5 }}

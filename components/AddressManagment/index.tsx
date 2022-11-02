@@ -16,7 +16,7 @@ import addIcon from '../../assets/images/icons/add-icon.svg';
 import DeleteConfirmationMdoal from '../DeleteConfirmation';
 import AddressDrawer from './components/AddressDrawer';
 import { LOADING, SUCCESS } from '../../constants';
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 
 const AddressManagment = () => {
   const initialState = {
@@ -28,7 +28,7 @@ const AddressManagment = () => {
     latitude: 0,
     longitude: 0,
   };
-  const [t] = useTranslation();
+  const {t} = useTranslation('settings');
   const [deleteConfirmationActive, setDeleteConfirmationState] =useState(false);
   const [open, setOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<AddressData>();
@@ -100,7 +100,7 @@ const AddressManagment = () => {
       }}
     >
       <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' }  }}>
-        {t('settings:addressManagment')}
+        {t('addressManagment')}
       </Typography>
       
       <Box
@@ -113,7 +113,7 @@ const AddressManagment = () => {
         }}
       >
         <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }  }}>
-          {t('settings:homeAddress')}
+          {t('homeAddress')}
         </Typography>
         <Button
           variant='contained'
@@ -132,7 +132,7 @@ const AddressManagment = () => {
           }}
           onClick={onOpen}
         >
-          {t('settings:addNewAddress')}
+          {t('addNewAddress')}
         </Button>
       </Box>
 
@@ -163,10 +163,10 @@ const AddressManagment = () => {
       }) : (
         <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '20px' }}>
           <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
-          {t('settings:oops')}
+          {t('oops')}
           </Typography>
           <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
-          {t('settings:noAddress')}
+          {t('noAddress')}
           </Typography>
         </Box>
       )}

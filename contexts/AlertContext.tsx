@@ -1,4 +1,5 @@
-import { Alert, Snackbar } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import React, { createContext, useState, useContext, useEffect, ReactElement } from 'react';
 import { AlertState, AlertType } from '../types/common';
 

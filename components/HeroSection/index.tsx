@@ -4,19 +4,18 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import CardMedia from '@mui/material/CardMedia';
-import { useTranslation } from "next-i18next";
+import useTranslation from "next-translate/useTranslation";
 
-import Link from 'next/link';
 import Carousel from 'react-material-ui-carousel'
-import { SlideData } from '../../types/common';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
     targetSectionId: string,
-    slides: SlideData[]
 }
 
-const HeroSection: FC<Props> = ({ targetSectionId, slides }) => {
-    const [t] = useTranslation();
+const HeroSection: FC<Props> = ({ targetSectionId }) => {
+    const {t} = useTranslation('heroSection');
+    const {slides, fetchSlides} = useCommon();
 
     function scrollToProducts() {
         const yOffset = -91; 
@@ -25,6 +24,11 @@ const HeroSection: FC<Props> = ({ targetSectionId, slides }) => {
         const y = element?.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({top: y, behavior: 'smooth'});
     }
+
+    useEffect(() => {
+        fetchSlides();
+    }, [])
+    
 
   return (
     <Box component='section' sx={{ position: 'relative' }}>
@@ -63,7 +67,7 @@ const HeroSection: FC<Props> = ({ targetSectionId, slides }) => {
                                     mb: {xs: 1, sm: 2}
                                 }}
                             >
-                                -{item.discountValue}% {t('heroSection:discount')}
+                                -{item.discountValue}% {t('discount')}
                             </Typography>
                             <Typography
                                 sx={{
@@ -89,7 +93,7 @@ const HeroSection: FC<Props> = ({ targetSectionId, slides }) => {
                                 }}
                                 onClick={scrollToProducts}
                             >
-                                {t('heroSection:shopNow')}
+                                {t('shopNow')}
                                 </Button>
                         </Container>
                     </Box>

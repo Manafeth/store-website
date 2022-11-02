@@ -9,7 +9,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   data: {
@@ -21,7 +21,7 @@ interface Props {
 }
 const ListMenuItem: FC<Props> = ({ data }) => {
   const router = useRouter();
-    const { i18n } = useTranslation();
+    const { lang } = useTranslation();
   
   function handleClick() {
     if (data.onClick)
@@ -44,7 +44,7 @@ const ListMenuItem: FC<Props> = ({ data }) => {
         onClick={handleClick}
       >
         <ListItemText primary={data.name} disableTypography={true} sx={{ opacity: 1, fontSize:'18px', fontWeight:'700',fontFamily: 'Urbanist' }} />
-        {i18n.language === 'ar'? (
+        {lang === 'ar'? (
            <Typography sx={{ ml: 4, transform:'rotate(180deg)'}}><Image src={ArrowRight} alt='checked icon' /></Typography>
         ):(
           <Typography sx={{ ml: 4}}><Image src={ArrowRight} alt='checked icon' /></Typography>

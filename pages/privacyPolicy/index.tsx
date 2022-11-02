@@ -1,32 +1,17 @@
-import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListMenuText from '../../components/ListMenuText';
 import {
-  Cancellation,
-  Commitment,
-  Consumer,
   Information,
-  Introduction,
-  Manafeth,
-  Merchant,
-  Modification,
-  Payment,
-  Registration,
-  Responsibility,
-  Rules,
   Store,
 } from '../../constants/statuses';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 
 const PrivacyPolicy = () => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('privacy');
 
   return (
     <MainLayout>
@@ -36,7 +21,7 @@ const PrivacyPolicy = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' } }}
         >
-          {t('privacy:privacyPolicy')}
+          {t('privacyPolicy')}
         </Typography>
         <Typography
           sx={{
@@ -47,14 +32,14 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {t('privacy:privacyDescription')}
+          {t('privacyDescription')}
         </Typography>
         <Typography
           variant='h1'
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('privacy:info')}
+          {t('info')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Information?.map((item) => (
@@ -66,7 +51,7 @@ const PrivacyPolicy = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' } }}
         >
-          {t('privacy:store')}
+          {t('store')}
         </Typography>
         <Typography
           sx={{
@@ -77,7 +62,7 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {t('privacy:storeDescription')}
+          {t('storeDescription')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Store?.map((item) => (
@@ -89,7 +74,7 @@ const PrivacyPolicy = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' } }}
         >
-          {t('privacy:safety')}
+          {t('safety')}
         </Typography>
         <Typography
           sx={{
@@ -100,14 +85,14 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {t('privacy:saftytext')}
+          {t('saftytext')}
         </Typography>
         <Typography
           variant='h1'
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' } }}
         >
-          {t('privacy:share')}
+          {t('share')}
         </Typography>
         <Typography
           sx={{
@@ -118,7 +103,7 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {t('privacy:shareOne')}
+          {t('shareOne')}
         </Typography>
         <Typography
           sx={{
@@ -129,28 +114,11 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {t('privacy:shareTwo')}
+          {t('shareTwo')}
         </Typography>
       </Container>
     </MainLayout>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(locale &&
-        (await serverSideTranslations(locale, [
-          'settings',
-          'common',
-          'cart',
-          'auth',
-          'terms',
-          'privacy'
-        ]))),
-    },
-    revalidate: 10,
-  };
 };
 
 export default PrivacyPolicy;

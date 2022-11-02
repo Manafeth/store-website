@@ -1,9 +1,7 @@
-import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListMenuText from '../../components/ListMenuText';
@@ -24,7 +22,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 const TermsOfUse = () => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('terms');
 
   return (
     <MainLayout>
@@ -34,7 +32,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' } }}
         >
-          {t('terms:termsOfService')}
+          {t('termsOfService')}
         </Typography>
         <Typography
           sx={{
@@ -45,14 +43,14 @@ const TermsOfUse = () => {
             textAlign: 'justify',
           }}
         >
-          {t('terms:termsDescription')}
+          {t('termsDescription')}
         </Typography>
         <Typography
           variant='h1'
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:introduction')}
+          {t('introduction')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Introduction?.map((item) => (
@@ -64,7 +62,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:merchant')}
+          {t('merchant')}
         </Typography>
         <Typography
           sx={{
@@ -74,7 +72,7 @@ const TermsOfUse = () => {
             textAlign: 'justify',
           }}
         >
-          {t('terms:merchantDescription')}
+          {t('merchantDescription')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Merchant?.map((item) => (
@@ -86,7 +84,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:commitment')}
+          {t('commitment')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Commitment?.map((item) => (
@@ -98,7 +96,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:rules')}
+          {t('rules')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Rules?.map((item) => (
@@ -110,7 +108,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:registration')}
+          {t('registration')}
         </Typography>
         <Typography
           sx={{
@@ -120,7 +118,7 @@ const TermsOfUse = () => {
             textAlign: 'justify',
           }}
         >
-          {t('terms:regDescription')}
+          {t('regDescription')}
         </Typography>
         <Typography
           sx={{
@@ -130,7 +128,7 @@ const TermsOfUse = () => {
             textAlign: 'justify',
           }}
         >
-          {t('terms:regDescriptionTwo')}
+          {t('regDescriptionTwo')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Registration?.map((item) => (
@@ -142,7 +140,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:modification')}
+          {t('modification')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Modification?.map((item) => (
@@ -154,7 +152,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:payment')}
+          {t('payment')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Payment?.map((item) => (
@@ -166,7 +164,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:manafeth')}
+          {t('manafeth')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Manafeth?.map((item) => (
@@ -178,7 +176,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:consumer')}
+          {t('consumer')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Consumer?.map((item) => (
@@ -190,7 +188,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:responsibility')}
+          {t('responsibility')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Responsibility?.map((item) => (
@@ -202,7 +200,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
         >
-          {t('terms:cancellation')}
+          {t('cancellation')}
         </Typography>
         <Typography
           sx={{
@@ -212,7 +210,7 @@ const TermsOfUse = () => {
             textAlign: 'justify',
           }}
         >
-          {t('terms:cancellationDescription')}
+          {t('cancellationDescription')}
         </Typography>
         <List sx={{ display: 'flex', flexDirection: 'column', mb: 2 }}>
           {Cancellation?.map((item) => (
@@ -227,7 +225,7 @@ const TermsOfUse = () => {
             textAlign: 'justify',
           }}
         >
-          {t('terms:termsText')}
+          {t('termsText')}
         </Typography>
         <Box
           sx={{
@@ -247,7 +245,7 @@ const TermsOfUse = () => {
               mr: '20px',
             }}
           >
-            {t('terms:notRightNow')}
+            {t('notRightNow')}
           </Button>
           <Button
             variant='contained'
@@ -260,28 +258,12 @@ const TermsOfUse = () => {
             }}
             type='submit'
           >
-            {t('terms:agree')}
+            {t('agree')}
           </Button>
         </Box>
       </Container>
     </MainLayout>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(locale &&
-        (await serverSideTranslations(locale, [
-          'settings',
-          'common',
-          'cart',
-          'auth',
-          'terms',
-        ]))),
-    },
-    revalidate: 10,
-  };
 };
 
 export default TermsOfUse;

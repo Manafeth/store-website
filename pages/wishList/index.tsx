@@ -5,13 +5,11 @@ import ProductItem from '../../components/ProductItem';
 import { useProfile } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
 const WishListProduct = () => {
   const { fetchWishListData, wishListData } = useProfile();
-  const [t] = useTranslation();
+  const {t} = useTranslation('settings');
   useEffect(() => {
     fetchWishListData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,7 +22,7 @@ const WishListProduct = () => {
             variant='h1'
             sx={{ mb: 5, fontWeight: 'bold', fontSize: { xs: '28px', md: '34px', fontSize: { xs: '28px', md: '34px' } } }}
           >
-              {t('settings:wishlistProduct')}
+              {t('wishlistProduct')}
           </Typography>
           { wishListData?.map((item) => {
             return(
@@ -38,14 +36,5 @@ const WishListProduct = () => {
     </MainLayout>
   );
 };
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(locale && await serverSideTranslations(locale, ['settings', 'common', 'cart', 'auth']))
-    },
-    revalidate: 10,
-  }
-}
 
 export default WishListProduct;

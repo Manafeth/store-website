@@ -10,7 +10,7 @@ import React, { ChangeEvent, FC, useState } from 'react';
 import { useCart } from '../../../contexts/CartContext';
 import { AddressData } from '../../../types/profile';
 import Button from '@mui/material/Button';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { addressTagsEnums } from '../../../constants/statuses';
 interface Props {
   data: AddressData;
@@ -18,7 +18,7 @@ interface Props {
 
 const AddressCard: FC<Props> = ({ data }) => {
   const { updateCheckoutData, checkoutData } = useCart();
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
 
   function handleChange() {
     updateCheckoutData('addressId', data.id);

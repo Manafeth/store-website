@@ -11,7 +11,7 @@ function getMostPurchasedProducts (params?: { page: number, pageSize: number, ge
   );
 }
 
-function getProductDetails(id: string, headers?: { [key: string]: any }) {
+function getProductDetails(id: string | string[] | undefined | number, headers?: { [key: string]: any }) {
   return axiosInstance.get(
     'Product/Get',
     {
@@ -21,7 +21,7 @@ function getProductDetails(id: string, headers?: { [key: string]: any }) {
   );
 }
 
-function getRelatedProductDetails(productId: string, headers?: { [key: string]: any }) {
+function getRelatedProductDetails(productId: string | string[] | undefined | number, headers?: { [key: string]: any }) {
   return axiosInstance.get(
     'Product/GetRelatedProduct',
     {

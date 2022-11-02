@@ -14,10 +14,9 @@ import closeIcon from '../../assets/images/icons/close-icon.png';
 import { CodeData, LoginData, ProfileData } from '../../types/auth';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import isEmail from 'validator/lib/isEmail';
-import { LoadingButton } from '@mui/lab';
-import { useTranslation } from "next-i18next";
+import LoadingButton from '@mui/lab/LoadingButton';
+import useTranslation from "next-translate/useTranslation";
 import { LOADING, SUCCESS } from '../../constants';
-import Link from 'next/link';
 
 interface Props {
 
@@ -36,7 +35,7 @@ const AuthModal: FC<Props> = () => {
         userData
     } = useAuthModal();
     const [tab, setTab] = useState(1);
-    const [t] = useTranslation();
+    const {t} = useTranslation('common');
     const [isInvalid, setIsInvalid] = useState(false);
     const [loginData, setLoginData] = useState<LoginData>({
         countryId: 0,
@@ -210,7 +209,7 @@ const AuthModal: FC<Props> = () => {
                     type="submit"
                     loading={[sendPhoneNumberStatus, verifyStatus, updateProfileStatus].includes(LOADING)}
                 >
-                    {t('common:next')}
+                    {t('next')}
                 </LoadingButton>
             </Box>
         </Drawer>

@@ -1,10 +1,10 @@
 import React, { createContext, useContext, ReactElement, FC, useEffect, useState } from 'react';
 import { getSlides, getStoreInfo } from '../services/common.services';
 import { CommonContextState, StoreInfoData } from '../types/common';
-import FloatingWhatsApp from 'react-floating-whatsapp'
 import  { getMostPurchasedProducts } from '../services/products.services';
 import { ProductData } from '../types/products';
 import { useRouter } from 'next/router';
+import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 interface Props {
   children: ReactElement | ReactElement[];
 }
@@ -70,7 +70,14 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
   return (
     <CommonContext.Provider value={state}>
       {children}
-      <FloatingWhatsApp phoneNumber={storeInfo.complaintNumber} accountName={storeInfo.name} avatar={storeInfo.mainImageFilePath?.thumbUrl} />
+      <FloatingWhatsApp
+        phoneNumber={storeInfo.complaintNumber}
+        accountName={storeInfo.name}
+        avatar={storeInfo.mainImageFilePath?.thumbUrl}
+        allowEsc
+        allowClickAway
+        notification
+      />
     </CommonContext.Provider>
   );
 };

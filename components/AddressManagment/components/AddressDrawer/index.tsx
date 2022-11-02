@@ -16,10 +16,8 @@ import { GOOGLE_MAP_KEY, LOADING, SUCCESS } from '../../../../constants';
 import { Status, Wrapper } from '@googlemaps/react-wrapper';
 import GoogleMap from '../../../GoogleMap';
 import Marker from '../../../Marker';
-import { useTranslation } from 'next-i18next';
-import mapMarkupIcon from '../../../../assets/images/icons/map-markup.svg';
-import { LoadingButton } from '@mui/lab';
-import Input from '@mui/material/Input';
+import useTranslation from "next-translate/useTranslation";
+import LoadingButton from '@mui/lab/LoadingButton';
 import { addressTagsEnums } from '../../../../constants/statuses';
 import { getAllCities } from '../../../../services/common.services';
 
@@ -54,7 +52,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
   const [state, setState] = useState<AddressData>(initialState);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [country, setCountry] = useState(0);
-  const [t] = useTranslation();
+  const {t: CT} = useTranslation('common');
+  const {t: ST} = useTranslation('settings');
   const renderMarker = state.latitude > 0 && state.longitude > 0;
   const loading =
     createAddressStatus === LOADING || updateAddressStatus === LOADING;
@@ -218,7 +217,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
         }}
       >
         <Typography variant='h2' component='h2' sx={{fontFamily: 'Urbanist'}}>
-          {!selectedAddress ? t('settings:addNewAddress') : t('settings:updateAddress')}
+          {!selectedAddress ? ST('addNewAddress') : ST('updateAddress')}
         </Typography>
         <IconButton onClick={handleClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
@@ -261,7 +260,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
                     handleSelectAddressTag(item.value);
                 }}
               >
-                {t(item.label)}
+                {CT(item.label)}
               </Button>
             )
           })}
@@ -276,11 +275,11 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontFamily: 'Urbanist'
           }}
         >
-          {t('settings:address')}
+          {ST('address')}
         </Box>
         <TextField
           variant='standard'
-          placeholder={t('settings:address')}
+          placeholder={ST('address')}
           name='address'
           value={state.address}
           sx={{ mb: 3 }}
@@ -298,7 +297,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontFamily: 'Urbanist'
           }}
         >
-          {t('settings:street')}
+          {ST('street')}
         </Box>
 
         <TextField
@@ -321,7 +320,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontFamily: 'Urbanist'
           }}
         >
-          {t('settings:country')}
+          {ST('country')}
         </Box>
 
         <TextField
@@ -335,7 +334,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           value={country}
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-            {t('common:selectItem')}
+            {CT('selectItem')}
           </MenuItem>
           {countryData?.length > 0 &&
             countryData?.map((option) => (
@@ -358,7 +357,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontFamily: 'Urbanist'
           }}
         >
-          {t('settings:city')}
+          {ST('city')}
         </Box>
 
         <TextField
@@ -373,7 +372,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           name='cityId'
         >
           <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-            {t('common:selectItem')}
+            {CT('selectItem')}
           </MenuItem>
           {cityData?.length > 0 &&
             cityData?.map((option) => (
@@ -438,7 +437,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
               }}
               onClick={handleClose}
             >
-              {t('common:cancel')}
+              {CT('cancel')}
             </Button>
 
             <LoadingButton
@@ -451,8 +450,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
               loading={loading}
             >
               {!selectedAddress
-                ? t('settings:addNewAddress')
-                : t('settings:updateAddress')}
+                ? ST('addNewAddress')
+                : ST('updateAddress')}
             </LoadingButton>
           </Box>
         </Box>

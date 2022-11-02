@@ -17,7 +17,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
 
     function handleAddingAttribute(id: number) {
         setState((prevState) => {
-            const attribute = productDetials.attributes.find((item) => !!item.options?.find((option) => option.id === id));
+            const attribute = productDetials.attributes?.find((item) => !!item.options?.find((option) => option.id === id));
             if (attribute) {
                 return {
                     ...prevState,
@@ -33,7 +33,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
 
     return (
         <>
-            {productDetials.attributes.map((item) => (
+            {productDetials.attributes?.map((item) => (
                 <Grid
                     key={item.id}
                     container

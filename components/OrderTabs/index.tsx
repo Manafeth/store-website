@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import React, { useState, MouseEvent, useEffect } from "react";
 import { useProfile } from "../../contexts/ProfileContext";
 import ActiveOrders from "./components/ActiveOrders";

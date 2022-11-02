@@ -4,7 +4,7 @@ import Slider from '@mui/material/Slider'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { ProductByCategoryParams } from '../../../../types/products'
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   handlePriceFromInput: (_:number) => void,
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const FilterByPrice: FC<Props> = ({ params, handlePriceFromInput, handlePriceToInput }) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   
   function handleSliderChange (event: Event, newValue: number | number[]) {
     // @ts-ignore
@@ -41,7 +41,7 @@ function valuetext(value: number) {
         component='h1'
         sx={{ color:'text.primary', fontWeight:'700', fontSize:'16px'}}
       >
-         {t('common:filterByPrice')}
+         {t('filterByPrice')}
       </Typography>
       <Box sx={{ width: 150 }}>
         <Slider

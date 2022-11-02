@@ -6,7 +6,6 @@ import CardActionArea from '@mui/material/CardActionArea';
 import Box from '@mui/material/Box';
 import { ShipmentsProvidersData } from '../../../types/cart';
 import Avatar from '@mui/material/Avatar';
-import ButtonBase from '@mui/material/ButtonBase';
 import { useCart } from '../../../contexts/CartContext';
 
 interface Props {

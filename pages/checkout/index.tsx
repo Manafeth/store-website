@@ -5,9 +5,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import CheckoutForm from '../../components/CheckoutForm';
 import DeliveryAddress from '../../components/DeliveryAddress';
-import PaymentDetail from '../../components/PaymentDetail';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import TruckIcon from'../../assets/images/icons/truck-icon.svg';
@@ -20,12 +18,10 @@ import { styled } from '@mui/material/styles';
 import CartItem from '../../components/CartItem';
 import OrderSummary from '../../components/OrderSummary';
 import { useCart } from '../../contexts/CartContext';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import PaymentProviders from '../../components/Providers/PaymentProviders';
 import ShippingProviders from '../../components/Providers/ShippingProviders';
-import { LOADING, SUCCESS } from '../../constants';
-import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { LOADING } from '../../constants';
 import AuthComponent from '../../components/AuthComponent';
 
 
@@ -60,7 +56,8 @@ const ColorlibStepIconRoot = styled('div')<{
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const {fetchCartProducts,cartData,createOrderStatus } = useCart();
-  const [t] = useTranslation();
+  const {t} = useTranslation('checkout');
+  const {t:CT} = useTranslation('common');
   useEffect(() => {
     fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -134,14 +131,14 @@ const Checkout = () => {
               </Grid>
               <Grid item xs={12} md={5}>
                 <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-                  {t('checkout:orderSummery')}
+                  {t('orderSummery')}
                 </Typography>
               
                 <OrderSummary/>
           
                 <Divider />
                 <Typography variant='h1' component='h1' sx={{ mb: 5, mt: 5 }}>
-                {t('common:items')}
+                {CT('items')}
                 </Typography>
                 {cartData?.map((item, index) => {
                   return(
@@ -160,15 +157,5 @@ const Checkout = () => {
     </AuthComponent>
   );
 };
-
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(locale && await serverSideTranslations(locale, ['settings', 'checkout', 'common', 'cart', 'auth']))
-    },
-    revalidate: 10,
-  }
-}
 
 export default Checkout;

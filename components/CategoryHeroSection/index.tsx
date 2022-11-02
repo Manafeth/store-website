@@ -4,16 +4,17 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import Carousel from 'react-material-ui-carousel';
-import { SlideData } from '../../types/common';
+import { useCommon } from '../../contexts/CommonContext';
 interface Props {
     targetSectionId: string,
-    slides: SlideData[]
 }
 
-const CategoryHeroSection: FC<Props> = ({ targetSectionId, slides }) => {
-    const [t] = useTranslation();
+const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
+    const {slides, fetchSlides} = useCommon();
+    
+    const {t} = useTranslation('heroSection');
     function scrollToProducts() {
         const yOffset = -91; 
         const element = document.getElementById(targetSectionId);
@@ -21,6 +22,10 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId, slides }) => {
         const y = element?.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({top: y, behavior: 'smooth'});
     }
+
+    useEffect(() => {
+        fetchSlides();
+    }, [])
 
   return (
     <Box component='section' sx={{ position: 'relative' }}>
@@ -60,7 +65,7 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId, slides }) => {
                                     mb: { xs: 1, sm: 2 },
                                 }}
                             >
-                                {item.discountValue}% {t('heroSection:off')}
+                                {item.discountValue}% {t('off')}
                             </Typography>
                             <Typography
                                 variant='h6'
@@ -76,7 +81,7 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId, slides }) => {
                                 {item.desicrption}
                             </Typography>
                             <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }} onClick={scrollToProducts}>
-                            {t('heroSection:shopNow')}
+                            {t('shopNow')}
                             </Button>
                         </Box>
                     </Box>

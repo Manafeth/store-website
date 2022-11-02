@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import OrderTimeline from '../../../components/OrderTimeline';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../../contexts/CartContext';
 import Avatar from '@mui/material/Avatar';
 import moment from 'moment';
@@ -16,8 +16,6 @@ import StatusText from '../../../components/StatusText';
 import { invoiceStatusEnums, orderStatusEnums } from '../../../constants/statuses';
 import paths from '../../../constants/paths';
 import { useRouter } from 'next/router';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import AuthComponent from '../../../components/AuthComponent';
 import StcPayment from '../../../components/StcPayment';
 import BankPayment from '../../../components/BankPayment';
@@ -25,7 +23,10 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { LOADING } from '../../../constants';
 
 const OrderDetails = () => {
-  const [t] = useTranslation();
+  const {t: CAT} = useTranslation('cart');
+  const {t: CT} = useTranslation('common');
+  const {t:ST} = useTranslation('settings');
+  const {t} = useTranslation('checkout');
   const { fetchOrderDetails, orderData, createPayment, paymentStatus } = useCart();
   const router = useRouter()
   const { orderId } = router.query
@@ -54,14 +55,14 @@ const OrderDetails = () => {
                 variant='h1'
                 sx={{ fontWeight: 'bold', mb: 3,fontFamily: 'Urbanist' }}
               >
-                {t('settings:orderDetails')}
+                {ST('orderDetails')}
               </Typography>
 
               <Typography
                 variant='h2'
                 sx={{ fontWeight: '700', fontSize: '20px', mb: 3,fontFamily: 'Urbanist' }}
               >
-                {t('checkout:inovice')} {orderData.invoiceId}
+                {t('inovice')} {orderData.invoiceId}
               </Typography>
               <Grid container spacing='40px'>
                 <Grid item xs={6}>
@@ -69,7 +70,7 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
-                    {t('common:date')}
+                    {CT('date')}
                   </Typography>
                   <Typography
                     variant='h5'
@@ -83,7 +84,7 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
-                    {t('common:phoneNumber')}
+                    {CT('phoneNumber')}
                   </Typography>
                   <Typography
                     variant='h5'
@@ -99,7 +100,7 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '600', mb: 2 ,fontFamily: 'Urbanist'}}
                   >
-                    {t('checkout:paymnetMethod')}
+                    {t('paymnetMethod')}
                   </Typography>
                   <Typography
                     variant='h5'
@@ -113,11 +114,11 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
-                    {t('checkout:paymentStatus')}
+                    {t('paymentStatus')}
                   </Typography>
                 
                   <StatusText
-                    title={t(invoiceStatus?.label || '')}
+                    title={CT(invoiceStatus?.label || '')}
                     color={invoiceStatus?.color || ''}
                   />
                 </Grid>
@@ -128,7 +129,7 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
-                    {t('checkout:shippingMethod')}
+                    {t('shippingMethod')}
                   </Typography>
                   <Box sx={{ mb: 4 }}>
                     <Avatar
@@ -145,10 +146,10 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
                   >
-                    {t('checkout:shippingStatus')}
+                    {t('shippingStatus')}
                   </Typography>
                   <StatusText
-                    title={t(orderStatus?.label || '')}
+                    title={CT(orderStatus?.label || '')}
                     color={orderStatus?.color || ''}
                   />
                 </Grid>
@@ -160,7 +161,7 @@ const OrderDetails = () => {
                     variant='h5'
                     sx={{ fontWeight: '500', mb: 2,fontFamily: 'Urbanist' }}
                   >
-                    {t('cat:total')}
+                    {CAT('total')}
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
@@ -168,7 +169,7 @@ const OrderDetails = () => {
                     variant='h3'
                     sx={{ fontWeight: '900', mb: 2,fontFamily: 'Urbanist',color:'grey.1800' }}
                   >
-                    {t('common:sar')} {orderData.totalCost}
+                    {CT('sar')} {orderData.totalCost}
                   </Typography>
                 </Grid>
               </Grid>
@@ -177,7 +178,7 @@ const OrderDetails = () => {
                    "&:hover": {
                   backgroundColor: "primary.hover"
                 }}}>
-                 {t('checkout:payConfirmPayment')}
+                 {t('payConfirmPayment')}
                 </LoadingButton>
               )}
               <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
@@ -197,7 +198,7 @@ const OrderDetails = () => {
             variant='h5'
             sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
           >
-            {t('checkout:orderTimeline')}
+            {t('orderTimeline')}
           </Typography>
           {orderData.orderChangeLogs.map((item) => {
             return (
@@ -221,7 +222,7 @@ const OrderDetails = () => {
                     backgroundColor: "primary.hover"
                   } }}
                 >
-                  {t('settings:viewInvoice')}
+                  {ST('viewInvoice')}
                 </Button>
               </Link>
             ) : (
@@ -230,7 +231,7 @@ const OrderDetails = () => {
                 sx={{ width: '219px', height: '44px' }}
                 disabled
               >
-                {t('settings:viewInvoice')}
+                {ST('viewInvoice')}
               </Button>
             )}
           </Box>
@@ -239,32 +240,5 @@ const OrderDetails = () => {
     </AuthComponent>
   );
 };
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          orderId: "1"
-        }
-      },
-      {
-        params: {
-          orderId: "2"
-        }
-      }
-    ],
-    fallback: 'blocking'
-  }
-}
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(locale && await serverSideTranslations(locale, ['settings', 'checkout', 'common', 'cart', 'auth']))
-    },
-    revalidate: 10,
-  }
-}
 
 export default OrderDetails;

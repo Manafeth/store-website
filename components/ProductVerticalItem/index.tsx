@@ -16,7 +16,7 @@ import { ProductData } from '../../types/products';
 import paths from '../../constants/paths';
 import { toggleProductInWishList } from '../../services/products.services';
 import { useAlert } from '../../contexts/AlertContext';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import { useProfile } from '../../contexts/ProfileContext';
 interface Props {
   data: ProductData
@@ -43,7 +43,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
 
   const { sendAlert } = useAlert();
   const { fetchWishListData } = useProfile();
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
 
   function handleTogglingProductInWishList() {
     toggleProductInWishList(product.id).then(() => {
@@ -123,14 +123,14 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
                   fontWeight: '700',
                 }}
               >
-                {t('common:sar')} {product.salePrice}
+                {t('sar')} {product.salePrice}
               </Typography>
               <Typography
                 variant='h5'
                 component='span'
                 sx={{ color: '#23856D', fontWeight: '700' }}
               >
-                 {t('common:sar')} {product.priceAfterDiscount}
+                 {t('sar')} {product.priceAfterDiscount}
               </Typography>
             </>
           ) : (
@@ -139,7 +139,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               component='span'
               sx={{ color: 'primary.main', fontWeight: '700', ml:1 }}
             >
-               {t('common:sar')} {product.salePrice}
+               {t('sar')} {product.salePrice}
             </Typography>
           )}
         </Box>

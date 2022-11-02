@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import PaymentCard from '../PaymentCard';
 import { useCart } from '../../../contexts/CartContext';
 import TextField from '@mui/material/TextField';
-import { useTranslation } from "next-i18next";
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import paths from '../../../constants/paths';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -21,7 +21,8 @@ interface Props {
 let timer: ReturnType<typeof setTimeout>;
 
 const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
-  const [t] = useTranslation();
+  const {t: CT} = useTranslation('common');
+  const {t: COT} = useTranslation('checkout');
   const [isInvalid, setIsInvalid] = useState(false);
   const {
     paymnetData,
@@ -72,10 +73,10 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   return (
     <Box>
       <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-      {t('checkout:paymentProviders')}
+      {COT('paymentProviders')}
       </Typography>
       <Typography variant='h4' component='h1' sx={{ mb: 2 }}>
-      {t('checkout:paymentDiscription')}
+      {COT('paymentDiscription')}
       </Typography>
 
       {paymnetData.map((item) => {
@@ -122,7 +123,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
           }}
           onClick={handleBack}
         >
-             {t('common:back')}
+             {CT('back')}
         </Button>
         <Button
           variant='contained'
@@ -134,7 +135,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
           }}}
           onClick={handleClick}
         >
-          {loading ? <CircularProgress size={25} color="info" /> : t('checkout:placeOrder')}
+          {loading ? <CircularProgress size={25} color="info" /> : COT('placeOrder')}
         </Button>
       </Box>
     </Box>

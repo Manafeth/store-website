@@ -9,14 +9,14 @@ import { FC } from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import { ProductData } from '../../types/products';
-import { useTranslation } from 'next-i18next';
-import { Divider } from '@mui/material';
+import useTranslation from 'next-translate/useTranslation';
+import Divider from '@mui/material/Divider';
 interface Props {
   data: ProductData;
 }
 
 const CartItem: FC<Props> = ({data}) => {
-  const [t] = useTranslation();
+  const {t} = useTranslation('common');
   return (
     <Box sx={{mb:2}}>
       <Box sx={{display: 'flex', gap: '50px' }}>
@@ -51,7 +51,7 @@ const CartItem: FC<Props> = ({data}) => {
             </Box>
           </Box>
           <Typography variant='h2' component='h1'>
-          {t('common:sar')} {data.salePrice}
+          {t('sar')} {data.salePrice}
           </Typography>
         </Box>
       </Box>
