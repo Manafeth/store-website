@@ -19,6 +19,7 @@ import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import productStatusMenu from '../../../constants/ProductStatusValues';
+import ProductEmptyState from '../../../components/ProductEmptyState';
 
 interface Products {
   data: ProductData[],
@@ -176,13 +177,33 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails}) => {
               </Box>
               <CategoryHeroSection targetSectionId='products-sec' />
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
-                {products.data.map((item) => {
-                  return (
-                    <Grid item xs={12} sm={6} lg={4} key={item.id}>
-                      <ProductVerticalItem data={item} />
+                {products.data.length > 0 ? (
+                  products.data.map((item) => {
+                    return (
+                      <Grid item xs={12} sm={6} lg={4} key={item.id}>
+                        <ProductVerticalItem data={item} />
+                      </Grid>
+                    )
+                  })
+                ) : (
+                  <>
+                    <Grid item xs={12} sm={6} lg={4}>
+                      <ProductEmptyState />
                     </Grid>
-                  )
-                })}
+                    <Grid item xs={12} sm={6} lg={4}>
+                      <ProductEmptyState />
+                    </Grid>
+                    <Grid item xs={12} sm={6} lg={4}>
+                      <ProductEmptyState />
+                    </Grid>
+                    <Grid item xs={12} sm={6} lg={4}>
+                      <ProductEmptyState />
+                    </Grid>
+                    <Grid item xs={12} sm={6} lg={4}>
+                      <ProductEmptyState />
+                    </Grid>
+                  </>
+                )}
               </Grid>
               {products.totalPages > 1 && (
                 <ProductPagination
