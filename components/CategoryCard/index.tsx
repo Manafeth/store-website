@@ -24,7 +24,7 @@ const CategoryCard: FC<Props> = ({ data, height }) => {
                 cursor: 'pointer',
             }}
         >
-            <Avatar src={data.imageFilePath?.orignialUrl || ''} alt='category' sx={{ width: '100%', height: height || 300, borderRadius: 3 }}>
+            <Avatar src={data.imageFilePath?.orignialUrl || data.bannerFilePath?.orignialUrl || ''} alt='category' sx={{ width: '100%', height: height || 300, borderRadius: 3 }}>
                 C
             </Avatar>
             <Box

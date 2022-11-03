@@ -96,8 +96,8 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
           sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
-            <Typography variant='h2' sx={{ mb: 3, cursor: 'pointer' }}>
-            {t('relatedProducts')}
+            <Typography variant='h2' sx={{ mb: 3 }}>
+              {t('relatedProducts')}
             </Typography>
             <Divider sx={{ mb: 3 }} />
             <Grid container spacing={3} rowSpacing={3.75}>
