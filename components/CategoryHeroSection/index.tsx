@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import useTranslation from 'next-translate/useTranslation';
 import Carousel from 'react-material-ui-carousel';
 import { useCommon } from '../../contexts/CommonContext';
+import HeroSectionEmptyState from '../HeroSectionEmptyState';
 interface Props {
     targetSectionId: string,
 }
@@ -28,66 +29,70 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
     }, [])
 
   return (
-    <Box component='section' sx={{ position: 'relative' }}>
-        <Carousel>
-            {slides.map((item) => (
-                <Box key={item.id}>
-                    <Box sx={{ display: 'flex' }}>
-                        <CardMedia
-                            image={item.mainImageFilePath.orignialUrl || ''}
-                            component='img'
-                            alt={item.desicrption}
-                            sx={{ width: '100%', maxWidth: '100%', height: {md: '432px', xs: '250px', borderRadius: 8 }}}
-                        />
-                    </Box>
-                    <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.25)' }}>
-                        <Box px={5}>
-                            <Typography
-                                variant='h5'
-                                sx={{
-                                    fontWeight: 700,
-                                    lineHeight: '24px',
-                                    letterSpacing: '0.1px',
-                                    color: 'primary.dark',
-                                    mb: { xs: 1, sm: 2 },
-                                    fontSize: { xs: '12px', sm: '16px'},
-                                }}
-                            >
-                                {item.code}
-                            </Typography>
-                            <Typography
-                                sx={{
-                                    fontWeight: 700,
-                                    fontSize: { xs: '25px', sm: '40px'},
-                                    lineHeight: { xs: '35px', sm: '80px'},
-                                    letterSpacing: '0.2px',
-                                    color: 'primary.dark',
-                                    mb: { xs: 1, sm: 2 },
-                                }}
-                            >
-                                {item.discountValue}% {t('off')}
-                            </Typography>
-                            <Typography
-                                variant='h6'
-                                sx={{
-                                    lineHeight: '20px',
-                                    letterSpacing: '0.2px',
-                                    color: 'grey.2200',
-                                    mb: { xs: 1, sm: 2 },
-                                    maxWidth: 376,
-                                    fontSize: { xs: '12px', sm: '16px'},
-                                }}
-                            >
-                                {item.desicrption}
-                            </Typography>
-                            <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }} onClick={scrollToProducts}>
-                            {t('shopNow')}
-                            </Button>
+    <Box component='section' sx={{ position: 'relative', height: {md: '432px', xs: '250px'} }}>
+        {slides.length > 0 ? (
+            <Carousel>
+                {slides.map((item) => (
+                    <Box key={item.id}>
+                        <Box sx={{ display: 'flex' }}>
+                            <CardMedia
+                                image={item.mainImageFilePath.orignialUrl || ''}
+                                component='img'
+                                alt={item.desicrption}
+                                sx={{ width: '100%', maxWidth: '100%', height: {md: '432px', xs: '250px'}, borderRadius: 8}}
+                            />
+                        </Box>
+                        <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.25)' }}>
+                            <Box px={5}>
+                                <Typography
+                                    variant='h5'
+                                    sx={{
+                                        fontWeight: 700,
+                                        lineHeight: '24px',
+                                        letterSpacing: '0.1px',
+                                        color: 'primary.dark',
+                                        mb: { xs: 1, sm: 2 },
+                                        fontSize: { xs: '12px', sm: '16px'},
+                                    }}
+                                >
+                                    {item.code}
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        fontWeight: 700,
+                                        fontSize: { xs: '25px', sm: '40px'},
+                                        lineHeight: { xs: '35px', sm: '80px'},
+                                        letterSpacing: '0.2px',
+                                        color: 'primary.dark',
+                                        mb: { xs: 1, sm: 2 },
+                                    }}
+                                >
+                                    {item.discountValue}% {t('off')}
+                                </Typography>
+                                <Typography
+                                    variant='h6'
+                                    sx={{
+                                        lineHeight: '20px',
+                                        letterSpacing: '0.2px',
+                                        color: 'grey.2200',
+                                        mb: { xs: 1, sm: 2 },
+                                        maxWidth: 376,
+                                        fontSize: { xs: '12px', sm: '16px'},
+                                    }}
+                                >
+                                    {item.desicrption}
+                                </Typography>
+                                <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }} onClick={scrollToProducts}>
+                                {t('shopNow')}
+                                </Button>
+                            </Box>
                         </Box>
                     </Box>
-                </Box>
-            ))}
-        </Carousel>
+                ))}
+            </Carousel>
+        ) : (
+            <HeroSectionEmptyState targetSectionId={targetSectionId} radius={8} />
+        )}
     </Box>
   )
 }

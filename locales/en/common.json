@@ -70,6 +70,14 @@
     "text":"The page you’re trying to visit is not available, kindly get back to the homepage or contact our customer service.",
     "backHome":"Back to home",
     "support":"Support",
-    "siteMap":"Sitemap"
-
+    "siteMap":"Sitemap",
+    "categoryName": "Category name",
+    "productName": "Product name",
+    "newStore": "New store",
+    "storeNotReady": "Store not ready yet!",
+    "storeEmptyStateDescription": "Our store is not ready yet, kindly get back in few hours to view our products.",
+    "shopByCategory": "Shop By Category",
+    "listOfProducts": "List of products",
+    "showAll": "Show All",
+    "feateredCategories": "Featered categories"
 }

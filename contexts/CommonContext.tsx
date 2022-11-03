@@ -1,10 +1,12 @@
-import React, { createContext, useContext, ReactElement, FC, useEffect, useState } from 'react';
+import React, { createContext, useContext, ReactElement, FC, useState } from 'react';
 import { getSlides, getStoreInfo } from '../services/common.services';
-import { CommonContextState, StoreInfoData } from '../types/common';
+import { CommonContextState, SlideData, StoreInfoData } from '../types/common';
 import  { getMostPurchasedProducts } from '../services/products.services';
 import { ProductData } from '../types/products';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
+import StoreEmptyState from '../components/StoreEmptyState';
+// import paths from '../constants/paths';
 interface Props {
   children: ReactElement | ReactElement[];
 }
@@ -23,19 +25,18 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         supportEmail: ''
     })
 
-    const [slides, setSlides] = useState<[]>([])
-
-    const router = useRouter();
-
+    const [slides, setSlides] = useState<SlideData[]>([])
+    const [storeNotFound, setStoreNotFound] = useState(false);
     const [mostPurchasedProducts, setMostPurchasedProducts] = useState<ProductData[]>([])
-    
+    // const router = useRouter();
     async function fetchStoreInfo() {
       try {
         const response = await getStoreInfo();
         setStoreInfo(response.data.data)
+        setStoreNotFound(false)
       } catch (error) {
         Promise.reject(error)
-        router.push('/404')
+        setStoreNotFound(true)
       }
     }
 
@@ -66,18 +67,24 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
     slides,
     fetchSlides
   };
-  
+
   return (
     <CommonContext.Provider value={state}>
-      {children}
-      <FloatingWhatsApp
-        phoneNumber={storeInfo.complaintNumber}
-        accountName={storeInfo.name}
-        avatar={storeInfo.mainImageFilePath?.thumbUrl}
-        allowEsc
-        allowClickAway
-        notification
-      />
+      {storeNotFound ? (
+        <StoreEmptyState />
+      ) : (
+        <>
+          {children}
+          <FloatingWhatsApp
+          phoneNumber={storeInfo.complaintNumber}
+          accountName={storeInfo.name}
+          avatar={storeInfo.mainImageFilePath?.thumbUrl}
+          allowEsc
+          allowClickAway
+          notification
+        />
+        </>
+      )}
     </CommonContext.Provider>
   );
 };

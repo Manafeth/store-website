@@ -137,7 +137,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             <Typography
               variant='h5'
               component='span'
-              sx={{ color: 'primary.main', fontWeight: '700', ml:1 }}
+              sx={{ color: 'primary.main', fontWeight: '700', ml:1, textAlign: 'left' }}
             >
                {t('sar')} {product.salePrice}
             </Typography>

@@ -10,61 +10,41 @@ import paths from '../../constants/paths';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
-    data: CategoryData
+    data: CategoryData,
+    height?: number | string
 }
 
-const CategoryCard: FC<Props> = ({ data }) => {
+const CategoryCard: FC<Props> = ({ data, height }) => {
     const {t} = useTranslation('common');
   return (
     <Link href={paths.categoryDetails(data.id)}>
         <Box
             sx={{
-            position: 'relative',
-            height: 300,
-            cursor: 'pointer',
+                position: 'relative',
+                cursor: 'pointer',
             }}
         >
-            <Avatar src={data.imageFilePath?.orignialUrl || ''} alt='category' sx={{ width: '100%', height: '100%', borderRadius: 0 }}>
+            <Avatar src={data.imageFilePath?.orignialUrl || data.bannerFilePath?.orignialUrl || ''} alt='category' sx={{ width: '100%', height: height || 300, borderRadius: 3 }}>
                 C
             </Avatar>
             <Box
-            sx={{
-                position: 'absolute',
-                bottom: '29px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '80%',
-                height: '48px',
-                p: 4,
-                backgroundColor: 'rgba(255,255,255,0.5)',
-                boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.12)',
-                borderRadius: '5px',
-                textAlign: 'center',
-            }}
-            >
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '7px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
+                pt={2}
+                display='flex'
+                flexDirection='column'
             >
                 <Typography
                     variant='h4'
-                    sx={{ fontWeight: '500', color: 'primary.dark' }}
+                    sx={{ fontWeight: '600', letterSpacing: '0.2px', mb: 1.75 }}
                 >
                     {data.name}
                 </Typography>
                 <Typography
                     variant='h5'
                     component='span'
-                    sx={{ color: 'regba(0,0,0,0,0.5)' }}
+                    sx={{ fontWeight: 500, fontSize: 12, lineHeight: '16px', letterSpacing: '0.2px', opacity: 0.5 }}
                 >
                     {data.itemsCount} {t('items')}
                 </Typography>
-            </Box>
             </Box>
         </Box>
     </Link>
