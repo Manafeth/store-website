@@ -70,6 +70,7 @@
     "text":"The page you’re trying to visit is not available, kindly get back to the homepage or contact our customer service.",
     "backHome":"Back to home",
     "support":"Support",
-    "siteMap":"Sitemap"
+    "siteMap":"Sitemap",
+    "categoryName": "Category name"
 
 }

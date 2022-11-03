@@ -9,6 +9,7 @@ import FeaturedCategoriesSection from '../../components/FeaturedCategoriesSectio
 import CategoryCard from '../../components/CategoryCard'
 import { getAllCategories, getFeaturedCategories } from '../../services/categories.services'
 import { CategoryData } from '../../types/categories'
+import CategoryEmptyState from '../../components/CategoryEmptyState'
 
 
 interface Props {
@@ -56,13 +57,30 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
         <Box component='section' pb={6}>
             <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
                 <Grid container spacing={3} rowSpacing={3.75} id='categroires-sec'>
-                    {allcategoriesList.map((item) => {
-                        return (
-                            <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                                <CategoryCard data={item} />
+                    {[].length > 0 ? (
+                        allcategoriesList.map((item) => {
+                            return (
+                                <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
+                                    <CategoryCard data={item} />
+                                </Grid>
+                            )
+                        })
+                    ) : (
+                        <>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <CategoryEmptyState />
                             </Grid>
-                        )
-                    })}
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <CategoryEmptyState />
+                            </Grid>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <CategoryEmptyState />
+                            </Grid>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <CategoryEmptyState />
+                            </Grid>
+                        </>
+                    )}
                 </Grid>
             </Container>
         </Box>
