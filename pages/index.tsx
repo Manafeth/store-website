@@ -75,7 +75,7 @@ const HomePage: NextPage<Props> = ({ productsList, categories }) => {
       <Box component='section' pt={9.5} pb={6}>
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Typography variant='h5' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
+            <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
               {t('shopByCategory')}
             </Typography>
             <Link href={paths.categories}>
@@ -114,7 +114,7 @@ const HomePage: NextPage<Props> = ({ productsList, categories }) => {
       </Box>
       <Box component='section' sx={{ pt: 6, pb: 5 }}>
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-          <Typography variant='h5' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 7 }}>
+          <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 7 }}>
             {t('listOfProducts')}
           </Typography>
           <Grid container spacing={3.75} rowSpacing={1.25} ref={ref} id='recent-products'>

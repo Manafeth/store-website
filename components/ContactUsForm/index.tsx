@@ -8,7 +8,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import LoadingButton from '@mui/lab/LoadingButton';
 import useTranslation from 'next-translate/useTranslation';
 import { useContactUs } from '../../contexts/ContactUs';
-import { LOADING } from '../../constants';
+import { LOADING, SUCCESS } from '../../constants';
 import { ContactUsData } from '../../types/contactUs';
 import { useCommon } from '../../contexts/CommonContext';
 import isEmail from 'validator/lib/isEmail';
@@ -16,10 +16,15 @@ import FormLabel from '@mui/material/FormLabel';
 
 const ContactUsForm = () => {
   const {t} = useTranslation('contact');
-  const [state, setState] = useState<ContactUsData>({
+
+  const initialState = {
     name: '',
     email: '',
     message: '',
+  }
+
+  const [state, setState] = useState<ContactUsData>({
+    ...initialState,
     storeId: 0
   });
   const [isInvalid, setIsInvalid] = useState(false);
@@ -55,6 +60,17 @@ const ContactUsForm = () => {
       }))
     }
   }, [storeInfo])
+
+
+  useEffect(() => {
+    if (createLoader === SUCCESS) {
+      setState((prevState) => ({
+        ...prevState,
+        ...initialState,
+      }))
+    }
+  }, [createLoader])
+  
   
 
   return (
@@ -100,6 +116,7 @@ const ContactUsForm = () => {
           }}
           error={isInvalid && !state.name}
           onChange={handleInputChange}
+          value={state.name}
         />
         <InputLabel>{t('contactEmail')}</InputLabel>
         <TextField
@@ -123,6 +140,7 @@ const ContactUsForm = () => {
           }}
           error={isInvalid && (!state.email || !isEmail(state.email))}
           onChange={handleInputChange}
+          value={state.email}
         />
         <FormLabel>{t('message')}</FormLabel>
         <Box sx={{
@@ -148,6 +166,7 @@ const ContactUsForm = () => {
             placeholder={t('messageText')}
             name='message'
             onChange={handleInputChange}
+            value={state.message}
           /> 
         </Box>
         

@@ -57,7 +57,7 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
 
         <Box component='section' pb={5} pt={6}>
             <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-                <Typography variant='h5' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
+                <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
                     {t('shopByCategory')}
                 </Typography>
                 <Grid container spacing={3} rowSpacing={3.75} id='categroires-sec'>
