@@ -57,7 +57,7 @@ const Categories: NextPage<Props>  = ({ categories, allCategories }) => {
         <Box component='section' pb={6}>
             <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
                 <Grid container spacing={3} rowSpacing={3.75} id='categroires-sec'>
-                    {[].length > 0 ? (
+                    {allcategoriesList.length > 0 ? (
                         allcategoriesList.map((item) => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>

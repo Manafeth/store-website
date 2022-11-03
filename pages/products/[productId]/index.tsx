@@ -18,6 +18,7 @@ import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 import { useProfile } from '../../../contexts/ProfileContext';
 import { useRouter } from 'next/router';
+import ProductEmptyState from '../../../components/ProductEmptyState';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -100,13 +101,30 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
             </Typography>
             <Divider sx={{ mb: 3 }} />
             <Grid container spacing={3} rowSpacing={3.75}>
-              {productsList.map((item) => {
-                return (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                    <RelatedProductCard data={item} />
+              {productsList.length > 0 ? (
+                productsList.map((item) => {
+                  return (
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
+                      <RelatedProductCard data={item} />
+                    </Grid>
+                  )
+                })
+              ) : (
+                <>
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <ProductEmptyState />
                   </Grid>
-                )
-              })}
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <ProductEmptyState />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <ProductEmptyState />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <ProductEmptyState />
+                  </Grid>
+                </>
+              )}
             </Grid>
           </Container>
         </Box>

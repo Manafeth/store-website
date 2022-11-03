@@ -14,6 +14,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useCommon } from '../contexts/CommonContext';
 import { useRouter } from 'next/router';
 import Divider from '@mui/material/Divider';
+import ProductEmptyState from '../components/ProductEmptyState';
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[],
@@ -71,13 +72,30 @@ const HomePage: NextPage<Props> = ({ productsList, categories }) => {
         <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
           <Divider />
           <Grid container spacing={3.75} rowSpacing={1.25} sx={{ pt: 5.25, pb: 18.25 }} ref={ref} id='recent-products'>
-            {products.map((item) => {
-              return (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>
-                  <ProductVerticalItem data={item} />
+            {products.length > 0 ? (
+                products.map((item) => {
+                  return (
+                    <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>
+                      <ProductVerticalItem data={item} />
+                    </Grid>
+                  );
+                })
+            ) : (
+              <>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <ProductEmptyState />
                 </Grid>
-              );
-            })}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <ProductEmptyState />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <ProductEmptyState />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <ProductEmptyState />
+                </Grid>
+              </>
+            )}
           </Grid>
         </Container>
       </Box>
