@@ -141,17 +141,26 @@ ProductDetails.getInitialProps = async ({ locale, req, query }: NextPageContext)
       realtedProducts: []
     }
   }
-  const headers = {
-    'referer': req?.headers?.referer || '',
-    'accepted-language': locale
-  }
-    const {productId} = query
+
+  try {
+    const headers = {
+      'referer': req?.headers?.referer || '',
+      'accepted-language': locale
+    }
+    const { productId } = query
     const product = await getProductDetails(productId, headers);
     const realtedProducts = await getRelatedProductDetails(productId, headers);
     return {
       productDetials: product.data.data,
       realtedProducts: realtedProducts.data.data,
     }
+  } catch(error: any) {
+    return {
+      productDetials: {},
+      realtedProducts: []
+    }
+  }
+ 
 }
 
 export default ProductDetails;

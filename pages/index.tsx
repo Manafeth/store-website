@@ -159,17 +159,23 @@ HomePage.getInitialProps = async ({ req, locale }: NextPageContext) => {
       categories: [],
     }
   }
-
-  const headers = {
-    'referer': req?.headers?.referer || '',
-    'accepted-language': locale
-  }
-  const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
-  const categories = await getFeaturedCategories(headers);
-  
-  return {
-    productsList: products.data.data.data,
-    categories: categories.data.data,
+  try {
+    const headers = {
+      'referer': req?.headers?.referer || '',
+      'accepted-language': locale
+    }
+    const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
+    const categories = await getFeaturedCategories(headers);
+    
+    return {
+      productsList: products.data.data.data,
+      categories: categories.data.data,
+    }
+  } catch(error: any) {
+    return {
+      productsList: [],
+      categories: [],
+    }
   }
 }
 
