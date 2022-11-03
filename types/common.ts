@@ -40,7 +40,7 @@ export type CommonContextState = {
     mostPurchasedProducts: ProductData[],
     fetchMostPurchasedProducts: (params: { page: number, pageSize: number, generalSearch: string | string[] | undefined }) => Promise<void>,
     slides: SlideData[],
-    fetchSlides: () => Promise<void>,
+    fetchSlides: () => Promise<void>
 }
 
 

@@ -72,6 +72,8 @@
     "support":"Support",
     "siteMap":"Sitemap",
     "categoryName": "Category name",
-    "productName": "Product name"
-
+    "productName": "Product name",
+    "newStore": "New store",
+    "storeNotReady": "Store not ready yet!",
+    "storeEmptyStateDescription": "Our store is not ready yet, kindly get back in few hours to view our products."
 }

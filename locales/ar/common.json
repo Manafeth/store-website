@@ -72,6 +72,8 @@
     "support":"دعم",
     "siteMap":"خريطة الموقع",
     "categoryName": "اسم الصنف",
-    "productName": "اسم المنتج"
-
+    "productName": "اسم المنتج",
+    "newStore": "متجر جديد",
+    "storeNotReady": "المتجر ليس جاهزًا بعد!",
+    "storeEmptyStateDescription": "متجرنا ليس جاهزًا بعد ، يرجى الرجوع في غضون ساعات قليلة لعرض منتجاتنا."
 }
