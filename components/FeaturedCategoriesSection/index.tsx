@@ -18,7 +18,7 @@ const FeaturedCategoriesSection: FC<Props> = ({ categories }) => {
   return (
     <Box component='section'>
       <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 } }}>
-        <Typography variant='h5' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
+        <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
           {t('feateredCategories')}
         </Typography>
         <Grid container spacing={2} rowSpacing={4}>
