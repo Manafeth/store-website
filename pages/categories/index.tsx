@@ -99,17 +99,23 @@ Categories.getInitialProps = async ({req, locale}: NextPageContext) => {
             allCategories: []
         }
     }
+    try {
+        const headers = {
+            'referer': req?.headers?.referer || '',
+            'accepted-language': locale
+        }
     
-    const headers = {
-        'referer': req?.headers?.referer || '',
-        'accepted-language': locale
-    }
-
-    const categories = await getFeaturedCategories(headers);
-    const allCategories = await getAllCategories(headers);
-    return {
-        categories: categories.data.data,
-        allCategories: allCategories.data.data,
+        const categories = await getFeaturedCategories(headers);
+        const allCategories = await getAllCategories(headers);
+        return {
+            categories: categories.data.data,
+            allCategories: allCategories.data.data,
+        }
+    } catch(error: any) {
+        return {
+            categories: [],
+            allCategories: []
+        }
     }
 }
 
