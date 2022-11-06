@@ -66,9 +66,9 @@ const CategoriesSection: FC<Props> = ({ categories, title, sx, showAll, seeAllBu
             )}
           </Grid>
           {seeAllButtonLink && (
-            <Box sx={{ textAlign: 'center', pt: 3, borderRadius: 3 }}>
+            <Box sx={{ textAlign: 'center', pt: 3 }}>
               <Link href={seeAllButtonLink}>
-                <Button variant='contained' sx={{ minWidth: 240 }}>
+                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3 }}>
                   {seeAllButtonText && t(seeAllButtonText)}
                 </Button>
               </Link>
