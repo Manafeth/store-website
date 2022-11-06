@@ -3,20 +3,12 @@ import type { NextPage, NextPageContext } from 'next';
 import HeroSection from '../components/HeroSection';
 import MainLayout from '../layouts/MainLayout';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import MuiLink from '@mui/material/Link';
 import { getDiscountedProduct, getMostPurchasedProducts } from '../services/products.services';
 import { getFeaturedCategories } from '../services/categories.services';
 import { ProductData } from '../types/products';
 import { CategoryData } from '../types/categories';
 import { useCommon } from '../contexts/CommonContext';
 import { useRouter } from 'next/router';
-import CategoryCard from '../components/CategoryCard';
-import CategoryEmptyState from '../components/CategoryEmptyState';
-import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 import paths from '../constants/paths';
 import ProductsSection from '../components/ProductsSection';
 import CategoriesSection from '../components/CategoriesSection';
@@ -34,7 +26,6 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
   const ref = useRef(null);
   const router = useRouter();
   const { search } = router.query;
-  const {t} = useTranslation('common');
 
   function scrollToProducts() {
     const yOffset = -91; 
@@ -50,13 +41,14 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
   
   useEffect(() => {
     if (search !== undefined) {
-      fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: search })
-      scrollToProducts()
+      fetchMostPurchasedProducts({ page: 1, pageSize: 15, generalSearch: search }).then(() => {
+        scrollToProducts()
+      })
     }
   }, [search])  
   
   useEffect(() => {
-    if (productsList.length === 0) {
+    if (productsList.length === 0 && search === undefined) {
       getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}).then((res) => {
         setProducts(res.data.data.data)
       })
@@ -73,7 +65,7 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
         setDiscountedProducts(res.data.data)
       })
     }
-  }, [productsList, categories, discountedProducts])
+  }, [productsList, categories, discountedProducts, search])
   
   const featuredCategories = categoriesList.filter((_, index) => index <= 3)
   
@@ -87,16 +79,15 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
         seeAllButtonLink={paths.categories}
         seeAllButtonText='seeAllCategories'
       />
-
-      <ProductsSection
-        sx={{ pt: 2.75 }}
-        products={products}
-        title='listOfProducts'
-        seeAllButtonLink={paths.products}
-        seeAllButtonText='seeAllProducts'
-        id='recent-products'
-      />
-
+      <Box ref={ref}>
+        <ProductsSection
+          sx={{ pt: 2.75 }}
+          products={products}
+          title='listOfProducts'
+          seeAllButtonLink={paths.products}
+          seeAllButtonText='seeAllProducts'
+        />
+      </Box>
       <ProductsSection
         sx={{ pt: 2.5, pb: 5 }}
         products={discProducts}
