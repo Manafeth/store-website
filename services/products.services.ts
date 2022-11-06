@@ -48,10 +48,32 @@ function toggleProductInWishList(productId: number | string) {
     );
 }
 
+function getTopSellingProducts(headers?: { [key: string]: any }) {
+  return axiosInstance.get(
+    'Product/GetTopSellingProducts',
+    {
+      headers: headers || {}
+    }
+  );
+}
+
+
+function getDiscountedProduct(headers?: { [key: string]: any }) {
+  return axiosInstance.get(
+    'Product/GetDiscountedProduct',
+    {
+      headers: headers || {}
+    }
+  );
+}
+
+
 export {
     getMostPurchasedProducts,
     getProductDetails,
     getRelatedProductDetails,
     getProductsByCategory,
-    toggleProductInWishList
+    toggleProductInWishList,
+    getTopSellingProducts,
+    getDiscountedProduct
 }
