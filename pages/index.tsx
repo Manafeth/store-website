@@ -19,6 +19,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import paths from '../constants/paths';
 import ProductsSection from '../components/ProductsSection';
+import CategoriesSection from '../components/CategoriesSection';
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[],
@@ -79,53 +80,21 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
   return (
     <MainLayout>
       <HeroSection targetSectionId='recent-products' />
-      <Box component='section' pt={9.5} pb={6}>
-        <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
-              {t('shopByCategory')}
-            </Typography>
-            <Link href={paths.categories}>
-              <MuiLink sx={{ fontWeight: 700 }}>
-                {t('showAll')}
-              </MuiLink>
-            </Link>
-          </Box>
-          <Grid container spacing={3.75} rowSpacing={1.25} ref={ref} id='recent-products'>
-            {featuredCategories.length > 0 ? (
-              featuredCategories.map((item) => {
-                  return (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                      <CategoryCard data={item} />
-                    </Grid>
-                  )
-              })
-            ) : (
-              <>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <CategoryEmptyState />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <CategoryEmptyState />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <CategoryEmptyState />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <CategoryEmptyState />
-                </Grid>
-              </>
-            )}
-          </Grid>
-        </Container>
-      </Box>
+      <CategoriesSection
+        categories={featuredCategories}
+        title='shopByCategory'
+        sx={{ pt: 9.5, pb: 6 }}
+        seeAllButtonLink={paths.categories}
+        seeAllButtonText='seeAllCategories'
+      />
 
       <ProductsSection
-        sx={{ pt: 6, pb: 3 }}
+        sx={{ pt: 2.75 }}
         products={products}
         title='listOfProducts'
         seeAllButtonLink={paths.products}
         seeAllButtonText='seeAllProducts'
+        id='recent-products'
       />
 
       <ProductsSection

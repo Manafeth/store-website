@@ -5,14 +5,14 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MuiLink from '@mui/material/Link';
-import { ProductData } from '../../types/products';
-import ProductVerticalItem from '../ProductVerticalItem';
-import ProductEmptyState from '../ProductEmptyState';
+import { CategoryData } from '../../types/categories';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import CategoryEmptyState from '../CategoryEmptyState';
+import CategoryCard from '../CategoryCard';
 
 interface Props {
-    products: ProductData[],
+    categories: CategoryData[],
     title: string
     sx?: {[key: string]: any},
     showAll?: string,
@@ -21,7 +21,7 @@ interface Props {
     id?: string
 }
 
-const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButtonLink, seeAllButtonText, id }) => {
+const CategoriesSection: FC<Props> = ({ categories, title, sx, showAll, seeAllButtonLink, seeAllButtonText, id }) => {
   const { t } = useTranslation('common');
   
   return (
@@ -40,38 +40,35 @@ const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButton
             )}
           </Box>
           <Grid container spacing={3.75} rowSpacing={1.25}>
-            {products.length > 0 ? (
-                products.map((item) => {
+            {categories.length > 0 ? (
+              categories.map((item) => {
                   return (
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={item.id}>
-                      <ProductVerticalItem data={item} />
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
+                      <CategoryCard data={item} />
                     </Grid>
-                  );
-                })
+                  )
+              })
             ) : (
               <>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} >
-                  <ProductEmptyState />
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <CategoryEmptyState />
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} >
-                  <ProductEmptyState />
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <CategoryEmptyState />
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} >
-                  <ProductEmptyState />
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <CategoryEmptyState />
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} >
-                  <ProductEmptyState />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} >
-                  <ProductEmptyState />
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <CategoryEmptyState />
                 </Grid>
               </>
             )}
           </Grid>
           {seeAllButtonLink && (
-            <Box sx={{ textAlign: 'center', pt: 3 }}>
+            <Box sx={{ textAlign: 'center', pt: 3, borderRadius: 3 }}>
               <Link href={seeAllButtonLink}>
-                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3 }}>
+                <Button variant='contained' sx={{ minWidth: 240 }}>
                   {seeAllButtonText && t(seeAllButtonText)}
                 </Button>
               </Link>
@@ -82,4 +79,4 @@ const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButton
   )
 }
 
-export default ProductsSection
+export default CategoriesSection
