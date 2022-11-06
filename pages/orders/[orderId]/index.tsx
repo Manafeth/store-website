@@ -181,6 +181,25 @@ const OrderDetails = () => {
                  {t('payConfirmPayment')}
                 </LoadingButton>
               )}
+
+              {orderData.providerType === 2 && orderData.providerCategory === 4 && !isInActive && (
+                <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
+                   "&:hover": {
+                  backgroundColor: "primary.hover"
+                }}}>
+                 {t('payConfirmPayment')}
+                </LoadingButton>
+              )}
+
+              {orderData.providerType === 2 && orderData.providerCategory === 1 && !isInActive && (
+                <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
+                   "&:hover": {
+                  backgroundColor: "primary.hover"
+                }}}>
+                 {t('payConfirmPayment')}
+                </LoadingButton>
+              )}
+
               <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
             </Grid>
             {!isInActive && (
