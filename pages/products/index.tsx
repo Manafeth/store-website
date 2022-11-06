@@ -29,7 +29,7 @@ interface Products {
 }
 
 interface Props {
-  categoryDetails: {
+  productsData: {
     products: Products,
     itemsCount: number,
     categories: CategoryData[],
@@ -37,7 +37,7 @@ interface Props {
   }
 }
 
-const ProductsPage: NextPage<Props> = ({ categoryDetails}) => {
+const ProductsPage: NextPage<Props> = ({ productsData}) => {
   const router = useRouter();
   const {t} = useTranslation('common');
 
@@ -103,7 +103,7 @@ const ProductsPage: NextPage<Props> = ({ categoryDetails}) => {
   }
 
   useEffect(() => {
-    if (!categoryDetails?.products?.data) {
+    if (productsData?.products?.data?.length === 0) {
       getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }).then((res) => {
         if (res.data.data.products) {
           setProducts(res.data.data.products);
@@ -120,7 +120,7 @@ const ProductsPage: NextPage<Props> = ({ categoryDetails}) => {
           setCategories(res.data.data.categories)
       });
     }
-  }, [categoryDetails])
+  }, [productsData])
   
   return (
     <MainLayout>
@@ -216,7 +216,7 @@ const ProductsPage: NextPage<Props> = ({ categoryDetails}) => {
 ProductsPage.getInitialProps = async ({locale, req }: NextPageContext) => {
   if (!req) {
     return {
-      categoryDetails: {}
+      productsData: {}
     }
   }
   try {
@@ -224,14 +224,14 @@ ProductsPage.getInitialProps = async ({locale, req }: NextPageContext) => {
       'referer': req?.headers?.referer || '',
       'accepted-language': locale
     }
-      const categoryDetails = await getProductsByCategory({  page: 1, pageSize: 12 }, headers);
+      const productsData = await getProductsByCategory({  page: 1, pageSize: 12 }, headers);
       
       return {
-        categoryDetails: categoryDetails.data.data,
+        productsData: productsData.data.data,
       }
   } catch(error: any) {
     return {
-      categoryDetails: {}
+      productsData: {}
     }
   }
 

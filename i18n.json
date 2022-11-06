@@ -6,6 +6,7 @@
       "/": ["heroSection"],
       "/wishList": ["settings"],
       "/termsOfUse": ["settings", "terms"],
+      "/products": ["heroSection"],
       "/products/[productId]": ["settings"],
       "/privacyPolicy": ["settings", "terms", "privacy"],
       "/orders": ["settings"],
