@@ -9,6 +9,7 @@ const paths = {
   checkout:'/checkout',
   termsOfUse:'/termsOfUse',
   privacyPolicy:'/privacyPolicy',
+  products: '/products',
   productDetails: (id: string | number) => `/products/${id}`,
   categoryDetails: (id: string | number) => `/categories/${id}`,
   orderDetails: (id: string | number) => `/orders/${id}`,

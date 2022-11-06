@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, FormEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -34,6 +34,7 @@ import LanguageMenu from '../LanguageMenu';
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState<string | string[]>('');
   const router = useRouter();
   const {t} = useTranslation('common');
   const { isloggedIn, handleOpenAuthModal, profileData, fetchAccountData } = useAuthModal();
@@ -57,18 +58,9 @@ const Header = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  let timer: ReturnType<typeof setTimeout>;
 
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
-    clearTimeout(timer);
-      timer = setTimeout(() => {
-      router.push({
-        pathname: paths.home,
-        query: {
-          search: ev.target.value
-        }
-      })
-    }, 500);
+    setSearch(ev.target.value);
   }
 
   function onOpen() {
@@ -77,6 +69,16 @@ const Header = () => {
 
   function onClose() {
     setOpen(false);
+  }
+
+  function handleSearchSubmit(ev: FormEvent<HTMLFormElement>) {
+    ev.preventDefault();
+    router.push({
+      pathname: paths.home,
+      query: {
+        search: search
+      }
+    })
   }
 
   useEffect(() => {
@@ -88,6 +90,12 @@ const Header = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isloggedIn]);
+
+  useEffect(() => {
+    if (router.query.search !== undefined) {
+      setSearch(router.query.search)
+    }
+  }, [router.query.search]) 
 
   return (
     <AppBar position="fixed" color='inherit' sx={{ boxShadow: '0' }}>
@@ -221,33 +229,38 @@ const Header = () => {
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center'}}>
-            <TextField
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Image src={SearchIcon} alt='search icon' width='16' height='16' />
-                  </InputAdornment>
-                ),
-                sx: { 
-                  backgroundColor: 'grey.200',
-                  borderRadius: 2,
-                  height: 46,
-                  fontStyle: 'italic',
-                  fontWeight: 400,
-                  fontSize: '10px',
-                  lineHeight: '16px',
-                  letterSpacing: '0.2px',
-                  color: 'text.grey',
-                  minWidth: {xs: 250, xl: 300},
-                  '& fieldset': {
-                    border: '0 !important',
+            <Box component='form' onSubmit={handleSearchSubmit}>
+              <TextField
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Button sx={{ p: 0, borderRadius: 0, minWidth: 0 }} type='submit'>
+                        <Image src={SearchIcon} alt='search icon' width='16' height='16' />
+                      </Button>
+                    </InputAdornment>
+                  ),
+                  sx: { 
+                    backgroundColor: 'grey.200',
+                    borderRadius: 2,
+                    height: 46,
+                    fontStyle: 'italic',
+                    fontWeight: 400,
+                    fontSize: '10px',
+                    lineHeight: '16px',
+                    letterSpacing: '0.2px',
+                    color: 'text.grey',
+                    minWidth: {xs: 250, xl: 300},
+                    '& fieldset': {
+                      border: '0 !important',
+                    }
                   }
-                }
-              }}
-              placeholder={t('searchPlaceHolder')}
-              onChange={handleSearch}
-              sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
-            />
+                }}
+                value={search}
+                placeholder={t('searchPlaceHolder')}
+                onChange={handleSearch}
+                sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
+              />
+            </Box>
             {isloggedIn && (
               <>
                 <Link href={paths.whishList}>

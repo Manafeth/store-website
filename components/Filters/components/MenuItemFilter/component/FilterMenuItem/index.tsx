@@ -22,10 +22,7 @@ const FilterMenuItem: FC<Props> = ({ data }) => {
           color:'grey.2200',
         }}
       >
-        <ListItemText primary={data.name} sx={{ opacity: 1, 
-         fontSize:'14px',
-          fontWeight:'bold',
-          color:'grey.2200', }} />
+        {data.name}
       </ListItemButton>
   )
   return (
