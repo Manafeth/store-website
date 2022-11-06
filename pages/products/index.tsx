@@ -103,7 +103,7 @@ const ProductsPage: NextPage<Props> = ({ productsData}) => {
   }
 
   useEffect(() => {
-    if (productsData?.products?.data?.length === 0) {
+    if (!productsData?.products?.data || productsData?.products?.data?.length === 0) {
       getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }).then((res) => {
         if (res.data.data.products) {
           setProducts(res.data.data.products);
