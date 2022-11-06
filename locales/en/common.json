@@ -79,5 +79,9 @@
     "shopByCategory": "Shop By Category",
     "listOfProducts": "List of products",
     "showAll": "Show All",
-    "feateredCategories": "Featered categories"
+    "feateredCategories": "Featered categories",
+    "discountedProducts": "Discounted products",
+    "seeAllCategories": "See all categories",
+    "seeAllProducts": "See all products",
+    "topSellingProducts": "Top selling products"
 }

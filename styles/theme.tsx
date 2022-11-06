@@ -159,7 +159,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
             lineHeight: '22px',
             letterSpacing: '0.2px',
             boxShadow: 'none',
-            testTransform: 'none',
+            textTransform: 'none',
             '&:hover': {
               boxShadow: 'none',
             }

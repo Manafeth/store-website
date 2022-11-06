@@ -79,5 +79,9 @@
     "shopByCategory": "تسوق حسب الصنف",
     "listOfProducts": "قائمة المنتجات",
     "showAll": "عرض الكل",
-    "feateredCategories": "أصناف مميزة"
+    "feateredCategories": "أصناف مميزة",
+    "discountedProducts": "المنتجات المخفضة",
+    "seeAllCategories": "عرض كل الأصناف",
+    "seeAllProducts": "عرض كل المنتجات",
+    "topSellingProducts": "المنتجات الأكثر مبيعًا"
 }

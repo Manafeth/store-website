@@ -1,25 +1,24 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import MainLayout from '../../../layouts/MainLayout';
-import HeroSection from '../../../components/HeroSection';
+import MainLayout from '../../layouts/MainLayout';
+import HeroSection from '../../components/HeroSection';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import CategoryHeroSection from '../../../components/CategoryHeroSection';
-import ProductVerticalItem from '../../../components/ProductVerticalItem';
-import Filters from '../../../components/Filters';
-import ProductPagination from '../../../components/Pagination';
+import CategoryHeroSection from '../../components/CategoryHeroSection';
+import ProductVerticalItem from '../../components/ProductVerticalItem';
+import Filters from '../../components/Filters';
+import ProductPagination from '../../components/Pagination';
 import { NextPage, NextPageContext } from 'next';
-import { CategoryData } from '../../../types/categories';
-import { getCategoryDetails } from '../../../services/categories.services';
-import { getProductsByCategory } from '../../../services/products.services';
-import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../../types/products';
+import { CategoryData } from '../../types/categories';
+import { getProductsByCategory } from '../../services/products.services';
+import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../types/products';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import productStatusMenu from '../../../constants/ProductStatusValues';
-import ProductEmptyState from '../../../components/ProductEmptyState';
+import productStatusMenu from '../../constants/ProductStatusValues';
+import ProductEmptyState from '../../components/ProductEmptyState';
 
 interface Products {
   data: ProductData[],
@@ -28,9 +27,9 @@ interface Products {
   page: number,
   pageSize: number,
 }
+
 interface Props {
-  categoryData: CategoryData,
-  categoryDetails: {
+  productsData: {
     products: Products,
     itemsCount: number,
     categories: CategoryData[],
@@ -38,7 +37,7 @@ interface Props {
   }
 }
 
-const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails}) => {
+const ProductsPage: NextPage<Props> = ({ productsData}) => {
   const router = useRouter();
   const {t} = useTranslation('common');
 
@@ -104,7 +103,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails}) => {
   }
 
   useEffect(() => {
-    if (categoryDetails?.products?.data?.length === 0) {
+    if (productsData?.products?.data?.length === 0) {
       getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }).then((res) => {
         if (res.data.data.products) {
           setProducts(res.data.data.products);
@@ -121,7 +120,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails}) => {
           setCategories(res.data.data.categories)
       });
     }
-  }, [categoryDetails])
+  }, [productsData])
   
   return (
     <MainLayout>
@@ -214,11 +213,10 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails}) => {
   );
 };
 
-CategoryDetails.getInitialProps = async ({locale, req, query }: NextPageContext) => {
+ProductsPage.getInitialProps = async ({locale, req }: NextPageContext) => {
   if (!req) {
     return {
-      categoryData: [],
-      categoryDetails: { }
+      productsData: {}
     }
   }
   try {
@@ -226,21 +224,17 @@ CategoryDetails.getInitialProps = async ({locale, req, query }: NextPageContext)
       'referer': req?.headers?.referer || '',
       'accepted-language': locale
     }
-      const {categoryId} = query
-      const category = await getCategoryDetails(categoryId, headers);
-      const categoryDetails = await getProductsByCategory({ categoryId: categoryId, page: 1, pageSize: 12 }, headers);
+      const productsData = await getProductsByCategory({  page: 1, pageSize: 12 }, headers);
       
       return {
-        categoryData: category.data.data,
-        categoryDetails: categoryDetails.data.data,
+        productsData: productsData.data.data,
       }
   } catch(error: any) {
     return {
-      categoryData: [],
-      categoryDetails: { }
+      productsData: {}
     }
   }
 
 }
 
-export default CategoryDetails;
+export default ProductsPage;

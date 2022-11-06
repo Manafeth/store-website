@@ -31,6 +31,7 @@ const CategoryCard: FC<Props> = ({ data, height }) => {
                 pt={2}
                 display='flex'
                 flexDirection='column'
+                pb={4}
             >
                 <Typography
                     variant='h4'

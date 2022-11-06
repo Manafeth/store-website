@@ -41,19 +41,30 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
     subProducts: [],
   });
 
+  const [addingToFav, setaddingToFav] = useState(false);
+
   const { sendAlert } = useAlert();
   const { fetchWishListData } = useProfile();
   const {t} = useTranslation('common');
 
   function handleTogglingProductInWishList() {
+    setProduct((prevState) => ({
+      ...prevState,
+      isInWishList: !prevState.isInWishList
+    }))
+
+    setaddingToFav(true)
+
     toggleProductInWishList(product.id).then(() => {
+      fetchWishListData()
+      setaddingToFav(false)
+    }).catch((error: any) => {
+      sendAlert(error.response.data.Message, 'error')
       setProduct((prevState) => ({
         ...prevState,
         isInWishList: !prevState.isInWishList
       }))
-      fetchWishListData()
-    }).catch((error: any) => {
-      sendAlert(error.response.data.Message, 'error')
+      setaddingToFav(false)
     });
   }
 
@@ -83,7 +94,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             right: '7px'
           }}
         >
-          <IconButton onClick={handleTogglingProductInWishList}>
+          <IconButton onClick={handleTogglingProductInWishList} disabled={addingToFav}>
             <Image src={product.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40} />
           </IconButton>
           {/* <IconButton onClick={handleAddProductToCart}>
