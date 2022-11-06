@@ -180,7 +180,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     try {
       const response = await createPaymentGateway(data);
       const result = response.data.data
-      if (result.category === 2) {
+      if ([1, 2, 4].includes(result.category)) {
         const link = document.createElement("a")
         link.href = result.result
         link.target = "_blank"
