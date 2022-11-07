@@ -21,7 +21,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
             if (attribute) {
                 return {
                     ...prevState,
-                    options: [...prevState.options.filter((item) => !attribute.options.find((option) => (item === option.id))), id]
+                    options: [...prevState.options?.filter((item) => !attribute.options?.find((option) => (item === option.id))), id]
                 }
             }
             return {
@@ -51,12 +51,12 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                             flexWrap: {xs:'wrap', sm:'wrap', md:'nowrap',lg:'nowrap'}
                         }}
                     >
-                    {item.options.map((option) => {
+                    {item.options?.map((option) => {
                         if (item.type === 1) {
                         return (
                             <Button
                                 variant='contained'
-                                color={options.includes(option.id || 0) ? 'primary' : 'secondary'}
+                                color={options?.includes(option.id || 0) ? 'primary' : 'secondary'}
                                 key={option.id}
                                 sx={{
                                     p: 0.5,
@@ -67,7 +67,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                                     fontSize: '14px',
                                     lineHeight: '20px',
                                     letterSpacing: '0.2px',
-                                    backgroundColor: !options.includes(option.id || 0) ? 'rgba(217, 217, 217, 0.4)' : '',
+                                    backgroundColor: !options?.includes(option.id || 0) ? 'rgba(217, 217, 217, 0.4)' : '',
                                     minWidth: 0,
                                     px: 1.25,
                                     py: 0.5,
@@ -105,7 +105,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                                         height: 30,
                                         borderRadius: '50%',
                                         border: '2px solid transparent',
-                                        borderColor: options.includes(option.id || 0) ? 'text.primary' : 'transparent'
+                                        borderColor: options?.includes(option.id || 0) ? 'text.primary' : 'transparent'
                                     }}
                                 />
                             </IconButton>
@@ -115,7 +115,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                         return (
                             <Button
                                 variant='contained'
-                                color={options.includes(option.id || 0) ? 'primary' : 'secondary'}
+                                color={options?.includes(option.id || 0) ? 'primary' : 'secondary'}
                                 key={option.id}
                                 sx={{
                                     p: 0.5,
@@ -125,7 +125,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                                     fontSize: '14px',
                                     lineHeight: '20px',
                                     letterSpacing: '0.2px',
-                                    backgroundColor: !options.includes(option.id || 0) ? 'rgba(217, 217, 217, 0.4)' : '',
+                                    backgroundColor: !options?.includes(option.id || 0) ? 'rgba(217, 217, 217, 0.4)' : '',
                                     borderRadius: 2.25,
                                     minWidth: 0,
                                     px: 1.25,

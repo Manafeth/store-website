@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
 import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.svg';
 import CartIcon from '../../assets/images/icons/cart-icon.svg';
@@ -19,6 +19,7 @@ import { ProductCartData } from '../../types/cart';
 import { addProductToCart } from '../../services/cart.services';
 import { useAlert } from '../../contexts/AlertContext';
 import { useCart } from '../../contexts/CartContext';
+import { useAuthModal } from '../../contexts/AuthModalContext';
 interface Props {
   productDetials: ProductData,
   handleTogglingProductInWishList: () => void,
@@ -37,18 +38,23 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
   
   const { sendAlert } = useAlert()
   const { fetchCartProducts } = useCart()
+  const { isloggedIn, handleOpenAuthModal } = useAuthModal()
   const [addToCartLoader, setAddToCartLoader] = useState(false);
 
   function handleAddProductToCart() {
-    setAddToCartLoader(true);
-    addProductToCart(state).then((response) => {
-      sendAlert(response?.data?.message, 'success')
-      fetchCartProducts()
-      setAddToCartLoader(false);
-    }).catch((error: any) => {
-      sendAlert(error.response.data.Message, 'error')
-      setAddToCartLoader(false);
-    })
+    if (isloggedIn) {
+      setAddToCartLoader(true);
+      addProductToCart(state).then((response) => {
+        sendAlert(response?.data?.message, 'success')
+        fetchCartProducts()
+        setAddToCartLoader(false);
+      }).catch((error: any) => {
+        sendAlert(error.response.data.Message, 'error')
+        setAddToCartLoader(false);
+      })
+    } else {
+      handleOpenAuthModal();
+    }
   }
 
   function handleAddCheckoutAttribute() {
@@ -90,7 +96,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         >
           {productDetials.name}
         </Typography>
-        <IconButton onClick={handleTogglingProductInWishList} sx={{ p: 0 }}>
+        <IconButton onClick={!isloggedIn ? handleOpenAuthModal : handleTogglingProductInWishList} sx={{ p: 0 }}>
           <Image src={productDetials.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40}/>
         </IconButton>
       </Box>
@@ -160,7 +166,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         </Button>
         <Box sx={{display:'flex' }}>
           <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }} disabled={addToCartLoader}>
-            <Image src={CartIcon} alt='cart icon' width={40} height={40} />
+            {addToCartLoader ? <CircularProgress /> : <Image src={CartIcon} alt='cart icon' width={40} height={40} />}
           </IconButton>
         </Box>
       </Box>
