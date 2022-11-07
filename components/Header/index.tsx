@@ -64,7 +64,10 @@ const Header = () => {
   }
 
   function onOpen() {
+    if (isloggedIn)
     setOpen(true);
+    else
+    handleOpenAuthModal();
   }
 
   function onClose() {
@@ -261,8 +264,7 @@ const Header = () => {
                 sx={{mr: 2, display: { xs: 'none', lg: 'block' }}}
               />
             </Box>
-            {isloggedIn && (
-              <>
+            {isloggedIn ? (
                 <Link href={paths.whishList}>
                   <Box
                     sx={{
@@ -287,31 +289,54 @@ const Header = () => {
                     </Box>
                   </Box>
                 </Link>
+            ) : (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  mr: {xs: 1, sm: 2, md: 4},
+                  cursor: 'pointer'
+                }}
+                onClick={handleOpenAuthModal}
+              >
+                <Image src={HeartIcon} alt='heart icon' width='16' height='15' />
                 <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    mr: {xs: 1, sm: 1.5, md: 2.5},
-                    cursor: 'pointer'
+                    fontWeight: 400,
+                    fontSize: '12px',
+                    lineHeight: '16px',
+                    letterSpacing: '0.2px',
+                    color: '#323940',
+                    ml: 0.5
                   }}
-                  onClick={onOpen}
                 >
-                  <Image src={CartIcon} alt='cart icon' width='15' height='15' />
-                  <Box
-                    sx={{
-                      fontWeight: 400,
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      letterSpacing: '0.2px',
-                      color: '#323940',
-                      ml: 0.5
-                    }}
-                  >
-                    {cartData.length}
-                  </Box>  
+                  {wishListData.length}
                 </Box>
-              </>
+              </Box>
             )}
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                mr: {xs: 1, sm: 1.5, md: 2.5},
+                cursor: 'pointer'
+              }}
+              onClick={onOpen}
+            >
+              <Image src={CartIcon} alt='cart icon' width='15' height='15' />
+              <Box
+                sx={{
+                  fontWeight: 400,
+                  fontSize: '12px',
+                  lineHeight: '16px',
+                  letterSpacing: '0.2px',
+                  color: '#323940',
+                  ml: 0.5
+                }}
+              >
+                {cartData.length}
+              </Box>  
+            </Box>
             <LanguageMenu />
             {isloggedIn ? (
               <Link href={paths.editAccount}>
@@ -338,7 +363,6 @@ const Header = () => {
                  {t('login')}
               </Button>
             )}
-            
           </Box>
         </Toolbar>
       </Container>

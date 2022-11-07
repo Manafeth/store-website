@@ -43,7 +43,7 @@ const ListMenuItem: FC<Props> = ({ data }) => {
         }}
         onClick={handleClick}
       >
-        <ListItemText primary={data.name} disableTypography={true} sx={{ opacity: 1, fontSize:'18px', fontWeight:'700',fontFamily: 'Urbanist' }} />
+        <ListItemText primary={data.name} disableTypography={true} sx={{ opacity: 1, fontSize:'18px', fontWeight:'700', fontFamily: lang === 'en' ? 'Urbanist' : '' }} />
         {lang === 'ar'? (
            <Typography sx={{ ml: 4, transform:'rotate(180deg)'}}><Image src={ArrowRight} alt='checked icon' /></Typography>
         ):(

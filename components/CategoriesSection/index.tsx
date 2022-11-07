@@ -27,8 +27,8 @@ const CategoriesSection: FC<Props> = ({ categories, title, sx, showAll, seeAllBu
   return (
     <Box component='section' sx={{ ...(sx || {}) }} id={id || ''}>
        <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pb: 6 }}>
+            <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px' }}>
               {t(title)}
             </Typography>
             {showAll && (
