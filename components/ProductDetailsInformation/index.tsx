@@ -37,14 +37,17 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
   
   const { sendAlert } = useAlert()
   const { fetchCartProducts } = useCart()
-
+  const [addToCartLoader, setAddToCartLoader] = useState(false);
 
   function handleAddProductToCart() {
+    setAddToCartLoader(true);
     addProductToCart(state).then((response) => {
       sendAlert(response?.data?.message, 'success')
       fetchCartProducts()
+      setAddToCartLoader(false);
     }).catch((error: any) => {
       sendAlert(error.response.data.Message, 'error')
+      setAddToCartLoader(false);
     })
   }
 
@@ -156,7 +159,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
            {t('selectOptions')}
         </Button>
         <Box sx={{display:'flex' }}>
-          <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }}>
+          <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }} disabled={addToCartLoader}>
             <Image src={CartIcon} alt='cart icon' width={40} height={40} />
           </IconButton>
         </Box>
