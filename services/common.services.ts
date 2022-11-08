@@ -19,9 +19,9 @@ function getStoreInfo() {
   );
 }
 
-function getSlides(headers?: { [key: string]: any }) {
+function getBanner(headers?: { [key: string]: any }) {
   return axiosInstance.get(
-    'Announcement/GetAllSliders',
+    'Auth/GetBanner',
     {
       headers: headers || {}
     }
@@ -32,5 +32,5 @@ export {
     getCountries,
     getAllCities,
     getStoreInfo,
-    getSlides
+    getBanner
 };
