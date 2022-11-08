@@ -1,6 +1,6 @@
 import React, { createContext, useContext, ReactElement, FC, useState } from 'react';
-import { getSlides, getStoreInfo } from '../services/common.services';
-import { CommonContextState, SlideData, StoreInfoData } from '../types/common';
+import { getBanner, getStoreInfo } from '../services/common.services';
+import { BannerData, CommonContextState, SlideData, StoreInfoData } from '../types/common';
 import  { getMostPurchasedProducts } from '../services/products.services';
 import { ProductData } from '../types/products';
 // import { useRouter } from 'next/router';
@@ -25,7 +25,14 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         supportEmail: ''
     })
 
-    const [slides, setSlides] = useState<SlideData[]>([])
+    const [bannerData, setBannerData] = useState<BannerData>({
+      titel: '',
+      description: '',
+      imageFilePath: {
+        orignialUrl: '',
+        thumbUrl: ''
+      }
+    })
     const [storeNotFound, setStoreNotFound] = useState(false);
     const [mostPurchasedProducts, setMostPurchasedProducts] = useState<ProductData[]>([])
     // const router = useRouter();
@@ -49,10 +56,10 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
       }
     }
 
-    async function fetchSlides() {
+    async function fetchBannerData() {
       try {
-        const response = await getSlides();
-        setSlides(response.data.data)
+        const response = await getBanner();
+        setBannerData(response.data.data)
       } catch (error) {
         Promise.reject(error)
       }
@@ -64,8 +71,8 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
     fetchStoreInfo,
     mostPurchasedProducts,
     fetchMostPurchasedProducts,
-    slides,
-    fetchSlides
+    bannerData,
+    fetchBannerData
   };
 
   return (

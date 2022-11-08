@@ -34,13 +34,22 @@ export type SlideData = {
     }
 }
 
+export type BannerData = {
+    titel: string,
+    description: string,
+    imageFilePath: {
+        orignialUrl: string,
+        thumbUrl: string
+    }
+}
+
 export type CommonContextState = {
     storeInfo: StoreInfoData,
     fetchStoreInfo: () => Promise<void>,
     mostPurchasedProducts: ProductData[],
     fetchMostPurchasedProducts: (params: { page: number, pageSize: number, generalSearch: string | string[] | undefined }) => Promise<void>,
-    slides: SlideData[],
-    fetchSlides: () => Promise<void>
+    bannerData: BannerData,
+    fetchBannerData: () => Promise<void>
 }
 
 
