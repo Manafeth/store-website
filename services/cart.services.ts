@@ -16,6 +16,13 @@ function getAllCartProducts() {
   );
 }
 
+function deleteProductFromCart(id: number) {
+  return axiosInstance.delete(
+    'Cart/DeleteCartProduct',
+    {params: { id }}
+  );
+}
+
 function getAllProviders(addressId: number) {
   return axiosInstance.get(
     'Providers/GetAll',
@@ -102,5 +109,6 @@ export {
     createPaymentGateway,
     stcPaymentConfirmation,
     uploadBankFiles,
-    getBankFiles
+    getBankFiles,
+    deleteProductFromCart
 }
