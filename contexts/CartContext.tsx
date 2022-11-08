@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
-import { checkCouponValidation, createOrder, createPaymentGateway, getAllCartProducts, getAllProviders, getBankFiles, getInvoice, getOrder, stcPaymentConfirmation, uploadBankFiles } from '../services/cart.services';
+import { checkCouponValidation, createOrder, createPaymentGateway, deleteProductFromCart, getAllCartProducts, getAllProviders, getBankFiles, getInvoice, getOrder, stcPaymentConfirmation, uploadBankFiles } from '../services/cart.services';
 import { CartModalState, CheckoutData, StcPaymentData, InvocieData, OrderData, PaymentData, PaymentProvidersData, ShipmentsProvidersData, BankFilesData } from '../types/cart';
 import { ProductData } from '../types/products';
 import { useAlert } from './AlertContext';
@@ -89,6 +89,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
   const [paymentStatus, setPaymentStatus] = useState('');
   const [stcPaymentStatus, setStcPaymentStatus] = useState('');
   const [bankFilesStatus, setBankFilesStatus] = useState('');
+  const [removeStatus, setRemoveStatus] = useState('');
   const [bankFilesData, setBankFilesData] = useState({
     orignialUrl: "",
     thumbUrl: "",
@@ -108,6 +109,21 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       Promise.reject(error);
     }
   }
+
+  async function deleteCartProduct(id: number) {
+    setRemoveStatus(LOADING)
+    try {
+      await  deleteProductFromCart(id);
+      setRemoveStatus(SUCCESS)
+      fetchCartProducts()
+    } catch (error) {
+      setRemoveStatus(ERROR)
+      Promise.reject(error);
+    }
+  }
+
+
+  
   async function fetchShipmentsProviders(id:number) {
     try {
      const response = await  getAllProviders(id);
@@ -265,6 +281,8 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     createBankFiles,
     bankFilesStatus,
     bankFilesData,
+    deleteCartProduct,
+    removeStatus
   };
 
   return (

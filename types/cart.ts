@@ -141,5 +141,7 @@ export type CartModalState = {
         orignialUrl: string,
         thumbUrl: string,
         fileExtension: string
-    }
+    },
+    deleteCartProduct: (_:number) => Promise<void>
+    removeStatus: string
 }
