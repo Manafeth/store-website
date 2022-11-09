@@ -55,6 +55,7 @@
     "cancelledByStore": "CancelledByStore",
     "cancelledByCustomer": "CancelledByCustomer",
     "autoCancelled": "AutoCancelled",
+    "completed": "completed",
     "complete": "Complete",
     "draft": "Draft",
     "post": "Post",
@@ -83,5 +84,7 @@
     "discountedProducts": "Discounted products",
     "seeAllCategories": "See all categories",
     "seeAllProducts": "See all products",
-    "topSellingProducts": "Top selling products"
+    "topSellingProducts": "Top selling products",
+    "rejected": "Rejected",
+    "": ""
 }

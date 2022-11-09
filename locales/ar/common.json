@@ -55,6 +55,7 @@
     "cancelledByStore": "إلغائها من قبل التاجر",
     "cancelledByCustomer": "إلغائها من قبل العميل",
     "autoCancelled": "إلغاء تلقائي",
+    "completed": "مكتمل",
     "complete": "مكتمل",
     "draft": "غير مدفوعة",
     "post": "قيد التنفيذ",
@@ -83,5 +84,7 @@
     "discountedProducts": "المنتجات المخفضة",
     "seeAllCategories": "عرض كل الأصناف",
     "seeAllProducts": "عرض كل المنتجات",
-    "topSellingProducts": "المنتجات الأكثر مبيعًا"
+    "topSellingProducts": "المنتجات الأكثر مبيعًا",
+    "rejected": "مرفوض",
+    "": ""
 }

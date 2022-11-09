@@ -4,6 +4,7 @@ import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import Link from '@mui/material/Link';
+import Alert from '@mui/material/Alert';
 import { OrderData } from '../../types/cart';
 import { useCart } from '../../contexts/CartContext';
 import EditIcon from '../../assets/images/icons/edit-icon.svg';
@@ -54,7 +55,9 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                 <Typography variant='h5' component='span' sx={{ fontWeight: '600' }}>{orderData.bankInfo?.iban}</Typography>
             </Box>
             <Divider sx={{ mt: 4, mb: 2.5 }} />
-            
+            {orderData.paymentStatus === 3 && (
+                <Alert severity="error" sx={{ mb: 2, fontSize: 14 }}>{orderData?.rejectionReason}</Alert>
+            )}
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Typography variant='h5' component='span' sx={{ color: 'text.secondary' }}>{t('reciptFile')}</Typography>
                 {bankFilesData?.orignialUrl ? (
@@ -70,8 +73,15 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                             }}
                         >
                             {/* @ts-ignore */}
-                            <Input id="bank-file-2" type="file" sx={{ display: 'none' }} onChange={handleFile} />
-                            <LoadingButton color='secondary' variant='contained' sx={{ minWidth: 0, p: 0.5, borderRadius: 2 }} component='span' loading={bankFilesStatus === LOADING}>
+                            <Input id="bank-file-2" type="file" sx={{ display: 'none' }} onChange={handleFile} disabled={![1,3].includes(orderData.paymentStatus)} />
+                            <LoadingButton
+                                color='secondary'
+                                variant='contained'
+                                sx={{ minWidth: 0, p: 0.5, borderRadius: 2 }}
+                                component='span'
+                                loading={bankFilesStatus === LOADING}
+                                disabled={![1,3].includes(orderData.paymentStatus)}
+                            >
                                 <Image src={EditIcon} width={15} height={15} alt='edit' />
                             </LoadingButton>
                         </Box>
@@ -86,11 +96,12 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                         }}
                     >
                         {/* @ts-ignore */}
-                        <Input id="bank-file" type="file" sx={{ display: 'none' }} onChange={handleFile} />
+                        <Input id="bank-file" type="file" sx={{ display: 'none' }} onChange={handleFile} disabled={![1,3].includes(orderData.paymentStatus)} />
                         <LoadingButton
                             variant='contained'
                             component='span'
                             loading={bankFilesStatus === LOADING}
+                            disabled={![1,3].includes(orderData.paymentStatus)}
                         >
                             {t('attatchReceiptFile')}
                         </LoadingButton>

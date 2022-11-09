@@ -14,6 +14,7 @@ export const orderStatusEnums = [
     { label: 'draft', color: 'buttons.blueDarker', value: 0 },
     { label: 'post', color: 'warning.main', value: 1 },
     { label: 'paid', color: 'buttons.shippedDarker', value: 2 },
+    { label: 'rejected', color: 'error.main', value: 3 },
   ];
 
   export const addressTagsEnums = [

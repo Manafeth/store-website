@@ -50,6 +50,7 @@ export type OrderData = {
     orderChangeLogs: OrderChangeLogsData[],
     providerType: number,
     providerCategory: number,
+    rejectionReason: string
     bankInfo?: {
         bankId?: number,
         bankName?: string,
