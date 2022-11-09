@@ -78,6 +78,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
               fontWeight:'500', 
             }}
             onClick={handleBack}
+            disabled
           >
               {CT('back')}
           </Button>

@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 
 import useTranslation from 'next-translate/useTranslation';
-import Carousel from 'react-material-ui-carousel';
 import { useCommon } from '../../contexts/CommonContext';
 import HeroSectionEmptyState from '../HeroSectionEmptyState';
 interface Props {
@@ -68,7 +67,7 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
                             {bannerData.description}
                         </Typography>
                         <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }} onClick={scrollToProducts}>
-                        {t('shopNow')}
+                            {t('shopNow')}
                         </Button>
                     </Box>
                 </Box>
