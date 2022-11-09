@@ -118,7 +118,7 @@ const OrderDetails = () => {
                   </Typography>
                 
                   <StatusText
-                    title={CT(invoiceStatus?.label || '')}
+                    title={invoiceStatus?.label ? CT(invoiceStatus?.label) : ''}
                     color={invoiceStatus?.color || ''}
                   />
                 </Grid>
@@ -149,7 +149,7 @@ const OrderDetails = () => {
                     {t('shippingStatus')}
                   </Typography>
                   <StatusText
-                    title={CT(orderStatus?.label || '')}
+                    title={orderStatus?.label ? CT(orderStatus?.label) : ''}
                     color={orderStatus?.color || ''}
                   />
                 </Grid>
@@ -202,14 +202,15 @@ const OrderDetails = () => {
 
               <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
             </Grid>
-            {!isInActive && (
-              <Grid item xs={12} md={6} sx={{ borderLeft: !(orderData.providerType === 2 && orderData.providerCategory === 2 ) ? '1px solid #E7E7E7' : 0 }}>
-                {orderData.providerType === 1 && (
-                  <BankPayment orderData={orderData} />
-                )}
-                {orderData.providerType === 2 && orderData.providerCategory === 3  && (
-                  <StcPayment />
-                )}
+            {!isInActive && (orderData.providerType === 2 && orderData.providerCategory === 3)  && (
+              <Grid item xs={12} md={6} sx={{ borderLeft: '1px solid #E7E7E7' }}>
+                <StcPayment />
+              </Grid>
+            )}
+
+            {orderData.providerType === 1 && (
+              <Grid item xs={12} md={6} sx={{ borderLeft: '1px solid #E7E7E7' }}>
+                <BankPayment orderData={orderData} />
               </Grid>
             )}
           </Grid>

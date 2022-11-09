@@ -44,6 +44,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       paymentProvider:'',
       paymentStatus:0,
       status:0,
+      rejectionReason: '',
       shipmentProviderImage: {
         orignialUrl:'',
         thumbUrl:'',
