@@ -28,6 +28,7 @@ export type checkOutAttributes = {
 
 export type ProductData =  {
   id: number,
+  productId: number,
   name: string,
   salePrice: number,
   quantity: number,

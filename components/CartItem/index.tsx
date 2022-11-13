@@ -1,10 +1,14 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+
 import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import { ProductData } from '../../types/products';
@@ -13,9 +17,11 @@ import { LOADING } from '../../constants';
 import { useCart } from '../../contexts/CartContext';
 interface Props {
   data: ProductData;
+  handleCartItemQuantity?: (_: { cartProductId: number, quantity: number }) => void,
+  quantity?: number
 }
 
-const CartItem: FC<Props> = ({data}) => {
+const CartItem: FC<Props> = ({data, handleCartItemQuantity, quantity}) => {
   const {t} = useTranslation('common');
 
   const {deleteCartProduct, removeStatus} = useCart()
@@ -23,6 +29,13 @@ const CartItem: FC<Props> = ({data}) => {
   function handleRemoveCart() {
     deleteCartProduct(data.id)
   }
+
+  function handleChange(ev: ChangeEvent<HTMLInputElement>) {
+    const value = +ev.target.value
+    if (handleCartItemQuantity && (value > 0))
+      handleCartItemQuantity({ cartProductId: data.productId, quantity: value })
+  }
+
   return (
     <Box sx={{mb:2}}>
       <Box sx={{display: 'flex', gap: '50px' }}>
@@ -68,41 +81,25 @@ const CartItem: FC<Props> = ({data}) => {
           </Typography>
         </Box>
       </Box>
-      {/* <Grid container spacing='40px' sx={{ mt: 2 }}>
-        <Grid item xs={6}>
-          <TextField
-            id='outlined-basic'
-            select
-            variant='outlined'
-            label='Size : L'
-            fullWidth
-            margin='normal'
-            name='cityId'
-            sx={{ mb: 4 }}
-          >
-            <MenuItem value={0}>test</MenuItem>
-
-            <MenuItem value={1}></MenuItem>
-          </TextField>
+      {handleCartItemQuantity && (
+        <Grid container spacing='40px' sx={{ mt: 2 }}>
+          <Grid item xs={6}>
+            <TextField
+              variant='outlined'
+              label={t('quantity')}
+              fullWidth
+              margin='normal'
+              name='cityId'
+              sx={{ mb: 4 }}
+              inputProps={{ style: { fontSize: '16px', fontWeight: '700' } }}
+              InputLabelProps={{ shrink: true }}
+              type='number'
+              onChange={handleChange}
+              value={quantity}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id='outlined-basic'
-            select
-            variant='outlined'
-            label='Qty : 1'
-            fullWidth
-            margin='normal'
-            name='cityId'
-            sx={{ mb: 4 }}
-            inputProps={{ style: { fontSize: '16px', fontWeight: '700' } }}
-          >
-            <MenuItem value={0}>test</MenuItem>
-
-            <MenuItem value={1}></MenuItem>
-          </TextField>
-        </Grid>
-      </Grid> */}
+      )}
     </Box>
   );
 };

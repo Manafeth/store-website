@@ -142,11 +142,10 @@ const Checkout = () => {
                 </Typography>
                 {cartData?.map((item, index) => {
                   return(
-                  <>
-                <CartItem data={item} key={item.id}/>
-                {index < cartData.length -1 && <Divider sx={{mb:1}}/>}
-                
-                </>
+                  <Box key={item.id}>
+                    <CartItem data={item} />
+                    {index < cartData.length -1 && <Divider sx={{mb:1}}/>}
+                  </Box>
                 );
               })}
               </Grid>

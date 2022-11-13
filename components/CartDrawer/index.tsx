@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,12 +10,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import OrderSummary from '../OrderSummary';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
-import Container from '@mui/material/Container';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { editCartProductsQuantity } from '../../services/cart.services';
+import { useRouter } from 'next/router';
+import paths from '../../constants/paths';
 
 interface Props {
   open: boolean;
@@ -25,6 +25,9 @@ interface Props {
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const {t} = useTranslation('cart');
   const { fetchCartProducts, cartData } = useCart();
+  const [cartItems, setcartItems] = useState<{cartProductId: number, quantity: number}[]>([]);
+  const router = useRouter();
+
   useEffect(() => {
     if (open)
       fetchCartProducts();
@@ -33,6 +36,31 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
 
   function handleClose() {
     onClose();
+  }
+
+  function handleCartItemQuantity(cartProduct: {cartProductId: number, quantity: number}) {
+    setcartItems((prevState) => {
+      const selectedItem = prevState?.find(({ cartProductId }) => cartProductId === cartProduct.cartProductId)
+      if (selectedItem) {
+        return prevState?.map((item) => {
+          if(item.cartProductId === cartProduct.cartProductId) {
+            return cartProduct
+          } 
+          return item
+        })
+      } else {
+        return [
+          ...(prevState || []),
+          cartProduct
+        ]
+      }
+    })
+  }
+
+  function handleCheckout() {
+    editCartProductsQuantity(cartItems).then(() => {
+      router.push(paths.checkout)
+    })
   }
 
   return (
@@ -65,11 +93,11 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       </Box>
       <Box>
       {cartData?.map((item) => {
-                 return(
-                  <>
-        <CartItem data={item} key={item.id} />
-        <Divider sx={{ mt: 3, mb: 3 }} />
-        </>
+        return(
+          <Box key={item.id}>
+            <CartItem data={item} handleCartItemQuantity={handleCartItemQuantity} quantity={cartItems?.find((quantity) => quantity.cartProductId === item.productId)?.quantity} />
+            <Divider sx={{ mt: 3, mb: 3 }} />
+          </Box>
         );
       })}
         
@@ -103,29 +131,17 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           {t('continueShopping')}
         </Button>
         </Link>
-        {cartData.length > 0 ? (
-          <Link href='/checkout'>
-            <Button
-              variant='contained'
-              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
-              "&:hover": {
-                backgroundColor: "primary.hover",
-             }}}
-              type='submit'
-            >
-                {t('continueToPayment')}
-            </Button>
-          </Link>
-        ) : (
-          <Button
-            variant='contained'
-            sx={{ width: 'auto', height: '44px',textTransform: 'lowercase' }}
-            disabled
-          >
-              {t('continueToPayment')}
-          </Button>
-        )}
-        
+        <LoadingButton
+          variant='contained'
+          sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
+          "&:hover": {
+            backgroundColor: "primary.hover",
+          }}}
+          disabled={cartData.length === 0}
+          onClick={handleCheckout}
+        >
+            {t('continueToPayment')}
+        </LoadingButton>
       </Box>
     </Drawer>
   );
