@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react';
+import React, { useEffect, FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -6,17 +6,17 @@ import Container from '@mui/material/Container';
 import CardMedia from '@mui/material/CardMedia';
 import useTranslation from "next-translate/useTranslation";
 
-import Carousel from 'react-material-ui-carousel'
-import { useCommon } from '../../contexts/CommonContext';
 import HeroSectionEmptyState from '../HeroSectionEmptyState';
-
+import { BannerData } from '../../types/common' 
+import { getBanner } from '../../services/common.services';
 interface Props {
     targetSectionId: string,
+    data: BannerData
 }
 
-const HeroSection: FC<Props> = ({ targetSectionId }) => {
+const HeroSection: FC<Props> = ({ targetSectionId, data }) => {
     const {t} = useTranslation('heroSection');
-    const {bannerData, fetchBannerData} = useCommon();
+    const [banner, setBanner] = useState(data);
 
     function scrollToProducts() {
         const yOffset = -91; 
@@ -27,18 +27,23 @@ const HeroSection: FC<Props> = ({ targetSectionId }) => {
     }
 
     useEffect(() => {
-        fetchBannerData();
-    }, [])
+        if (!data?.titel) {
+            getBanner().then((res) => {
+                setBanner(res.data.data)
+            })
+        } else
+            setBanner(data)
+    }, [data])
     
   return (
     <Box component='section' sx={{ position: 'relative', height: {md: '600px', xs: '300px'} }}>
-        {bannerData?.imageFilePath?.orignialUrl ? (
+        {banner?.imageFilePath?.orignialUrl ? (
             <>
                 <Box sx={{ display: 'flex' }}>
                     <CardMedia
-                        image={bannerData.imageFilePath.orignialUrl || ''}
+                        image={banner.imageFilePath.orignialUrl || ''}
                         component='img'
-                        alt={bannerData.titel}
+                        alt={banner.titel}
                         sx={{ width: '100%', maxWidth: '100%', height: {md: '600px', xs: '300px'}}}
                     />
                 </Box>
@@ -54,7 +59,7 @@ const HeroSection: FC<Props> = ({ targetSectionId }) => {
                                 mb: {xs: 1, sm: 2}
                             }}
                         >
-                            {bannerData.titel}
+                            {banner.titel}
                         </Typography>
                         <Typography
                             sx={{
@@ -66,7 +71,7 @@ const HeroSection: FC<Props> = ({ targetSectionId }) => {
                                 maxWidth: {xs: 226, sm: 376}
                             }}
                         >
-                            {bannerData.description}
+                            {banner.description}
                         </Typography>
 
                             <Button

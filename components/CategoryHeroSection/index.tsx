@@ -1,20 +1,22 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useCommon } from '../../contexts/CommonContext';
 import HeroSectionEmptyState from '../HeroSectionEmptyState';
+import { BannerData } from '../../types/common';
+import { getBanner } from '../../services/common.services';
 interface Props {
     targetSectionId: string,
+    data: BannerData
 }
 
-const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
-    const {bannerData, fetchBannerData} = useCommon();
-    
+const CategoryHeroSection: FC<Props> = ({ targetSectionId, data }) => {
     const {t} = useTranslation('heroSection');
+    const [banner, setBanner] = useState(data);
+
     function scrollToProducts() {
         const yOffset = -91; 
         const element = document.getElementById(targetSectionId);
@@ -24,18 +26,23 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
     }
 
     useEffect(() => {
-        fetchBannerData();
-    }, [])
+        if (!data?.titel) {
+            getBanner().then((res) => {
+                setBanner(res.data.data)
+            })
+        } else
+            setBanner(data)
+    }, [data])
 
   return (
     <Box component='section' sx={{ position: 'relative', height: {md: '432px', xs: '250px'} }}>
-        {bannerData?.imageFilePath?.orignialUrl ? (
+        {banner?.imageFilePath?.orignialUrl ? (
             <>
                 <Box sx={{ display: 'flex' }}>
                     <CardMedia
-                        image={bannerData?.imageFilePath?.orignialUrl || ''}
+                        image={banner?.imageFilePath?.orignialUrl || ''}
                         component='img'
-                        alt={bannerData.titel}
+                        alt={banner.titel}
                         sx={{ width: '100%', maxWidth: '100%', height: {md: '432px', xs: '250px'}, borderRadius: 8}}
                     />
                 </Box>
@@ -51,7 +58,7 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
                                 mb: { xs: 1, sm: 2 },
                             }}
                         >
-                            {bannerData.titel}
+                            {banner.titel}
                         </Typography>
                         <Typography
                             variant='h6'
@@ -64,7 +71,7 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId }) => {
                                 fontSize: { xs: '12px', sm: '16px'},
                             }}
                         >
-                            {bannerData.description}
+                            {banner.description}
                         </Typography>
                         <Button variant='contained' sx={{ minWidth: {xs: 100, sm: 160}, p: {xs: 1, sm: 2} }} onClick={scrollToProducts}>
                             {t('shopNow')}

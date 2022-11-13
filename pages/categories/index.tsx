@@ -12,14 +12,17 @@ import ProductsSection from '../../components/ProductsSection'
 import { getDiscountedProduct, getTopSellingProducts } from '../../services/products.services'
 import { ProductData } from '../../types/products'
 import paths from '../../constants/paths'
+import { getBanner } from '../../services/common.services'
+import { BannerData } from '../../types/common'
 interface Props {
     // categories: CategoryData[],
     allCategories: CategoryData[],
     discountedProducts: ProductData[],
-    topSellingProducts: ProductData[]
+    topSellingProducts: ProductData[],
+    bannerData: BannerData
 }
 
-const Categories: NextPage<Props>  = ({ allCategories, discountedProducts, topSellingProducts }) => {
+const Categories: NextPage<Props>  = ({ allCategories, discountedProducts, topSellingProducts, bannerData }) => {
     const categoriesSections = useRef(null);
     // const [categoriesList, setCategoriesList] = useState(categories);
     const [allcategoriesList, setAllCategoriesList] = useState(allCategories);
@@ -60,7 +63,7 @@ const Categories: NextPage<Props>  = ({ allCategories, discountedProducts, topSe
     
   return (
     <MainLayout>
-        <HeroSection targetSectionId='categroires-sec' />
+        <HeroSection targetSectionId='categroires-sec' data={bannerData} />
         {/* <Box pt={9.5} pb={6} ref={categoriesSections}>
             <FeaturedCategoriesSection categories={categoriesList} />
         </Box> */}
@@ -95,7 +98,8 @@ Categories.getInitialProps = async ({req, locale}: NextPageContext) => {
             // categories: [],
             allCategories: [],
             discountedProducts: [],
-            topSellingProducts: []
+            topSellingProducts: [],
+            bannerData: {}
         }
     }
     try {
@@ -108,18 +112,21 @@ Categories.getInitialProps = async ({req, locale}: NextPageContext) => {
         const allCategories = await getAllCategories(headers);
         const discountedProducts = await getDiscountedProduct(headers);
         const topSellingProducts = await getTopSellingProducts(headers);
+        const banner = await getBanner(headers);
         return {
             // categories: categories.data.data,
             allCategories: allCategories.data.data,
             discountedProducts: discountedProducts.data.data,
-            topSellingProducts: topSellingProducts.data.data
+            topSellingProducts: topSellingProducts.data.data,
+            bannerData: banner.data.data
         }
     } catch(error: any) {
         return {
             // categories: [],
             allCategories: [],
             discountedProducts: [],
-            topSellingProducts: []
+            topSellingProducts: [],
+            bannerData: {}
         }
     }
 }

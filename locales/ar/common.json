@@ -72,7 +72,7 @@
     "backHome":"الصفحة الرئيسية",
     "support":"دعم",
     "siteMap":"خريطة الموقع",
-    "categoryName": "اسم الصنف",
+    "categoryName": "اسم التصنيف",
     "productName": "اسم المنتج",
     "newStore": "متجر جديد",
     "storeNotReady": "المتجر ليس جاهزًا بعد!",
@@ -80,11 +80,12 @@
     "shopByCategory": "تسوق حسب التصنيف",
     "listOfProducts": "قائمة المنتجات",
     "showAll": "عرض الكل",
-    "feateredCategories": "أصناف مميزة",
+    "feateredCategories": "تصنيفات مميزة",
     "discountedProducts": "المنتجات المخفضة",
     "seeAllCategories": "عرض كل التصنيفات",
     "seeAllProducts": "عرض كل المنتجات",
     "topSellingProducts": "المنتجات الأكثر مبيعًا",
     "rejected": "مرفوض",
+    "sort": "رتب",
     "": ""
 }

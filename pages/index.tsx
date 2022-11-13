@@ -12,13 +12,16 @@ import { useRouter } from 'next/router';
 import paths from '../constants/paths';
 import ProductsSection from '../components/ProductsSection';
 import CategoriesSection from '../components/CategoriesSection';
+import { getBanner } from '../services/common.services';
+import { BannerData } from '../types/common';
 interface Props {
   productsList: ProductData[],
   categories: CategoryData[],
-  discountedProducts: ProductData[]
+  discountedProducts: ProductData[],
+  bannerData: BannerData
 }
 
-const HomePage: NextPage<Props> = ({ productsList, categories, discountedProducts }) => {
+const HomePage: NextPage<Props> = ({ productsList, categories, discountedProducts, bannerData }) => {
   const { mostPurchasedProducts, fetchMostPurchasedProducts } = useCommon();
   const [products, setProducts] = useState(productsList);
   const [discProducts, setDiscountedProducts] = useState(discountedProducts);
@@ -71,7 +74,7 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
   
   return (
     <MainLayout>
-      <HeroSection targetSectionId='recent-products' />
+      <HeroSection targetSectionId='recent-products' data={bannerData} />
       <CategoriesSection
         categories={featuredCategories}
         title='shopByCategory'
@@ -102,7 +105,8 @@ HomePage.getInitialProps = async ({ req, locale }: NextPageContext) => {
     return {
       productsList: [],
       categories: [],
-      discountedProducts: []
+      discountedProducts: [],
+      bannerData: {}
     }
   }
   try {
@@ -113,17 +117,20 @@ HomePage.getInitialProps = async ({ req, locale }: NextPageContext) => {
     const products = await getMostPurchasedProducts({page: 1, pageSize: 15, generalSearch: ''}, headers);
     const categories = await getFeaturedCategories(headers);
     const discountedProducts = await getDiscountedProduct(headers);
+    const banner = await getBanner(headers);
     
     return {
       productsList: products.data.data.data,
       categories: categories.data.data,
-      discountedProducts: discountedProducts.data.data
+      discountedProducts: discountedProducts.data.data,
+      bannerData: banner.data.data
     }
   } catch(error: any) {
     return {
       productsList: [],
       categories: [],
-      discountedProducts: []
+      discountedProducts: [],
+      bannerData: {}
     }
   }
 }

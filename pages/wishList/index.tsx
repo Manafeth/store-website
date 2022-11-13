@@ -1,19 +1,20 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import ProductItem from '../../components/ProductItem';
 import { useProfile } from '../../contexts/ProfileContext';
 import MainLayout from '../../layouts/MainLayout';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import useTranslation from 'next-translate/useTranslation';
+import { NextPage } from 'next';
 
-const WishListProduct = () => {
+const WishListProduct: FC<NextPage> = () => {
   const { fetchWishListData, wishListData } = useProfile();
-  const {t} = useTranslation('settings');
+  const {t, lang} = useTranslation('settings');
   useEffect(() => {
     fetchWishListData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
   return (
     <MainLayout>
       <ProfileLayout>

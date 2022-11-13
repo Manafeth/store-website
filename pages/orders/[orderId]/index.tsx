@@ -26,7 +26,7 @@ const OrderDetails = () => {
   const {t: CAT} = useTranslation('cart');
   const {t: CT} = useTranslation('common');
   const {t:ST} = useTranslation('settings');
-  const {t} = useTranslation('checkout');
+  const {t, lang} = useTranslation('checkout');
   const { fetchOrderDetails, orderData, createPayment, paymentStatus } = useCart();
   const router = useRouter()
   const { orderId } = router.query
@@ -40,7 +40,7 @@ const OrderDetails = () => {
     if (orderId)
       fetchOrderDetails(orderId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [orderId]);
+  }, [orderId, lang]);
 
   const invoiceStatus = invoiceStatusEnums.find((item) => +item.value === orderData.paymentStatus);
   const orderStatus = orderStatusEnums.find((item) => +item.value === orderData.status);
@@ -53,14 +53,14 @@ const OrderDetails = () => {
             <Grid item xs={12} md={6}>
               <Typography
                 variant='h1'
-                sx={{ fontWeight: 'bold', mb: 3,fontFamily: 'Urbanist' }}
+                sx={{ fontWeight: 'bold', mb: 3,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
               >
                 {ST('orderDetails')}
               </Typography>
 
               <Typography
                 variant='h2'
-                sx={{ fontWeight: '700', fontSize: '20px', mb: 3,fontFamily: 'Urbanist' }}
+                sx={{ fontWeight: '700', fontSize: '20px', mb: 3,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
               >
                 {t('inovice')} {orderData.invoiceId}
               </Typography>
@@ -68,13 +68,13 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {CT('date')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {moment(orderData.orderDate).format('DD MMM  YYYY hh:MM A')}
                   </Typography>
@@ -82,13 +82,13 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {CT('phoneNumber')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 ,fontFamily: 'Urbanist'}}
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4 ,fontFamily: lang === 'ar' ? '' : 'Urbanist'}}
                   >
                     {orderData.phoneNumber}
                   </Typography>
@@ -98,13 +98,13 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2 ,fontFamily: 'Urbanist'}}
+                    sx={{ fontWeight: '600', mb: 2 ,fontFamily: lang === 'ar' ? '' : 'Urbanist'}}
                   >
                     {t('paymnetMethod')}
                   </Typography>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '600', color: 'text.grey', mb: 4,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {orderData.paymentProvider}
                   </Typography>
@@ -112,7 +112,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {t('paymentStatus')}
                   </Typography>
@@ -127,7 +127,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {t('shippingMethod')}
                   </Typography>
@@ -144,7 +144,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {t('shippingStatus')}
                   </Typography>
@@ -159,7 +159,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
-                    sx={{ fontWeight: '500', mb: 2,fontFamily: 'Urbanist' }}
+                    sx={{ fontWeight: '500', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
                   >
                     {CAT('total')}
                   </Typography>
@@ -167,7 +167,7 @@ const OrderDetails = () => {
                 <Grid item xs={6}>
                   <Typography
                     variant='h3'
-                    sx={{ fontWeight: '900', mb: 2,fontFamily: 'Urbanist',color:'grey.1800' }}
+                    sx={{ fontWeight: '900', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist',color:'grey.1800' }}
                   >
                     {CT('sar')} {orderData.totalCost}
                   </Typography>
@@ -216,7 +216,7 @@ const OrderDetails = () => {
           </Grid>
           <Typography
             variant='h5'
-            sx={{ fontWeight: '600', mb: 2,fontFamily: 'Urbanist' }}
+            sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}
           >
             {t('orderTimeline')}
           </Typography>

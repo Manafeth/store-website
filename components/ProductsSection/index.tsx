@@ -39,7 +39,7 @@ const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButton
               </Link>
             )}
           </Box>
-          <Grid container spacing={3.75} rowSpacing={1.25}>
+          <Grid container spacing={{xs: 2, lg: 3.75}} rowSpacing={1.25}>
             {products.length > 0 ? (
                 products.map((item) => {
                   return (

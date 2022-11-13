@@ -19,6 +19,8 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import productStatusMenu from '../../constants/ProductStatusValues';
 import ProductEmptyState from '../../components/ProductEmptyState';
+import { getBanner } from '../../services/common.services';
+import { BannerData } from '../../types/common';
 
 interface Products {
   data: ProductData[],
@@ -34,10 +36,11 @@ interface Props {
     itemsCount: number,
     categories: CategoryData[],
     attributes: []
-  }
+  },
+  bannerData: BannerData
 }
 
-const ProductsPage: NextPage<Props> = ({ productsData}) => {
+const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
   const router = useRouter();
   const {t} = useTranslation('common');
 
@@ -124,7 +127,7 @@ const ProductsPage: NextPage<Props> = ({ productsData}) => {
   
   return (
     <MainLayout>
-      <HeroSection targetSectionId='products-sec' />
+      <HeroSection targetSectionId='products-sec' data={bannerData} />
       <Box component='footer' py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing={3} rowSpacing={3.75}>
@@ -158,7 +161,6 @@ const ProductsPage: NextPage<Props> = ({ productsData}) => {
                   variant='outlined'
                   label={t('popularity')}
                   margin='normal'
-                  name='popularity'
                   sx={{ mb: 4, width: '141px', fontSize:'14px',
                   '& .MuiSelect-select':{
                     fontSize: '14px',
@@ -166,7 +168,7 @@ const ProductsPage: NextPage<Props> = ({ productsData}) => {
                   onChange={handleSort}
                   value={params.productStatus || 0}
                 >
-                  <MenuItem value={0} disabled>{t('popularity')}</MenuItem>
+                  <MenuItem value={0} disabled />
                   {productStatusMenu.map((item) => {
                     return (
                       <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
@@ -174,7 +176,7 @@ const ProductsPage: NextPage<Props> = ({ productsData}) => {
                   })}
                 </TextField>
               </Box>
-              <CategoryHeroSection targetSectionId='products-sec' />
+              <CategoryHeroSection targetSectionId='products-sec' data={bannerData} />
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
                 {products.data.length > 0 ? (
                   products.data.map((item) => {
@@ -216,7 +218,8 @@ const ProductsPage: NextPage<Props> = ({ productsData}) => {
 ProductsPage.getInitialProps = async ({locale, req }: NextPageContext) => {
   if (!req) {
     return {
-      productsData: {}
+      productsData: {},
+      bannerData: {}
     }
   }
   try {
@@ -225,13 +228,16 @@ ProductsPage.getInitialProps = async ({locale, req }: NextPageContext) => {
       'accepted-language': locale
     }
       const productsData = await getProductsByCategory({  page: 1, pageSize: 12 }, headers);
+      const banner = await getBanner(headers);
       
       return {
         productsData: productsData.data.data,
+        bannerData: banner.data.data
       }
   } catch(error: any) {
     return {
-      productsData: {}
+      productsData: {},
+      bannerData: {}
     }
   }
 

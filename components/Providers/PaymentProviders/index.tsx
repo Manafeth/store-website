@@ -21,7 +21,7 @@ interface Props {
 let timer: ReturnType<typeof setTimeout>;
 
 const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
-  const {t: CT} = useTranslation('common');
+  const {t: CT, lang} = useTranslation('common');
   const {t: COT} = useTranslation('checkout');
   const [isInvalid, setIsInvalid] = useState(false);
   const {
@@ -42,7 +42,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   useEffect(() => {
     fetchPaymentProviders(checkoutData.addressId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
 
   function handleInputChange(ev: ChangeEvent<HTMLInputElement>) {
     clearTimeout(timer);
