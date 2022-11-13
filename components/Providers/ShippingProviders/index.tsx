@@ -14,13 +14,13 @@ interface Props {
 
 const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   const { fetchShipmentsProviders, shipmentData, checkoutData } = useCart();
-  const {t: CT} = useTranslation('common');
+  const {t: CT, lang} = useTranslation('common');
   const {t: COT} = useTranslation('checkout');
 
   useEffect(() => {
     fetchShipmentsProviders(checkoutData.addressId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
 
   return (
     <Box>

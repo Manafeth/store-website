@@ -28,7 +28,7 @@ const AddressManagment = () => {
     latitude: 0,
     longitude: 0,
   };
-  const {t} = useTranslation('settings');
+  const {t, lang} = useTranslation('settings');
   const [deleteConfirmationActive, setDeleteConfirmationState] =useState(false);
   const [open, setOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<AddressData>();
@@ -81,7 +81,7 @@ const AddressManagment = () => {
     fetchAllCityData(); 
     fetchAllCountryData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
     if (removeStatus === SUCCESS) {

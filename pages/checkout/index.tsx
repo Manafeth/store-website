@@ -56,12 +56,12 @@ const ColorlibStepIconRoot = styled('div')<{
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const {fetchCartProducts,cartData,createOrderStatus } = useCart();
-  const {t} = useTranslation('checkout');
+  const {t, lang} = useTranslation('checkout');
   const {t:CT} = useTranslation('common');
   useEffect(() => {
     fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
  
   function handleBack() {
     setActiveStep(activeStep - 1);

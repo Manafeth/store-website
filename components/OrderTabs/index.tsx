@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState, MouseEvent, useEffect } from "react";
 import { useProfile } from "../../contexts/ProfileContext";
 import ActiveOrders from "./components/ActiveOrders";
@@ -6,16 +7,16 @@ import Tabs from "./components/Tabs/Tabs";
 
 const OrderTabs = () => {
   const [activeTab, setActiveTab] = useState(1);
-  const { fetchActiveOrderData, activeOrderData } = useProfile();
-  const { fetchArchiveedOrderData,  archiveedOrderData } = useProfile();
+  const { fetchActiveOrderData, activeOrderData, fetchArchiveedOrderData,  archiveedOrderData } = useProfile();
+  const { lang } = useTranslation();
   useEffect(() => {
     fetchActiveOrderData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
   useEffect(() => {
     fetchArchiveedOrderData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
 
   function handleTabs(ev: MouseEvent<HTMLButtonElement>) {
     // @ts-ignore

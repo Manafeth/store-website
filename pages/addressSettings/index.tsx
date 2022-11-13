@@ -1,4 +1,5 @@
 
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import AcccoutSettingForm from "../../components/AccountSettingForm";
 import { LOADING } from "../../constants";

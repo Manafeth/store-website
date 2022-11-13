@@ -14,7 +14,7 @@ import AuthComponent from '../../../components/AuthComponent';
 const InvoiceDetails = () => {
   const {t: CAT} = useTranslation('cart');
   const {t: CT} = useTranslation('common');
-  const {t} = useTranslation('checkout');
+  const {t, lang} = useTranslation('checkout');
   const { fetchInvoiceDetails, invoiceData } = useCart();
   const router = useRouter();
 
@@ -24,7 +24,7 @@ const InvoiceDetails = () => {
     if (invoiceId)
     fetchInvoiceDetails(invoiceId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [invoiceId]);
+  }, [invoiceId, lang]);
 
   return (
     <AuthComponent>
