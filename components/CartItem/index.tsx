@@ -8,23 +8,26 @@ import Image from 'next/image';
 import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import { ProductData } from '../../types/products';
 import useTranslation from 'next-translate/useTranslation';
 import { LOADING } from '../../constants';
 import { useCart } from '../../contexts/CartContext';
+import { editCartProductsQuantity } from '../../services/cart.services';
 interface Props {
   data: ProductData;
-  handleCartItemQuantity?: (_: { cartProductId: number, quantity: number }) => void,
-  quantity?: number
+  isDrawerItem?: boolean;
 }
 
-const CartItem: FC<Props> = ({data, handleCartItemQuantity, quantity}) => {
+let timer: ReturnType<typeof setTimeout>;
+
+const CartItem: FC<Props> = ({data, isDrawerItem}) => {
   const {t} = useTranslation('common');
 
   const {deleteCartProduct, removeStatus} = useCart()
+  const [quantity, setQuantity] = useState(data.quantity);
 
   function handleRemoveCart() {
     deleteCartProduct(data.id)
@@ -32,9 +35,51 @@ const CartItem: FC<Props> = ({data, handleCartItemQuantity, quantity}) => {
 
   function handleChange(ev: ChangeEvent<HTMLInputElement>) {
     const value = +ev.target.value
-    if (handleCartItemQuantity && (value > 0))
-      handleCartItemQuantity({ cartProductId: data.productId, quantity: value })
+    if (!!value && value <= data.maxQuantity) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        editCartProductsQuantity({ cartProductId: data.productId, quantity: value }).then(() => {
+          setQuantity(value)
+        }).catch(() => {
+          setQuantity(data.quantity)
+        })
+      }, 1000);
+      setQuantity(value)
+    } else if (value >= data.maxQuantity) {
+      setQuantity(data.maxQuantity)
+    } else if (!value || value <= 0) {
+      setQuantity(1)
+    }
   }
+
+  function handleIncriment() {
+    if (quantity < data.maxQuantity) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        editCartProductsQuantity({ cartProductId: data.productId, quantity: quantity + 1 }).then(() => {
+          setQuantity((prevState) => prevState + 1)
+        }).catch(() => {
+          setQuantity(data.quantity)
+        })
+      }, 1000);
+      setQuantity((prevState) => prevState + 1)
+    }
+  }
+
+  function handleDecriment() {
+    if (quantity > 1) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        editCartProductsQuantity({ cartProductId: data.productId, quantity: quantity - 1 }).then(() => {
+          setQuantity((prevState) => prevState - 1)
+        }).catch(() => {
+          setQuantity(data.quantity)
+        })
+      }, 1000);
+      setQuantity((prevState) => prevState - 1)
+    }
+  }
+
 
   return (
     <Box sx={{mb:2}}>
@@ -67,13 +112,63 @@ const CartItem: FC<Props> = ({data, handleCartItemQuantity, quantity}) => {
               </Typography>
             )}
             <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-              <Typography
-                variant='h5'
-                component='h1'
-                sx={{ mb: 2, fontWeight: '800' }}
-              >
-                {data.quantity}
-              </Typography>
+              {!isDrawerItem ? (
+                <Typography
+                  variant='h5'
+                  component='h1'
+                  sx={{ mb: 2, fontWeight: '800' }}
+                >
+                  {data.quantity}
+                </Typography>
+              ) : (
+                <TextField
+                  variant='outlined'
+                  label={t('quantity')}
+                  fullWidth
+                  margin='normal'
+                  name='cityId'
+                  sx={{ mb: 4 }}
+                  inputProps={{ sx: { fontSize: '16px', fontWeight: '700', textAlign: 'center', minWidth: 200 },
+                    inputMode: 'numeric',
+                    pattern: '[0-9]*',
+                    min: 1,
+                    max: data.maxQuantity
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                  onChange={handleChange}
+                  value={quantity}
+                  InputProps={{
+                    endAdornment: (
+                    <IconButton
+                      sx={{
+                        borderRadius: 0,
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        height: '100%',
+                        zIndex: 99
+                      }}
+                      onClick={handleDecriment}
+                    >
+                      -
+                    </IconButton>),
+                    startAdornment: (
+                    <IconButton
+                      sx={{
+                        borderRadius: 0,
+                        position: 'absolute',
+                        right: 0,
+                        top: 0,
+                        height: '100%',
+                        zIndex: 99
+                      }}
+                      onClick={handleIncriment}
+                    >
+                      +
+                    </IconButton>)
+                  }}
+                />
+              )}
             </Box>
           </Box>
           <Typography variant='h2' component='h1'>
@@ -81,25 +176,6 @@ const CartItem: FC<Props> = ({data, handleCartItemQuantity, quantity}) => {
           </Typography>
         </Box>
       </Box>
-      {handleCartItemQuantity && (
-        <Grid container spacing='40px' sx={{ mt: 2 }}>
-          <Grid item xs={6}>
-            <TextField
-              variant='outlined'
-              label={t('quantity')}
-              fullWidth
-              margin='normal'
-              name='cityId'
-              sx={{ mb: 4 }}
-              inputProps={{ style: { fontSize: '16px', fontWeight: '700' } }}
-              InputLabelProps={{ shrink: true }}
-              type='number'
-              onChange={handleChange}
-              value={quantity}
-            />
-          </Grid>
-        </Grid>
-      )}
     </Box>
   );
 };

@@ -98,7 +98,7 @@ function getBankFiles(invoiceId: number) {
   );
 }
 
-function editCartProductsQuantity(data: { cartProductId: number, quantity: number }[]) {
+function editCartProductsQuantity(data: { cartProductId: number, quantity: number }) {
   return axiosInstance.put(
     'Cart/EditCartProductQuantity',
     data

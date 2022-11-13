@@ -10,12 +10,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import OrderSummary from '../OrderSummary';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
-import LoadingButton from '@mui/lab/LoadingButton';
-import { editCartProductsQuantity } from '../../services/cart.services';
-import { useRouter } from 'next/router';
-import paths from '../../constants/paths';
+import Container from '@mui/material/Container';
 
 interface Props {
   open: boolean;
@@ -25,9 +25,7 @@ interface Props {
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const {t} = useTranslation('cart');
   const { fetchCartProducts, cartData } = useCart();
-  const [cartItems, setcartItems] = useState<{cartProductId: number, quantity: number}[]>([]);
-  const router = useRouter();
-
+  const [cartItems, setcartItems] = useState<{cartProductId: number, quantity: number}[]>();
   useEffect(() => {
     if (open)
       fetchCartProducts();
@@ -56,11 +54,8 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       }
     })
   }
-
   function handleCheckout() {
-    editCartProductsQuantity(cartItems).then(() => {
-      router.push(paths.checkout)
-    })
+    console.log('cartItems :>> ', cartItems);
   }
 
   return (
@@ -95,7 +90,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       {cartData?.map((item) => {
         return(
           <Box key={item.id}>
-            <CartItem data={item} handleCartItemQuantity={handleCartItemQuantity} quantity={cartItems?.find((quantity) => quantity.cartProductId === item.productId)?.quantity} />
+            <CartItem data={item} key={item.id} isDrawerItem />
             <Divider sx={{ mt: 3, mb: 3 }} />
           </Box>
         );
@@ -131,17 +126,29 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           {t('continueShopping')}
         </Button>
         </Link>
-        <LoadingButton
-          variant='contained'
-          sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
-          "&:hover": {
-            backgroundColor: "primary.hover",
-          }}}
-          disabled={cartData.length === 0}
-          onClick={handleCheckout}
-        >
-            {t('continueToPayment')}
-        </LoadingButton>
+        {cartData.length > 0 ? (
+          <Link href='/checkout'>
+            <Button
+              variant='contained'
+              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
+              "&:hover": {
+                backgroundColor: "primary.hover",
+             }}}
+              type='submit'
+            >
+                {t('continueToPayment')}
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            variant='contained'
+            sx={{ width: 'auto', height: '44px',textTransform: 'lowercase' }}
+            disabled
+          >
+              {t('continueToPayment')}
+          </Button>
+        )}
+        
       </Box>
     </Drawer>
   );

@@ -53,6 +53,7 @@ export type ProductData =  {
   total?: number,
   subTotal?: number,
   checkoutAttributsTotal?: number,
+  maxQuantity: number
 }
 
 
