@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -25,6 +25,7 @@ interface Props {
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const {t} = useTranslation('cart');
   const { fetchCartProducts, cartData } = useCart();
+  const [cartItems, setcartItems] = useState<{cartProductId: number, quantity: number}[]>();
   useEffect(() => {
     if (open)
       fetchCartProducts();
@@ -33,6 +34,28 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
 
   function handleClose() {
     onClose();
+  }
+
+  function handleCartItemQuantity(cartProduct: {cartProductId: number, quantity: number}) {
+    setcartItems((prevState) => {
+      const selectedItem = prevState?.find(({ cartProductId }) => cartProductId === cartProduct.cartProductId)
+      if (selectedItem) {
+        return prevState?.map((item) => {
+          if(item.cartProductId === cartProduct.cartProductId) {
+            return cartProduct
+          } 
+          return item
+        })
+      } else {
+        return [
+          ...(prevState || []),
+          cartProduct
+        ]
+      }
+    })
+  }
+  function handleCheckout() {
+    console.log('cartItems :>> ', cartItems);
   }
 
   return (
@@ -65,11 +88,11 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
       </Box>
       <Box>
       {cartData?.map((item) => {
-                 return(
-                  <>
-        <CartItem data={item} key={item.id} />
-        <Divider sx={{ mt: 3, mb: 3 }} />
-        </>
+        return(
+          <Box key={item.id}>
+            <CartItem data={item} key={item.id} isDrawerItem />
+            <Divider sx={{ mt: 3, mb: 3 }} />
+          </Box>
         );
       })}
         

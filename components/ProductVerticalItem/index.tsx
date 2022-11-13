@@ -39,6 +39,8 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
     attributes: [],
     checkOutAttributes: [],
     subProducts: [],
+    maxQuantity: 0,
+    productId: 0
   });
 
   const [addingToFav, setaddingToFav] = useState(false);

@@ -220,7 +220,7 @@ CategoryDetails.getInitialProps = async ({locale, req, query }: NextPageContext)
     return {
       categoryData: [],
       categoryDetails: {},
-    bannerData: {}
+      bannerData: {}
     }
   }
   try {

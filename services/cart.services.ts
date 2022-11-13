@@ -98,6 +98,13 @@ function getBankFiles(invoiceId: number) {
   );
 }
 
+function editCartProductsQuantity(data: { cartProductId: number, quantity: number }) {
+  return axiosInstance.put(
+    'Cart/EditCartProductQuantity',
+    data
+  );
+}
+
 export {
     addProductToCart,
     getAllCartProducts,
@@ -110,5 +117,6 @@ export {
     stcPaymentConfirmation,
     uploadBankFiles,
     getBankFiles,
-    deleteProductFromCart
+    deleteProductFromCart,
+    editCartProductsQuantity
 }
