@@ -24,7 +24,7 @@ let timer: ReturnType<typeof setTimeout>;
 const CartItem: FC<Props> = ({data, isDrawerItem}) => {
   const {t} = useTranslation('common');
 
-  const {deleteCartProduct, removeStatus} = useCart()
+  const {deleteCartProduct, removeStatus, fetchCartProducts} = useCart()
   const [quantity, setQuantity] = useState(data.quantity);
 
   function handleRemoveCart() {
@@ -36,8 +36,9 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
     if (!!value && value <= data.maxQuantity) {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        editCartProductsQuantity({ cartProductId: data.productId, quantity: value }).then(() => {
+        editCartProductsQuantity({ cartProductId: data.id, quantity: value }).then(() => {
           setQuantity(value)
+          fetchCartProducts()
         }).catch(() => {
           setQuantity(data.quantity)
         })
@@ -54,8 +55,8 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
     if (quantity < data.maxQuantity) {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        editCartProductsQuantity({ cartProductId: data.productId, quantity: quantity + 1 }).then(() => {
-          setQuantity((prevState) => prevState + 1)
+        editCartProductsQuantity({ cartProductId: data.id, quantity: quantity + 1 }).then(() => {
+          fetchCartProducts()
         }).catch(() => {
           setQuantity(data.quantity)
         })
@@ -68,8 +69,8 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
     if (quantity > 1) {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        editCartProductsQuantity({ cartProductId: data.productId, quantity: quantity - 1 }).then(() => {
-          setQuantity((prevState) => prevState - 1)
+        editCartProductsQuantity({ cartProductId: data.id, quantity: quantity - 1 }).then(() => {
+          fetchCartProducts()
         }).catch(() => {
           setQuantity(data.quantity)
         })
