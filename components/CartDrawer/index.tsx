@@ -25,7 +25,6 @@ interface Props {
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const {t} = useTranslation('cart');
   const { fetchCartProducts, cartData } = useCart();
-  const [cartItems, setcartItems] = useState<{cartProductId: number, quantity: number}[]>();
   useEffect(() => {
     if (open)
       fetchCartProducts();
@@ -36,27 +35,6 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
     onClose();
   }
 
-  function handleCartItemQuantity(cartProduct: {cartProductId: number, quantity: number}) {
-    setcartItems((prevState) => {
-      const selectedItem = prevState?.find(({ cartProductId }) => cartProductId === cartProduct.cartProductId)
-      if (selectedItem) {
-        return prevState?.map((item) => {
-          if(item.cartProductId === cartProduct.cartProductId) {
-            return cartProduct
-          } 
-          return item
-        })
-      } else {
-        return [
-          ...(prevState || []),
-          cartProduct
-        ]
-      }
-    })
-  }
-  function handleCheckout() {
-    console.log('cartItems :>> ', cartItems);
-  }
 
   return (
     <Drawer
