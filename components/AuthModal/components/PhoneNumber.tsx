@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import PhoneNumberInput from '../../PhoneNumberInput';
 import { LoginData } from '../../../types/auth';
 import useTranslation from "next-translate/useTranslation";
+import { useCommon } from '../../../contexts/CommonContext';
 
 interface Props {
   loginData: LoginData;
@@ -13,7 +14,7 @@ interface Props {
 
 const PhoneNumber: FC<Props> = ({ loginData, setLoginData, isInvalid }) => {
   const {t} = useTranslation('auth');
-  
+  const { storeInfo } = useCommon()
   function handleInput(data: { countryId: number; phoneNumber: string }) {
     setLoginData(data);
   }
@@ -24,7 +25,7 @@ const PhoneNumber: FC<Props> = ({ loginData, setLoginData, isInvalid }) => {
         {t('phoneNumber')}
         </Typography>
         <Typography variant='h2' sx={{ mb: 6, lineHeight: '30px', letterSpacing: '0.2px' }}>
-        {t('signInStore')}
+        {t('signInStore', { store: storeInfo.name })}
         </Typography>
         <PhoneNumberInput
           sx={{ mb: 9.5 }}
