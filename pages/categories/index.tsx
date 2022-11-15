@@ -68,7 +68,7 @@ const Categories: NextPage<Props>  = ({ allCategories, discountedProducts, topSe
             <FeaturedCategoriesSection categories={categoriesList} />
         </Box> */}
 
-        <Box ref={categoriesSections}>
+        <Box ref={categoriesSections} id='categroires-sec'>
             <CategoriesSection
                 categories={allcategoriesList}
                 title='shopByCategory'
