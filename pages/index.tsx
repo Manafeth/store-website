@@ -82,7 +82,7 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
         seeAllButtonLink={paths.categories}
         seeAllButtonText='seeAllCategories'
       />
-      <Box ref={ref}>
+      <Box ref={ref} id='recent-products'>
         <ProductsSection
           sx={{ pt: 2.75 }}
           products={products}
