@@ -18,7 +18,12 @@ export type StoreInfoData = {
         thumbUrl: string
     },
     complaintNumber: string,
-    supportEmail: string
+    supportEmail: string,
+    instagram: string,
+    facebook: string,
+    twitter: string,
+    description: string,
+    backgroundColor: string
 }
 
 export type SlideData = {

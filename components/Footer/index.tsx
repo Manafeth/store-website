@@ -6,9 +6,9 @@ import MuiLink from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import Avatar from '@mui/material/Avatar';
 
 import Image from 'next/image';
-import logo from '../../assets/images/logo.svg';
 import facebook from '../../assets/images/icons/facebook-icon.png';
 import instagram from '../../assets/images/icons/instagram-icon.png';
 import twitter from '../../assets/images/icons/twitter-icon.png';
@@ -16,62 +16,62 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import paths from '../../constants/paths';
 import { useCommon } from '../../contexts/CommonContext';
+import { useAuthModal } from '../../contexts/AuthModalContext';
 
 
 const Footer = () => {
   const {t} = useTranslation('common');
   const { storeInfo } = useCommon()
+  const { isloggedIn } = useAuthModal()
+
   return (
     <Box component='footer' py={12.5}>
       <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
         <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
-          <Box sx={{ maxWidth: { md: 596}, flexGrow: 1, pr: 2 }}>
-            <Link href={paths.home}>
-              <MuiLink sx={{ mb: 3.5, display: 'inline-block' }}>
-                <Image src={logo} width='198' height='38' alt='footer logo' />
-              </MuiLink>
-            </Link>
-            <Typography sx={{ fontSize: '13px', lineHeight: '16px', letterSpacing: '0.2px', mb: 2.5}}>
-            {t('beuandCompany')}
+          <Box sx={{ maxWidth: { md: 596}, flexGrow: 1, pr: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <Typography sx={{ fontSize: '13px', lineHeight: '16px', letterSpacing: '0.2px', mb: { xs: 2.5 }}}>
+              {storeInfo.description}
             </Typography>
-            <Grid container spacing={5} sx={{ mb: 2.5 }}>
-              <Grid item xs={12} sm={6}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
-                    {t('compliantsNumber')}
-                  </Typography>
-                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
-                    {storeInfo.complaintNumber}
-                  </Typography>
-                </Box>
+            <Box>
+              <Grid container spacing={5} sx={{ mb: 2.5 }}>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
+                      {t('compliantsNumber')}
+                    </Typography>
+                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
+                      {storeInfo.complaintNumber}
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
+                      {t('compliantsEmail')}
+                    </Typography>
+                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
+                      {storeInfo.supportEmail}
+                    </Typography>
+                  </Box>
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
-                    {t('compliantsEmail')}
-                  </Typography>
-                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
-                    {storeInfo.supportEmail}
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-            <Box sx={{ display: 'flex', alignItem: 'center', mb: 2, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-              <Link href='/'>
-                <MuiLink mr={2.75} display='flex' alignItems='center'>
-                  <Image src={facebook} alt='facebook' width='23' height='23' />
-                </MuiLink>
-              </Link>
-              <Link href='/'>
-                <MuiLink mr={2.75} display='flex' alignItems='center'>
-                  <Image src={instagram} alt='instagram' width='22' height='22' />
-                </MuiLink>
-              </Link>
-              <Link href='/'>
-                <MuiLink display='flex' alignItems='center'>
-                  <Image src={twitter} alt='twitter' width='22' height='18' />
-                </MuiLink>
-              </Link>
+              <Box sx={{ display: 'flex', alignItem: 'center', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                {storeInfo.facebook && (
+                  <MuiLink href={storeInfo.facebook} target='_blank' mr={2.75} display='flex' alignItems='center'>
+                    <Image src={facebook} alt='facebook' width='23' height='23' />
+                  </MuiLink>
+                )}
+                {storeInfo.instagram && (
+                  <MuiLink href={storeInfo.instagram} target='_blank' mr={2.75} display='flex' alignItems='center'>
+                    <Image src={instagram} alt='instagram' width='22' height='22' />
+                  </MuiLink>
+                )}
+                {storeInfo.twitter && (
+                  <MuiLink href={storeInfo.twitter} target='_blank' display='flex' alignItems='center'>
+                    <Image src={twitter} alt='twitter' width='22' height='18' />
+                  </MuiLink>
+                )}
+              </Box>
             </Box>
           </Box>
           <Box sx={{ flexGrow: 1, maxWidth: 320 }}>
@@ -88,27 +88,31 @@ const Footer = () => {
                         </MuiLink>
                       </Link>
                     </ListItem>
-                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                      <Link href={paths.whishList}>
-                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('wishlist')}
-                        </MuiLink>
-                      </Link>
-                    </ListItem>
-                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                      <Link href={paths.profileOrders}>
-                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('myOrders')}
-                        </MuiLink>
-                      </Link>
-                    </ListItem>
-                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                      <Link href={paths.editAccount}>
-                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('settings')}
-                        </MuiLink>
-                      </Link>
-                    </ListItem>
+                    {isloggedIn && (
+                      <>
+                        <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                          <Link href={paths.whishList}>
+                            <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
+                            {t('wishlist')}
+                            </MuiLink>
+                          </Link>
+                        </ListItem>
+                        <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                          <Link href={paths.profileOrders}>
+                            <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
+                            {t('myOrders')}
+                            </MuiLink>
+                          </Link>
+                        </ListItem>
+                        <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                          <Link href={paths.editAccount}>
+                            <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
+                            {t('settings')}
+                            </MuiLink>
+                          </Link>
+                        </ListItem>
+                      </>
+                    )}
                 </List>
               </Box>
               <Box mb={5}>
@@ -137,13 +141,13 @@ const Footer = () => {
                         </MuiLink>
                       </Link>
                     </ListItem>
-                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                    {/* <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href='/'>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
                         {t('faq')}
                         </MuiLink>
                       </Link>
-                    </ListItem>
+                    </ListItem> */}
                 </List>
               </Box>
             </Box>

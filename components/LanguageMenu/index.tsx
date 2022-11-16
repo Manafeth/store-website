@@ -39,13 +39,29 @@ const LanguageMenu = () => {
   return (
     <>
       <Box
-        sx={{  cursor: 'pointer', color: 'primary.main',display: 'flex',
-        alignItems: 'center',
-        mr: {xs: 1, sm: 1.5, md: 4},}}
-        // eslint-disable-next-line react/jsx-no-bind
-        onClick={handleClick}
+        sx={{
+          position: 'relative',
+          mr: {xs: 1, sm: 1.5, md: 4},
+          width: '20px',
+          height: '20px',
+        }}
       >
-        <Image src={LangIocn} alt='lang icon' />
+        <Box
+          sx={{
+            cursor: 'pointer', color: 'primary.main',display: 'flex',
+            alignItems: 'center',
+            width: '50px',
+            height: '46px',
+            position: 'absolute',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            top: '50%',
+          }}
+          // eslint-disable-next-line react/jsx-no-bind
+          onClick={handleClick}
+        >
+          <Image src={LangIocn} alt='lang icon' />
+        </Box>
       </Box>
       <Menu
         id="basic-menu"
