@@ -12,7 +12,6 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
-import logoImage from '../../assets/images/logo.svg'
 import SearchIcon from '../../assets/images/icons/search.png'
 import HeartIcon from '../../assets/images/icons/heart.png'
 import CartIcon from '../../assets/images/icons/cart.png'
@@ -104,22 +103,14 @@ const Header = () => {
     <AppBar position="fixed" color='inherit' sx={{ boxShadow: '0' }}>
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: { xs: 64, sm: 91 } }}>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Link href='/'>
-              <MuiLink>
-                <Image src={logoImage} width='140' height='27' alt='logo' />
-              </MuiLink>
-            </Link>
-
-            <Box px={4}>
-              <Box sx={{ display: 'flex', alignItems: 'center'}}>
-                <Avatar alt="Remy Sharp" src={storeInfo.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>
-                  S
-                </Avatar>
-                <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
-                {t('welcomeTo')}, <br />
-                  {storeInfo.name}  {t('store')}
-                </Box>
+          <Box px={4} sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ display: 'flex', alignItems: 'center'}}>
+              <Avatar alt="Remy Sharp" src={storeInfo.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>
+                SL
+              </Avatar>
+              <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
+              {t('welcomeTo')}, <br />
+                {storeInfo.name}  {t('store')}
               </Box>
             </Box>
           </Box>
@@ -136,7 +127,7 @@ const Header = () => {
                 <Box>
                   <Box
                     sx={{
-                      width: '20px',
+                      width: '15px',
                       borderRadius: '2px',
                       backgroundColor: '#323940',
                       height: '2px',
@@ -145,7 +136,7 @@ const Header = () => {
                   />
                   <Box
                     sx={{
-                      width: '20px',
+                      width: '15px',
                       borderRadius: '2px',
                       backgroundColor: '#323940',
                       height: '2px',
@@ -154,7 +145,7 @@ const Header = () => {
                   />
                   <Box
                     sx={{
-                      width: '20px',
+                      width: '15px',
                       borderRadius: '2px',
                       backgroundColor: '#323940',
                       height: '2px'
@@ -189,18 +180,17 @@ const Header = () => {
                 ))}
               </Menu>
             </Box>
-            
-            <Box
-              sx={{
-                display: 'flex',
-                mr: 2
-              }}
-            >
-              <Link href='/'>
-                <MuiLink sx={{ display: 'flex' }}>
-                  <Image src={logoImage} width='120' height='20' alt='logo' />
-                </MuiLink>
-              </Link>
+          </Box>
+
+          <Box pr={1} sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ display: 'flex', alignItems: 'center'}}>
+              <Avatar alt="Remy Sharp" src={storeInfo.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>
+                SL
+              </Avatar>
+              <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
+              {t('welcomeTo')}, <br />
+                {storeInfo.name}  {t('store')}
+              </Box>
             </Box>
           </Box>
           

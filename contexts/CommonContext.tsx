@@ -22,7 +22,12 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
             thumbUrl: ''
         },
         complaintNumber: '',
-        supportEmail: ''
+        supportEmail: '',
+        instagram: '',
+        twitter: '',
+        facebook: '',
+        description: '',
+        backgroundColor: ''
     })
 
     const [bannerData, setBannerData] = useState<BannerData>({
