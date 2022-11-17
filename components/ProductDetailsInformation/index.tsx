@@ -111,9 +111,27 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
           4.9 Reviews
         </Typography>
       </Box> */}
-      <Typography variant='h2' component='span' sx={{ mb: 1, display: 'block' }}>
-        {t('sar')} {productDetials.salePrice}
-      </Typography>
+      <Box sx={{ display: 'flex', mb: 2 }}>
+        {productDetials.priceAfterDiscount ? (
+          <>
+            <Typography variant='h2' component='span' sx={{ mb: 1, display: 'block', color: 'text.disabled',
+                textDecorationLine: 'line-through' }}>
+              {t('sar')} {productDetials.salePrice}
+            </Typography>
+            <Typography
+              variant='h5'
+              component='span'
+              sx={{ color: '#23856D', fontWeight: '700' }}
+            >
+                {t('sar')} {productDetials.priceAfterDiscount}
+            </Typography>
+          </>
+        ) : (
+          <Typography variant='h2' component='span' sx={{ mb: 1, display: 'block' }}>
+            {t('sar')} {productDetials.salePrice}
+          </Typography>
+        )}
+      </Box>
       <Box sx={{ display: 'flex', gap:'10px', mb: 4 }}>
         <Typography
           variant='h6'
