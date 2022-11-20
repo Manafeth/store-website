@@ -3,30 +3,15 @@ import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
 import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListMenuText from '../../components/ListMenuText';
-import {
-  Cancellation,
-  Commitment,
-  Consumer,
-  Introduction,
-  Manafeth,
-  Merchant,
-  Modification,
-  Payment,
-  Registration,
-  Responsibility,
-  Rules,
-} from '../../constants/statuses';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useContant } from '../../contexts/ContentContext';
 
-const TermsOfUse = () => {
+const RefundPolicy = () => {
   const {t,lang} = useTranslation('terms');
   const {getContentDetails,ContantData} = useContant();
   useEffect(() => {
-    getContentDetails(1);
+    getContentDetails(4);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[lang]);
 
@@ -38,7 +23,7 @@ const TermsOfUse = () => {
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' } }}
         >
-          {t('termsOfService')}
+          {t('refundPolicy')}
         </Typography>
         <Typography
           sx={{
@@ -90,4 +75,4 @@ const TermsOfUse = () => {
   );
 };
 
-export default TermsOfUse;
+export default RefundPolicy;

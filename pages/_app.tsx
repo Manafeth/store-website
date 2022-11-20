@@ -10,6 +10,7 @@ import { AlertProvider } from '../contexts/AlertContext';
 import { CartModalProvider } from '../contexts/CartContext';
 import { useRouter } from 'next/router';
 import { ContactUsProvider } from '../contexts/ContactUs';
+import { ContantProvider } from '../contexts/ContentContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -33,7 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ProfileModalProvider>
               <CartModalProvider>
                 <ContactUsProvider>
+                  <ContantProvider>
                   <Component {...pageProps} />
+                  </ContantProvider>
                 </ContactUsProvider>
               </CartModalProvider>
             </ProfileModalProvider>
