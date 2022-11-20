@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
@@ -9,9 +9,15 @@ import {
   Information,
   Store,
 } from '../../constants/statuses';
+import { useContant } from '../../contexts/ContentContext';
 
 const PrivacyPolicy = () => {
-  const {t} = useTranslation('privacy');
+  const {t, lang} = useTranslation('privacy');
+  const {getContentDetails,ContantData} = useContant();
+  useEffect(() => {
+    getContentDetails(2);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[lang]);
 
   return (
     <MainLayout>
@@ -32,9 +38,9 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {t('privacyDescription')}
+          {ContantData.content}
         </Typography>
-        <Typography
+        {/* <Typography
           variant='h1'
           component='h1'
           sx={{ mb: 4, fontSize: { xs: '28px', md: '32px' } }}
@@ -115,7 +121,7 @@ const PrivacyPolicy = () => {
           }}
         >
           {t('shareTwo')}
-        </Typography>
+        </Typography> */}
       </Container>
     </MainLayout>
   );
