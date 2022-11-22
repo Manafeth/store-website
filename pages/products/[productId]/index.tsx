@@ -19,6 +19,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useProfile } from '../../../contexts/ProfileContext';
 import { useRouter } from 'next/router';
 import ProductEmptyState from '../../../components/ProductEmptyState';
+import { useCommon } from '../../../contexts/CommonContext';
 
 interface Props {
   realtedProducts: ProductData[],
@@ -28,6 +29,7 @@ interface Props {
 const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) => {
   const {t} = useTranslation('settings');
   const {sendAlert} = useAlert();
+  const { storeInfo } = useCommon();
   const { fetchWishListData } = useProfile();
   const [productData, setProductData] = useState(productDetials);
   const [productsList, setProductsList] = useState(realtedProducts);
@@ -69,11 +71,11 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
       <>
         <Box
           component='section'
-          sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
+          sx={{ backgroundColor: storeInfo.backgroundColor, height: 'auto' }}
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 4.25, pb: 6.5 }}>
             <Breadcrumb  productDetials={productData}/>
-            <Grid container spacing={7} rowSpacing={4.25}>
+            <Grid container spacing={7} rowSpacing={4.25} >
               <Grid item xs={12} md={6}>
                 <ProductGallery images={productData.imagesFilePath} />
               </Grid>
