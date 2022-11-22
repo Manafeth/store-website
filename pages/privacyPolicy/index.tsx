@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,9 +10,11 @@ import {
   Store,
 } from '../../constants/statuses';
 import { useContant } from '../../contexts/ContentContext';
+import Box from '@mui/material/Box';
 
 const PrivacyPolicy = () => {
   const {t, lang} = useTranslation('privacy');
+  const [html, setHTML] = useState({__html: ""});
   const {getContentDetails,ContantData} = useContant();
   useEffect(() => {
     getContentDetails(2);
@@ -38,7 +40,8 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {(ContantData.content).replace(/<(.|\n)*?>/g, '')}
+          <Box dangerouslySetInnerHTML={{__html:ContantData.content}}></Box>
+          
         </Typography>
       </Container>
     </MainLayout>
