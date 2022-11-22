@@ -52,40 +52,6 @@ const TermsOfUse = () => {
         >
           <Box dangerouslySetInnerHTML={{__html:ContantData.content}}></Box>
         </Typography>
-        {/* <Box
-          sx={{
-            display: 'flex',
-            justifyContent: { xs: 'space-between', sm: 'flex-start' },
-            pt: 7,
-            pb: 5,
-          }}
-        >
-          <Button
-            variant='outlined'
-            color='secondary'
-            sx={{
-              color: 'secondary.contrastText',
-              width: '220px',
-              height: '54px',
-              mr: '20px',
-            }}
-          >
-            {t('notRightNow')}
-          </Button>
-          <Button
-            variant='contained'
-            sx={{
-              width: '220px',
-              height: '54px',
-              "&:hover": {
-               backgroundColor: "primary.hover",
-            }
-            }}
-            type='submit'
-          >
-            {t('agree')}
-          </Button>
-        </Box> */}
       </Container>
     </MainLayout>
   );
