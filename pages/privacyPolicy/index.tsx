@@ -40,8 +40,7 @@ const PrivacyPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          <Box dangerouslySetInnerHTML={{__html:ContantData.content}}></Box>
-          
+          <Box dangerouslySetInnerHTML={{__html:ContantData.content}}></Box>  
         </Typography>
       </Container>
     </MainLayout>
