@@ -34,7 +34,7 @@ const RefundPolicy = () => {
             textAlign: 'justify',
           }}
         >
-          {(ContantData.content).replace(/<(.|\n)*?>/g, '')}
+          <Box dangerouslySetInnerHTML={{__html:ContantData.content}}></Box>
         </Typography>
       </Container>
     </MainLayout>
