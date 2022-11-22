@@ -25,6 +25,7 @@ import { useContant } from '../../contexts/ContentContext';
 const TermsOfUse = () => {
   const {t,lang} = useTranslation('terms');
   const {getContentDetails,ContantData} = useContant();
+  const tagRegExp =  new RegExp('<\s*[^>]*>', 'g')
   useEffect(() => {
     getContentDetails(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,9 +50,9 @@ const TermsOfUse = () => {
             textAlign: 'justify',
           }}
         >
-          {ContantData.content}
+          {(ContantData.content).replace(/<(.|\n)*?>/g, '')}
         </Typography>
-        <Box
+        {/* <Box
           sx={{
             display: 'flex',
             justifyContent: { xs: 'space-between', sm: 'flex-start' },
@@ -84,7 +85,7 @@ const TermsOfUse = () => {
           >
             {t('agree')}
           </Button>
-        </Box>
+        </Box> */}
       </Container>
     </MainLayout>
   );
