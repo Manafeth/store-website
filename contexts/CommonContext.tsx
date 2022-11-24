@@ -27,7 +27,13 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         twitter: '',
         facebook: '',
         description: '',
-        backgroundColor: ''
+        backgroundColor: '',
+        producTitelColor: '',
+    priceColor: '',
+    buttonColor: '',
+    buttonTitelColor: '',
+    footerColor: '',
+    headerColor: '',
     })
 
     const [bannerData, setBannerData] = useState<BannerData>({

@@ -18,6 +18,7 @@ import { toggleProductInWishList } from '../../services/products.services';
 import { useAlert } from '../../contexts/AlertContext';
 import useTranslation from 'next-translate/useTranslation';
 import { useProfile } from '../../contexts/ProfileContext';
+import { useCommon } from '../../contexts/CommonContext';
 interface Props {
   data: ProductData
 }
@@ -48,6 +49,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
   const { sendAlert } = useAlert();
   const { fetchWishListData } = useProfile();
   const {t} = useTranslation('common');
+  const { storeInfo } = useCommon()
 
   function handleTogglingProductInWishList() {
     setProduct((prevState) => ({
@@ -117,7 +119,8 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               cursor: 'pointer',
               fontWeight: '700',
               textAlign: 'left',
-              ml:1
+              ml:1,
+              color: storeInfo.producTitelColor
             }}
           >
             {product.name}

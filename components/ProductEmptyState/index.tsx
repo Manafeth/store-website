@@ -7,9 +7,11 @@ import Image from 'next/image';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
 import useTranslation from 'next-translate/useTranslation';
 import emptyState from '../../assets/images/product-empty-state.png';
+import { useCommon } from '../../contexts/CommonContext';
 
 const ProductEmptyState: FC = () => {
   const {t} = useTranslation('common');
+  const { storeInfo } = useCommon()
   return (
     <Box sx={{ textAlign: 'center' }}>
       <Box sx={{ position: 'relative' }}>
@@ -39,7 +41,8 @@ const ProductEmptyState: FC = () => {
                 cursor: 'pointer',
                 fontWeight: '700',
                 textAlign: 'left',
-                ml:1
+                ml:1,
+                color: storeInfo.producTitelColor
             }}
         >
         {t('productName')}

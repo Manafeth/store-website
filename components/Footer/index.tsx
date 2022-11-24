@@ -24,8 +24,9 @@ const Footer = () => {
   const { storeInfo } = useCommon()
   const { isloggedIn } = useAuthModal()
 
+
   return (
-    <Box component='footer' py={12.5}>
+    <Box component='footer' py={12.5} sx={{ backgroundColor: storeInfo.footerColor }}>
       <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
         <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
           <Box sx={{ maxWidth: { md: 596}, flexGrow: 1, pr: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
