@@ -95,7 +95,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
         </Box>
         <Box
           component='section'
-          sx={{ backgroundColor: 'secondary.light', height: 'auto' }}
+          sx={{ backgroundColor: storeInfo.backgroundColor, height: 'auto' }}
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 5 }}>
             <Typography variant='h2' sx={{ mb: 3 }}>
