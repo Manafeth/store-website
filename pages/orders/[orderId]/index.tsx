@@ -21,6 +21,7 @@ import StcPayment from '../../../components/StcPayment';
 import BankPayment from '../../../components/BankPayment';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { LOADING } from '../../../constants';
+import { useCommon } from '../../../contexts/CommonContext';
 
 const OrderDetails = () => {
   const {t: CAT} = useTranslation('cart');
@@ -29,6 +30,7 @@ const OrderDetails = () => {
   const {t, lang} = useTranslation('checkout');
   const { fetchOrderDetails, orderData, createPayment, paymentStatus } = useCart();
   const router = useRouter()
+  const { storeInfo } = useCommon()
   const { orderId } = router.query
 
   function handlePayment() {
@@ -175,6 +177,7 @@ const OrderDetails = () => {
               </Grid>
               {orderData.providerType === 2 && orderData.providerCategory === 2 && !isInActive && (
                 <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
+                  backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
                    "&:hover": {
                   backgroundColor: "primary.hover"
                 }}}>
@@ -184,6 +187,7 @@ const OrderDetails = () => {
 
               {orderData.providerType === 2 && orderData.providerCategory === 4 && !isInActive && (
                 <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
+                  backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
                    "&:hover": {
                   backgroundColor: "primary.hover"
                 }}}>
@@ -193,6 +197,7 @@ const OrderDetails = () => {
 
               {orderData.providerType === 2 && orderData.providerCategory === 1 && !isInActive && (
                 <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
+                  backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
                    "&:hover": {
                   backgroundColor: "primary.hover"
                 }}}>
@@ -237,7 +242,7 @@ const OrderDetails = () => {
               <Link href={paths.invoiceDetails(orderData.invoiceId)}>
                 <Button
                   variant='contained'
-                  sx={{ width: '219px', height: '44px',
+                  sx={{ width: '219px', height: '44px', backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
                   "&:hover": {
                     backgroundColor: "primary.hover"
                   } }}
@@ -248,7 +253,7 @@ const OrderDetails = () => {
             ) : (
               <Button
                 variant='contained'
-                sx={{ width: '219px', height: '44px' }}
+                sx={{ width: '219px', height: '44px' , backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,}}
                 disabled
               >
                 {ST('viewInvoice')}

@@ -23,7 +23,13 @@ export type StoreInfoData = {
     facebook: string,
     twitter: string,
     description: string,
-    backgroundColor: string
+    backgroundColor: string,
+    producTitelColor: string,
+    priceColor: string,
+    buttonColor: string,
+    buttonTitelColor: string,
+    footerColor: string,
+    headerColor: string,
 }
 
 export type SlideData = {

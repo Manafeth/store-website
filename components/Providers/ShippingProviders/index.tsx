@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import ShippingCard from '../ShippingCard';
 import { useCart } from '../../../contexts/CartContext';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../../contexts/CommonContext';
 
 
 interface Props {
@@ -16,6 +17,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
   const { fetchShipmentsProviders, shipmentData, checkoutData } = useCart();
   const {t: CT, lang} = useTranslation('common');
   const {t: COT} = useTranslation('checkout');
+  const { storeInfo } = useCommon()
 
   useEffect(() => {
     fetchShipmentsProviders(checkoutData.addressId);
@@ -66,7 +68,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
         </Button>
         <Button
           variant='contained'
-          sx={{ width: '219px', height: '44px',
+          sx={{ width: '219px', height: '44px', backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
           "&:hover": {
             backgroundColor: "primary.hover",
          } }}

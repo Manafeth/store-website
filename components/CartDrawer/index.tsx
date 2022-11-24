@@ -16,6 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
 import Container from '@mui/material/Container';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
   open: boolean;
@@ -25,6 +26,7 @@ interface Props {
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
   const {t} = useTranslation('cart');
   const { fetchCartProducts, cartData } = useCart();
+  const { storeInfo } = useCommon()
   useEffect(() => {
     if (open)
       fetchCartProducts();
@@ -92,7 +94,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           variant='contained'
           color='secondary'
           sx={{
-            color: 'primary.main',
+            color: storeInfo.buttonTitelColor,
             width: 'auto',
             height: '44px',
             backgroundColor: 'secondary.main',
@@ -108,7 +110,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           <Link href='/checkout'>
             <Button
               variant='contained'
-              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
+              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase', backgroundColor: storeInfo.buttonColor, color: storeInfo.buttonTitelColor,
               "&:hover": {
                 backgroundColor: "primary.hover",
              }}}
@@ -120,7 +122,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         ) : (
           <Button
             variant='contained'
-            sx={{ width: 'auto', height: '44px',textTransform: 'lowercase' }}
+            sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',color: storeInfo.buttonTitelColor, backgroundColor: storeInfo.buttonColor, }}
             disabled
           >
               {t('continueToPayment')}

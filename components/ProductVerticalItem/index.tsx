@@ -23,6 +23,7 @@ import { useAuthModal } from '../../contexts/AuthModalContext';
 import { addProductToCart } from '../../services/cart.services';
 import { useCart } from '../../contexts/CartContext';
 import { ProductCartData } from '../../types/cart';
+import { useCommon } from '../../contexts/CommonContext';
 interface Props {
   data: ProductData
 }
@@ -59,7 +60,8 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
   const { sendAlert } = useAlert();
   const { fetchCartProducts } = useCart()
   const { fetchWishListData } = useProfile();
-  const { t } = useTranslation('common');
+  const {t} = useTranslation('common');
+  const { storeInfo } = useCommon()
 
   function handleTogglingProductInWishList() {
     setProduct((prevState) => ({
@@ -154,7 +156,8 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               cursor: 'pointer',
               fontWeight: '700',
               textAlign: 'left',
-              ml: 1
+              ml:1,
+              color: storeInfo.producTitelColor
             }}
           >
             {product.name}
@@ -168,7 +171,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
                 component='span'
                 sx={{
                   mr: 1,
-                  color: 'text.disabled',
+                  color: storeInfo.priceColor,
                   textDecorationLine: 'line-through',
                   fontWeight: '700',
                 }}

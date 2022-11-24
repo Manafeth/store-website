@@ -20,6 +20,7 @@ import { addProductToCart } from '../../services/cart.services';
 import { useAlert } from '../../contexts/AlertContext';
 import { useCart } from '../../contexts/CartContext';
 import { useAuthModal } from '../../contexts/AuthModalContext';
+import { useCommon } from '../../contexts/CommonContext';
 interface Props {
   productDetials: ProductData,
   handleTogglingProductInWishList: () => void,
@@ -40,6 +41,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
   const { fetchCartProducts } = useCart()
   const { isloggedIn, handleOpenAuthModal } = useAuthModal()
   const [addToCartLoader, setAddToCartLoader] = useState(false);
+  const { storeInfo } = useCommon()
 
   function handleAddProductToCart() {
     if (isloggedIn) {
@@ -92,7 +94,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         <Typography
           variant='h2'
           component='h1'
-          sx={{ mb: 0, fontWeight: '400', fontSize: '20px' }}
+          sx={{ mb: 0, fontWeight: '400', fontSize: '20px' , color: storeInfo.producTitelColor }}
         >
           {productDetials.name}
         </Typography>
@@ -127,7 +129,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
             </Typography>
           </>
         ) : (
-          <Typography variant='h2' component='span' sx={{ mb: 1, display: 'block' }}>
+          <Typography variant='h2' component='span' sx={{ mb: 1, display: 'block', color: storeInfo.priceColor }}>
             {t('sar')} {productDetials.salePrice}
           </Typography>
         )}
@@ -172,7 +174,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px', mr: 2.5 ,
+          sx={{ width: 'auto', height: '44px', mr: 2.5 , backgroundColor: storeInfo.buttonColor, color: storeInfo.buttonTitelColor,
            "&:hover": {
             backgroundColor: "primary.hover"
           }}}

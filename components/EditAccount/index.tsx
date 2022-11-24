@@ -18,6 +18,7 @@ import PhoneNumberInput from '../PhoneNumberInput';
 import { customerData } from '../../types/profile';
 import CircularProgress from '@mui/material/CircularProgress';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
   customerData: customerData;
@@ -40,6 +41,7 @@ const EditAccount: FC<Props> = ({
   const [image, setImage] = useState('');
   const {t: CT} = useTranslation('common');
   const {t: ST} = useTranslation('settings');
+  const { storeInfo } = useCommon()
 
   function handlePhoneInput({
     countryId,
@@ -214,7 +216,7 @@ const EditAccount: FC<Props> = ({
         </Button> */}
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px',
+          sx={{ width: 'auto', height: '44px', backgroundColor: storeInfo.buttonColor, color : storeInfo.buttonTitelColor,
           "&:hover": {
             backgroundColor: "primary.hover"
           }

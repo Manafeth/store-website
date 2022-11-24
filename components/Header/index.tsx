@@ -100,7 +100,7 @@ const Header = () => {
   }, [router.query.search]) 
 
   return (
-    <AppBar position="fixed" color='inherit' sx={{ boxShadow: '0' }}>
+    <AppBar position="fixed" color='inherit' sx={{ boxShadow: '0' ,backgroundColor: storeInfo.headerColor}}>
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: { xs: 64, sm: 91 } }}>
           <Box px={4} sx={{ display: { xs: 'none', md: 'flex' } }}>
