@@ -145,9 +145,9 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         <Typography
           variant='h6'
           component='h1'
-          sx={{ mb: 0, color: '#23A6F0', fontWeight: '700' }}
+          sx={{ mb: 0, color: productDetials.quantity > 0 ? 'success.main' : 'error.main', fontWeight: '700' }}
         >
-          {productDetials.quantity > 0 ? 'In Stock' : 'Out Stock'}
+          {productDetials.quantity > 0 ? t('inStock') : t('outStock')}
         </Typography>
       </Box>
       <Typography

@@ -88,5 +88,7 @@
     "rejected": "Rejected",
     "sort": "Sort",
     "quantity": "Quantity",
+    "inStock": "In Stock",
+    "outStock": "Out Stock",
     "": ""
 }
