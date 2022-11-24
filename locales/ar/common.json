@@ -88,5 +88,7 @@
     "rejected": "مرفوض",
     "sort": "رتب",
     "quantity": "الكمية",
-    "paymentCanceled": "PAYMENT Canceled !!"
+    "paymentCanceled": "تم إلغاء الدفع !!",
+    "paymentDescr":"نأسف ، لم تتم معالجة دفعتك لسبب ما ، يرجى المحاولة مرة أخرى أو تحديث معلومات الدفع الخاصة بك.",
+    "tryAgain":"حاول مرة أخرى"
 }

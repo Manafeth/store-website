@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
 import Container from '@mui/material/Container';
-import List from '@mui/material/List';
 import Image from 'next/image';
 import paymentCancel from '../../assets/images/payment-cancel.svg';
-import { useContant } from '../../contexts/ContentContext';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Link from 'next/link';
+import { useCommon } from '../../contexts/CommonContext';
 
 const PaymentCancel = () => {
-  const {t, lang} = useTranslation('privacy');
+  const {t, lang} = useTranslation('common');
+  const { storeInfo } = useCommon()
 
   
 
@@ -23,10 +25,34 @@ const PaymentCancel = () => {
               <Typography
           variant='h1'
           component='h1'
-          sx={{ mb: 4, fontSize: { xs: '28px', md: '40px' } }}
+          sx={{ mb: 4, mt:5 ,fontSize: { xs: '28px', md: '40px' } }}
         >
-          {t('privacyPolicy')}
+          {t('paymentCanceled')}
         </Typography>
+        <Typography
+          variant='h5'
+          component='h1'
+          sx={{ mb: 4, fontSize: { xs: '14px' } ,lineHeight: '24px',
+          letterSpacing: '0.2px', width:'80%'}}
+        >
+          {t('paymentDescr')}
+        </Typography>
+        <Link href='/'>
+        <Button
+          variant='contained'
+          color='secondary'
+          sx={{
+            color: storeInfo.buttonTitelColor,
+            width: '219px',
+            height: '44px',
+            backgroundColor: storeInfo.buttonColor,
+            mr: '20px',
+            textTransform: 'lowercase'
+          }}
+        >
+          {t('tryAgain')}
+        </Button>
+        </Link>
               </Grid>
               <Grid item xs={12} md={4}>
               <Image
