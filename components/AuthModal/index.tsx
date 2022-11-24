@@ -17,6 +17,7 @@ import isEmail from 'validator/lib/isEmail';
 import LoadingButton from '@mui/lab/LoadingButton';
 import useTranslation from "next-translate/useTranslation";
 import { LOADING, SUCCESS } from '../../constants';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
 
@@ -37,6 +38,7 @@ const AuthModal: FC<Props> = () => {
     const [tab, setTab] = useState(1);
     const {t} = useTranslation('common');
     const [isInvalid, setIsInvalid] = useState(false);
+    const { storeInfo } = useCommon()
     const [loginData, setLoginData] = useState<LoginData>({
         countryId: 0,
         phoneNumber: ''
@@ -202,7 +204,7 @@ const AuthModal: FC<Props> = () => {
                     variant='contained'
                     endIcon={<Image src={rightArrow} width='16' height='10' alt='right arrow' />}
                     fullWidth
-                    sx={{ borderRadius: 2 ,
+                    sx={{ borderRadius: 2 , backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
                         "&:hover": {
                             backgroundColor: "primary.hover"
                           }}}
