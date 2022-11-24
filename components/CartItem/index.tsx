@@ -7,6 +7,7 @@ import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ChangeEvent, FC, useState } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Avatar from '@mui/material/Avatar';
 import { ProductData } from '../../types/products';
@@ -23,7 +24,7 @@ let timer: ReturnType<typeof setTimeout>;
 
 const CartItem: FC<Props> = ({data, isDrawerItem}) => {
   const {t} = useTranslation('common');
-
+  const matches = useMediaQuery('(max-width:600px)');
   const {deleteCartProduct, removeStatus, fetchCartProducts} = useCart()
   const [quantity, setQuantity] = useState(data.quantity);
 
@@ -127,7 +128,7 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
                   margin='normal'
                   name='cityId'
                   sx={{ mb: 4 }}
-                  inputProps={{ sx: { fontSize: '16px', fontWeight: '700', textAlign: 'center', minWidth: 200 },
+                  inputProps={{ sx: { fontSize: '16px', fontWeight: '700', textAlign: 'center', minWidth: matches ? 150 : 200 },
                     inputMode: 'numeric',
                     pattern: '[0-9]*',
                     min: 1,

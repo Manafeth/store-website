@@ -2,6 +2,7 @@ import React, { ChangeEvent, FC } from 'react';
 import Box from '@mui/material/Box';
 import usePagination from '@mui/material/usePagination';
 import { styled } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const List = styled('ul')({
   listStyle: 'none',
@@ -23,7 +24,7 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
     page,
     onChange
   });
-
+  const matches = useMediaQuery('(max-width:600px)');
 
   return (
     <Box
@@ -47,7 +48,7 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
                   type='button'
                   style={{
                     fontWeight: 'bold',
-                    width: '46px',
+                    width: matches ? '28px' : '46px',
                     height: '74px',
                     backgroundColor: selected ? '#000' : '#fff',
                     color: selected ? '#fff' : '#000',
@@ -65,7 +66,7 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
                 <button
                   type='button'
                   style={{
-                    width: '83px',
+                    width: matches ? '70px' : '83px',
                     height: '74px',
                     fontWeight: selected ? 'bold' : undefined,
                     cursor: 'pointer'

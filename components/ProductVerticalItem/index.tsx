@@ -10,7 +10,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
 import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.svg';
-// import CartIcon from '../../assets/images/icons/cart-icon.svg';
+import CartIcon from '../../assets/images/icons/cart-icon.svg';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { ProductData } from '../../types/products';
 import paths from '../../constants/paths';
@@ -18,6 +18,11 @@ import { toggleProductInWishList } from '../../services/products.services';
 import { useAlert } from '../../contexts/AlertContext';
 import useTranslation from 'next-translate/useTranslation';
 import { useProfile } from '../../contexts/ProfileContext';
+import { CircularProgress } from '@mui/material';
+import { useAuthModal } from '../../contexts/AuthModalContext';
+import { addProductToCart } from '../../services/cart.services';
+import { useCart } from '../../contexts/CartContext';
+import { ProductCartData } from '../../types/cart';
 interface Props {
   data: ProductData
 }
@@ -42,12 +47,19 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
     maxQuantity: 0,
     productId: 0
   });
-
+  const [state, setState] = useState<ProductCartData>({
+    productId: 0,
+    quantity: 1,
+    options: [],
+    checkOutAttributes: []
+  });
   const [addingToFav, setaddingToFav] = useState(false);
-
+  const { isloggedIn, handleOpenAuthModal } = useAuthModal();
+  const [addToCartLoader, setAddToCartLoader] = useState(false);
   const { sendAlert } = useAlert();
+  const { fetchCartProducts } = useCart()
   const { fetchWishListData } = useProfile();
-  const {t} = useTranslation('common');
+  const { t } = useTranslation('common');
 
   function handleTogglingProductInWishList() {
     setProduct((prevState) => ({
@@ -70,12 +82,37 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
     });
   }
 
+  function handleAddProductToCart() {
+    if (isloggedIn) {
+      setAddToCartLoader(true);
+      addProductToCart(state).then((response) => {
+        sendAlert(response?.data?.message, 'success')
+        fetchCartProducts()
+        setAddToCartLoader(false);
+      }).catch((error: any) => {
+        sendAlert(error.response.data.Message, 'error')
+        setAddToCartLoader(false);
+      })
+    } else {
+      handleOpenAuthModal();
+    }
+  }
+
   useEffect(() => {
     setProduct(data)
   }, [data])
 
+  console.log('data', data);
+
+  useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      productId: data.id,
+    }))
+  }, [data])
+
   const colorAttribute = product.attributes.find((item) => item.type === 2);
-  
+
   return (
     <Box sx={{ textAlign: 'center' }}>
       <Box sx={{ position: 'relative' }}>
@@ -99,9 +136,9 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
           <IconButton onClick={handleTogglingProductInWishList} disabled={addingToFav}>
             <Image src={product.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40} />
           </IconButton>
-          {/* <IconButton onClick={handleAddProductToCart}>
-            <Image src={CartIcon} alt='cart icon' width={40} height={40} />
-          </IconButton> */}
+          <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }} disabled={addToCartLoader}>
+            {addToCartLoader ? <CircularProgress /> : <Image src={CartIcon} alt='cart icon' width={40} height={40} />}
+          </IconButton>
           {/* <IconButton>
             <Image src={EyeIcon} alt='eye icon' width={40} height={40} />
           </IconButton> */}
@@ -117,7 +154,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               cursor: 'pointer',
               fontWeight: '700',
               textAlign: 'left',
-              ml:1
+              ml: 1
             }}
           >
             {product.name}
@@ -143,16 +180,16 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
                 component='span'
                 sx={{ color: '#23856D', fontWeight: '700' }}
               >
-                 {t('sar')} {product.priceAfterDiscount}
+                {t('sar')} {product.priceAfterDiscount}
               </Typography>
             </>
           ) : (
             <Typography
               variant='h5'
               component='span'
-              sx={{ color: 'primary.main', fontWeight: '700', ml:1, textAlign: 'left' }}
+              sx={{ color: 'primary.main', fontWeight: '700', ml: 1, textAlign: 'left' }}
             >
-               {t('sar')} {product.salePrice}
+              {t('sar')} {product.salePrice}
             </Typography>
           )}
         </Box>
@@ -198,7 +235,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             })}
           </Box>
         )}
-        
+
       </Box>
     </Box>
   );

@@ -162,7 +162,7 @@ const AuthModal: FC<Props> = () => {
         <Drawer
             open={openAuthModal}
             onClose={handleClose}
-            PaperProps={{ sx: { width: 660, px: 2 } }}
+            PaperProps={{ sx: { width: { xs: '100%', sm: 660 }, px: 2 } }}
             anchor='right'
         >
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -171,7 +171,7 @@ const AuthModal: FC<Props> = () => {
                 </IconButton>
             </Box>
             <Box
-                sx={{ width: 420, mx: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: 'calc(100% - 40px)' }}
+                sx={{ width: { xs: '100%', sm: 420 }, mx: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: 'calc(100% - 40px)' }}
                 component='form'
                 onSubmit={handleSubmit}
             >
