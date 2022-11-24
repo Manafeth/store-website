@@ -73,7 +73,7 @@ const HeroSection: FC<Props> = ({ targetSectionId, data }) => {
                         >
                             {banner.description}
                         </Typography>
-
+{/* 
                             <Button
                             variant='contained'
                             sx={{
@@ -86,7 +86,7 @@ const HeroSection: FC<Props> = ({ targetSectionId, data }) => {
                             onClick={scrollToProducts}
                         >
                             {t('shopNow')}
-                            </Button>
+                            </Button> */}
                     </Container>
                 </Box>
             </>

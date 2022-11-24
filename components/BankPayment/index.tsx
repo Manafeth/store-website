@@ -12,6 +12,7 @@ import Image from 'next/image';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { LOADING } from '../../constants';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
     orderData: OrderData
@@ -20,6 +21,7 @@ interface Props {
 const BankPayment: FC<Props> = ({ orderData }) => {
     const {t} = useTranslation('checkout');
     const { fetchBankFiles, createBankFiles, bankFilesData, bankFilesStatus } = useCart();
+    const { storeInfo } = useCommon()
 
     function handleFile(ev: ChangeEvent<HTMLInputElement>) {
         if (ev.target?.files && ev.target?.files[0])
@@ -102,6 +104,7 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                             component='span'
                             loading={bankFilesStatus === LOADING}
                             disabled={![1,3].includes(orderData.paymentStatus)}
+                            sx={{backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,}}
                         >
                             {t('attatchReceiptFile')}
                         </LoadingButton>
