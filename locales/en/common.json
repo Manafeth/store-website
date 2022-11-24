@@ -88,7 +88,10 @@
     "rejected": "Rejected",
     "sort": "Sort",
     "quantity": "Quantity",
+    "inStock": "In Stock",
+    "outStock": "Out Stock",
     "paymentCanceled": "PAYMENT Canceled !!",
     "paymentDescr":"We’re sorry, your payment wasn’t processed for some reason, kindly try again or update your payment info.",
-    "tryAgain":"Try again"
+    "tryAgain":"Try again",
+    "": ""
 }
