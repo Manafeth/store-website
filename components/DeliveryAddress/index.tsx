@@ -7,6 +7,7 @@ import AddressCard from './components';
 import useTranslation from 'next-translate/useTranslation';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useCart } from '../../contexts/CartContext';
+import { useCommon } from '../../contexts/CommonContext';
 interface Props {
   handleNext: () => void;
   handleBack: () => void;
@@ -19,6 +20,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
   const {t: COT} = useTranslation('checkout');
   const {t: ST} = useTranslation('settings');
   const {t: CT} = useTranslation('common');
+  const { storeInfo } = useCommon()
   useEffect(() => {
     fetchAllAddressData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -84,7 +86,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
           </Button>
           <Button
             variant='contained'
-            sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px', 
+            sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px', backgroundColor: storeInfo.buttonColor, color: storeInfo.buttonTitelColor,
             "&:hover": {
               backgroundColor: "primary.hover",
            }}}

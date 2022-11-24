@@ -11,6 +11,7 @@ import paths from '../../../constants/paths';
 import CircularProgress from '@mui/material/CircularProgress';
 import { SUCCESS } from '../../../constants';
 import { useRouter } from 'next/router';
+import { useCommon } from '../../../contexts/CommonContext';
 
 
 interface Props {
@@ -24,6 +25,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
   const {t: CT, lang} = useTranslation('common');
   const {t: COT} = useTranslation('checkout');
   const [isInvalid, setIsInvalid] = useState(false);
+  const { storeInfo } = useCommon()
   const {
     paymnetData,
     fetchPaymentProviders,
@@ -129,7 +131,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
           variant='contained'
           type="submit" 
           disabled={!checkoutData.paymentProviderId ||loading}
-          sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px',
+          sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px', backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
            "&:hover": {
             backgroundColor: "primary.hover"
           }}}
