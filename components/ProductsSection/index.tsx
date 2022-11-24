@@ -10,6 +10,7 @@ import ProductVerticalItem from '../ProductVerticalItem';
 import ProductEmptyState from '../ProductEmptyState';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
     products: ProductData[],
@@ -23,6 +24,7 @@ interface Props {
 
 const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButtonLink, seeAllButtonText, id }) => {
   const { t } = useTranslation('common');
+  const { storeInfo } = useCommon()
   
   return (
     <Box component='section' sx={{ ...(sx || {}) }} id={id || ''}>
@@ -71,7 +73,7 @@ const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButton
           {seeAllButtonLink && (
             <Box sx={{ textAlign: 'center', pt: 3 }}>
               <Link href={seeAllButtonLink}>
-                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3 }}>
+                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3, backgroundColor : storeInfo.buttonColor, color:storeInfo.buttonTitelColor }}>
                   {seeAllButtonText && t(seeAllButtonText)}
                 </Button>
               </Link>

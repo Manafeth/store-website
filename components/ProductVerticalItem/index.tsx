@@ -134,7 +134,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
                 component='span'
                 sx={{
                   mr: 1,
-                  color: 'text.disabled',
+                  color: storeInfo.priceColor,
                   textDecorationLine: 'line-through',
                   fontWeight: '700',
                 }}

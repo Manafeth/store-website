@@ -50,7 +50,7 @@ const ProductEmptyState: FC = () => {
         <Typography
             variant='h5'
             component='div'
-            sx={{ color: 'primary.main', fontWeight: '700', ml:1, textAlign: 'left' }}
+            sx={{ color: storeInfo.priceColor, fontWeight: '700', ml:1, textAlign: 'left' }}
         >
             {t('sar')} 0.00
         </Typography>

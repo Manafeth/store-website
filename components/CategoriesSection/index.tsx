@@ -70,7 +70,7 @@ const CategoriesSection: FC<Props> = ({ categories, title, sx, showAll, seeAllBu
           {seeAllButtonLink && (
             <Box sx={{ textAlign: 'center', pt: 3 }}>
               <Link href={seeAllButtonLink}>
-                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3,backgroundColor: storeInfo.buttonColor}}>
+                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3,backgroundColor: storeInfo.buttonColor ,color: storeInfo.buttonTitelColor}}>
                   {seeAllButtonText && t(seeAllButtonText)}
                 </Button>
               </Link>
