@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import { ProductAttributesData, ProductByCategoryParams, ProductData } from '../../types/products';
 import { CategoryData } from '../../types/categories';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../contexts/CommonContext';
 // import TagFilter from './components/TagFilter';
 
 
@@ -25,7 +26,7 @@ interface Props {
 
 const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, params }) => {
   const {t} = useTranslation('common');
-
+  const { storeInfo } = useCommon();
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
     getProducts({generalSearch: ev.target.value, page: 1});
     setParams((prevState) => ({
@@ -116,7 +117,8 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
         sx={{
           width: '154px',
           height: '44px',
-          ml: 2
+          ml: 2,
+          backgroundColor: storeInfo.buttonColor,
         }}
         onClick={handleFilterSubmit}
       >

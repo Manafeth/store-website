@@ -104,7 +104,6 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
     setProduct(data)
   }, [data])
 
-  console.log('data', data);
 
   useEffect(() => {
     setState((prevState) => ({
@@ -181,7 +180,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               <Typography
                 variant='h5'
                 component='span'
-                sx={{ color: '#23856D', fontWeight: '700' }}
+                sx={{ color: storeInfo.priceColor, fontWeight: '700' }}
               >
                 {t('sar')} {product.priceAfterDiscount}
               </Typography>
@@ -190,7 +189,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
             <Typography
               variant='h5'
               component='span'
-              sx={{ color: 'primary.main', fontWeight: '700', ml: 1, textAlign: 'left' }}
+              sx={{ color: storeInfo.priceColor, fontWeight: '700', ml: 1, textAlign: 'left' }}
             >
               {t('sar')} {product.salePrice}
             </Typography>
