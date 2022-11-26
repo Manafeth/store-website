@@ -15,7 +15,7 @@ const List = styled('ul')({
 interface Props {
   totalPages: number,
   page: number,
-  onChange: (_:ChangeEvent<unknown>, page: number) => void
+  onChange: (_: ChangeEvent<unknown>, page: number) => void
 }
 
 const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
@@ -68,8 +68,9 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
                   style={{
                     width: matches ? '70px' : '83px',
                     height: '74px',
-                    fontWeight: selected ? 'bold' : undefined,
-                    cursor: 'pointer'
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    backgroundColor: '#fff',
                   }}
                   {...item}
                 >
