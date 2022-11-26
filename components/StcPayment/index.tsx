@@ -87,7 +87,7 @@ const StcPayment = () => {
                         }}
                         sx={{ mb: 6 }}
                         onChange={handleInput}
-                        placeholder="05X XXX-XXX"
+                        placeholder="XXX XXX-XXX"
                         error={isInvalid && !phoneNumber}
                         value={phoneNumber}
                     />
