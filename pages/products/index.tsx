@@ -176,7 +176,7 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
                   })}
                 </TextField>
               </Box>
-              <CategoryHeroSection targetSectionId='products-sec' data={bannerData} />
+              {/* <CategoryHeroSection targetSectionId='products-sec' data={bannerData} /> */}
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
                 {products.data.length > 0 ? (
                   products.data.map((item) => {
