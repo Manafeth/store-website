@@ -93,5 +93,5 @@
     "paymentCanceled": "PAYMENT Canceled !!",
     "paymentDescr":"We’re sorry, your payment wasn’t processed for some reason, kindly try again or update your payment info.",
     "tryAgain":"Try again",
-    "": ""
+    "paymentDecline": "PAYMENT DECLINED!!"
 }
