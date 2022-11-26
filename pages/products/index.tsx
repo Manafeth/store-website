@@ -200,13 +200,13 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
                   </>
                 )}
               </Grid>
-              {/* {products.totalPages > 1 && ( */}
+              {products.totalPages > 1 && (
                 <ProductPagination
-                  totalPages={15}
+                  totalPages={products.totalPages}
                   page={params.page!}
                   onChange={handlePageChange}
                 />
-              {/* )} */}
+              )}
             </Grid>
           </Grid>
         </Container>
