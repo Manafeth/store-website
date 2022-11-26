@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { ProductByCategoryParams } from '../../../../types/products'
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../../../contexts/CommonContext'
 
 interface Props {
   handlePriceFromInput: (_:number) => void,
@@ -14,6 +15,7 @@ interface Props {
 
 const FilterByPrice: FC<Props> = ({ params, handlePriceFromInput, handlePriceToInput }) => {
   const {t} = useTranslation('common');
+  const { storeInfo } = useCommon()
   
   function handleSliderChange (event: Event, newValue: number | number[]) {
     // @ts-ignore
@@ -52,6 +54,7 @@ function valuetext(value: number) {
           onChange={handleSliderChange}
           value={[params.priceFrom || 0, params.priceTo || 0]}
           max={1000}
+          sx={{ color: storeInfo.buttonColor }}
         />
         <Box sx={{display:'flex', gap:'5px', mb:1}}>
           <TextField 

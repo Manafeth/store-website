@@ -23,7 +23,6 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
     fetchShipmentsProviders(checkoutData.addressId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
-  {console.log('shipmentData',shipmentData)}
 
   return (
     <Box>

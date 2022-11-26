@@ -62,7 +62,6 @@ const EditAccount: FC<Props> = ({
       ...prevState,
       [ev.target.name]: ev.target.value,
     }));
-    console.log(ev.target.name);
   }
 
   const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {

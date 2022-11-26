@@ -18,7 +18,6 @@ const TagFilter = () => {
   };
   function handleClose(i: any) {
     setTags(tags.filter((tag, index) => index !== i));
-    console.log('filter', setTags(tags.filter((tag, index) => index !== i)));
   }
 
   return (
