@@ -149,10 +149,10 @@ const ContactUsForm = () => {
               color:'p.color',paddingLeft:'10px',
               paddingTop:'10px',
               borderRadius: 1,
-              borderColor: isInvalid && !state.message ? 'error.main' : '#c4c4c4',
+              borderColor: isInvalid && !state.message ? 'error.main' : '#00000023',
             },
             'textarea::placeholder': {
-              color: '#afb1b9'
+              color: 'p.color'
             },
             'textarea:focus-visible': {
               outline: '0',
@@ -167,6 +167,7 @@ const ContactUsForm = () => {
             name='message'
             onChange={handleInputChange}
             value={state.message}
+            style={{ backgroundColor: storeInfo.backgroundColor }}
           /> 
         </Box>
         
@@ -181,6 +182,7 @@ const ContactUsForm = () => {
             fontSize: { xs: '12px', md: '25px' },
             fontWeight:'500',
             textTransform: 'lowercase',
+            backgroundColor: storeInfo.buttonColor,
           }}
           loading={createLoader === LOADING}
           type='submit'
