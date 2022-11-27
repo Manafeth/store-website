@@ -1,4 +1,5 @@
 export const GOOGLE_MAP_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API;
+export const TABBY_PROMO_KEY = process.env.NEXT_PUBLICK_KEY_TABBY_PROMO;
 
 
 export const LOADING = 'loading';
