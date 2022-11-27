@@ -70,13 +70,13 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
     }
   }, [productsList, categories, discountedProducts, search])
   
-  const featuredCategories = categoriesList.filter((_, index) => index <= 3)
+  const featuredCategories = categoriesList.length > 0 && categoriesList.filter((_, index) => index <= 3)
   
   return (
     <MainLayout>
       <HeroSection targetSectionId='recent-products' data={bannerData} />
       <CategoriesSection
-        categories={featuredCategories}
+        categories={featuredCategories || []}
         title='shopByCategory'
         sx={{ pt: 9.5, pb: 6 }}
         seeAllButtonLink={paths.categories}

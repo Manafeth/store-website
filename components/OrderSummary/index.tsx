@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
+import TabyPromo from '../TabbyPromo';
 
 const OrderSummary = () => {
   const {t: CAT} = useTranslation('cart');
@@ -15,10 +16,11 @@ const OrderSummary = () => {
 
   return (
     <Box>
+      <TabyPromo sar="SAR" price={subTotal} />
       <Box
         sx={{
           display: 'flex',
-          mb: 3,
+          my: 3,
           justifyContent:'space-between'
         }}
       >
