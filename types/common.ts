@@ -30,6 +30,7 @@ export type StoreInfoData = {
     buttonTitelColor: string,
     footerColor: string,
     headerColor: string,
+    isTabbyActive: boolean,
 }
 
 export type SlideData = {

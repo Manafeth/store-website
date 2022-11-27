@@ -46,7 +46,7 @@ const CategoryHeroSection: FC<Props> = ({ targetSectionId, data }) => {
                         sx={{ width: '100%', maxWidth: '100%', height: {md: '432px', xs: '250px'}, borderRadius: 8}}
                     />
                 </Box>
-                <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.25)' }}>
+                <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', backgroundColor: (banner.titel || banner.description) ? 'rgba(255, 255, 255, 0.25)' : '' }}>
                     <Box px={5}>
                         <Typography
                             sx={{
