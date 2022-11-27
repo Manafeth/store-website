@@ -16,7 +16,7 @@ import { getBanner } from '../services/common.services';
 import { BannerData } from '../types/common';
 interface Props {
   productsList: ProductData[],
-  categories: CategoryData[],
+  categories: { categoriesWithImages: CategoryData[], categoriesWithoutImages: CategoryData[] },
   discountedProducts: ProductData[],
   bannerData: BannerData
 }
@@ -57,7 +57,7 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
       })
     }
 
-    if (categories.length === 0) {
+    if (categories?.categoriesWithImages?.length === 0) {
       getFeaturedCategories().then((res) => {
         setCategoriesList(res.data.data)
       })
@@ -70,13 +70,14 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
     }
   }, [productsList, categories, discountedProducts, search])
   
-  const featuredCategories = categoriesList.length > 0 && categoriesList.filter((_, index) => index <= 3)
+  const categoriesWithImages = (categoriesList?.categoriesWithImages || []).filter((_, index) => index <= 3)
+  const categoriesWithoutImages = (categoriesList?.categoriesWithoutImages || []).filter((_, index) => index <= 3)
   
   return (
     <MainLayout>
       <HeroSection targetSectionId='recent-products' data={bannerData} />
       <CategoriesSection
-        categories={featuredCategories || []}
+        categories={{ categoriesWithImages, categoriesWithoutImages }}
         title='shopByCategory'
         sx={{ pt: 9.5, pb: 6 }}
         seeAllButtonLink={paths.categories}
@@ -104,7 +105,7 @@ HomePage.getInitialProps = async ({ req, locale }: NextPageContext) => {
   if (!req) {
     return {
       productsList: [],
-      categories: [],
+      categories: { categoriesWithImages: [], categoriesWithoutImages: [] },
       discountedProducts: [],
       bannerData: {}
     }
@@ -128,7 +129,7 @@ HomePage.getInitialProps = async ({ req, locale }: NextPageContext) => {
   } catch(error: any) {
     return {
       productsList: [],
-      categories: [],
+      categories: { categoriesWithImages: [], categoriesWithoutImages: [] },
       discountedProducts: [],
       bannerData: {}
     }
