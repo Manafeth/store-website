@@ -105,6 +105,14 @@ function editCartProductsQuantity(data: { cartProductId: number, quantity: numbe
   );
 }
 
+function createPreScoring(amount: number) {
+  return axiosInstance.post(
+    'Tabby/CreatePreScoring',
+    { amount }
+  );
+}
+
+
 export {
     addProductToCart,
     getAllCartProducts,
@@ -118,5 +126,6 @@ export {
     uploadBankFiles,
     getBankFiles,
     deleteProductFromCart,
-    editCartProductsQuantity
+    editCartProductsQuantity,
+    createPreScoring
 }

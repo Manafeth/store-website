@@ -13,18 +13,21 @@ interface Props {
   }
 
 const PaymentCard: FC<Props> = ({ data }) => {
-  const { updateCheckoutData, checkoutData } = useCart();
-
+  const { updateCheckoutData, checkoutData, isTappyEnabled } = useCart();
+  const disabled = data.providerCategory === 4 ? !isTappyEnabled : false
   function handleClick() {
-    updateCheckoutData('paymentProviderId', data.id);
+    if (!disabled) {
+      updateCheckoutData('paymentProviderId', data.id);
+    }
   }
 
   return (
     <Box
       onClick={handleClick}
+      sx={{ opacity: disabled ? 0.5 : 1 }}
     >
       <Card sx={{width: '100%', mb:3, backgroundColor: data.id === checkoutData.paymentProviderId ? '#F3F3F3': null}}>
-        <CardActionArea>
+        <CardActionArea disabled={disabled}>
           <CardContent>
             <Box sx={{display:'flex', gap:'20px'}}>
             <Avatar src={data.imageFilePath?.orignialUrl || ''} alt='category' sx={{ width: '60px', height: '33px', borderRadius: '2px' }}>
