@@ -13,6 +13,7 @@ import Link from 'next/link';
 import CategoryEmptyState from '../CategoryEmptyState';
 import CategoryCard from '../CategoryCard';
 import { useCommon } from '../../contexts/CommonContext';
+import paths from '../../constants/paths';
 interface Props {
     categories: { categoriesWithImages: CategoryData[], categoriesWithoutImages: CategoryData[] },
     title: string
@@ -57,23 +58,25 @@ const CategoriesSection: FC<Props> = ({ categories, title, sx, showAll, seeAllBu
                     {categories?.categoriesWithoutImages.map((item) => {
                         return (
                           <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                            <Card sx={{ width: '100%', boxShadow: '0px 3px 14px 3px rgba(121, 121, 121, 0.12)', borderRadius: 3, px: 5.25 }}>
-                              <CardContent>
-                                <Typography
-                                    variant='h4'
-                                    sx={{ fontWeight: '600', letterSpacing: '0.2px', mb: 1.75 }}
-                                >
-                                    {item.name}
-                                </Typography>
-                                <Typography
-                                    variant='h5'
-                                    component='span'
-                                    sx={{ fontWeight: 500, fontSize: 12, lineHeight: '16px', letterSpacing: '0.2px', opacity: 0.5 }}
-                                >
-                                    {item.itemsCount} {t('items')}
-                                </Typography>
-                              </CardContent>
-                            </Card>
+                            <Link href={paths.categoryDetails(item.id)}>
+                              <Card sx={{ width: '100%', boxShadow: '0px 3px 14px 3px rgba(121, 121, 121, 0.12)', borderRadius: 3, px: 5.25, cursor: 'pointer' }}>
+                                <CardContent>
+                                  <Typography
+                                      variant='h4'
+                                      sx={{ fontWeight: '600', letterSpacing: '0.2px', mb: 1.75 }}
+                                  >
+                                      {item.name}
+                                  </Typography>
+                                  <Typography
+                                      variant='h5'
+                                      component='span'
+                                      sx={{ fontWeight: 500, fontSize: 12, lineHeight: '16px', letterSpacing: '0.2px', opacity: 0.5 }}
+                                  >
+                                      {item.itemsCount} {t('items')}
+                                  </Typography>
+                                </CardContent>
+                              </Card>
+                            </Link>
                           </Grid>
                         )
                     })}
