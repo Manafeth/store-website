@@ -34,6 +34,7 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
     buttonTitelColor: '',
     footerColor: '',
     headerColor: '',
+    isTabbyActive: false,
     })
 
     const [bannerData, setBannerData] = useState<BannerData>({
