@@ -16,7 +16,7 @@ import { getBanner } from '../../services/common.services'
 import { BannerData } from '../../types/common'
 interface Props {
     // categories: CategoryData[],
-    allCategories: CategoryData[],
+    allCategories: { categoriesWithImages: CategoryData[], categoriesWithoutImages: CategoryData[] },
     discountedProducts: ProductData[],
     topSellingProducts: ProductData[],
     bannerData: BannerData
@@ -52,14 +52,13 @@ const Categories: NextPage<Props>  = ({ allCategories, discountedProducts, topSe
             });
         }
        
-        if (allCategories.length === 0) {
+        if (allCategories.categoriesWithImages.length === 0) {
             getAllCategories().then((res) => {
                 setAllCategoriesList(res.data.data)
             });
         }
         
     }, [discountedProducts, topSellingProducts, allCategories])
-    
     
   return (
     <MainLayout>
@@ -96,7 +95,7 @@ Categories.getInitialProps = async ({req, locale}: NextPageContext) => {
     if (!req) {
         return {
             // categories: [],
-            allCategories: [],
+            allCategories: { categoriesWithImages: [], categoriesWithoutImages: [] },
             discountedProducts: [],
             topSellingProducts: [],
             bannerData: {}
@@ -123,7 +122,7 @@ Categories.getInitialProps = async ({req, locale}: NextPageContext) => {
     } catch(error: any) {
         return {
             // categories: [],
-            allCategories: [],
+            allCategories: { categoriesWithImages: [], categoriesWithoutImages: [] },
             discountedProducts: [],
             topSellingProducts: [],
             bannerData: {}
