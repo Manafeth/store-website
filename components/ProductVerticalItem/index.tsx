@@ -64,24 +64,28 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
   const { storeInfo } = useCommon()
 
   function handleTogglingProductInWishList() {
-    setProduct((prevState) => ({
-      ...prevState,
-      isInWishList: !prevState.isInWishList
-    }))
-
-    setaddingToFav(true)
-
-    toggleProductInWishList(product.id).then(() => {
-      fetchWishListData()
-      setaddingToFav(false)
-    }).catch((error: any) => {
-      sendAlert(error.response.data.Message, 'error')
+    if (isloggedIn) {
       setProduct((prevState) => ({
         ...prevState,
         isInWishList: !prevState.isInWishList
       }))
-      setaddingToFav(false)
-    });
+      
+      setaddingToFav(true)
+
+      toggleProductInWishList(product.id).then(() => {
+        fetchWishListData()
+        setaddingToFav(false)
+      }).catch((error: any) => {
+        sendAlert(error.response.data.Message, 'error')
+        setProduct((prevState) => ({
+          ...prevState,
+          isInWishList: !prevState.isInWishList
+        }))
+        setaddingToFav(false)
+      });
+    } else {
+      handleOpenAuthModal();
+    }
   }
 
   function handleAddProductToCart() {

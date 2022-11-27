@@ -46,7 +46,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
   const {t} = useTranslation('common');
 
   const { categoryId } = router.query
-  const [products, setProducts] = useState<Products>({
+  const [products, setProducts] = useState<Products>(categoryDetails.products || {
     data: [],
     totalCount: 0,
     page: 1,
@@ -64,8 +64,8 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
     options: [],
   })
 
-  const [attributes, setAttributes] = useState<ProductAttributesData[]>([]);
-  const [categories, setCategories] = useState<CategoryData[]>([]);
+  const [attributes, setAttributes] = useState<ProductAttributesData[]>(categoryDetails.attributes || []);
+  const [categories, setCategories] = useState<CategoryData[]>(categoryDetails.categories || []);
 
   async function getProducts(data: ProductByCategoryParams) {
     if (categoryId) {
@@ -154,7 +154,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
                   component='h1'
                   sx={{ mb: 5, fontWeight: '700', color: 'text.secondary' }}
                 >
-                   {t('showingAll')} {products.data.length} {t('results')} 
+                   {t('showingAll')} {products?.data?.length} {t('results')} 
                 </Typography>
                 <TextField
                   id='outlined-basic'
@@ -178,7 +178,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
               </Box>
               {/* <CategoryHeroSection targetSectionId='products-sec' data={bannerData} /> */}
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
-                {products.data.length > 0 ? (
+                {products?.data?.length > 0 ? (
                   products.data.map((item) => {
                     return (
                       <Grid item xs={12} sm={6} lg={4} key={item.id}>
