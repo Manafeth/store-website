@@ -93,5 +93,11 @@
     "paymentCanceled": "تم إلغاء الدفع !!",
     "paymentDescr":"نأسف ، لم تتم معالجة دفعتك لسبب ما ، يرجى المحاولة مرة أخرى أو تحديث معلومات الدفع الخاصة بك.",
     "tryAgain":"حاول مرة أخرى",
-    "paymentDecline": "تم رفض الدفع!!"
+    "paymentDecline": "تم رفض الدفع!!",
+    "bestsellers": "أفضل المبيعات",
+    "wishList": "المفضلة",
+    "lowestPrice": "أقل سعر",
+    "highestPrice": "أعلى سعر",
+    "oldToNew": "القديم إلى الجديد",
+    "newToOld": "الجديد إلى القديم"
 }

@@ -3,10 +3,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
+import TabyPromo from '../TabbyPromo';
+import { useCommon } from '../../contexts/CommonContext';
 
 const OrderSummary = () => {
   const {t: CAT} = useTranslation('cart');
   const {t: CT} = useTranslation('common');
+  const { storeInfo } = useCommon();
 
   const { cartData } = useCart();
   const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0),0);
@@ -15,10 +18,11 @@ const OrderSummary = () => {
 
   return (
     <Box>
+      {storeInfo.isTabbyActive &&<TabyPromo sar="SAR" price={subTotal} />}
       <Box
         sx={{
           display: 'flex',
-          mb: 3,
+          my: 3,
           justifyContent:'space-between'
         }}
       >

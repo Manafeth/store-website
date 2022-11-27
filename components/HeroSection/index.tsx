@@ -47,7 +47,7 @@ const HeroSection: FC<Props> = ({ targetSectionId, data }) => {
                         sx={{ width: '100%', maxWidth: '100%', height: {md: '600px', xs: '300px'}}}
                     />
                 </Box>
-                <Box sx={{display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%', backgroundColor: (banner.titel || banner.description) ? 'rgba(0, 0, 0, 0.25)' : '', display: 'flex', alignItems: 'center' }}>
                     <Container sx={{ maxWidth: 1050 }}>
                         <Typography
                             sx={{
