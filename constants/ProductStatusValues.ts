@@ -1,10 +1,10 @@
  const productStatusMenu = [
-    { label: 'Bestsellers', value: 1 },
-    { label: 'Featured', value: 2 },
-    { label: 'LowestPrice', value: 3 },
-    { label: 'HighestPrice', value: 4 },
-    { label: 'OldToNew', value: 5 },
-    { label: 'NewToOld', value: 6 },
+    { label: 'bestsellers', value: 1 },
+    { label: 'wishList', value: 2 },
+    { label: 'lowestPrice', value: 3 },
+    { label: 'highestPrice', value: 4 },
+    { label: 'oldToNew', value: 5 },
+    { label: 'newToOld', value: 6 },
 ]
 
 export default productStatusMenu;

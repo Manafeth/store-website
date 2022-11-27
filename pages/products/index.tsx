@@ -45,7 +45,7 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
   const {t} = useTranslation('common');
 
   const { categoryId } = router.query
-  const [products, setProducts] = useState<Products>({
+  const [products, setProducts] = useState<Products>(productsData.products || {
     data: [],
     totalCount: 0,
     page: 1,
@@ -63,29 +63,26 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
     options: [],
   })
 
-  const [attributes, setAttributes] = useState<ProductAttributesData[]>([]);
-  const [categories, setCategories] = useState<CategoryData[]>([]);
+  const [attributes, setAttributes] = useState<ProductAttributesData[]>(productsData.attributes || []);
+  const [categories, setCategories] = useState<CategoryData[]>(productsData.categories || []);
 
   async function getProducts(data: ProductByCategoryParams) {
-    if (categoryId) {
-      const payload: ProductByCategoryParams = {
-        page: data.page || params.page,
-        pageSize: data.pageSize || params.pageSize,
-        generalSearch: data.generalSearch || params.generalSearch,
-        categoryId,
-        options: data.options || params.options
-      }
-      if (data.priceFrom || params.priceFrom)
-        payload.priceFrom = data.priceFrom || params.priceFrom
-      if (data.priceTo || params.priceTo)
-        payload.priceTo = data.priceTo || params.priceTo
-      if (data.productStatus || params.productStatus)
-        payload.productStatus = data.productStatus || params.productStatus
-      const productsData = await getProductsByCategory(payload);
-      setAttributes(productsData.data.data.attributes)
-      setCategories(productsData.data.data.categories)
-      setProducts(productsData.data.data.products);
+    const payload: ProductByCategoryParams = {
+      page: data.page || params.page,
+      pageSize: data.pageSize || params.pageSize,
+      generalSearch: data.generalSearch || params.generalSearch,
+      options: data.options || params.options
     }
+    if (data.priceFrom || params.priceFrom)
+      payload.priceFrom = data.priceFrom || params.priceFrom
+    if (data.priceTo || params.priceTo)
+      payload.priceTo = data.priceTo || params.priceTo
+    if (data.productStatus || params.productStatus)
+      payload.productStatus = data.productStatus || params.productStatus
+    const productsData = await getProductsByCategory(payload);
+    setAttributes(productsData.data.data.attributes)
+    setCategories(productsData.data.data.categories)
+    setProducts(productsData.data.data.products);
   }
 
   function handlePageChange(_:ChangeEvent<unknown>, page: number) {
@@ -124,7 +121,7 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
       });
     }
   }, [productsData])
-  
+
   return (
     <MainLayout>
       <HeroSection targetSectionId='products-sec' data={bannerData} />
@@ -153,7 +150,7 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
                   component='h1'
                   sx={{ mb: 5, fontWeight: '700', color: 'text.secondary' }}
                 >
-                   {t('showingAll')} {products.data.length} {t('results')} 
+                   {t('showingAll')} {products?.data?.length} {t('results')} 
                 </Typography>
                 <TextField
                   id='outlined-basic'
@@ -171,14 +168,14 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
                   <MenuItem value={0} disabled />
                   {productStatusMenu.map((item) => {
                     return (
-                      <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
+                      <MenuItem value={item.value} key={item.value}>{t(item.label)}</MenuItem>
                     )
                   })}
                 </TextField>
               </Box>
               {/* <CategoryHeroSection targetSectionId='products-sec' data={bannerData} /> */}
               <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
-                {products.data.length > 0 ? (
+                {products?.data?.length > 0 ? (
                   products.data.map((item) => {
                     return (
                       <Grid item xs={12} sm={6} lg={4} key={item.id}>

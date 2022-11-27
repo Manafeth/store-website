@@ -41,7 +41,7 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
             let children = null;
 
             if (type === 'start-ellipsis' || type === 'end-ellipsis') {
-              children = '…';
+              children = <span style={{ borderTop: '2px solid', borderBottom: '2px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '100%' }}>…</span>;
             } else if (type === 'page') {
               children = (
                 <button
@@ -79,7 +79,7 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
               );
             }
 
-            return <li key={index}>{children}</li>;
+            return <li key={index} style={{ display: 'flex', alignItems: 'streatch', justifyContent: 'center' }}>{children}</li>;
           })}
         </List>
       </nav>
