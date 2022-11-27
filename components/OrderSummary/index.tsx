@@ -15,7 +15,6 @@ const OrderSummary = () => {
   const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0),0);
   const subTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0),0);
   const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.checkoutAttributsTotal || 0),0);
-  console.log('storeInfo', storeInfo);
 
   return (
     <Box>
