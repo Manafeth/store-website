@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useCommon } from '../../contexts/CommonContext';
+import Header from '../../components/Header';
 
 const PaymentDecline = () => {
   const {t, lang} = useTranslation('common');
@@ -18,7 +19,8 @@ const PaymentDecline = () => {
   
 
   return (
-    <MainLayout>
+    <Box component='main' pt={11.375} sx={{ backgroundColor: storeInfo.backgroundColor }}>
+    <Header />
       <Container sx={{ mt: 5 }}>
         <Grid container spacing={5} rowSpacing={4}>
               <Grid item xs={12} md={8}>
@@ -66,7 +68,8 @@ const PaymentDecline = () => {
         
         </Grid>
       </Container>
-    </MainLayout>
+      </Box>
+   
   );
 };
 
