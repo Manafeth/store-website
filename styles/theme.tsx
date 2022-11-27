@@ -100,7 +100,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         light: '#FFFFFF',
         grayDisabled: '#F6F6F6',
         main:'#e8f4f7',
-        secondary:'#FFCB77'
+        secondary:'#FFCB77',
+        grey:'#F8F8F8'
       },
       text: {
         primary: '#252B42',
@@ -124,6 +125,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         2000:'#B9B9B9',
         2200:' #737373',
         2400:'#F8F8F8',
+        2600:'#A5A5A5',
+        2800:'#a9abb5'
       },
       buttons: {
         blueDarker: '#29D2FC',

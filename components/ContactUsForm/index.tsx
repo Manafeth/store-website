@@ -99,7 +99,7 @@ const ContactUsForm = () => {
           id='fullWidth'
           placeholder={t('enterYourName')}
           fullWidth
-          sx={{ mb: 3, mt: 1 }}
+          sx={{ mb: 3, mt: 1, backgroundColor:'background.grey' }}
           InputLabelProps={{ shrink: true }}
           type='text'
           name='name'
@@ -123,7 +123,7 @@ const ContactUsForm = () => {
           id='fullWidth'
           placeholder={t('enterYourEmail')}
           fullWidth
-          sx={{ mb: 3, mt: 1 }}
+          sx={{ mb: 3, mt: 1, backgroundColor:'background.grey' }}
           InputLabelProps={{ shrink: true }}
           type='email'
           name='email'
@@ -152,7 +152,7 @@ const ContactUsForm = () => {
               borderColor: isInvalid && !state.message ? 'error.main' : '#00000023',
             },
             'textarea::placeholder': {
-              color: 'p.color'
+              color: 'grey.2800'
             },
             'textarea:focus-visible': {
               outline: '0',
@@ -167,7 +167,7 @@ const ContactUsForm = () => {
             name='message'
             onChange={handleInputChange}
             value={state.message}
-            style={{ backgroundColor: storeInfo.backgroundColor }}
+            style={{ backgroundColor:'background.grey' }}
           /> 
         </Box>
         

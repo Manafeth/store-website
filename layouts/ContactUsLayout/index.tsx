@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
   image: ReactElement;
@@ -12,14 +13,15 @@ interface Props {
 }
 const ContactUsLayout: FC<Props> = ({ image, children }) => {
   const {t} = useTranslation();
+  const { storeInfo } = useCommon()
 
   return (
-    <Container maxWidth={false} disableGutters>
+    <Container maxWidth={false} disableGutters sx={{backgroundColor:'background.paper'}}>
       <Grid container spacing={0} alignItems='stretch' minHeight='100vh'>
         <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
           <Box
             sx={{
-              bgcolor: 'background.main',
+              bgcolor: storeInfo.backgroundColor,
               display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
               height: '100%',
