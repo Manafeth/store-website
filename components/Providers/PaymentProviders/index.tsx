@@ -36,7 +36,7 @@ const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
     createOrderStatus,
     clearOrderStatus,
     checkCouponCodeValidation,
-    isCodeValid
+    isCodeValid,
   } = useCart();
 
   const router = useRouter();
