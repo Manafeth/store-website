@@ -4,19 +4,22 @@ import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
 import { useCart } from '../../contexts/CartContext';
 import TabyPromo from '../TabbyPromo';
+import { useCommon } from '../../contexts/CommonContext';
 
 const OrderSummary = () => {
   const {t: CAT} = useTranslation('cart');
   const {t: CT} = useTranslation('common');
+  const { storeInfo } = useCommon();
 
   const { cartData } = useCart();
   const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0),0);
   const subTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0),0);
   const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.checkoutAttributsTotal || 0),0);
+  console.log('storeInfo', storeInfo);
 
   return (
     <Box>
-      <TabyPromo sar="SAR" price={subTotal} />
+      {storeInfo.isTabbyActive &&<TabyPromo sar="SAR" price={subTotal} />}
       <Box
         sx={{
           display: 'flex',
