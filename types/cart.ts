@@ -144,5 +144,7 @@ export type CartModalState = {
         fileExtension: string
     },
     deleteCartProduct: (_:number) => Promise<void>
-    removeStatus: string
+    removeStatus: string,
+    checkTabby: () => Promise<void>,
+    isTappyEnabled: boolean
 }
