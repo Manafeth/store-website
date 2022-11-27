@@ -171,7 +171,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
                   <MenuItem value={0} disabled />
                   {productStatusMenu.map((item) => {
                     return (
-                      <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
+                      <MenuItem value={item.value} key={item.value}>{t(item.label)}</MenuItem>
                     )
                   })}
                 </TextField>
