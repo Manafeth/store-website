@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { ERROR, LOADING, SUCCESS } from '../constants';
-import { checkCouponValidation, createOrder, createPaymentGateway, deleteProductFromCart, getAllCartProducts, getAllProviders, getBankFiles, getInvoice, getOrder, stcPaymentConfirmation, uploadBankFiles } from '../services/cart.services';
+import { checkCouponValidation, createOrder, createPaymentGateway, createPreScoring, deleteProductFromCart, getAllCartProducts, getAllProviders, getBankFiles, getInvoice, getOrder, stcPaymentConfirmation, uploadBankFiles } from '../services/cart.services';
 import { CartModalState, CheckoutData, StcPaymentData, InvocieData, OrderData, PaymentData, PaymentProvidersData, ShipmentsProvidersData, BankFilesData } from '../types/cart';
 import { ProductData } from '../types/products';
 import { useAlert } from './AlertContext';
@@ -91,6 +91,7 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
   const [stcPaymentStatus, setStcPaymentStatus] = useState('');
   const [bankFilesStatus, setBankFilesStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
+  const [isTappyEnabled, setIsTappyEnabled] = useState(false);
   const [bankFilesData, setBankFilesData] = useState({
     orignialUrl: "",
     thumbUrl: "",
@@ -123,7 +124,20 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     }
   }
 
-
+  async function checkTabby() {
+    try {
+      const subtotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0),0)
+      const response = await createPreScoring(subtotal);
+      if (response.status === 200) {
+        setIsTappyEnabled(true)
+      } else {
+        setIsTappyEnabled(false)
+      }
+    } catch(error) {
+        setIsTappyEnabled(false)
+        Promise.reject(error);
+    }
+  }
   
   async function fetchShipmentsProviders(id:number) {
     try {
@@ -133,10 +147,12 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       Promise.reject(error);
     }
   }
+
   async function fetchPaymentProviders(id:number) {
     try {
-     const response = await  getAllProviders(id);
-     setPaymnetData(response.data.data.paymentProviders)
+      checkTabby()
+      const response = await getAllProviders(id);
+      setPaymnetData(response.data.data.paymentProviders)
     } catch(error) {
       Promise.reject(error);
     }
@@ -283,7 +299,9 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     bankFilesStatus,
     bankFilesData,
     deleteCartProduct,
-    removeStatus
+    removeStatus,
+    checkTabby,
+    isTappyEnabled
   };
 
   return (
