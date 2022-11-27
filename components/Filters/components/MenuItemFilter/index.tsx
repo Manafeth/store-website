@@ -14,13 +14,6 @@ interface Props {
 const MenuItemFilter: FC<Props> = ({ categories }) => {
   return (
     <Box>
-      <Typography
-        variant='h6'
-        component='h1'
-        sx={{ fontWeight: 'bold', ml: 2 }}
-      >
-        Accessories
-      </Typography>
       <List sx={{ display: 'flex', flexDirection: 'column' }}>
         {categories?.map((item) => (
           <FilterMenuItem data={{...item, link: paths.categoryDetails(item.id)}} key={item.id} />
