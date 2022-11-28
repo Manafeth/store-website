@@ -21,6 +21,8 @@
     "shippingDiscription":"هذه طرق الشحن المتاحة ، يرجى تحديد طريقة مناسبة لك",
     "paymentProviders":"موفرو الدفع",
     "paymentDiscription":"طرق الدفع هذه متوفرة ، يرجى تحديد طريقة مناسبة لك",
+    "payemntProvidersDescription": "حدد طريقة الدفع لتتمكن من إكمال طلبك",
+    "availablePaymentMethods": "طرق الدفع المتاحة",
     "placeOrder":"مكان الامر",
     "netValue":"صافي القيمة",
     "discount":"تخفيض",
@@ -37,5 +39,6 @@
     "attatchReceiptFile":"إرفاق ملف إيصال",
     "mobileNumber":"رقم الهاتف المحمول",
     "verifiy":"كود التنويع",
-    "verificationCode":"تم إرسال رمز التحقق إلى هاتفك"
+    "verificationCode":"تم إرسال رمز التحقق إلى هاتفك",
+    "repaymentConfirmation": "ادفع {{price}} ريال سعودي"
 }

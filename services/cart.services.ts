@@ -23,7 +23,7 @@ function deleteProductFromCart(id: number) {
   );
 }
 
-function getAllProviders(addressId: number) {
+function getAllProviders(addressId?: number) {
   return axiosInstance.get(
     'Providers/GetAll',
     {

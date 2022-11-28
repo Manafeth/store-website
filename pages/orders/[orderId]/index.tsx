@@ -22,13 +22,14 @@ import BankPayment from '../../../components/BankPayment';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { LOADING } from '../../../constants';
 import { useCommon } from '../../../contexts/CommonContext';
+import RepaymentComponent from '../../../components/RepaymentComponent';
 
 const OrderDetails = () => {
   const {t: CAT} = useTranslation('cart');
   const {t: CT} = useTranslation('common');
   const {t:ST} = useTranslation('settings');
   const {t, lang} = useTranslation('checkout');
-  const { fetchOrderDetails, orderData, createPayment, paymentStatus } = useCart();
+  const { fetchOrderDetails, orderData, createPayment, paymentStatus, fetchPaymentProviders } = useCart();
   const router = useRouter()
   const { storeInfo } = useCommon()
   const { orderId } = router.query
@@ -43,6 +44,12 @@ const OrderDetails = () => {
       fetchOrderDetails(orderId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId, lang]);
+
+  useEffect(() => {
+    if (orderData.transactionStatus === 2)
+      fetchPaymentProviders();
+  }, [orderData])
+  
 
   const invoiceStatus = invoiceStatusEnums.find((item) => +item.value === orderData.paymentStatus);
   const orderStatus = orderStatusEnums.find((item) => +item.value === orderData.status);
@@ -175,7 +182,7 @@ const OrderDetails = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              {orderData.providerType === 2 && orderData.providerCategory === 2 && !isInActive && (
+              {orderData.providerType === 2 && [1, 2, 4].includes(orderData.providerCategory) && orderData.transactionStatus !== 2 && !isInActive && (
                 <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
                   backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
                    "&:hover": {
@@ -184,41 +191,27 @@ const OrderDetails = () => {
                  {t('payConfirmPayment')}
                 </LoadingButton>
               )}
-
-              {orderData.providerType === 2 && orderData.providerCategory === 4 && !isInActive && (
-                <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
-                  backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
-                   "&:hover": {
-                  backgroundColor: "primary.hover"
-                }}}>
-                 {t('payConfirmPayment')}
-                </LoadingButton>
-              )}
-
-              {orderData.providerType === 2 && orderData.providerCategory === 1 && !isInActive && (
-                <LoadingButton variant='contained' onClick={handlePayment} loading={paymentStatus === LOADING} sx={{
-                  backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
-                   "&:hover": {
-                  backgroundColor: "primary.hover"
-                }}}>
-                 {t('payConfirmPayment')}
-                </LoadingButton>
-              )}
-
               <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
             </Grid>
-            {!isInActive && (orderData.providerType === 2 && orderData.providerCategory === 3)  && (
+            {!isInActive && (orderData.providerType === 2 && orderData.providerCategory === 3) && orderData.transactionStatus !== 2 && (
               <Grid item xs={12} md={6} sx={{ borderLeft: '1px solid #E7E7E7' }}>
                 <StcPayment />
               </Grid>
             )}
 
-            {orderData.providerType === 1 && (
+            {orderData.providerType === 1 && orderData.transactionStatus !== 2 && (
               <Grid item xs={12} md={6} sx={{ borderLeft: '1px solid #E7E7E7' }}>
                 <BankPayment orderData={orderData} />
               </Grid>
             )}
+
+            {orderData.transactionStatus === 2 && orderData.paymentStatus !== 2 && (
+              <Grid item xs={12} md={6} sx={{ borderLeft: '1px solid #E7E7E7' }}>
+                <RepaymentComponent />
+              </Grid>
+            )}
           </Grid>
+          
           <Typography
             variant='h5'
             sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'ar' ? '' : 'Urbanist' }}

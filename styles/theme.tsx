@@ -248,7 +248,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
           sx={{
             color: 'text.primary',
             '& *': {
-              fontFamily: theme.typography.fontFamily
+              fontFamily: theme.typography.fontFamily,
             }
           }}
           dir={direction}

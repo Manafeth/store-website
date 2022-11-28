@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -6,7 +6,6 @@ import PaymentCard from '../PaymentCard';
 import { useCart } from '../../../contexts/CartContext';
 import TextField from '@mui/material/TextField';
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 import paths from '../../../constants/paths';
 import CircularProgress from '@mui/material/CircularProgress';
 import { SUCCESS } from '../../../constants';
@@ -21,7 +20,7 @@ interface Props {
 
 let timer: ReturnType<typeof setTimeout>;
 
-const PaymentProviders: FC<Props> = ({ handleBack,loading }) => {
+const PaymentProviders: FC<Props> = ({ handleBack, loading }) => {
   const {t: CT, lang} = useTranslation('common');
   const {t: COT} = useTranslation('checkout');
   const [isInvalid, setIsInvalid] = useState(false);

@@ -58,7 +58,8 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
       ],
       providerCategory: 0,
       providerType: 0,
-      totalCost: 0
+      totalCost: 0,
+      transactionStatus: 0,
     });
     const [invoiceData, setInvoiceData] = useState<InvocieData>({
       id:0,
@@ -148,8 +149,9 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
     }
   }
 
-  async function fetchPaymentProviders(id:number) {
+  async function fetchPaymentProviders(id?:number) {
     try {
+      if (id)
       checkTabby()
       const response = await getAllProviders(id);
       setPaymnetData(response.data.data.paymentProviders)
