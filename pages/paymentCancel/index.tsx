@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {MouseEvent } from 'react';
 import MainLayout from '../../layouts/MainLayout';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,12 +11,26 @@ import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useCommon } from '../../contexts/CommonContext';
 import Header from '../../components/Header';
+import { useRouter } from 'next/router';
+import { redirectTabbyPayment } from '../../services/payment.services';
 
 const PaymentCancel = () => {
   const {t, lang} = useTranslation('common');
-  const { storeInfo } = useCommon()
+  const { storeInfo } = useCommon();
+  const router = useRouter();
+  const { payment_id } = router.query;
+  console.log('payment_id',payment_id)
 
-  
+ 
+
+  function handleRedirectTabbyPayment(ev: MouseEvent<HTMLButtonElement>) {
+    ev.preventDefault();
+    if(payment_id){
+    redirectTabbyPayment(payment_id).then(resp=>{
+      // console.log('resp',resp)
+    })
+  }  
+  }
 
   return (
     <Box component='main' pt={11.375} sx={{ backgroundColor: storeInfo.backgroundColor }}>
@@ -39,7 +53,7 @@ const PaymentCancel = () => {
         >
           {t('paymentDescr')}
         </Typography>
-        <Link href='/'>
+        {/* <Link href='/'> */}
         <Button
           variant='contained'
           color='secondary'
@@ -51,10 +65,10 @@ const PaymentCancel = () => {
             mr: '20px',
             textTransform: 'lowercase'
           }}
+          onClick={handleRedirectTabbyPayment}
         >
           {t('tryAgain')}
         </Button>
-        </Link>
               </Grid>
               <Grid item xs={12} md={4}>
               <Image
