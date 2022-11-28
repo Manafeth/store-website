@@ -1,5 +1,4 @@
-import React from 'react';
-import MainLayout from '../../layouts/MainLayout';
+import React, {MouseEvent }from 'react';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
 import Container from '@mui/material/Container';
@@ -8,13 +7,28 @@ import paymentDecline from '../../assets/images/payment-decline.svg';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import Link from 'next/link';
 import { useCommon } from '../../contexts/CommonContext';
 import Header from '../../components/Header';
+import { useRouter } from 'next/router';
+import { redirectTabbyPayment } from '../../services/payment.services';
 
 const PaymentDecline = () => {
   const {t, lang} = useTranslation('common');
   const { storeInfo } = useCommon()
+  const router = useRouter();
+  const { payment_id } = router.query;
+  console.log('payment_id',payment_id)
+
+ 
+
+  function handleRedirectTabbyPayment(ev: MouseEvent<HTMLButtonElement>) {
+    ev.preventDefault();
+    if(payment_id){
+    redirectTabbyPayment(payment_id).then(resp=>{
+      // console.log('resp',resp)
+    })
+  }  
+  }
 
   
 
@@ -39,7 +53,6 @@ const PaymentDecline = () => {
         >
           {t('paymentDescr')}
         </Typography>
-        <Link href='/'>
         <Button
           variant='contained'
           color='secondary'
@@ -51,10 +64,10 @@ const PaymentDecline = () => {
             mr: '20px',
             textTransform: 'lowercase'
           }}
+          onClick={handleRedirectTabbyPayment}
         >
           {t('tryAgain')}
         </Button>
-        </Link>
               </Grid>
               <Grid item xs={12} md={4}>
               <Image
