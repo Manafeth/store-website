@@ -27,7 +27,8 @@ const PaymentCancel = () => {
     ev.preventDefault();
     if(payment_id){
     redirectTabbyPayment(payment_id).then(resp=>{
-      // console.log('resp',resp)
+      if (resp)
+          window.location = resp.data.data;
     })
   }  
   }
