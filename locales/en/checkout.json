@@ -28,6 +28,8 @@
     "payConfirmPayment":"Pay and confirm payment",
     "payConfirmYourPayment":"Pay and Confirm your Payment",
     "payemntDescription":"please make sure to make bank transfer and attach file to confirm your payment process.",
+    "payemntProvidersDescription": "Select payment method to be able to complete your order",
+    "availablePaymentMethods": "Available payment methods",
     "bankName":"Bank Name",
     "holderName":"Holder Name",
     "accountNumber":"Account Number",
@@ -37,5 +39,6 @@
     "attatchReceiptFile":"Attatch receipt file",
     "mobileNumber":"Mobile Number",
     "verifiy":"Varification Code",
-    "verificationCode":"A verification code has been sent to your phone"
+    "verificationCode":"A verification code has been sent to your phone",
+    "repaymentConfirmation": "Pay {{price}} SAR"
 }

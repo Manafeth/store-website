@@ -36,6 +36,7 @@ export type OrderChangeLogsData = {
 }
 
 export type OrderData = {
+    transactionStatus: number
     id:number,
     invoiceId:number,
     orderDate:string,
@@ -94,7 +95,8 @@ export type InvocieData = {
 
 export type PaymentData = {
     orderId: number,
-    mobileNumber?: string
+    mobileNumber?: string,
+    paymentProviderId?: number
 }
 
 export type StcPaymentData = {
@@ -112,7 +114,7 @@ export type BankFilesData = {
 export type CartModalState = {
     fetchCartProducts: () => Promise<void>,
     fetchShipmentsProviders:(id:number) => Promise<void>,
-    fetchPaymentProviders: (id:number) => Promise<void>,
+    fetchPaymentProviders: (id?:number) => Promise<void>,
     fetchOrderDetails: (id: number | string | string[]) => Promise<void>,
     fetchInvoiceDetails: (id: number | string | string[]) => Promise<void>,
     cartData: ProductData[],
