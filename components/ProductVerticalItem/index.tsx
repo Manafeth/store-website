@@ -125,7 +125,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
           <MuiLink>
             <Avatar
               src={product.mainImageFilePath?.orignialUrl || ''}
-              alt='product' sx={{ width: '100%', height: 300, borderRadius: 0 }}
+              alt='product' sx={{ width: '100%', height: 300, borderRadius: 3 }}
             >
               P
             </Avatar>

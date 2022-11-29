@@ -36,12 +36,12 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
       }}
     >
       <nav>
-        <List>
+        <List sx={{ boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', borderRadius: 1.5, border: '1px solid #BDBDBD', overflow: 'hidden' }}>
           {items.map(({ page, type, selected, ...item }, index) => {
             let children = null;
 
             if (type === 'start-ellipsis' || type === 'end-ellipsis') {
-              children = <span style={{ borderTop: '2px solid', borderBottom: '2px solid', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '100%' }}>…</span>;
+              children = <span style={{ borderTop: '1px solid #F3F3F3', borderBottom: '1px solid #F3F3F3', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '100%' }}>…</span>;
             } else if (type === 'page') {
               children = (
                 <button
@@ -50,10 +50,9 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
                     fontWeight: 'bold',
                     width: matches ? '28px' : '46px',
                     height: '74px',
-                    backgroundColor: selected ? '#000' : '#fff',
-                    color: selected ? '#fff' : '#000',
-                    borderLeft: 'none',
-                    borderRight: 'none',
+                    backgroundColor: selected ? '#1995AD' : '#fff',
+                    color: selected ? '#fff' : '#323940',
+                    border: 'none',
                     cursor: 'pointer'
                   }}
                   {...item}
@@ -66,11 +65,13 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
                 <button
                   type='button'
                   style={{
+                    border: 'none',
                     width: matches ? '70px' : '83px',
                     height: '74px',
                     fontWeight: 'bold',
                     cursor: 'pointer',
-                    backgroundColor: '#fff',
+                    color: item.disabled ? '#C6C6C6' : '#323940',
+                    backgroundColor: item.disabled ? '#F3F3F3' : '#fff',
                   }}
                   {...item}
                 >
