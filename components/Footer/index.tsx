@@ -29,12 +29,12 @@ const Footer = () => {
     <Box component='footer' py={12.5} sx={{ backgroundColor: storeInfo.footerColor }}>
       <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
         <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
-          <Box sx={{ maxWidth: { md: 596}, flexGrow: 1, pr: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <Box sx={{ maxWidth: { md: 596}, flexGrow: 1, pr: { md: 2 }, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <Typography sx={{ fontSize: '13px', lineHeight: '16px', letterSpacing: '0.2px', mb: { xs: 2.5 }}}>
               {storeInfo.description}
             </Typography>
             <Box>
-              <Grid container spacing={5} sx={{ mb: 2.5 }}>
+              <Grid container spacing={{ xs: 2, lg: 5 }} sx={{ mb: 2.5 }}>
                 <Grid item xs={12} sm={6}>
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
@@ -75,7 +75,7 @@ const Footer = () => {
               </Box>
             </Box>
           </Box>
-          <Box sx={{ flexGrow: 1, maxWidth: 320 }}>
+          <Box sx={{ flexGrow: 1, maxWidth: { lg: 320 } }}>
             <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
               <Box pr={{ md: 2}}  mb={5}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>

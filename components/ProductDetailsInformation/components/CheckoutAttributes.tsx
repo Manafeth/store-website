@@ -68,7 +68,7 @@ const CheckoutAttributes: FC<Props> = ({ productDetials, checkoutAttributes, set
         return (
           <Grid
             container
-            spacing={2.5}
+            spacing={{ xs: 2, lg: 2.5 }}
             key={item.checkOutAttributeId}
             alignItems='center'
           >

@@ -16,7 +16,7 @@ const ProductDescription: FC<Props> = ({ productDetials }) => {
   return (
     <Box sx={{ pt: 3, pb: 8.5 }}>
       <Container>
-        <Grid container spacing={4.25}>
+        <Grid container spacing={{ xs: 2, lg: 4.25 }}>
           <Grid item md={4.3}>
             <CardMedia
               image={productDetials.mainImageFilePath?.orignialUrl || ''}

@@ -127,7 +127,7 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
       <HeroSection targetSectionId='products-sec' data={bannerData} />
       <Box component='footer' py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
-          <Grid container spacing={3} rowSpacing={3.75}>
+          <Grid container spacing={{ xs: 2, lg: 3 }} rowSpacing={3.75}>
             <Grid item xs={3} display={{ xs: 'none', md: 'block' }}>
               <Filters
                 getProducts={getProducts}
@@ -174,7 +174,7 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
                 </TextField>
               </Box>
               {/* <CategoryHeroSection targetSectionId='products-sec' data={bannerData} /> */}
-              <Grid container spacing={3} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
+              <Grid container spacing={{ xs: 2, lg: 3 }} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
                 {products?.data?.length > 0 ? (
                   products.data.map((item) => {
                     return (

@@ -43,7 +43,7 @@ const RepaymentComponent: FC<Props> = () => {
             <Typography sx={{ fontSize: '17px', lineHeight: '150%', m: 0 }}>{t('payemntProvidersDescription')}</Typography>
             <Divider sx={{ mt: 2, mb: 5.125 }} />
             <Typography variant='h4' sx={{ fontWeight: 'bold', m: 0, mb: 2 }}>{t('availablePaymentMethods')}</Typography>
-            <Grid container spacing={2.25} rowSpacing={2}>
+            <Grid container spacing={{ xs: 2, lg: 2.25 }} rowSpacing={2}>
                 {paymnetData.map((item) => {
                     return (
                         <Grid item xs={12} md={6} key={item.id}>

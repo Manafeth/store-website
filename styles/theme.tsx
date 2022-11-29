@@ -235,15 +235,14 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
     },
   });
 
-  
   const cacheRtl = createCache({
     key: `mui${direction}`,
     stylisPlugins: direction === 'rtl' ? [prefixer, rtlPlugin] : [],
   });
 
   return (
-    <ThemeProvider theme={{ ...theme, direction: direction }}>
-      <CacheProvider value={cacheRtl}>
+    <CacheProvider value={cacheRtl}>
+      <ThemeProvider theme={{ ...theme, direction: direction }}>
         <Box
           sx={{
             color: 'text.primary',
@@ -255,8 +254,8 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         >
           {children}
         </Box>
-      </CacheProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </CacheProvider>
   );
 };
 export default CustomThemeProvider;

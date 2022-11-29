@@ -37,7 +37,7 @@ const Attributes: FC<Props> = ({ productDetials, setState, options }) => {
                 <Grid
                     key={item.id}
                     container
-                    spacing={2.5}
+                    spacing={{ xs: 2, lg: 2.5 }}
                     mb={2}
                 >
                 <Grid item xs={5}>
