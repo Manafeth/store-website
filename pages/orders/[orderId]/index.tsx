@@ -58,7 +58,7 @@ const OrderDetails = () => {
     <AuthComponent>
       <MainLayout>
         <Container maxWidth={false} sx={{ maxWidth: 1050, mt: 5 }}>
-          <Grid container spacing={5}>
+          <Grid container spacing={{ xs: 2, lg: 5 }}>
             <Grid item xs={12} md={6}>
               <Typography
                 variant='h1'

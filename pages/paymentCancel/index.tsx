@@ -37,7 +37,7 @@ const PaymentCancel = () => {
     <Box component='main' pt={11.375} sx={{ backgroundColor: storeInfo.backgroundColor }}>
         <Header />
         <Container sx={{ mt: 5 }}>
-        <Grid container spacing={5} rowSpacing={4}>
+        <Grid container spacing={{ xs: 2, lg: 5 }} rowSpacing={4}>
               <Grid item xs={12} md={8}>
               <Typography
           variant='h1'

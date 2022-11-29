@@ -75,7 +75,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
         >
           <Container maxWidth={false} sx={{ maxWidth: 1050, pt: 4.25, pb: 6.5 }}>
             <Breadcrumb  productDetials={productData}/>
-            <Grid container spacing={7} rowSpacing={4.25} >
+            <Grid container spacing={{ xs: 2, lg: 7 }} rowSpacing={4.25} >
               <Grid item xs={12} md={6}>
                 <ProductGallery images={productData.imagesFilePath} />
               </Grid>
@@ -102,7 +102,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
               {t('relatedProducts')}
             </Typography>
             <Divider sx={{ mb: 3 }} />
-            <Grid container spacing={3} rowSpacing={3.75}>
+            <Grid container spacing={{ xs: 2, lg: 3 }} rowSpacing={3.75}>
               {productsList.length > 0 ? (
                 productsList.map((item) => {
                   return (
