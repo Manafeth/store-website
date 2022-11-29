@@ -238,7 +238,7 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
   
   const cacheRtl = createCache({
     key: `mui${direction}`,
-    // stylisPlugins: direction === 'rtl' ? [prefixer, rtlPlugin] : [],
+    stylisPlugins: direction === 'rtl' ? [prefixer, rtlPlugin] : [],
   });
 
   return (
