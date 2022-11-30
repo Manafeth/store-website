@@ -13,7 +13,7 @@ function redirectTabbyPayment(payment_id: string | string[]) {
   }
   function redirectTabbySuccessfullPayment(payment_id: string | string[]) {
     return axiosInstance.get(
-      'Tabby​/RedirectSuccessfullPayment',
+      'Tabby/RedirectSuccessfullPayment',
       {
         params:{
        payment_id
