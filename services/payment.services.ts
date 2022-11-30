@@ -22,7 +22,21 @@ function redirectTabbyPayment(payment_id: string | string[]) {
     );
   }
 
+  function redirectSuccessfullMobilePayment(payment_id: string | string[]) {
+    return axiosInstance.get(
+      'Tabby/RedirectSuccessfullMobilePayment',
+      {
+        params:{
+       payment_id
+        },
+      }
+    );
+  }
+
+
+
   export {
     redirectTabbyPayment,
-    redirectTabbySuccessfullPayment
+    redirectTabbySuccessfullPayment,
+    redirectSuccessfullMobilePayment
   }
