@@ -99,5 +99,9 @@
     "lowestPrice": "أقل سعر",
     "highestPrice": "أعلى سعر",
     "oldToNew": "القديم إلى الجديد",
-    "newToOld": "الجديد إلى القديم"
+    "newToOld": "الجديد إلى القديم",
+    "paymentSuccessful":"تم الدفع بنجاح",
+    "paymentDescription":"شكرا لاختيارك تابي ، سنقوم بإعلامك بتحديثات طلبك.",
+    "viewOrders":"مشاهدة الطلب",
+    "continueShopping":"مواصلة التسوق"
 }
