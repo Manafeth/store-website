@@ -99,5 +99,9 @@
     "lowestPrice": "LowestPrice",
     "highestPrice": "HighestPrice",
     "oldToNew": "OldToNew",
-    "newToOld": "NewToOld"
+    "newToOld": "NewToOld",
+    "paymentSuccessful":"PAYMENT Successful",
+    "paymentDescription":"Thank you for choosing tabby, we will notify you with updates about your order.",
+    "viewOrders":"View Order",
+    "continueShopping":"Continue Shopping"
 }
