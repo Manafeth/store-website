@@ -160,7 +160,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
               fontWeight: '700',
               textAlign: 'left',
               ml:1,
-              color: storeInfo.producTitelColor
+              color: storeInfo.producTitelColor ? storeInfo.producTitelColor : 'text.primary'
             }}
           >
             {product.name}

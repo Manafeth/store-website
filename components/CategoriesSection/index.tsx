@@ -30,7 +30,7 @@ const CategoriesSection: FC<Props> = ({ categories, title, sx, showAll, seeAllBu
     <Box component='section' sx={{ ...(sx || {}) }} id={id || ''}>
        <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }} >
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pb: 6 }}>
-            <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px' }}>
+            <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', color: storeInfo.sectionTitleColor }}>
               {t(title)}
             </Typography>
             {showAll && (
@@ -81,7 +81,7 @@ const CategoriesSection: FC<Props> = ({ categories, title, sx, showAll, seeAllBu
           {seeAllButtonLink && (
             <Box sx={{ textAlign: 'center', pt: 3 }}>
               <Link href={seeAllButtonLink}>
-                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3,backgroundColor: storeInfo.buttonColor ,color: storeInfo.buttonTitelColor}}>
+                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3 }}>
                   {seeAllButtonText && t(seeAllButtonText)}
                 </Button>
               </Link>

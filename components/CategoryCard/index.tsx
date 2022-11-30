@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { CategoryData } from '../../types/categories';
 import paths from '../../constants/paths';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
     data: CategoryData,
@@ -16,6 +17,7 @@ interface Props {
 
 const CategoryCard: FC<Props> = ({ data, height }) => {
     const {t} = useTranslation('common');
+    const { storeInfo } = useCommon();
   return (
     <Link href={paths.categoryDetails(data.id)}>
         <Box
@@ -36,7 +38,7 @@ const CategoryCard: FC<Props> = ({ data, height }) => {
             >
                 <Typography
                     variant='h4'
-                    sx={{ fontWeight: '600', letterSpacing: '0.2px', mb: 1.75 }}
+                    sx={{ fontWeight: '600', letterSpacing: '0.2px', mb: 1.75, color: storeInfo.categoryTitleColor }}
                 >
                     {data.name}
                 </Typography>

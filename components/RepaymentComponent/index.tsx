@@ -75,7 +75,6 @@ const RepaymentComponent: FC<Props> = () => {
                 onClick={handlePayment}
                 loading={paymentStatus === LOADING}
                 sx={{
-                    backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
                     minWidth: 180,
                     "&:hover": {
                         backgroundColor: "primary.hover",

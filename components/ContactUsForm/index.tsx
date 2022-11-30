@@ -182,7 +182,6 @@ const ContactUsForm = () => {
             fontSize: { xs: '12px', md: '25px' },
             fontWeight:'500',
             textTransform: 'lowercase',
-            backgroundColor: storeInfo.buttonColor,
           }}
           loading={createLoader === LOADING}
           type='submit'

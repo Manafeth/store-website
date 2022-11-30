@@ -2,6 +2,7 @@ import React, { FC, MouseEvent } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../../../contexts/CommonContext';
 
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 
 const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
   const {t} = useTranslation('settings');
+  const { storeInfo } = useCommon()
   const sharedStyle = {
     'mr': 3,
     'fontSize': { xs: '14px', md: '18px' },
@@ -42,7 +44,7 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
     <Box sx={{ pb: 4 , display:'flex'}}>
       <Button
         variant="text"
-        color="secondary"
+        color="primary"
         sx={activeTab === 1 ? tabStyle : sharedStyle}
         value={1}
         onClick={handleTabs}
@@ -51,7 +53,7 @@ const Tabs: FC<Props> = ({ activeTab, handleTabs }) => {
       </Button>
       <Button
         variant="text"
-        color="secondary"
+        color="primary"
         sx={activeTab === 2 ? tabStyle : sharedStyle}
         value={2}
         onClick={handleTabs}

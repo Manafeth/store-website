@@ -110,7 +110,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
           <Link href='/checkout'>
             <Button
               variant='contained'
-              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase', backgroundColor: storeInfo.buttonColor, color: storeInfo.buttonTitelColor,
+              sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',
               "&:hover": {
                 backgroundColor: "primary.hover",
              }}}
@@ -122,7 +122,7 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         ) : (
           <Button
             variant='contained'
-            sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',color: storeInfo.buttonTitelColor, backgroundColor: storeInfo.buttonColor, }}
+            sx={{ width: 'auto', height: '44px',textTransform: 'lowercase',color: storeInfo.buttonTitelColor, }}
             disabled
           >
               {t('continueToPayment')}

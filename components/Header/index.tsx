@@ -349,6 +349,8 @@ const Header = () => {
             ) : (
               <Button
                 onClick={handleOpenAuthModal}
+                color='secondary'
+                sx={{ color: '#666666' }}
               >
                  {t('login')}
               </Button>

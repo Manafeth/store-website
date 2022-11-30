@@ -67,7 +67,7 @@ const ShippingProviders: FC<Props> = ({ handleNext, handleBack }) => {
         </Button>
         <Button
           variant='contained'
-          sx={{ width: '219px', height: '44px', backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
+          sx={{ width: '219px', height: '44px',
           "&:hover": {
             backgroundColor: "primary.hover",
          } }}

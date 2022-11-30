@@ -130,7 +130,7 @@ const PaymentProviders: FC<Props> = ({ handleBack, loading }) => {
           variant='contained'
           type="submit" 
           disabled={!checkoutData.paymentProviderId ||loading}
-          sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px', backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
+          sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px',
            "&:hover": {
             backgroundColor: "primary.hover"
           }}}

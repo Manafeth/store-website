@@ -7,6 +7,7 @@ import CategoryCard from '../CategoryCard';
 import { CategoryData } from '../../types/categories';
 import CategoryEmptyState from '../CategoryEmptyState';
 import useTranslation from 'next-translate/useTranslation';
+import { useCommon } from '../../contexts/CommonContext';
 
 interface Props {
   categories: CategoryData[];
@@ -14,11 +15,12 @@ interface Props {
 
 const FeaturedCategoriesSection: FC<Props> = ({ categories }) => {
   const categoriesList = categories.filter((_, index) => index <= 2);
-  const {t} = useTranslation('common')
+  const {t} = useTranslation('common');
+  const { storeInfo } = useCommon();
   return (
     <Box component='section'>
       <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 } }}>
-        <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6 }}>
+        <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px', mb: 6, color: storeInfo.sectionTitleColor }}>
           {t('feateredCategories')}
         </Typography>
         <Grid container spacing={2} rowSpacing={4}>

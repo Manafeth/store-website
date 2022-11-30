@@ -54,7 +54,6 @@ function valuetext(value: number) {
           onChange={handleSliderChange}
           value={[params.priceFrom || 0, params.priceTo || 0]}
           max={1000}
-          sx={{ color: storeInfo.buttonColor }}
         />
         <Box sx={{display:'flex', gap:'5px', mb:1}}>
           <TextField 

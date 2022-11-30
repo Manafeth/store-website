@@ -52,7 +52,7 @@ const ContactUsLayout: FC<Props> = ({ image, children }) => {
             ></Box>
           </Box>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} justifyContent='center'>
           <Box
             sx={{
               height: '100%',

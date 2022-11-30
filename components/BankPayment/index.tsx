@@ -104,7 +104,6 @@ const BankPayment: FC<Props> = ({ orderData }) => {
                             component='span'
                             loading={bankFilesStatus === LOADING}
                             disabled={![1,3].includes(orderData.paymentStatus)}
-                            sx={{backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,}}
                         >
                             {t('attatchReceiptFile')}
                         </LoadingButton>

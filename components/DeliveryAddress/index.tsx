@@ -86,7 +86,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
           </Button>
           <Button
             variant='contained'
-            sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px', backgroundColor: storeInfo.buttonColor, color: storeInfo.buttonTitelColor,
+            sx={{ width: '219px', height: '44px', py: loading ? '10px' : '14px',
             "&:hover": {
               backgroundColor: "primary.hover",
            }}}

@@ -29,7 +29,7 @@ const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButton
   return (
     <Box component='section' sx={{ ...(sx || {}) }} id={id || ''}>
        <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pb: 6 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pb: 6, color: storeInfo.sectionTitleColor }}>
             <Typography variant='h5' component='h2' sx={{ fontWeight: 600, letterSpacing: '0.2px' }}>
               {t(title)}
             </Typography>
@@ -73,7 +73,7 @@ const ProductsSection: FC<Props> = ({ products, title, sx, showAll, seeAllButton
           {seeAllButtonLink && (
             <Box sx={{ textAlign: 'center', pt: 3 }}>
               <Link href={seeAllButtonLink}>
-                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3, backgroundColor : storeInfo.buttonColor, color:storeInfo.buttonTitelColor }}>
+                <Button variant='contained' sx={{ minWidth: 240, borderRadius: 3 }}>
                   {seeAllButtonText && t(seeAllButtonText)}
                 </Button>
               </Link>

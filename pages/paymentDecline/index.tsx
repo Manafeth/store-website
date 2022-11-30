@@ -58,12 +58,10 @@ const PaymentDecline = () => {
             </Typography>
             <Button
               variant='contained'
-              color='secondary'
+              color='primary'
               sx={{
-                color: storeInfo.buttonTitelColor,
                 width: '219px',
                 height: '44px',
-                backgroundColor: storeInfo.buttonColor,
                 mr: '20px',
                 textTransform: 'lowercase'
               }}
