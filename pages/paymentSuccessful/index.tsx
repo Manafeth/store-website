@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import useTranslation from 'next-translate/useTranslation';
 import Container from '@mui/material/Container';
@@ -10,20 +10,17 @@ import Button from '@mui/material/Button';
 import { useCommon } from '../../contexts/CommonContext';
 import Header from '../../components/Header';
 import { useRouter } from 'next/router';
-import { redirectTabbySuccessfullPayment } from '../../services/payment.services';
+import { redirectSuccessfullMobilePayment, redirectTabbySuccessfullPayment } from '../../services/payment.services';
+import paths from '../../constants/paths';
 import Link from 'next/link';
 
 const PaymentSuccessful = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const { storeInfo } = useCommon()
   const router = useRouter();
   const { payment_id } = router.query;
-  console.log('payment_id', payment_id)
 
-
-
-  function handleRedirectTabbySuccessfullPayment(ev: MouseEvent<HTMLButtonElement>) {
-    ev.preventDefault();
+  function handleRedirectTabbySuccessfullPayment() {
     if (payment_id) {
         redirectTabbySuccessfullPayment(payment_id).then(resp => {
         if (resp)
@@ -31,8 +28,12 @@ const PaymentSuccessful = () => {
       })
     }
   }
-
-
+  
+  useEffect(() => {
+    if (payment_id)
+      redirectSuccessfullMobilePayment(payment_id)
+  }, [payment_id])
+  
 
   return (
     <Box component='main' pt={11.375} sx={{ backgroundColor: storeInfo.backgroundColor}}>
@@ -79,7 +80,7 @@ const PaymentSuccessful = () => {
               >
                 {t('viewOrders')}
               </Button>
-              <Link href='/'>
+              <Link href={paths.home}>
                 <Button
                   variant='outlined'
                   color='primary'
