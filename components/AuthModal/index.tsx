@@ -204,7 +204,7 @@ const AuthModal: FC<Props> = () => {
                     variant='contained'
                     endIcon={<Image src={rightArrow} width='16' height='10' alt='right arrow' />}
                     fullWidth
-                    sx={{ borderRadius: 2 , backgroundColor: storeInfo.buttonColor, color:storeInfo.buttonTitelColor,
+                    sx={{ borderRadius: 2 ,
                         "&:hover": {
                             backgroundColor: "primary.hover"
                           }}}

@@ -23,27 +23,27 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router])
 
   return (
-    <ThemeProvider>
-      <Head>
-        <title>Store website</title>
-        <meta name="description" content="Store website" />
-      </Head>
-      <AlertProvider>
-        <CommonContextProvider>
-          <AuthModalProvider>
-            <ProfileModalProvider>
-              <CartModalProvider>
-                <ContactUsProvider>
-                  <ContantProvider>
-                  <Component {...pageProps} />
-                  </ContantProvider>
-                </ContactUsProvider>
-              </CartModalProvider>
-            </ProfileModalProvider>
-          </AuthModalProvider>
-        </CommonContextProvider>
-      </AlertProvider>
-    </ThemeProvider>
+    <CommonContextProvider>
+      <ThemeProvider>
+        <Head>
+          <title>Store website</title>
+          <meta name="description" content="Store website" />
+        </Head>
+        <AlertProvider>
+            <AuthModalProvider>
+              <ProfileModalProvider>
+                <CartModalProvider>
+                  <ContactUsProvider>
+                    <ContantProvider>
+                    <Component {...pageProps} />
+                    </ContantProvider>
+                  </ContactUsProvider>
+                </CartModalProvider>
+              </ProfileModalProvider>
+            </AuthModalProvider>
+        </AlertProvider>
+      </ThemeProvider>
+    </CommonContextProvider>
   )
 }
 

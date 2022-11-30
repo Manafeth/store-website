@@ -7,6 +7,8 @@ import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { prefixer } from 'stylis';
 import useTranslation from 'next-translate/useTranslation';
+import StoreEmptyState from '../components/StoreEmptyState';
+import { useCommon } from '../contexts/CommonContext';
 
 interface Props {
   children: ReactNode;
@@ -17,6 +19,7 @@ interface Props {
 const CustomThemeProvider: FC<Props> = ({ children }) => {
   const { lang } = useTranslation();
   const direction = lang === 'ar' ? 'rtl' : 'ltr';
+  const { storeNotFound, storeInfo } = useCommon();
 
   let theme = createTheme({
     typography: {
@@ -38,7 +41,6 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
       h1: {
         fontSize: '32px',
         fontWeight: 700,
-
       },
       h2: {
         fontSize: '24px',
@@ -63,34 +65,42 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         fontWeight: 400,
       },
     },
+  } as ThemeOptions);
+
+  theme = createTheme(theme, {
     palette: {
       primary: {
-        light: '#39403233',
-        main: '#1995AD',
-        hover:'#0D788C',
-        dark: '#000000',
-        contrastText: '#fff',
+        light: storeInfo.buttonHoverColor ? `${storeInfo.buttonHoverColor}` : '#888888',
+        main: storeInfo.buttonColor ? storeInfo.buttonColor : '#666666',
+        hover: storeInfo.buttonHoverColor ? `${storeInfo.buttonHoverColor}` : '#555555',
+        dark: storeInfo.buttonHoverColor ? `${storeInfo.buttonHoverColor}` : '#555555',
+        contrastText: storeInfo.buttonTitelColor ? `${storeInfo.buttonTitelColor}` :'#fff',
       },
       secondary: {
         main: '#D9D9D9',
+        dark: '#D9D9D9E1',
         contrastText: '#1E1E1E',
-        light:' #FAFAFA',
+        light:'#FAFAFA',
       },
       warning: {
         main: '#F4BE5E',
+        dark: '#F4BE5EE6',
         contrastText: '#fff',
         light: '#ffcb7733',
       },
       success: {
         main: '#2DC071',
+        dark: '#2DC071',
         contrastText: '#fff',
       },
       error: {
         main: '#FF808B',
+        dark: '#FF808BE6',
         contrastText: '#fff',
       },
       info: {
         main: '#4D9AE4',
+        dark: '#4D9AE4E6',
         contrastText: '#fff',
         light: '#29D2FC',
       },
@@ -141,9 +151,6 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
         cancelDarker: '#FF9B45',
       },
     },
-  } as ThemeOptions);
-
-  theme = createTheme(theme, {
     components: {
       MuiLink: {
         styleOverrides: {
@@ -252,7 +259,11 @@ const CustomThemeProvider: FC<Props> = ({ children }) => {
           }}
           dir={direction}
         >
-          {children}
+          {storeNotFound ? (
+            <StoreEmptyState />
+          ) : (
+            children
+          )}
         </Box>
       </ThemeProvider>
     </CacheProvider>

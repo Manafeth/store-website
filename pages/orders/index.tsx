@@ -19,7 +19,7 @@ const ProfileOrders = () => {
             >
               {t('myOrders')}
             </Typography>
-            <OrderTabs/>
+            <OrderTabs />
           </Box>
        </ProfileLayout>
     </MainLayout>

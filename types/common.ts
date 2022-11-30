@@ -31,6 +31,13 @@ export type StoreInfoData = {
     footerColor: string,
     headerColor: string,
     isTabbyActive: boolean,
+    buttonHoverColor: string,
+    categoryTitleColor: string,
+    sectionTitleColor: string,
+    contactUsImagePath: {
+        orignialUrl: string,
+        thumbUrl: string
+    }
 }
 
 export type SlideData = {
@@ -61,7 +68,8 @@ export type CommonContextState = {
     mostPurchasedProducts: ProductData[],
     fetchMostPurchasedProducts: (params: { page: number, pageSize: number, generalSearch: string | string[] | undefined }) => Promise<void>,
     bannerData: BannerData,
-    fetchBannerData: () => Promise<void>
+    fetchBannerData: () => Promise<void>,
+    storeNotFound: boolean
 }
 
 

@@ -14,27 +14,34 @@ interface Props {
 const CommonContext = createContext({} as CommonContextState);
 
 export const CommonContextProvider: FC<Props> = ({ children }) => {
-    const [storeInfo, setStoreInfo] = useState<StoreInfoData>({
-        id: 0,
-        name: '',
-        mainImageFilePath: {
-            orignialUrl: '',
-            thumbUrl: ''
-        },
-        complaintNumber: '',
-        supportEmail: '',
-        instagram: '',
-        twitter: '',
-        facebook: '',
-        description: '',
-        backgroundColor: '',
-        producTitelColor: '',
-    priceColor: '',
-    buttonColor: '',
-    buttonTitelColor: '',
-    footerColor: '',
-    headerColor: '',
-    isTabbyActive: false,
+  const [storeInfo, setStoreInfo] = useState<StoreInfoData>({
+      id: 0,
+      name: '',
+      mainImageFilePath: {
+          orignialUrl: '',
+          thumbUrl: ''
+      },
+      complaintNumber: '',
+      supportEmail: '',
+      instagram: '',
+      twitter: '',
+      facebook: '',
+      description: '',
+      backgroundColor: '',
+      producTitelColor: '',
+      priceColor: '',
+      buttonColor: '',
+      buttonTitelColor: '',
+      footerColor: '',
+      headerColor: '',
+      isTabbyActive: false,
+      buttonHoverColor: '',
+      categoryTitleColor: '',
+      sectionTitleColor: '',
+      contactUsImagePath: {
+        orignialUrl: '',
+        thumbUrl: ''
+      }
     })
 
     const [bannerData, setBannerData] = useState<BannerData>({
@@ -45,6 +52,7 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
         thumbUrl: ''
       }
     })
+    
     const [storeNotFound, setStoreNotFound] = useState(false);
     const [mostPurchasedProducts, setMostPurchasedProducts] = useState<ProductData[]>([])
     // const router = useRouter();
@@ -84,26 +92,21 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
     mostPurchasedProducts,
     fetchMostPurchasedProducts,
     bannerData,
-    fetchBannerData
+    fetchBannerData,
+    storeNotFound
   };
 
   return (
     <CommonContext.Provider value={state}>
-      {storeNotFound ? (
-        <StoreEmptyState />
-      ) : (
-        <>
-          {children}
-          <FloatingWhatsApp
-          phoneNumber={storeInfo.complaintNumber}
-          accountName={storeInfo.name}
-          avatar={storeInfo.mainImageFilePath?.thumbUrl}
-          allowEsc
-          allowClickAway
-          notification
-        />
-        </>
-      )}
+      {children}
+      <FloatingWhatsApp
+        phoneNumber={storeInfo.complaintNumber}
+        accountName={storeInfo.name}
+        avatar={storeInfo.mainImageFilePath?.thumbUrl}
+        allowEsc
+        allowClickAway
+        notification
+      />
     </CommonContext.Provider>
   );
 };

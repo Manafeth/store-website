@@ -118,7 +118,6 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
           width: '154px',
           height: '44px',
           ml: 2,
-          backgroundColor: storeInfo.buttonColor,
         }}
         onClick={handleFilterSubmit}
       >

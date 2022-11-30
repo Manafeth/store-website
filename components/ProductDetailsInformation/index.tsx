@@ -174,7 +174,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px', mr: 2.5 , backgroundColor: storeInfo.buttonColor, color: storeInfo.buttonTitelColor,
+          sx={{ width: 'auto', height: '44px', mr: 2.5 ,
            "&:hover": {
             backgroundColor: "primary.hover"
           }}}
