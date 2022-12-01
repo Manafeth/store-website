@@ -52,7 +52,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
   const [state, setState] = useState<AddressData>(initialState);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [country, setCountry] = useState(0);
-  const {t: CT} = useTranslation('common');
+  const {t: CT, lang} = useTranslation('common');
   const {t: ST} = useTranslation('settings');
   const renderMarker = state.latitude > 0 && state.longitude > 0;
   const loading =
@@ -216,7 +216,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           pb: 7,
         }}
       >
-        <Typography variant='h2' component='h2' sx={{fontFamily: 'Urbanist'}}>
+        <Typography variant='h2' component='h2' sx={{fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
           {!selectedAddress ? ST('addNewAddress') : ST('updateAddress')}
         </Typography>
         <IconButton onClick={handleClose}>
@@ -272,7 +272,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontWeight: '500',
             fontSize:'14px',
             marginTop: '16px',
-            fontFamily: 'Urbanist'
+            fontFamily: lang === 'en' ? 'Urbanist' : ''
           }}
         >
           {ST('address')}
@@ -294,7 +294,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontWeight: '500',
             marginTop: '16px',
             fontSize:'14px',
-            fontFamily: 'Urbanist'
+            fontFamily: lang === 'en' ? 'Urbanist' : ''
           }}
         >
           {ST('street')}
@@ -317,7 +317,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontWeight: '500',
             marginTop: '16px',
             fontSize:'14px',
-            fontFamily: 'Urbanist'
+            fontFamily: lang === 'en' ? 'Urbanist' : ''
           }}
         >
           {ST('country')}
@@ -354,7 +354,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
             fontWeight: '500',
             marginTop: '16px',
             fontSize:'14px',
-            fontFamily: 'Urbanist'
+            fontFamily: lang === 'en' ? 'Urbanist' : ''
           }}
         >
           {ST('city')}

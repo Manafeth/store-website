@@ -16,7 +16,7 @@ interface Props {
 }
 
 const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
-  const {t: CT} = useTranslation('common');
+  const {t: CT, lang} = useTranslation('common');
   const {t: ST} = useTranslation('settings');
   const {triggerUpdateEmailNotification} = useProfile();
   const router = useRouter();
@@ -38,7 +38,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
         maxWidth: {md: 400}
       }}
     >
-      <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '32px' },fontWeight:'700',fontFamily: 'Urbanist' }}>
+      <Typography variant='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '32px' },fontWeight:'700',fontFamily: lang === 'en' ? 'Urbanist' : '' }}>
         {ST('accountSetting')}
       </Typography>
 
@@ -50,7 +50,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
           justifyContent: 'space-between'
         }}
       >
-        <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }, fontWeight:'700',fontFamily: 'Urbanist' }}>
+        <Typography variant='h2' component='span' sx={{ flex: '0.75', fontSize: { xs: '20px', md: '24px' }, fontWeight:'700',fontFamily: lang === 'en' ? 'Urbanist' : '' }}>
           {ST('emailNotification')}
         </Typography>
         <Switch color='success' 
@@ -67,7 +67,7 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
           fontSize: '16px',
           fontWeight:'400',
           mb: 5,
-          fontFamily: 'Urbanist'
+          fontFamily: lang === 'en' ? 'Urbanist' : ''
         }}
       >
       {ST('emailTextOne')}{ST('emailtextTwo')}
@@ -76,11 +76,11 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
       <Divider sx={{ mb: 5 }} />
 
       <Box sx={{display:'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
-        <Typography variant='h2' sx={{ mb: 5,flex: '0.7', fontSize: { xs: '20px', md: '24px' },fontFamily: 'Urbanist' }}>
+        <Typography variant='h2' sx={{ mb: 5,flex: '0.7', fontSize: { xs: '20px', md: '24px' },fontFamily: lang === 'en' ? 'Urbanist' : '' }}>
           {ST('shippingAddress')}
         </Typography>
         <Link href='/addressManagment'>
-          <IconButton sx={{fontSize:'16px',fontFamily: 'Urbanist'}}>
+          <IconButton sx={{fontSize:'16px',fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
             {CT('edit')}
           </IconButton> 
         </Link>

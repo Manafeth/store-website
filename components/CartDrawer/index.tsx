@@ -24,7 +24,7 @@ interface Props {
 }
 
 const CartDrawer: FC<Props> = ({ open, onClose }) => {
-  const {t} = useTranslation('cart');
+  const {t, lang} = useTranslation('cart');
   const { fetchCartProducts, cartData } = useCart();
   const { storeInfo } = useCommon()
   useEffect(() => {
@@ -57,10 +57,10 @@ const CartDrawer: FC<Props> = ({ open, onClose }) => {
         }}
       >
         <Box sx={{display:'flex', alignItems:'baseline', gap:1}}>
-        <Typography variant='h1' component='h2' sx={{ fontFamily: 'Urbanist'}}>
+        <Typography variant='h1' component='h2' sx={{ fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
         {t('myBag')} 
         </Typography>
-        <Box sx={{fontSize:'25px', fontWeight:'700', fontFamily: 'Urbanist'}}>({cartData.length})</Box>
+        <Box sx={{fontSize:'25px', fontWeight:'700', fontFamily: lang === 'en' ? 'Urbanist' : ''}}>({cartData.length})</Box>
         </Box>
         <IconButton onClick={onClose}>
           <Image src={closeIcon} alt='close icon' width='24' height='24' />
