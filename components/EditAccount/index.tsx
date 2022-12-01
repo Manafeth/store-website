@@ -39,7 +39,7 @@ const EditAccount: FC<Props> = ({
   isSubmitted,
 }) => {
   const [image, setImage] = useState('');
-  const {t: CT} = useTranslation('common');
+  const {t: CT, lang} = useTranslation('common');
   const {t: ST} = useTranslation('settings');
   const { storeInfo } = useCommon()
 
@@ -96,7 +96,7 @@ const EditAccount: FC<Props> = ({
       onSubmit={handleSubmit}
       noValidate
     >
-      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' },fontFamily: 'Urbanist' }}>
+      <Typography variant='h1' component='h1' sx={{ mb: 5, fontSize: { xs: '28px', md: '34px' },fontFamily: lang === 'en' ? 'Urbanist' : '' }}>
         {ST('editAccount')}
       </Typography>
       <Box

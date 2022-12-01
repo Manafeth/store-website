@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import usePagination from '@mui/material/usePagination';
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { Button } from '@mui/material';
 
 const List = styled('ul')({
   listStyle: 'none',
@@ -41,24 +42,26 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
             let children = null;
 
             if (type === 'start-ellipsis' || type === 'end-ellipsis') {
-              children = <span style={{ borderTop: '1px solid #F3F3F3', borderBottom: '1px solid #F3F3F3', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '100%' }}>…</span>;
+              children = <span style={{  display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '100%' }}>…</span>;
             } else if (type === 'page') {
               children = (
-                <button
+                <Button
                   type='button'
-                  style={{
+                  variant={selected ? 'contained' :'outlined'}
+                  sx={{
                     fontWeight: 'bold',
                     width: matches ? '28px' : '46px',
+                    borderRadius: 0,
                     height: '74px',
-                    backgroundColor: selected ? '#1995AD' : '#fff',
-                    color: selected ? '#fff' : '#323940',
+                    color: selected ? 'primary.contrastText' : '#666666',
                     border: 'none',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    minWidth: 0,
                   }}
                   {...item}
                 >
                   {page}
-                </button>
+                </Button>
               );
             } else {
               children = (
@@ -71,7 +74,7 @@ const ProductPagination: FC<Props> = ({ totalPages, page, onChange }) => {
                     fontWeight: 'bold',
                     cursor: 'pointer',
                     color: item.disabled ? '#C6C6C6' : '#323940',
-                    backgroundColor: item.disabled ? '#F3F3F3' : '#fff',
+                    backgroundColor: 'transparent',
                   }}
                   {...item}
                 >

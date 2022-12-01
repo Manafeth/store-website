@@ -31,13 +31,13 @@ const InvoiceDetails = () => {
       <MainLayout>
         <Box component='section' sx={{ mt: 5 }}>
           <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
-            <Typography variant='h1' component='h1' sx={{ mb: 3, fontFamily: 'Urbanist'}}>
+            <Typography variant='h1' component='h1' sx={{ mb: 3, fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
             {t('inovice')}  {invoiceData.id}
             </Typography>
             <Typography
               variant='h6'
               component='h1'
-              sx={{ fontWeight: '700', mb: 3, color: 'text.grey', fontFamily: 'Urbanist' }}
+              sx={{ fontWeight: '700', mb: 3, color: 'text.grey', fontFamily: lang === 'en' ? 'Urbanist' : '' }}
             >
               {t('viewInvoice')}
             </Typography>
@@ -46,14 +46,14 @@ const InvoiceDetails = () => {
                 <Typography
                   variant='h5'
                   component='h1'
-                  sx={{ fontWeight: '600', mb: 2, fontFamily: 'Urbanist'}}
+                  sx={{ fontWeight: '600', mb: 2, fontFamily: lang === 'en' ? 'Urbanist' : ''}}
                 >
                   {t('billTo')}
                 </Typography>
                 <Typography
                   variant='h5'
                   component='h1'
-                  sx={{ fontWeight: '600', color: 'text.grey', mb: 4, fontFamily: 'Urbanist' }}
+                  sx={{ fontWeight: '600', color: 'text.grey', mb: 4, fontFamily: lang === 'en' ? 'Urbanist' : '' }}
                 >
                 {invoiceData?.account?.title}
                 </Typography>
@@ -62,7 +62,7 @@ const InvoiceDetails = () => {
                 <Typography
                   variant='h5'
                   component='h1'
-                  sx={{ fontWeight: '600', mb: 2, fontFamily: 'Urbanist'}}
+                  sx={{ fontWeight: '600', mb: 2, fontFamily: lang === 'en' ? 'Urbanist' : ''}}
                 >
                   {t('amount')}
                 </Typography>

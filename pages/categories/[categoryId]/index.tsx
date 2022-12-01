@@ -129,7 +129,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
   return (
     <MainLayout>
       <HeroSection targetSectionId='products-sec' data={bannerData} />
-      <Box component='footer' py={12.5}>
+      <Box py={12.5}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
           <Grid container spacing={{ xs: 2, lg: 3}} rowSpacing={3.75}>
             <Grid item xs={3} display={{ xs: 'none', md: 'block' }}>
