@@ -160,7 +160,7 @@ const InvoiceDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '700', mb: 2 }}
               >
-                {CT('sar')} {invoiceData.netValue}
+                {CT('sar')} {invoiceData.total}
               </Typography>
             </Box>
             <Box sx={{ mt: 2, display: 'flex' }}>
@@ -211,7 +211,7 @@ const InvoiceDetails = () => {
                 component='h1'
                 sx={{ fontWeight: '700', mb: 2 }}
               >
-                {CT('sar')} {invoiceData.total}
+                {CT('sar')} {invoiceData.netValue}
               </Typography>
             </Box>
             <Box
