@@ -19,7 +19,7 @@ const CategoryWithoutImageCard: FC<Props> = ({ data }) => {
     const { storeInfo } = useCommon();
   return (
     <Link href={paths.categoryDetails(data.id)}>
-        <Card sx={{ width: '100%', boxShadow: '0px 3px 14px 3px rgba(121, 121, 121, 0.12)', borderRadius: 3, px: 3.25, cursor: 'pointer' }}>
+        <Card sx={{ width: '100%', boxShadow: '0px 3px 14px 3px rgba(121, 121, 121, 0.12)', borderRadius: 3, px: 3.25, cursor: 'pointer', backgroundColor: storeInfo.categoryCardColor }}>
         <CardContent>
             <Typography
                 variant='h4'

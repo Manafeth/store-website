@@ -34,6 +34,7 @@ export type StoreInfoData = {
     buttonHoverColor: string,
     categoryTitleColor: string,
     sectionTitleColor: string,
+    categoryCardColor: string,
     contactUsImagePath: {
         orignialUrl: string,
         thumbUrl: string

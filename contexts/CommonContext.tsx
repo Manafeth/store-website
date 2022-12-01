@@ -38,6 +38,7 @@ export const CommonContextProvider: FC<Props> = ({ children }) => {
       buttonHoverColor: '',
       categoryTitleColor: '',
       sectionTitleColor: '',
+      categoryCardColor: '',
       contactUsImagePath: {
         orignialUrl: '',
         thumbUrl: ''
