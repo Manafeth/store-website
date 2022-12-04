@@ -21,6 +21,7 @@ import { useAlert } from '../../contexts/AlertContext';
 import { useCart } from '../../contexts/CartContext';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import { useCommon } from '../../contexts/CommonContext';
+import TabyPromo from '../TabbyPromo';
 interface Props {
   productDetials: ProductData,
   handleTogglingProductInWishList: () => void,
@@ -35,8 +36,8 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
     checkOutAttributes: []
   });
 
-  const {t} = useTranslation('common');
-  
+  const { t } = useTranslation('common');
+
   const { sendAlert } = useAlert()
   const { fetchCartProducts } = useCart()
   const { isloggedIn, handleOpenAuthModal } = useAuthModal()
@@ -94,15 +95,15 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         <Typography
           variant='h2'
           component='h1'
-          sx={{ mb: 0, fontWeight: '400', fontSize: '20px' , color: storeInfo.producTitelColor }}
+          sx={{ mb: 0, fontWeight: '400', fontSize: '20px', color: storeInfo.producTitelColor }}
         >
           {productDetials.name}
         </Typography>
         <IconButton onClick={!isloggedIn ? handleOpenAuthModal : handleTogglingProductInWishList} sx={{ p: 0 }}>
-          <Image src={productDetials.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40}/>
+          <Image src={productDetials.isInWishList ? FilledHeartIcon : HeartIcon} alt='heart icon' width={40} height={40} />
         </IconButton>
       </Box>
-      
+
       {/* <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
         <Image src={StarIcon} alt='instagram' />
         <Typography
@@ -116,8 +117,10 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       <Box sx={{ display: 'flex', mb: 2 }}>
         {productDetials.priceAfterDiscount ? (
           <>
-            <Typography variant='h2' component='span' sx={{ mb: 1, display: 'block', color: 'text.disabled',
-                textDecorationLine: 'line-through' }}>
+            <Typography variant='h2' component='span' sx={{
+              mb: 1, display: 'block', color: 'text.disabled',
+              textDecorationLine: 'line-through'
+            }}>
               {t('sar')} {productDetials.salePrice}
             </Typography>
             <Typography
@@ -125,7 +128,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
               component='span'
               sx={{ color: '#23856D', fontWeight: '700' }}
             >
-                {t('sar')} {productDetials.priceAfterDiscount}
+              {t('sar')} {productDetials.priceAfterDiscount}
             </Typography>
           </>
         ) : (
@@ -134,13 +137,16 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
           </Typography>
         )}
       </Box>
-      <Box sx={{ display: 'flex', gap:'10px', mb: 4 }}>
+      <Box sx={{ my: 2 }}>
+        {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={productDetials.salePrice || productDetials.priceAfterDiscount} />}
+      </Box>
+      <Box sx={{ display: 'flex', gap: '10px', mb: 4 }}>
         <Typography
           variant='h6'
           component='h1'
           sx={{ mb: 0, color: 'text.secondary', fontWeight: '700' }}
         >
-           {t('availability')} :
+          {t('availability')} :
         </Typography>
         <Typography
           variant='h6'
@@ -158,7 +164,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         {productDetials.shortDescription}
       </Typography>
       <Divider sx={{ mb: 3 }} />
-      
+
       <Attributes
         productDetials={productDetials}
         setState={setState}
@@ -170,21 +176,23 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         checkoutAttributes={state.checkOutAttributes}
         setState={setState}
       />
-      
+
       <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
         <Button
           variant='contained'
-          sx={{ width: 'auto', height: '44px', mr: 2.5 ,
-           "&:hover": {
-            backgroundColor: "primary.hover"
-          }}}
+          sx={{
+            width: 'auto', height: '44px', mr: 2.5,
+            "&:hover": {
+              backgroundColor: "primary.hover"
+            }
+          }}
           type='submit'
           onClick={handleAddCheckoutAttribute}
           disabled={state.checkOutAttributes?.length > 0}
         >
-           {t('selectOptions')}
+          {t('selectOptions')}
         </Button>
-        <Box sx={{display:'flex' }}>
+        <Box sx={{ display: 'flex' }}>
           <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }} disabled={addToCartLoader}>
             {addToCartLoader ? <CircularProgress /> : <Image src={CartIcon} alt='cart icon' width={40} height={40} />}
           </IconButton>

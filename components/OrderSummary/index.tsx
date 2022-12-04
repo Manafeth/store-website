@@ -7,26 +7,26 @@ import TabyPromo from '../TabbyPromo';
 import { useCommon } from '../../contexts/CommonContext';
 
 const OrderSummary = () => {
-  const {t: CAT} = useTranslation('cart');
-  const {t: CT} = useTranslation('common');
+  const { t: CAT } = useTranslation('cart');
+  const { t: CT } = useTranslation('common');
   const { storeInfo } = useCommon();
 
   const { cartData } = useCart();
-  const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0),0);
-  const subTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0),0);
-  const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.checkoutAttributsTotal || 0),0);
+  const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0), 0);
+  const subTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0), 0);
+  const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.checkoutAttributsTotal || 0), 0);
 
   return (
     <Box>
-      {storeInfo.isTabbyActive &&<TabyPromo sar="SAR" price={subTotal} />}
+      {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={subTotal} />}
       <Box
         sx={{
           display: 'flex',
           my: 3,
-          justifyContent:'space-between'
+          justifyContent: 'space-between'
         }}
       >
-        <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
+        <Typography variant='h5' component='h1' sx={{ color: 'text.secondary' }}>
           {CAT('subTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
@@ -37,11 +37,11 @@ const OrderSummary = () => {
         sx={{
           display: 'flex',
           mb: 3,
-          justifyContent:'space-between'
+          justifyContent: 'space-between'
         }}
       >
-        <Typography variant='h5' component='h1' sx={{color:'text.secondary'}}>
-        {CAT('checkoutAttributsTotal')}
+        <Typography variant='h5' component='h1' sx={{ color: 'text.secondary' }}>
+          {CAT('checkoutAttributsTotal')}
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
           {CT('sar')} {checkoutAttributsTotal}
@@ -51,7 +51,7 @@ const OrderSummary = () => {
         sx={{
           display: 'flex',
           mb: 3,
-          justifyContent:'space-between'
+          justifyContent: 'space-between'
         }}
       >
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
