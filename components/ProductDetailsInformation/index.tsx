@@ -88,7 +88,8 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       }, [])
     }))
   }, [productDetials])
-
+  console.log('productDetials', productDetials);
+  console.log('state.options', state.options);
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2.5 }}>
@@ -178,20 +179,22 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       />
 
       <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
-        <Button
-          variant='contained'
-          sx={{
-            width: 'auto', height: '44px', mr: 2.5,
-            "&:hover": {
-              backgroundColor: "primary.hover"
-            }
-          }}
-          type='submit'
-          onClick={handleAddCheckoutAttribute}
-          disabled={state.checkOutAttributes?.length > 0}
-        >
-          {t('selectOptions')}
-        </Button>
+        {state?.options?.length > 0 && (
+          <Button
+            variant='contained'
+            sx={{
+              width: 'auto', height: '44px', mr: 2.5,
+              "&:hover": {
+                backgroundColor: "primary.hover"
+              }
+            }}
+            type='submit'
+            onClick={handleAddCheckoutAttribute}
+            disabled={state.checkOutAttributes?.length > 0}
+          >
+            {t('selectOptions')}
+          </Button>
+        )}
         <Box sx={{ display: 'flex' }}>
           <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }} disabled={addToCartLoader}>
             {addToCartLoader ? <CircularProgress /> : <Image src={CartIcon} alt='cart icon' width={40} height={40} />}
