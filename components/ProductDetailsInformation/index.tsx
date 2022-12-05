@@ -88,8 +88,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       }, [])
     }))
   }, [productDetials])
-  console.log('productDetials', productDetials);
-  console.log('state.options', state.options);
+
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2.5 }}>
