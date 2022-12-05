@@ -103,5 +103,6 @@
     "paymentSuccessful":"تم الدفع بنجاح",
     "paymentDescription":"شكرا لاختيارك تابي ، سنقوم بإعلامك بتحديثات طلبك.",
     "viewOrders":"مشاهدة الطلب",
-    "continueShopping":"مواصلة التسوق"
+    "continueShopping":"مواصلة التسوق",
+    "orderBy":"ترتيب حسب"
 }
