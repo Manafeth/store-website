@@ -23,7 +23,7 @@ const ContactUs = () => {
         />
         ) : (
            <CardMedia
-            image={storeInfo?.contactUsImagePath?.orignialUrl}
+            image={storeInfo?.contactUsImagePath?.orignialUrl || ''}
             component='img'
             alt='Contact us image'
             sx={{ maxWidth: '100%', height: 'auto' }}
