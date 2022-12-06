@@ -13,21 +13,22 @@ const ContactUs = () => {
     <MainLayout>
     <ContactUsLayout
       image={
-        storeInfo.contactUsImagePath.orignialUrl ? (
-          <CardMedia
-            image={storeInfo?.contactUsImagePath?.orignialUrl || ''}
+        (storeInfo.contactUsImagePath.orignialUrl === ' ') ? (
+          <Image
+          src={contactUs}
+          width='548'
+          height='335'
+          alt='Auth'
+          style={{ maxWidth: '100%', height: 'auto' }}
+        />
+        ) : (
+           <CardMedia
+            image={storeInfo?.contactUsImagePath?.orignialUrl}
             component='img'
             alt='Contact us image'
             sx={{ maxWidth: '100%', height: 'auto' }}
           />
-        ) : (
-          <Image
-            src={contactUs}
-            width='548'
-            height='335'
-            alt='Auth'
-            style={{ maxWidth: '100%', height: 'auto' }}
-          />
+        
         )
       }
     >
