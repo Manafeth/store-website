@@ -6,6 +6,7 @@ import { ProductData } from '../types/products';
 // import { useRouter } from 'next/router';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 import StoreEmptyState from '../components/StoreEmptyState';
+import { storeInfoInitialState } from '../constants/initialState';
 // import paths from '../constants/paths';
 interface Props {
   children: ReactElement | ReactElement[];
@@ -14,36 +15,7 @@ interface Props {
 const CommonContext = createContext({} as CommonContextState);
 
 export const CommonContextProvider: FC<Props> = ({ children }) => {
-  const [storeInfo, setStoreInfo] = useState<StoreInfoData>({
-      id: 0,
-      name: '',
-      mainImageFilePath: {
-          orignialUrl: '',
-          thumbUrl: ''
-      },
-      complaintNumber: '',
-      supportEmail: '',
-      instagram: '',
-      twitter: '',
-      facebook: '',
-      description: '',
-      backgroundColor: '',
-      producTitelColor: '',
-      priceColor: '',
-      buttonColor: '',
-      buttonTitelColor: '',
-      footerColor: '',
-      headerColor: '',
-      isTabbyActive: false,
-      buttonHoverColor: '',
-      categoryTitleColor: '',
-      sectionTitleColor: '',
-      categoryCardColor: '',
-      contactUsImagePath: {
-        orignialUrl: '',
-        thumbUrl: ''
-      }
-    })
+  const [storeInfo, setStoreInfo] = useState<StoreInfoData>(storeInfoInitialState)
 
     const [bannerData, setBannerData] = useState<BannerData>({
       titel: '',

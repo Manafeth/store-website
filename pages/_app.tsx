@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import ThemeProvider from '../styles/theme'
@@ -11,15 +11,21 @@ import { CartModalProvider } from '../contexts/CartContext';
 import { useRouter } from 'next/router';
 import { ContactUsProvider } from '../contexts/ContactUs';
 import { ContantProvider } from '../contexts/ContentContext';
+import { getStoreInfo } from '../services/common.services';
+import { StoreInfoData } from '../types/common';
+import { storeInfoInitialState } from '../constants/initialState';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  
+  const [storeInfo, setStoreInfo] = useState<StoreInfoData>(storeInfoInitialState);
 
   useEffect(() => {
     const { locale } = router;
     if (locale)
       localStorage.setItem('userLanguage', locale)  
+      getStoreInfo().then((res) => {
+        setStoreInfo(res.data.data)
+      })
   }, [router])
 
   return (
@@ -27,6 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider>
         <Head>
           <title>Store website</title>
+          <link rel="icon" href={storeInfo.mainImageFilePath?.thumbUrl || '/favicon.png'} />
           <meta name="description" content="Store website" />
         </Head>
         <AlertProvider>
