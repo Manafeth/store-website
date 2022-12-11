@@ -26,8 +26,9 @@ const SideMenu = () => {
     { id: 1, name: t('editAccount'), link: paths.editAccount },
     { id: 2, name: t('orders'), link: paths.profileOrders},
     { id: 3, name: t('wishlist'), link: paths.whishList},
-    { id: 4, name: t('setting'), link: paths.addressSettings },
-    { id: 5, name: t('logout'), onClick: logout},
+    { id: 4, name: t('setting'), link: paths.notificationsSettings },
+    { id: 5, name: t('addresses'), link: paths.addressesManagement },
+    { id: 6, name: t('logout'), onClick: logout},
   ];
   return (
     <Box sx={{ minHeight: '100%' }}>

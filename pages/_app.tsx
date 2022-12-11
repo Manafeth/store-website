@@ -32,9 +32,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <CommonContextProvider>
       <ThemeProvider>
         <Head>
-          <title>Store website</title>
+          <title>{storeInfo.name}</title>
           <link rel="icon" href={storeInfo.mainImageFilePath?.thumbUrl || '/favicon.png'} />
-          <meta name="description" content="Store website" />
+          <meta name="description" content={storeInfo.description} />
         </Head>
         <AlertProvider>
             <AuthModalProvider>

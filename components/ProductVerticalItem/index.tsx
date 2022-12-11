@@ -24,6 +24,7 @@ import { addProductToCart } from '../../services/cart.services';
 import { useCart } from '../../contexts/CartContext';
 import { ProductCartData } from '../../types/cart';
 import { useCommon } from '../../contexts/CommonContext';
+import { useRouter } from 'next/router';
 interface Props {
   data: ProductData
 }
@@ -62,6 +63,7 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
   const { fetchWishListData } = useProfile();
   const {t} = useTranslation('common');
   const { storeInfo } = useCommon()
+  const router = useRouter();
 
   function handleTogglingProductInWishList() {
     if (isloggedIn) {
@@ -90,15 +92,19 @@ const RelatedProductCard: FC<Props> = ({ data }) => {
 
   function handleAddProductToCart() {
     if (isloggedIn) {
-      setAddToCartLoader(true);
-      addProductToCart(state).then((response) => {
-        sendAlert(response?.data?.message, 'success')
-        fetchCartProducts()
-        setAddToCartLoader(false);
-      }).catch((error: any) => {
-        sendAlert(error.response.data.Message, 'error')
-        setAddToCartLoader(false);
-      })
+      if (product.attributes.length) {
+        router.push(paths.productDetails(product.id))
+      } else {
+        setAddToCartLoader(true);
+        addProductToCart(state).then((response) => {
+          sendAlert(response?.data?.message, 'success')
+          fetchCartProducts()
+          setAddToCartLoader(false);
+        }).catch((error: any) => {
+          sendAlert(error.response.data.Message, 'error')
+          setAddToCartLoader(false);
+        })
+      }
     } else {
       handleOpenAuthModal();
     }
