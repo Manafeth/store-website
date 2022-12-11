@@ -33,6 +33,7 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
   const { fetchWishListData } = useProfile();
   const [productData, setProductData] = useState(productDetials);
   const [productsList, setProductsList] = useState(realtedProducts);
+  const [gallryImages, setGalleryImages] = useState<{ orignialUrl: string, thumbUrl: string }[]>([]);
   const router = useRouter();
   const { productId } = router.query;
   function handleTogglingProductInWishList() {
@@ -60,13 +61,12 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
       })
     }
   }, [productDetials, realtedProducts])
-  
 
   return (
     <MainLayout>
       <Head>
-        <title>{productData.pageTitle || ''}</title>
-        <meta name="description" content={productData.metaDescription || ''} />
+        <title>{productData.pageTitle || storeInfo.name}</title>
+        <meta name="description" content={productData.metaDescription || storeInfo.description} />
       </Head>
       <>
         <Box
@@ -77,12 +77,13 @@ const ProductDetails: NextPage<Props> = ({ productDetials, realtedProducts }) =>
             <Breadcrumb  productDetials={productData}/>
             <Grid container spacing={{ xs: 2, lg: 7 }} rowSpacing={4.25} >
               <Grid item xs={12} md={6}>
-                <ProductGallery images={productData.imagesFilePath} />
+                <ProductGallery images={gallryImages} />
               </Grid>
               <Grid item xs={12} md={6}>
                 <ProductDetailsInformation 
                   productDetials={productData}
                   handleTogglingProductInWishList={handleTogglingProductInWishList}
+                  setGalleryImages={setGalleryImages}
                 />
               </Grid>
             </Grid>

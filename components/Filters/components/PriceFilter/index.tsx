@@ -58,7 +58,7 @@ function valuetext(value: number) {
         <Box sx={{display:'flex', gap:'5px', mb:1}}>
           <TextField 
             id="outlined-basic"
-            value={params.priceFrom}
+            value={params.priceFrom || 0}
             size="small"
             onChange={handlePriceFrom}
             inputProps={{
@@ -71,7 +71,7 @@ function valuetext(value: number) {
           <Box width={350}>
           <TextField 
             id="outlined-basic"
-            value={params.priceTo}
+            value={params.priceTo || 0}
             size="small"
             onChange={handlePriceTo}
             inputProps={{

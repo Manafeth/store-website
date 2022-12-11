@@ -75,16 +75,6 @@ const AcccoutSettingForm: FC<Props> = ({emailNotificationData,loading }) => {
 
       <Divider sx={{ mb: 5 }} />
 
-      <Box sx={{display:'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
-        <Typography variant='h2' sx={{ mb: 5,flex: '0.7', fontSize: { xs: '20px', md: '24px' },fontFamily: lang === 'en' ? 'Urbanist' : '' }}>
-          {ST('shippingAddress')}
-        </Typography>
-        <Link href='/addressManagment'>
-          <IconButton sx={{fontSize:'16px',fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
-            {CT('edit')}
-          </IconButton> 
-        </Link>
-      </Box>
     </Box>
   );
 };

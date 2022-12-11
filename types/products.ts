@@ -49,7 +49,7 @@ export type ProductData =  {
   }[],
   attributes: ProductAttributesData[],
   checkOutAttributes: checkOutAttributes[],
-  subProducts: [],
+  subProducts: {options: number[], mainImageFilePath: { orignialUrl: string, thumbUrl: string}}[],
   total?: number,
   subTotal?: number,
   checkoutAttributsTotal?: number,

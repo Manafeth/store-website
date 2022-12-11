@@ -27,5 +27,6 @@
     "updateAddress":"Update Address",
     "orderDetails":"Order details",
     "viewInvoice":"View invoice",
-    "relatedProducts":"Related Products"
+    "relatedProducts":"Related Products",
+    "addresses": "Addresses"
 }
