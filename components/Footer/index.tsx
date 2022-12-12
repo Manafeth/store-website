@@ -9,9 +9,14 @@ import ListItem from '@mui/material/ListItem';
 import Avatar from '@mui/material/Avatar';
 
 import Image from 'next/image';
-import facebook from '../../assets/images/icons/facebook-icon.png';
-import instagram from '../../assets/images/icons/instagram-icon.png';
-import twitter from '../../assets/images/icons/twitter-icon.png';
+import facebook from '../../assets/images/icons/facebook.svg';
+import instagram from '../../assets/images/icons/instagram.svg';
+import twitter from '../../assets/images/icons/twitter.svg';
+import snapchat from '../../assets/images/icons/snapchat.svg';
+import tikTok from '../../assets/images/icons/tikTok.svg';
+import youtube from '../../assets/images/icons/youtube.svg';
+import linkedin from '../../assets/images/icons/linkedin.svg';
+import telegram from '../../assets/images/icons/telegram.svg';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import paths from '../../constants/paths';
@@ -57,21 +62,48 @@ const Footer = () => {
                 </Grid>
               </Grid>
               <Box sx={{ display: 'flex', alignItem: 'center', justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                {storeInfo.facebook && (
+                {storeInfo.facebook ? (
                   <MuiLink href={storeInfo.facebook} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={facebook} alt='facebook' width='23' height='23' />
                   </MuiLink>
-                )}
-                {storeInfo.instagram && (
+                ): ( <Image src="" alt=''  />)}
+                {storeInfo.instagram ? (
                   <MuiLink href={storeInfo.instagram} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={instagram} alt='instagram' width='22' height='22' />
                   </MuiLink>
-                )}
-                {storeInfo.twitter && (
-                  <MuiLink href={storeInfo.twitter} target='_blank' display='flex' alignItems='center'>
+                ) : (<Image src="" alt=''  />)}
+                {storeInfo.twitter ? (
+                  <MuiLink href={storeInfo.twitter} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={twitter} alt='twitter' width='22' height='18' />
                   </MuiLink>
-                )}
+                ):(<Image src="" alt=''  />)}
+                {storeInfo.snapchat ? (
+                  <MuiLink href={storeInfo.snapchat} target='_blank' mr={2.75} display='flex' alignItems='center'>
+                    <Image src={snapchat} alt='snapchat' width='22' height='18' />
+                  </MuiLink>
+                ):( <Image src="" alt=''  /> )}
+                {storeInfo.tikTok ? (
+                  <MuiLink href={storeInfo.tikTok} target='_blank' mr={2.75} display='flex' alignItems='center'>
+                    <Image src={tikTok} alt='tikTok' width='22' height='18' />
+                  </MuiLink>
+                ):( <Image src="" alt=''  /> )}
+                {storeInfo.youtube ? (
+                  <MuiLink href={storeInfo.youtube} target='_blank' mr={2.75} display='flex' alignItems='center'>
+                    <Image src={youtube} alt='youtube' width='22' height='18' />
+                  </MuiLink>
+                ):( <Image src="" alt=''  /> )}
+                {storeInfo.linkedin ? (
+                  <MuiLink href={storeInfo.linkedin} target='_blank' mr={2.75} display='flex' alignItems='center'>
+                    <Image src={linkedin} alt='linkedin' width='22' height='18' />
+                  </MuiLink>
+                ):( <Image src="" alt=''  /> )}
+                {storeInfo.telegram ? (
+                  <MuiLink href={storeInfo.telegram} target='_blank' mr={2.75} display='flex' alignItems='center'>
+                    <Image src={telegram} alt='telegram' width='22' height='18' />
+                  </MuiLink>
+                ):( <Image src="" alt=''  /> )}
+      
+                
               </Box>
             </Box>
           </Box>
