@@ -114,3 +114,8 @@ export const orderStatusEnums = [
     { id: 2, name: "storeTwo", space: "privacy"},
     { id: 3, name: "storeThree", space: "privacy"},
   ];
+
+  export const genders = [
+    { label: 'male', value: 1},
+    { label: 'female', value: 2}
+  ]
