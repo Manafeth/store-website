@@ -15,7 +15,7 @@
       "/checkout": ["settings", "checkout"],
       "/categories": ["heroSection"],
       "/categories/[categoryId]": ["heroSection"],
-      "/addressSettings": ["settings"],
+      "/notificationsSettings": ["settings"],
       "/addressManagment": ["settings"],
       "/accountSettings": ["settings"],
       "/contactUs": ["settings", "contact"],

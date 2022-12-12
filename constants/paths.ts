@@ -1,5 +1,5 @@
 const paths = {
-  addressSettings: '/addressSettings',
+  notificationsSettings: '/notificationsSettings',
   editAccount: '/accountSettings',
   whishList: '/wishList',
   profileOrders: '/orders',
@@ -15,6 +15,7 @@ const paths = {
   categoryDetails: (id: string | number) => `/categories/${id}`,
   orderDetails: (id: string | number) => `/orders/${id}`,
   invoiceDetails: (id: string | number) => `/invoice/${id}`,
+  addressesManagement: '/addressManagment'
 };
   
 

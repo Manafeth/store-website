@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
@@ -22,13 +22,15 @@ import { useCart } from '../../contexts/CartContext';
 import { useAuthModal } from '../../contexts/AuthModalContext';
 import { useCommon } from '../../contexts/CommonContext';
 import TabyPromo from '../TabbyPromo';
+import arrayEquals from '../../utils/arrayEquals';
 interface Props {
   productDetials: ProductData,
   handleTogglingProductInWishList: () => void,
+  setGalleryImages: Dispatch<SetStateAction<{ orignialUrl: string; thumbUrl: string; }[]>>
 }
 
 
-const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList }) => {
+const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList, setGalleryImages }) => {
   const [state, setState] = useState<ProductCartData>({
     productId: 0,
     quantity: 1,
@@ -89,6 +91,16 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
     }))
   }, [productDetials])
 
+  useEffect(() => {
+    const subProduct = productDetials.subProducts?.reduce((acc: { [key: string]: any }, item) => {
+      if (arrayEquals(item.options, state.options))
+        return {...acc, ...item}
+      return acc;
+    }, {});
+    setGalleryImages(subProduct?.mainImageFilePath?.orignialUrl ? [subProduct?.mainImageFilePath] : (productDetials.imagesFilePath || []))
+  }, [state.options, productDetials])
+  
+
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2.5 }}>
@@ -138,7 +150,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         )}
       </Box>
       <Box sx={{ my: 2 }}>
-        {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={productDetials.salePrice || productDetials.priceAfterDiscount} />}
+        {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={productDetials.salePrice || productDetials.priceAfterDiscount} selector='tabby-product' />}
       </Box>
       <Box sx={{ display: 'flex', gap: '10px', mb: 4 }}>
         <Typography

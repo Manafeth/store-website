@@ -14,11 +14,13 @@ import Image from 'next/image';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Avatar from '@mui/material/Avatar';
+import MenuItem from '@mui/material/MenuItem';
 import PhoneNumberInput from '../PhoneNumberInput';
 import { customerData } from '../../types/profile';
 import CircularProgress from '@mui/material/CircularProgress';
 import useTranslation from 'next-translate/useTranslation';
 import { useCommon } from '../../contexts/CommonContext';
+import { genders } from '../../constants/statuses';
 
 interface Props {
   customerData: customerData;
@@ -80,6 +82,7 @@ const EditAccount: FC<Props> = ({
       email: customerData.email,
       phoneNumber: customerData.phoneNumber,
       countryId: customerData.countryId || 0,
+      gender: customerData.gender || 0,
     }));
     setImage(customerData.imageFilePath?.thumbUrl || '');
   }, [customerData, setState]);
@@ -192,6 +195,31 @@ const EditAccount: FC<Props> = ({
         countryError={isSubmitted && !state.countryId}
         error={isSubmitted && !state.phoneNumber}
       />
+
+      <TextField
+        select
+        variant='standard'
+        margin='normal'
+        sx={{ mb: 4 }}
+        onChange={handleInput}
+        name='gender'
+        value={state.gender || 0}
+        error={isSubmitted && !state.gender}
+      >
+        <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+          {CT('selectItem')}
+        </MenuItem>
+        {genders?.length > 0 &&
+          genders?.map((option) => (
+            <MenuItem
+              key={option.value}
+              value={option?.value}
+              sx={{ fontSize: '14px', fontWeight: 'bold' }}
+            >
+              {option?.label}
+            </MenuItem>
+          ))}
+      </TextField>
       <Box
         sx={{
           display: 'flex',
