@@ -66,42 +66,42 @@ const Footer = () => {
                   <MuiLink href={storeInfo.facebook} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={facebook} alt='facebook' width='23' height='23' />
                   </MuiLink>
-                ): ( <Image src="" alt=''  />)}
+                ): ( "")}
                 {storeInfo.instagram ? (
                   <MuiLink href={storeInfo.instagram} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={instagram} alt='instagram' width='22' height='22' />
                   </MuiLink>
-                ) : (<Image src="" alt=''  />)}
+                ) : ("")}
                 {storeInfo.twitter ? (
                   <MuiLink href={storeInfo.twitter} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={twitter} alt='twitter' width='22' height='18' />
                   </MuiLink>
-                ):(<Image src="" alt=''  />)}
+                ):("")}
                 {storeInfo.snapchat ? (
                   <MuiLink href={storeInfo.snapchat} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={snapchat} alt='snapchat' width='22' height='18' />
                   </MuiLink>
-                ):( <Image src="" alt=''  /> )}
+                ):( "" )}
                 {storeInfo.tikTok ? (
                   <MuiLink href={storeInfo.tikTok} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={tikTok} alt='tikTok' width='22' height='18' />
                   </MuiLink>
-                ):( <Image src="" alt=''  /> )}
+                ):( "" )}
                 {storeInfo.youtube ? (
                   <MuiLink href={storeInfo.youtube} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={youtube} alt='youtube' width='22' height='18' />
                   </MuiLink>
-                ):( <Image src="" alt=''  /> )}
+                ):( "" )}
                 {storeInfo.linkedin ? (
                   <MuiLink href={storeInfo.linkedin} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={linkedin} alt='linkedin' width='22' height='18' />
                   </MuiLink>
-                ):( <Image src="" alt=''  /> )}
+                ):( "" )}
                 {storeInfo.telegram ? (
                   <MuiLink href={storeInfo.telegram} target='_blank' mr={2.75} display='flex' alignItems='center'>
                     <Image src={telegram} alt='telegram' width='22' height='18' />
                   </MuiLink>
-                ):( <Image src="" alt=''  /> )}
+                ):("")}
       
                 
               </Box>
