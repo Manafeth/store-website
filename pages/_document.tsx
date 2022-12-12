@@ -9,7 +9,6 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Lora:wght@500&family=Urbanist:wght@400;700&display=swap" rel="stylesheet"></link>
           <script src="https://checkout.tabby.ai/tabby-promo.js"></script>
-          <NextScript />
         </Head>
         <body>
           <Main />

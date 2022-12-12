@@ -18,7 +18,7 @@ const OrderSummary = () => {
 
   return (
     <Box>
-      {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={subTotal} />}
+      {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={subTotal} selector='tabby-cart' />}
       <Box
         sx={{
           display: 'flex',

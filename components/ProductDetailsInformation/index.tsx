@@ -150,7 +150,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         )}
       </Box>
       <Box sx={{ my: 2 }}>
-        {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={productDetials.salePrice || productDetials.priceAfterDiscount} />}
+        {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={productDetials.salePrice || productDetials.priceAfterDiscount} selector='tabby-product' />}
       </Box>
       <Box sx={{ display: 'flex', gap: '10px', mb: 4 }}>
         <Typography
