@@ -15,9 +15,8 @@ const settingAccount = () => {
     phoneNumber:'',
     countryForLocationId: null,
     cityId: null,
-    gender: null,
-    dateOfBirth: null
-  
+    gender: 0,
+    dateOfBirth: null,
   };
    // eslint-disable-next-line react-hooks/rules-of-hooks
    const [state, setState] = useState<customerData>(initialState);
@@ -39,6 +38,7 @@ const settingAccount = () => {
       && state.email
       && state.phoneNumber
       && state.countryId
+      && state.gender
     );
   }
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
@@ -54,7 +54,7 @@ const settingAccount = () => {
             ...prevState,
             image: null
         }));
-      }).catch(()=>{
+      }).catch(() => {
       })
     }
   }
