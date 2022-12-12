@@ -75,28 +75,32 @@ const HomePage: NextPage<Props> = ({ productsList, categories, discountedProduct
   
   return (
     <MainLayout>
-      <HeroSection targetSectionId='recent-products' data={bannerData} />
-      <CategoriesSection
-        categories={{ categoriesWithImages, categoriesWithoutImages }}
-        title='shopByCategory'
-        sx={{ pt: 9.5, pb: 6 }}
-        seeAllButtonLink={paths.categories}
-        seeAllButtonText='seeAllCategories'
-      />
-      <Box ref={ref} id='recent-products'>
-        <ProductsSection
-          sx={{ pt: 2.75 }}
-          products={products}
-          title='listOfProducts'
-          seeAllButtonLink={paths.products}
-          seeAllButtonText='seeAllProducts'
+      <Box pb={5}>
+        <HeroSection targetSectionId='recent-products' data={bannerData} />
+        <CategoriesSection
+          categories={{ categoriesWithImages, categoriesWithoutImages }}
+          title='shopByCategory'
+          sx={{ pt: 9.5, pb: 6 }}
+          seeAllButtonLink={paths.categories}
+          seeAllButtonText='seeAllCategories'
         />
+        <Box ref={ref} id='recent-products'>
+          <ProductsSection
+            sx={{ pt: 2.75 }}
+            products={products}
+            title='listOfProducts'
+            seeAllButtonLink={paths.products}
+            seeAllButtonText='seeAllProducts'
+          />
+        </Box>
+        {discProducts.length > 0 && (
+          <ProductsSection
+            sx={{ pt: 2.5 }}
+            products={discProducts}
+            title='discountedProducts'
+          />
+        )}
       </Box>
-      <ProductsSection
-        sx={{ pt: 2.5, pb: 5 }}
-        products={discProducts}
-        title='discountedProducts'
-      />
     </MainLayout>
   )
 }
