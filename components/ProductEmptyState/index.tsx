@@ -16,7 +16,7 @@ const ProductEmptyState: FC = () => {
     <Box sx={{ textAlign: 'center' }}>
       <Box sx={{ position: 'relative' }}>
         <Box
-           sx={{ height: 300, borderRadius: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'grey.2400' }}
+           sx={{ height: 300, borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'grey.2400' }}
         >
             <Image src={emptyState} alt='product empty state' width={147} height={119} />
         </Box>
