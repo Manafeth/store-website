@@ -168,7 +168,9 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
                   onChange={handleSort}
                   value={params.productStatus || 0}
                 >
-                  <MenuItem value={0} disabled />
+                  <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+                   {t('orderBy')}
+                  </MenuItem>
                   {productStatusMenu.map((item) => {
                     return (
                       <MenuItem value={item.value} key={item.value}>{t(item.label)}</MenuItem>
