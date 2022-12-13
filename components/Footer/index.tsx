@@ -6,22 +6,14 @@ import MuiLink from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
 
-import Image from 'next/image';
-import facebook from '../../assets/images/icons/facebook.svg';
-import instagram from '../../assets/images/icons/instagram.svg';
-import twitter from '../../assets/images/icons/twitter.svg';
-import snapchat from '../../assets/images/icons/snapchat.svg';
-import tikTok from '../../assets/images/icons/tiktok.svg';
-import youtube from '../../assets/images/icons/youtube.svg';
-import linkedin from '../../assets/images/icons/linkedin.svg';
-import telegram from '../../assets/images/icons/telegram.svg';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import paths from '../../constants/paths';
 import { useCommon } from '../../contexts/CommonContext';
 import { useAuthModal } from '../../contexts/AuthModalContext';
+import BottomFooter from './components/BottomFooter';
 
 
 const Footer = () => {
@@ -31,7 +23,7 @@ const Footer = () => {
 
 
   return (
-    <Box component='footer' py={12.5} sx={{ backgroundColor: storeInfo.footerColor }}>
+    <Box component='footer' pb={2} pt={6.25} sx={{ backgroundColor: storeInfo.footerColor }}>
       <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
         <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
           <Box sx={{ maxWidth: { md: 596}, flexGrow: 1, pr: { md: 2 }, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -39,7 +31,7 @@ const Footer = () => {
               {storeInfo.description}
             </Typography>
             <Box>
-              <Grid container spacing={{ xs: 2, lg: 5 }} sx={{ mb: 2.5 }}>
+              <Grid container spacing={{ xs: 2, lg: 5 }} sx={{ mb: 6 }}>
                 <Grid item xs={12} sm={6}>
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
@@ -61,50 +53,6 @@ const Footer = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Box sx={{ display: 'flex', alignItem: 'center', justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                {storeInfo.facebook ? (
-                  <MuiLink href={storeInfo.facebook} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={facebook} alt='facebook' width='23' height='23' />
-                  </MuiLink>
-                ): ( "")}
-                {storeInfo.instagram ? (
-                  <MuiLink href={storeInfo.instagram} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={instagram} alt='instagram' width='22' height='22' />
-                  </MuiLink>
-                ) : ("")}
-                {storeInfo.twitter ? (
-                  <MuiLink href={storeInfo.twitter} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={twitter} alt='twitter' width='22' height='18' />
-                  </MuiLink>
-                ):("")}
-                {storeInfo.snapchat ? (
-                  <MuiLink href={storeInfo.snapchat} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={snapchat} alt='snapchat' width='22' height='18' />
-                  </MuiLink>
-                ):( "" )}
-                {storeInfo.tikTok ? (
-                  <MuiLink href={storeInfo.tikTok} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={tikTok} alt='tikTok' width='22' height='18' />
-                  </MuiLink>
-                ):( "" )}
-                {storeInfo.youtube ? (
-                  <MuiLink href={storeInfo.youtube} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={youtube} alt='youtube' width='22' height='18' />
-                  </MuiLink>
-                ):( "" )}
-                {storeInfo.linkedin ? (
-                  <MuiLink href={storeInfo.linkedin} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={linkedin} alt='linkedin' width='22' height='18' />
-                  </MuiLink>
-                ):( "" )}
-                {storeInfo.telegram ? (
-                  <MuiLink href={storeInfo.telegram} target='_blank' mr={2.75} display='flex' alignItems='center'>
-                    <Image src={telegram} alt='telegram' width='22' height='18' />
-                  </MuiLink>
-                ):("")}
-      
-                
-              </Box>
             </Box>
           </Box>
           <Box sx={{ flexGrow: 1, maxWidth: { lg: 320 } }}>
@@ -189,6 +137,8 @@ const Footer = () => {
             </Typography>
           </Box>
         </Box>
+        <Divider sx={{ mt: 2.5, mb: 3, borderColor: '#C6C6C6' }} />
+        <BottomFooter />
       </Container>
     </Box>
   )
