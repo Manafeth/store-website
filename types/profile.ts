@@ -69,8 +69,8 @@ export type customerData = {
     phoneNumber: string,
     countryForLocationId: null,
     cityId: null,
-    gender: null,
-    dateOfBirth: null
+    gender: null | number,
+    dateOfBirth: null,
   }
 
   export type emailNotificationData = {
