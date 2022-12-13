@@ -13,7 +13,7 @@ import facebook from '../../assets/images/icons/facebook.svg';
 import instagram from '../../assets/images/icons/instagram.svg';
 import twitter from '../../assets/images/icons/twitter.svg';
 import snapchat from '../../assets/images/icons/snapchat.svg';
-import tikTok from '../../assets/images/icons/tikTok.svg';
+import tikTok from '../../assets/images/icons/tiktok.svg';
 import youtube from '../../assets/images/icons/youtube.svg';
 import linkedin from '../../assets/images/icons/linkedin.svg';
 import telegram from '../../assets/images/icons/telegram.svg';
