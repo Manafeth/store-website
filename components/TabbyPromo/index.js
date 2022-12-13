@@ -13,7 +13,7 @@ const TabyPromo = ({ sar, price, selector }) => {
         publicKey: TABBY_PROMO_KEY, // required, public key which identifies your account when communicating with tabby. Test or Production depending on the environment
         merchantCode: 'string'  // required
       });
-    }, [])
+    }, [sar, price, selector])
     
   return (
     <div id={selector}></div>
