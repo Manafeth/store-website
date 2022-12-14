@@ -31,5 +31,6 @@ export const storeInfoInitialState = {
     contactUsImagePath: {
       orignialUrl: '',
       thumbUrl: ''
-    }
+    },
+    providers: []
   }
