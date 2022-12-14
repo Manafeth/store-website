@@ -12,12 +12,14 @@ import { AddressData } from '../../../types/profile';
 import Button from '@mui/material/Button';
 import useTranslation from 'next-translate/useTranslation';
 import { addressTagsEnums } from '../../../constants/statuses';
+import { useCommon } from '../../../contexts/CommonContext';
 interface Props {
   data: AddressData;
 }
 
 const AddressCard: FC<Props> = ({ data }) => {
   const { updateCheckoutData, checkoutData } = useCart();
+  const { storeInfo } = useCommon();
   const {t} = useTranslation('common');
 
   function handleChange() {
@@ -25,7 +27,7 @@ const AddressCard: FC<Props> = ({ data }) => {
   }
 
   return (
-    <Card sx={{ width: '100%', backgroundColor: 'grey.2400' }}>
+    <Card sx={{ width: '100%', backgroundColor: storeInfo.categoryCardColor || 'grey.2400' }}>
       <CardContent>
         <FormControl>
           <FormControlLabel

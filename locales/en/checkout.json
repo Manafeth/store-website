@@ -40,5 +40,11 @@
     "mobileNumber":"Mobile Number",
     "verifiy":"Varification Code",
     "verificationCode":"A verification code has been sent to your phone",
-    "repaymentConfirmation": "Pay {{price}} SAR"
+    "repaymentConfirmation": "Pay {{price}} SAR",
+    "firstStep": "FIRST STEP",
+    "secondStep": "SECOND STEP",
+    "thirdStep": "THIRD STEP",
+    "information": "Information",
+    "delivery": "Delivery",
+    "billing": "Billing"
 }
