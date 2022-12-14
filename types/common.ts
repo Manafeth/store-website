@@ -1,4 +1,5 @@
 import { ProductData } from "./products"
+import { PaymentProvidersData } from "./cart"
 
 export type CountryData = {
     code: string,
@@ -43,7 +44,8 @@ export type StoreInfoData = {
     contactUsImagePath: {
         orignialUrl: string,
         thumbUrl: string
-    }
+    },
+    providers: PaymentProvidersData[]
 }
 
 export type SlideData = {

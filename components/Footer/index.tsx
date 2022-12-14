@@ -13,7 +13,9 @@ import useTranslation from 'next-translate/useTranslation';
 import paths from '../../constants/paths';
 import { useCommon } from '../../contexts/CommonContext';
 import { useAuthModal } from '../../contexts/AuthModalContext';
-import BottomFooter from './components/BottomFooter';
+import SocialMedia from './components/SocialMedia';
+import PaymentProviders from './components/PaymentProviders';
+import moment from 'moment';
 
 
 const Footer = () => {
@@ -30,32 +32,34 @@ const Footer = () => {
             <Typography sx={{ fontSize: '13px', lineHeight: '16px', letterSpacing: '0.2px', mb: { xs: 2.5 }}}>
               {storeInfo.description}
             </Typography>
-            <Box>
-              <Grid container spacing={{ xs: 2, lg: 5 }} sx={{ mb: 6 }}>
-                <Grid item xs={12} sm={6}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
-                      {t('compliantsNumber')}
-                    </Typography>
-                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
-                      {storeInfo.complaintNumber}
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mr: 1 }} component='span'>
-                      {t('compliantsEmail')}
-                    </Typography>
-                    <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
-                      {storeInfo.supportEmail}
-                    </Typography>
-                  </Box>
-                </Grid>
+            <Grid container spacing={2} rowSpacing={3} alignItems='center' sx={{ textAlign: 'left', maxWidth: { xs: '400px', md: 'none' }, mx: { xs: 'auto', md: 0 } }}>
+              <Grid item xs={4} sm={3}>
+                <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px' }} component='span'>
+                  {t('forComplaints')}
+                </Typography>
               </Grid>
-            </Box>
+              <Grid item xs={8} sm={9}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600, mr: 6 }} component='span'>
+                    {storeInfo.complaintNumber}
+                  </Typography>
+                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>
+                    {storeInfo.supportEmail}
+                  </Typography>
+                </Box>
+              </Grid>
+
+              <Grid item xs={4} sm={3}>
+                <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px' }} component='span'>
+                  {t('followUs')}
+                </Typography>
+              </Grid>
+              <Grid item xs={8} sm={9}>
+                <SocialMedia />
+              </Grid>
+            </Grid>
           </Box>
-          <Box sx={{ flexGrow: 1, maxWidth: { lg: 320 } }}>
+          <Box sx={{ flexGrow: 1, minWidth: { md: 320 }, maxWidth: { md: 320 } }}>
             <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
               <Box pr={{ md: 2}}  mb={5}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>
@@ -96,25 +100,11 @@ const Footer = () => {
                     )}
                 </List>
               </Box>
-              <Box mb={5}>
+              <Box mb={2}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>
-                {t('legal')}
+                {t('general')}
                 </Typography>
                 <List sx={{ py: 0 }}>
-                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                      <Link href={paths.privacyPolicy}>
-                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('privacyPolicy')}
-                        </MuiLink>
-                      </Link>
-                    </ListItem>
-                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                      <Link href={paths.termsOfUse}>
-                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
-                        {t('termsOfUse')}
-                        </MuiLink>
-                      </Link>
-                    </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.refundPolicy}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
@@ -132,13 +122,25 @@ const Footer = () => {
                 </List>
               </Box>
             </Box>
-            <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary', mb: { xs: 5, md: 0 } }}>
-              {t('beaundTeam')}
-            </Typography>
+            <PaymentProviders />
           </Box>
         </Box>
         <Divider sx={{ mt: 2.5, mb: 3, borderColor: '#C6C6C6' }} />
-        <BottomFooter />
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Typography sx={{ fontSize: '12px', lineHeight: '16px', color: 'text.secondary', mr: { md: 3 }, flexGrow: { xs: 1, md: 0 }, mb: { xs: 1.5, md: 0 } }}>
+            {t('copyRight', { year: moment().year() })}
+          </Typography>
+          <Link href={paths.privacyPolicy}>
+            <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 'bold', color: 'text.secondary', mr: 3 }}>
+            {t('privacyPolicy')}
+            </MuiLink>
+          </Link>
+          <Link href={paths.termsOfUse}>
+            <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 'bold', color: 'text.secondary' }}>
+            {t('termsOfUse')}
+            </MuiLink>
+          </Link>
+        </Box>
       </Container>
     </Box>
   )
