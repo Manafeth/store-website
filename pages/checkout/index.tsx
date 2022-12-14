@@ -24,13 +24,6 @@ import ShippingProviders from '../../components/Providers/ShippingProviders';
 import { LOADING } from '../../constants';
 import AuthComponent from '../../components/AuthComponent';
 
-
-const steps = [
-  {id:1, name:'FIRST STEP',info:'Information'},
-  {id:2, name:'SECOND STEP',info:'Delivery'},
-  {id:3, name:'THIRD STEP',info:'Billing'},
-];
-
 const ColorlibStepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
@@ -44,13 +37,13 @@ const ColorlibStepIconRoot = styled('div')<{
   justifyContent: 'center',
   alignItems: 'center',
   ...(ownerState.active && {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(25,149,173) 0%, rgb(25,149,173) 50%, rgb(25,149,173) 100%)',
+    backgroundColor:
+      theme.palette.primary.main,
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(25,149,173) 0%, rgb(25,149,173) 50%, rgb(25,149,173) 100%)',
+    backgroundColor:
+      theme.palette.primary.main,
   }),
 }));
 const Checkout = () => {
@@ -58,6 +51,13 @@ const Checkout = () => {
   const {fetchCartProducts,cartData,createOrderStatus } = useCart();
   const {t, lang} = useTranslation('checkout');
   const {t:CT} = useTranslation('common');
+
+  const steps = [
+    { id: 1, name: t('firstStep'), info: t('information') },
+    { id: 2, name: t('secondStep'), info: t('delivery') },
+    { id: 3, name: t('thirdStep'), info: t('billing') },
+  ];
+  
   useEffect(() => {
     fetchCartProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps

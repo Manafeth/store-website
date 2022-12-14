@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { PaymentProvidersData } from '../../../types/cart';
 import Avatar from '@mui/material/Avatar';
 import { useCart } from '../../../contexts/CartContext';
+import { useCommon } from '../../../contexts/CommonContext';
 
 interface Props {
     data: PaymentProvidersData;
@@ -14,6 +15,7 @@ interface Props {
 
 const PaymentCard: FC<Props> = ({ data }) => {
   const { updateCheckoutData, checkoutData, isTappyEnabled } = useCart();
+  const { storeInfo } = useCommon();
   const disabled = data.providerCategory === 4 ? !isTappyEnabled : false
   function handleClick() {
     if (!disabled) {
@@ -26,7 +28,7 @@ const PaymentCard: FC<Props> = ({ data }) => {
       onClick={handleClick}
       sx={{ opacity: disabled ? 0.5 : 1 }}
     >
-      <Card sx={{width: '100%', mb:3, backgroundColor: data.id === checkoutData.paymentProviderId ? '#F3F3F3': null}}>
+      <Card sx={{width: '100%', mb:3, backgroundColor: storeInfo.categoryCardColor, opacity: data.id === checkoutData.paymentProviderId ? 0.7 : 1 }}>
         <CardActionArea disabled={disabled}>
           <CardContent>
             <Box sx={{display:'flex', gap:'20px'}}>
