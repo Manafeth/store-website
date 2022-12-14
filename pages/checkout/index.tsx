@@ -95,13 +95,13 @@ const Checkout = () => {
               {steps.map((step, index) => (
                 <Step key={step.id}>
                   <StepLabel StepIconComponent={ColorlibStepIcon} color='inherit'>
-                    <Box sx={{display:'flex',flexDirection:'column'}}>
+                    <Box sx={{display:{ xs: 'none', sm: 'flex'},flexDirection:'column' }}>
                       <Typography variant='h3' sx={{fontWeight:'700', color:'grey.2200', fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
                         {step.name} 
                        </Typography>
-                    <Box sx={{textAlign:'left', fontSize:'18px',fontWeight:'700',fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
-                    {step.info}
-                    </Box>
+                      <Box sx={{textAlign:'left', fontSize:'18px',fontWeight:'700',fontFamily: lang === 'en' ? 'Urbanist' : ''}}>
+                      {step.info}
+                      </Box>
                     </Box>
                   </StepLabel>
                 </Step>

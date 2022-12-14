@@ -10,6 +10,11 @@ export const storeInfoInitialState = {
     instagram: '',
     twitter: '',
     facebook: '',
+    snapchat: '',
+    tikTok: '',
+    youtube: '',
+    linkedin: '',
+    telegram: '',
     description: '',
     backgroundColor: '',
     producTitelColor: '',
@@ -26,5 +31,6 @@ export const storeInfoInitialState = {
     contactUsImagePath: {
       orignialUrl: '',
       thumbUrl: ''
-    }
+    },
+    providers: []
   }

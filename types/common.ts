@@ -1,4 +1,5 @@
 import { ProductData } from "./products"
+import { PaymentProvidersData } from "./cart"
 
 export type CountryData = {
     code: string,
@@ -22,6 +23,11 @@ export type StoreInfoData = {
     instagram: string,
     facebook: string,
     twitter: string,
+    snapchat: string,
+    tikTok: string,
+    youtube: string,
+    linkedin: string,
+    telegram: string,
     description: string,
     backgroundColor: string,
     producTitelColor: string,
@@ -38,7 +44,8 @@ export type StoreInfoData = {
     contactUsImagePath: {
         orignialUrl: string,
         thumbUrl: string
-    }
+    },
+    providers: PaymentProvidersData[]
 }
 
 export type SlideData = {

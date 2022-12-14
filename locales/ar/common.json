@@ -104,5 +104,9 @@
     "paymentDescription":"شكرا لاختيارك تابي ، سنقوم بإعلامك بتحديثات طلبك.",
     "viewOrders":"مشاهدة الطلب",
     "continueShopping":"مواصلة التسوق",
-    "orderBy":"ترتيب حسب"
+    "orderBy":"ترتيب حسب",
+    "forComplaints": "للشكاوي",
+    "followUs": "تابعنا",
+    "general": "عام",
+    "copyRight": "حقوق النشر © {{year}} منافذ. كل الحقوق محفوظة"
 }
