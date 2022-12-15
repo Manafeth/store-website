@@ -59,7 +59,7 @@ const Footer = () => {
               </Grid>
             </Grid>
           </Box>
-          <Box sx={{ flexGrow: 1, minWidth: { md: 320 }, maxWidth: { md: 320 } }}>
+          <Box sx={{ flexGrow: 1, minWidth: { md: 325 }, maxWidth: { md: 325 } }}>
             <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'space-between' }, flexDirection: { xs: 'column-reverse', md: 'row' }, textAlign: {xs: 'center', md: 'left'} }}>
               <Box pr={{ md: 2}}  mb={5}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>
@@ -102,13 +102,27 @@ const Footer = () => {
               </Box>
               <Box mb={2}>
                 <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', mb: 3.5, whiteSpace: 'nowrap' }}>
-                {t('general')}
+                {t('legal')}
                 </Typography>
                 <List sx={{ py: 0 }}>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.refundPolicy}>
                         <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', color: 'text.secondary' }}>
                         {t('refundPolicy')}
+                        </MuiLink>
+                      </Link>
+                    </ListItem>
+                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                      <Link href={paths.privacyPolicy}>
+                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', color: 'text.secondary', mr: 3 }}>
+                        {t('privacyPolicy')}
+                        </MuiLink>
+                      </Link>
+                    </ListItem>
+                    <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                      <Link href={paths.termsOfUse}>
+                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', color: 'text.secondary' }}>
+                        {t('termsOfUse')}
                         </MuiLink>
                       </Link>
                     </ListItem>
@@ -126,21 +140,9 @@ const Footer = () => {
           </Box>
         </Box>
         <Divider sx={{ mt: 2.5, mb: 3, borderColor: '#C6C6C6' }} />
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Typography sx={{ fontSize: '12px', lineHeight: '16px', color: 'text.secondary', mr: { md: 3 }, flexGrow: { xs: 1, md: 0 }, mb: { xs: 1.5, md: 0 } }}>
-            {t('copyRight', { year: moment().year() })}
-          </Typography>
-          <Link href={paths.privacyPolicy}>
-            <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 'bold', color: 'text.secondary', mr: 3 }}>
-            {t('privacyPolicy')}
-            </MuiLink>
-          </Link>
-          <Link href={paths.termsOfUse}>
-            <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 'bold', color: 'text.secondary' }}>
-            {t('termsOfUse')}
-            </MuiLink>
-          </Link>
-        </Box>
+        <Typography sx={{ fontSize: '12px', lineHeight: '16px', color: 'text.secondary', textAlign: 'center' }}>
+          {t('copyRight', { year: moment().year() })}
+        </Typography>
       </Container>
     </Box>
   )
