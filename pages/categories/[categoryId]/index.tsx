@@ -179,29 +179,37 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
                 </TextField>
               </Box>
               {/* <CategoryHeroSection targetSectionId='products-sec' data={bannerData} /> */}
-              <Grid container spacing={{ xs: 2, lg: 3 }} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
-                {products?.data?.length > 0 ? (
-                  products.data.map((item) => {
-                    return (
-                      <Grid item xs={12} sm={6} lg={4} key={item.id}>
-                        <ProductVerticalItem data={item} />
-                      </Grid>
-                    )
-                  })
-                ) : (
-                  <>
-                    <Grid item xs={12} sm={6} lg={4}>
-                      <ProductEmptyState />
-                    </Grid>
-                    <Grid item xs={12} sm={6} lg={4}>
-                      <ProductEmptyState />
-                    </Grid>
-                    <Grid item xs={12} sm={6} lg={4}>
-                      <ProductEmptyState />
-                    </Grid>
-                  </>
-                )}
-              </Grid>
+              {products?.data?.length > 0 ? (
+                <Grid container spacing={{ xs: 2, lg: 3 }} rowSpacing={3.75} sx={{ mt: 5 }} id='products-sec'>
+                  {products.data.map((item) => {
+                      return (
+                        <Grid item xs={12} sm={6} lg={4} key={item.id}>
+                          <ProductVerticalItem data={item} />
+                        </Grid>
+                      )
+                    })}
+                </Grid>
+              ) : (
+                <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '20px', textAlign: 'center' }}>
+                  <Typography variant="h2" sx={{ mb: '20px', fontWeight: 'bold' }}>
+                  {t('oops')}
+                  </Typography>
+                  <Typography variant="h5" sx={{ mb: '20px', fontWeight: 'bold' }}>
+                  {t('noProducts')}
+                  </Typography>
+                </Box>
+                // <>
+                //   <Grid item xs={12} sm={6} lg={4}>
+                //     <ProductEmptyState />
+                //   </Grid>
+                //   <Grid item xs={12} sm={6} lg={4}>
+                //     <ProductEmptyState />
+                //   </Grid>
+                //   <Grid item xs={12} sm={6} lg={4}>
+                //     <ProductEmptyState />
+                //   </Grid>
+                // </>
+              )}
               {products.totalPages > 1 && (
                 <ProductPagination
                   totalPages={products.totalPages}

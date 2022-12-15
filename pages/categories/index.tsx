@@ -62,31 +62,35 @@ const Categories: NextPage<Props>  = ({ allCategories, discountedProducts, topSe
     
   return (
     <MainLayout>
-        <HeroSection targetSectionId='categroires-sec' data={bannerData} />
-        {/* <Box pt={9.5} pb={6} ref={categoriesSections}>
-            <FeaturedCategoriesSection categories={categoriesList} />
-        </Box> */}
+        <Box pb={5}>
+            <HeroSection targetSectionId='categroires-sec' data={bannerData} />
+            {/* <Box pt={9.5} pb={6} ref={categoriesSections}>
+                <FeaturedCategoriesSection categories={categoriesList} />
+            </Box> */}
 
-        <Box ref={categoriesSections} id='categroires-sec'>
-            <CategoriesSection
-                categories={allcategoriesList}
-                title='shopByCategory'
-                sx={{ pt: 10, pb: 4 }}
+            <Box ref={categoriesSections} id='categroires-sec'>
+                <CategoriesSection
+                    categories={allcategoriesList}
+                    title='shopByCategory'
+                    sx={{ pt: 10, pb: 4 }}
+                />
+            </Box>
+            
+            <ProductsSection
+                sx={{ pt: 4.5 }}
+                products={topSellProducts}
+                title='topSellingProducts'
+                showAll={paths.products}
             />
-        </Box>
-        
-        <ProductsSection
-            sx={{ pt: 4.5 }}
-            products={topSellProducts}
-            title='topSellingProducts'
-            showAll={paths.products}
-        />
 
-        <ProductsSection
-            sx={{ pt: 7.5, pb: 5 }}
-            products={discProducts}
-            title='discountedProducts'
-        />
+            {discProducts.length > 0 && (
+                <ProductsSection
+                    sx={{ pt: 7.5 }}
+                    products={discProducts}
+                    title='discountedProducts'
+                />
+            )}
+        </Box>
     </MainLayout>
   )
 }
