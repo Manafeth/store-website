@@ -19,7 +19,6 @@ import Marker from '../../../Marker';
 import useTranslation from "next-translate/useTranslation";
 import LoadingButton from '@mui/lab/LoadingButton';
 import { addressTagsEnums } from '../../../../constants/statuses';
-import { getAllCities } from '../../../../services/common.services';
 
 
 interface Props {
@@ -36,6 +35,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
     updateAddressStatus,
     getAddressDetails,
     addressDetails,
+    fetchAllCityData
   } = useProfile();
   const { cityData, countryData } = useProfile();
 
@@ -98,7 +98,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
 
     useEffect(() => {
       if (country) {
-        getAllCities(country);
+        fetchAllCityData(country);
         setState((prevState) => ({
           ...prevState,
           cityId: 0
@@ -194,10 +194,6 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
     setCountry(+ev.target.value);
   }
 
- 
-  
-
- 
   return (
     <Drawer
       anchor='right'
