@@ -101,9 +101,9 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
       Promise.reject(error);
     }
   }
-  async function  fetchAllCityData() {
+  async function  fetchAllCityData(country?: number) {
     try {
-      const response = await getAllCities();
+      const response = await getAllCities(country);
       setCityData(response.data.data);
     } catch (error) {
       Promise.reject(error);

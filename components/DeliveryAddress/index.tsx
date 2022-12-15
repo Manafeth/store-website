@@ -8,6 +8,10 @@ import useTranslation from 'next-translate/useTranslation';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useCart } from '../../contexts/CartContext';
 import { useCommon } from '../../contexts/CommonContext';
+
+import addIcon from '../../assets/images/icons/add-icon.svg';
+import Image from 'next/image';
+import AddressDrawer from '../AddressManagment/components/AddressDrawer';
 interface Props {
   handleNext: () => void;
   handleBack: () => void;
@@ -15,17 +19,27 @@ interface Props {
 }
 
 const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
-  const { fetchAllAddressData, addressData } = useProfile();
+  const { fetchAllAddressData, addressData, fetchAllCityData, fetchAllCountryData } = useProfile();
   const { checkoutData } = useCart();
   const {t: COT} = useTranslation('checkout');
   const {t: ST} = useTranslation('settings');
   const {t: CT} = useTranslation('common');
-  const { storeInfo } = useCommon()
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     fetchAllAddressData();
+    fetchAllCityData();
+    fetchAllCountryData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  function onOpen() {
+    setOpen(true);
+  }
 
+  function onClose() {
+    setOpen(false);
+  }
   
   return (
     <Box
@@ -37,9 +51,17 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
       }}
     >
       <>
-        <Typography variant='h1' component='h1' sx={{ mb: 5 }}>
-        {COT('deliveryAddress')}
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 5 }}>
+        <Typography variant='h1' component='h1'>
+          {COT('deliveryAddress')}
         </Typography>
+        <Button
+          variant='contained'
+          onClick={onOpen}
+        >
+          <Image src={addIcon} width='14' height='14' alt='add icon' />
+        </Button>
+      </Box>
         {addressData.length > 0 ? addressData.map((item) => {
           return (
             <Box key={item.id} sx={{ mb: 2 }}>
@@ -99,6 +121,10 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
           </Button>
         </Box>
       </>
+      <AddressDrawer
+        onClose={onClose}
+        open={open}
+      />
     </Box>
   );
 };
