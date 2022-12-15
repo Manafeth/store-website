@@ -9,7 +9,7 @@ import React, {
 import { ERROR, LOADING, SUCCESS } from '../constants';
 import { checkCouponValidation, createOrder, createPaymentGateway, createPreScoring, deleteProductFromCart, getAllCartProducts, getAllProviders, getBankFiles, getInvoice, getOrder, stcPaymentConfirmation, uploadBankFiles } from '../services/cart.services';
 import { CartModalState, CheckoutData, StcPaymentData, InvocieData, OrderData, PaymentData, PaymentProvidersData, ShipmentsProvidersData, BankFilesData } from '../types/cart';
-import { ProductData } from '../types/products';
+import { CartProductData } from '../types/products';
 import { useAlert } from './AlertContext';
 
 
@@ -20,7 +20,7 @@ interface Props {
 const CartModalContext = createContext({} as CartModalState);
 
 export const CartModalProvider: FC<Props> = ({ children }) => {
-    const [cartData, setCartData] = useState<ProductData[]>([]);
+    const [cartData, setCartData] = useState<CartProductData[]>([]);
     const [shipmentData, setShipmentData] = useState<ShipmentsProvidersData[]>([]);
     const [paymnetData, setPaymnetData] = useState<PaymentProvidersData[]>([]);
     const [orderAndInvoice, setOrderAndInvoice] = useState({

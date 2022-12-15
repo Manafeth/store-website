@@ -56,6 +56,36 @@ export type ProductData =  {
   maxQuantity: number
 }
 
+export type CartProductData = {
+  id: number,
+  productId: number,
+  name: string,
+  salePrice: number,
+  quantity: number,
+  category: string,
+  priceAfterDiscount: number,
+  shortDescription: string,
+  description: string | null,
+  pageTitle: string | null,
+  metaDescription: string | null,
+  isInWishList: boolean,
+  mainImageFilePath?: {
+    orignialUrl: string,
+    thumbUrl: string,
+  },
+  imagesFilePath: {
+    orignialUrl: string,
+    thumbUrl: string,
+  }[],
+  attributes: ProductAttributesData[],
+  checkOutAttributes: {checkOutAttribute: checkOutAttributes, value: string}[],
+  subProducts: {options: number[], mainImageFilePath: { orignialUrl: string, thumbUrl: string}}[],
+  total?: number,
+  subTotal?: number,
+  checkoutAttributsTotal?: number,
+  maxQuantity: number
+}
+
 
 export type ProductByCategoryParams = {
   categoryId?: number | string | string[],

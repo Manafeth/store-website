@@ -109,5 +109,7 @@
     "forComplaints": "للشكاوي",
     "followUs": "تابعنا",
     "general": "عام",
-    "copyRight": "حقوق النشر © {{year}} منافذ. كل الحقوق محفوظة"
+    "copyRight": "حقوق النشر © {{year}} منافذ. كل الحقوق محفوظة",
+    "viewLess": "عرض أقل",
+    "viewMore": "عرض المزيد"
 }

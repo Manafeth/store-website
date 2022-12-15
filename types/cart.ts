@@ -1,4 +1,4 @@
-import { ProductData } from "./products"
+import { CartProductData } from "./products"
 
 export type ProductCartData = {
     productId: number,
@@ -117,7 +117,7 @@ export type CartModalState = {
     fetchPaymentProviders: (id?:number) => Promise<void>,
     fetchOrderDetails: (id: number | string | string[]) => Promise<void>,
     fetchInvoiceDetails: (id: number | string | string[]) => Promise<void>,
-    cartData: ProductData[],
+    cartData: CartProductData[],
     shipmentData: ShipmentsProvidersData[],
     paymnetData: PaymentProvidersData[],
     orderData: OrderData,

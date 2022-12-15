@@ -109,5 +109,7 @@
     "forComplaints": "For Complaints",
     "followUs": "Follow Us",
     "general": "General",
-    "copyRight": "Copyright © {{year}} Manafeth. All rights reserved"
+    "copyRight": "Copyright © {{year}} Manafeth. All rights reserved",
+    "viewLess": "View less",
+    "viewMore": "View more"
 }

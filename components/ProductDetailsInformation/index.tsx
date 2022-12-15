@@ -31,12 +31,13 @@ interface Props {
 
 
 const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList, setGalleryImages }) => {
-  const [state, setState] = useState<ProductCartData>({
+  const initialState = {
     productId: 0,
     quantity: 1,
     options: [],
     checkOutAttributes: []
-  });
+  }
+  const [state, setState] = useState<ProductCartData>(initialState);
 
   const { t } = useTranslation('common');
 
@@ -87,7 +88,8 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         if (atrribute.options[0]?.id)
           return [...acc, atrribute.options[0]?.id];
         return acc;
-      }, [])
+      }, []),
+      checkOutAttributes: []
     }))
   }, [productDetials])
 
@@ -100,7 +102,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
     setGalleryImages(subProduct?.mainImageFilePath?.orignialUrl ? [subProduct?.mainImageFilePath] : (productDetials.imagesFilePath || []))
   }, [state.options, productDetials])
   
-
+  
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2.5 }}>
