@@ -1,32 +1,32 @@
+import { ChangeEvent, FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-
-import Image from 'next/image';
-import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ChangeEvent, FC, useState } from 'react';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
+import MuiLink from '@mui/material/Link';
+import Image from 'next/image';
 
 import Avatar from '@mui/material/Avatar';
-import { ProductData } from '../../types/products';
+import { CartProductData } from '../../types/products';
 import useTranslation from 'next-translate/useTranslation';
 import { LOADING } from '../../constants';
 import { useCart } from '../../contexts/CartContext';
 import { editCartProductsQuantity } from '../../services/cart.services';
+import deleteIcon from '../../assets/images/icons/delete-icon.svg';
 interface Props {
-  data: ProductData;
+  data: CartProductData;
   isDrawerItem?: boolean;
 }
 
 let timer: ReturnType<typeof setTimeout>;
 
 const CartItem: FC<Props> = ({data, isDrawerItem}) => {
-  const {t} = useTranslation('common');
-  const matches = useMediaQuery('(max-width:600px)');
+  const {t, lang} = useTranslation('common');
   const {deleteCartProduct, removeStatus, fetchCartProducts} = useCart()
   const [quantity, setQuantity] = useState(data.quantity);
+  const [viewAllCheckoutAttributes, setViewAllCheckoutAttributes] = useState(false);
 
   function handleRemoveCart() {
     deleteCartProduct(data.id)
@@ -80,10 +80,13 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
     }
   }
 
+  function toggleCheckoutAttributes() {
+    setViewAllCheckoutAttributes((prevState) => !prevState)
+  }
 
   return (
     <Box sx={{mb:2}}>
-      <Box sx={{display: 'flex', gap: '50px' }}>
+      <Box sx={{display: 'flex', gap: '50px', mb: 3 }}>
         {/* <Image src={cartplaceHolder} alt='cart image' /> */}
         <Avatar
           src={data.mainImageFilePath?.orignialUrl || ''}
@@ -128,7 +131,7 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
                   margin='normal'
                   name='cityId'
                   sx={{ mb: 4 }}
-                  inputProps={{ sx: { fontSize: '16px', fontWeight: '700', textAlign: 'center', minWidth: matches ? 150 : 200 },
+                  inputProps={{ sx: { fontSize: '16px', fontWeight: '700', textAlign: 'center', minWidth: { xs: 120, sm: 200 }},
                     inputMode: 'numeric',
                     pattern: '[0-9]*',
                     min: 1,
@@ -176,6 +179,56 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
           </Typography>
         </Box>
       </Box>
+      {data.checkOutAttributes.length > 2 ? (
+        <>
+          {viewAllCheckoutAttributes ? (
+            <Grid container spacing={3.75}>
+              {data.checkOutAttributes.map((item) => {
+                return (
+                  <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant='h5' component='label' sx={{ color: 'text.secondary', mr: 1 }}>{item?.checkOutAttribute?.name}:</Typography>
+                        <Typography variant='h5' component='span' sx={{ fontWeight: 600 }}>{item?.value}</Typography>
+                    </Box>
+                  </Grid>
+                )
+              })}
+            </Grid>
+          ) : (
+          <Grid container spacing={3.75}>
+            {data.checkOutAttributes.filter((_, index) => index < 2).map((item) => {
+              return (
+                <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Typography variant='h5' component='label' sx={{ color: 'text.secondary', mr: 1 }}>{item?.checkOutAttribute?.name}:</Typography>
+                      <Typography variant='h5' component='span' sx={{ fontWeight: 600 }}>{item?.value}</Typography>
+                  </Box>
+                </Grid>
+              )
+            })}
+          </Grid>
+          )}
+            
+          <Box sx={{ textAlign: 'center' }}>
+            <MuiLink sx={{ fontWeight: 600, color: 'text.primary', fontSize: 16, fontFamily: lang === 'ar' ? 'cairo' : 'poppins' }} onClick={toggleCheckoutAttributes}>
+              {viewAllCheckoutAttributes ? t('viewLess') : t('viewMore')}
+            </MuiLink>
+          </Box>
+        </>
+      ) : (
+        <Grid container spacing={3.75}>
+          {data.checkOutAttributes.map((item) => {
+            return (
+              <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Typography variant='h5' component='label' sx={{ color: 'text.secondary', mr: 1 }}>{item?.checkOutAttribute?.name}:</Typography>
+                    <Typography variant='h5' component='span' sx={{ fontWeight: 600 }}>{item?.value}</Typography>
+                </Box>
+              </Grid>
+            )
+          })}
+        </Grid>
+      )}
     </Box>
   );
 };
