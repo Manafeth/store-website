@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import React, { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
@@ -7,9 +7,11 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+
 import HeartIcon from '../../assets/images/icons/heart-icon.svg';
 import FilledHeartIcon from '../../assets/images/icons/filled-heart-icon.svg';
-import CartIcon from '../../assets/images/icons/cart-icon.svg';
+import CartIcon from '../../assets/images/icons/cart-outlined.png';
 // import EyeIcon from '../../assets/images/icons/eye-icon.svg';
 import { ProductData } from '../../types/products';
 import useTranslation from 'next-translate/useTranslation';
@@ -23,12 +25,12 @@ import { useAuthModal } from '../../contexts/AuthModalContext';
 import { useCommon } from '../../contexts/CommonContext';
 import TabyPromo from '../TabbyPromo';
 import arrayEquals from '../../utils/arrayEquals';
+import LoadingButton from '@mui/lab/LoadingButton';
 interface Props {
   productDetials: ProductData,
   handleTogglingProductInWishList: () => void,
   setGalleryImages: Dispatch<SetStateAction<{ orignialUrl: string; thumbUrl: string; }[]>>
 }
-
 
 const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingProductInWishList, setGalleryImages }) => {
   const initialState = {
@@ -54,6 +56,10 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         sendAlert(response?.data?.message, 'success')
         fetchCartProducts()
         setAddToCartLoader(false);
+        setState((prevState) => ({
+          ...prevState,
+          quantity: 1
+        }))
       }).catch((error: any) => {
         sendAlert(error.response.data.Message, 'error')
         setAddToCartLoader(false);
@@ -80,6 +86,44 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
     }
   }
 
+  function handleChange(ev: ChangeEvent<HTMLInputElement>) {
+    const value = +ev.target.value
+    if (!!value && value <= productDetials.quantity) {
+      setState((prevState) => ({
+        ...prevState,
+        quantity: value
+      }))
+    } else if (value >= productDetials.quantity) {
+      setState((prevState) => ({
+        ...prevState,
+        quantity: productDetials.quantity
+      }))
+    } else if (!value || value <= 0) {
+      setState((prevState) => ({
+        ...prevState,
+        quantity: 1
+      }))
+    }
+  }
+
+  function handleIncriment() {
+    if (state.quantity < productDetials.quantity) {
+      setState((prevState) => ({
+        ...prevState,
+        quantity: prevState.quantity + 1
+      }))
+    }
+  }
+
+  function handleDecriment() {
+    if (state.quantity > 1) {
+      setState((prevState) => ({
+        ...prevState,
+        quantity: prevState.quantity - 1
+      }))
+    }
+  }
+
   useEffect(() => {
     setState((prevState) => ({
       ...prevState,
@@ -101,7 +145,6 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
     }, {});
     setGalleryImages(subProduct?.mainImageFilePath?.orignialUrl ? [subProduct?.mainImageFilePath] : (productDetials.imagesFilePath || []))
   }, [state.options, productDetials])
-  
   
   return (
     <Box>
@@ -191,28 +234,98 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         setState={setState}
       />
 
-      <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
-        {state?.options?.length > 0 && (
-          <Button
-            variant='contained'
-            sx={{
-              width: 'auto', height: '44px', mr: 2.5,
-              "&:hover": {
-                backgroundColor: "primary.hover"
-              }
-            }}
-            type='submit'
-            onClick={handleAddCheckoutAttribute}
-            disabled={state.checkOutAttributes?.length > 0}
-          >
-            {t('selectOptions')}
-          </Button>
-        )}
-        <Box sx={{ display: 'flex' }}>
-          <IconButton onClick={handleAddProductToCart} sx={{ p: 0 }} disabled={addToCartLoader}>
-            {addToCartLoader ? <CircularProgress /> : <Image src={CartIcon} alt='cart icon' width={40} height={40} />}
-          </IconButton>
-        </Box>
+      {state?.options?.length > 0 && (
+        <Button
+          variant='contained'
+          sx={{
+            width: 'auto', height: '44px', mr: 2.5,
+            mb: 3,
+            "&:hover": {
+              backgroundColor: "primary.hover"
+            }
+          }}
+          type='submit'
+          onClick={handleAddCheckoutAttribute}
+          disabled={state.checkOutAttributes?.length > 0}
+        >
+          {t('selectOptions')}
+        </Button>
+      )}
+
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <TextField
+          variant='outlined'
+          fullWidth
+          margin='normal'
+          name='cityId'
+          sx={{
+            my: 0,
+            width: 171,
+            mr: 2.5
+          }}
+          inputProps={{
+            sx: {
+              fontSize: '16px',
+              textAlign: 'center',
+              borderRadius: 0
+            },
+            inputMode: 'numeric',
+            pattern: '[0-9]*',
+            min: 1,
+            max: productDetials.quantity
+          }}
+          InputLabelProps={{ shrink: true }}
+          onChange={handleChange}
+          value={state.quantity}
+          InputProps={{
+            endAdornment: (
+              <IconButton
+                sx={{
+                  borderRadius: 0,
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  zIndex: 99,
+                  color: '#000'
+                }}
+                onClick={handleDecriment}
+              >
+                -
+              </IconButton>
+            ),
+            startAdornment: (
+              <IconButton
+                sx={{
+                  borderRadius: 0,
+                  position: 'absolute',
+                  right: 0,
+                  top: 0,
+                  height: '100%',
+                  zIndex: 99,
+                  color: '#000'
+                }}
+                onClick={handleIncriment}
+              >
+                +
+              </IconButton>
+            ),
+            sx: {
+              borderRadius: 0,
+              height: 44
+            },
+          }}
+        />
+
+        <LoadingButton
+          loading={addToCartLoader}
+          onClick={handleAddProductToCart}
+          variant='contained'
+          startIcon={<Image src={CartIcon} alt='cart icon' width={19} height={19} />}
+          sx={{ width: 180, py: 1.375 }}
+        >
+          {t('addToCart')}
+        </LoadingButton>
       </Box>
     </Box>
   );
