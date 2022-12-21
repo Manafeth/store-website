@@ -112,5 +112,6 @@
     "copyRight": "Copyright © {{year}} Manafeth. All rights reserved",
     "viewLess": "View less",
     "viewMore": "View more",
-    "currentLocation": "Current Location"
+    "currentLocation": "Current Location",
+    "addToCart": "Add to cart"
 }
