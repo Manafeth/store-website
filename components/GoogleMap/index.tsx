@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import useTranslation from 'next-translate/useTranslation';
 import React, { ReactElement } from 'react';
 
 // eslint-disable-next-line no-undef
@@ -20,6 +21,7 @@ const GoogleMap: React.FC<MapProps> = ({
   onClick,
 }) => {
   const ref = React.useRef<HTMLDivElement>(null);
+  const {t: CT} = useTranslation('common');
   // eslint-disable-next-line no-undef
   const [map, setMap] = React.useState<google.maps.Map>();
 
@@ -45,7 +47,7 @@ const GoogleMap: React.FC<MapProps> = ({
       let infoWindow: google.maps.InfoWindow;
       if (locationButton) {
         locationButton.classList.add("custom-map-control-button");
-        locationButton.textContent = "Current Location";
+        locationButton.textContent = CT('currentLocation')
         locationButton.style.background = 'white';
         locationButton.style.border = 'none';
         locationButton.style.cursor = 'pointer';
