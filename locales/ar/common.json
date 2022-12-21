@@ -111,5 +111,6 @@
     "general": "عام",
     "copyRight": "حقوق النشر © {{year}} منافذ. كل الحقوق محفوظة",
     "viewLess": "عرض أقل",
-    "viewMore": "عرض المزيد"
+    "viewMore": "عرض المزيد",
+    "currentLocation": "موقعك الحالي"
 }
