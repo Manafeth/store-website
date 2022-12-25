@@ -30,6 +30,7 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [updateAddressStatus, setupdateAddressStatus] = useState('');
   const [createAddressStatus, setCreateAddressStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
+  const [hasMoreCities, setHasMoreCities] = useState(false);
   const [status, setStatus] = useState('');
   const { sendAlert } = useAlert();
 
@@ -106,8 +107,10 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
       const response = await getAllCities(params);
       if ((params?.page || 0) > 1) {
         setCityData((prevState) => [...prevState, ...response.data.data.data]);
-      } else
-      setCityData(response.data.data.data);
+      } else {
+        setCityData(response.data.data.data);
+      }
+      setHasMoreCities(response.data.data.data.length === params?.pageSize)
     } catch (error) {
       Promise.reject(error);
     }
@@ -225,6 +228,7 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
     updateAddressStatus,
     addressDetails,
     status,
+    hasMoreCities,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,

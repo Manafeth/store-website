@@ -110,4 +110,5 @@ export type ProfileModalState = {
   removeStatus:string,
   updateAddressStatus:string,
   status:string,
+  hasMoreCities: boolean
 }

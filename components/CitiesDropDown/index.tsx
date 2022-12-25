@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import { SUCCESS } from '../../constants';
 import { cityData } from '../../types/profile';
 import { useProfile } from '../../contexts/ProfileContext';
-import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   countryId?: number;
@@ -24,10 +23,10 @@ const CitiesDropDown: FC<Props> = ({ countryId, isInValid, cityId, sx, setState,
   const [searchKey, setSearchKey] = useState('');
   const [currentScrollPosition, setCurrentScrollPosition] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
   const {
     fetchAllCityData,
-    cityData
+    cityData,
+    hasMoreCities
   } = useProfile();
 
   function fetchData(params?: { page?: number; searchKey?: string }) {
@@ -50,7 +49,8 @@ const CitiesDropDown: FC<Props> = ({ countryId, isInValid, cityId, sx, setState,
 
   function fetchMoreData() {
     setPage((prevState) => prevState + 1);
-    fetchData({ page: page + 1 });
+    if (hasMoreCities)
+      fetchData({ page: page + 1 });
   }
 
   function handleSearch(ev: SyntheticEvent, value: string) {
