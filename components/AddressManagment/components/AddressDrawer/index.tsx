@@ -19,6 +19,7 @@ import Marker from '../../../Marker';
 import useTranslation from "next-translate/useTranslation";
 import LoadingButton from '@mui/lab/LoadingButton';
 import { addressTagsEnums } from '../../../../constants/statuses';
+import CitiesDropDown from '../../../CitiesDropDown';
 
 
 interface Props {
@@ -35,9 +36,8 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
     updateAddressStatus,
     getAddressDetails,
     addressDetails,
-    fetchAllCityData
   } = useProfile();
-  const { cityData, countryData } = useProfile();
+  const { countryData } = useProfile();
 
   const initialState = {
     id: 0,
@@ -96,15 +96,6 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateAddressStatus]);
 
-    useEffect(() => {
-      if (country) {
-        fetchAllCityData(country);
-        setState((prevState) => ({
-          ...prevState,
-          cityId: 0
-        }))
-      }
-    }, [country])
 
   function handleClose() {
     onClose();
@@ -193,6 +184,13 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
   function handleCountry(ev: ChangeEvent<HTMLInputElement>) {
     setCountry(+ev.target.value);
   }
+
+  useEffect(() => {
+    if (countryData.length > 0) {
+      setCountry(countryData[0].id)
+    }
+  }, [countryData])
+  
 
   return (
     <Drawer
@@ -356,31 +354,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           {ST('city')}
         </Box>
 
-        <TextField
-          select
-          variant='standard'
-          margin='normal'
-          sx={{ mb: 4 }}
-          value={cityData.length > 0 ? state?.cityId : 0}
-          // eslint-disable-next-line react/jsx-no-bind
-          onChange={handleInput}
-          error={isSubmitted && !state.cityId}
-          name='cityId'
-        >
-          <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-            {CT('selectItem')}
-          </MenuItem>
-          {cityData?.length > 0 &&
-            cityData?.map((option) => (
-              <MenuItem
-                key={option.id}
-                value={option?.id}
-                sx={{ fontSize: '14px', fontWeight: 'bold' }}
-              >
-                {option?.name}
-              </MenuItem>
-            ))}
-        </TextField>
+        <CitiesDropDown cityId={state.cityId || 0} isInValid={isSubmitted} countryId={country || 0} sx={{ mb: 2 }} setState={setState} />
 
         <Box sx={{ mb: 5 }}>
           <Wrapper apiKey={GOOGLE_MAP_KEY || ''} render={renderMapStatus}>

@@ -101,10 +101,13 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
       Promise.reject(error);
     }
   }
-  async function  fetchAllCityData(country?: number) {
+  async function  fetchAllCityData(params?: { page?: number; pageSize?: number; searchKey?: string; countryId?: number }) {
     try {
-      const response = await getAllCities(country);
-      setCityData(response.data.data);
+      const response = await getAllCities(params);
+      if ((params?.page || 0) > 1) {
+        setCityData((prevState) => [...prevState, ...response.data.data.data]);
+      } else
+      setCityData(response.data.data.data);
     } catch (error) {
       Promise.reject(error);
     }
