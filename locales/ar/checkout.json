@@ -40,7 +40,7 @@
     "mobileNumber":"رقم الهاتف المحمول",
     "verifiy":"كود التنويع",
     "verificationCode":"تم إرسال رمز التحقق إلى هاتفك",
-    "repaymentConfirmation": "ادفع {{price}} ريال سعودي",
+    "repaymentConfirmation": "ادفع {{price}} ر.س",
     "firstStep": "الخطوة الأولى",
     "secondStep": "الخطوة الثانية",
     "thirdStep": "الخطوة الثالثة",
