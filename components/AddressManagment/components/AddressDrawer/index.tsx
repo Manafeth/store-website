@@ -354,7 +354,7 @@ const AddressDrawer: FC<Props> = ({ open, onClose, selectedAddress }) => {
           {ST('city')}
         </Box>
 
-        <CitiesDropDown cityId={state.cityId || 0} isInValid={isSubmitted} countryId={country || 0} sx={{ mb: 2 }} setState={setState} />
+        <CitiesDropDown cityId={state.cityId || 0} isInValid={isSubmitted} countryId={country || 0} sx={{ mb: 6 }} setState={setState} />
 
         <Box sx={{ mb: 5 }}>
           <Wrapper apiKey={GOOGLE_MAP_KEY || ''} render={renderMapStatus}>
