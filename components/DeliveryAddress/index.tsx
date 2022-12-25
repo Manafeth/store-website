@@ -28,7 +28,6 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
 
   useEffect(() => {
     fetchAllAddressData();
-    fetchAllCityData();
     fetchAllCountryData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -40,7 +39,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
   function onClose() {
     setOpen(false);
   }
-  
+
   return (
     <Box
       sx={{

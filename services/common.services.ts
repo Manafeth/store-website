@@ -5,11 +5,9 @@ function getCountries() {
     'Country/GetAll',
   );
 }
-function getAllCities(countryId?: number) {
+function getAllCities(params?: { page?: number; pageSize?: number; searchKey?: string; countryId?: number }) {
   return axiosInstance.get('City/GetAll', {
-    params: {
-      countryId,
-    },
+    params,
   });
 }
 
