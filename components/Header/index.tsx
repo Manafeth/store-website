@@ -103,12 +103,49 @@ const Header = () => {
     <AppBar position="fixed" color='inherit' sx={{ boxShadow: '0' ,backgroundColor: storeInfo.headerColor}}>
       <Container maxWidth={false} sx={{ px: {xs: 2, lg: 7.5} }}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between', minHeight: { xs: 64, sm: 91 } }}>
-          <Box px={4} sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box pl={{ md: 4 }} pr={{ xs: 1, md: 4 }} sx={{ display: 'flex' }}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+              sx={{ display: { md: 'none' } }}
+            >
+              <Box>
+                <Box
+                  sx={{
+                    width: '15px',
+                    borderRadius: '2px',
+                    backgroundColor: '#323940',
+                    height: '2px',
+                    mb: 0.5
+                  }}
+                />
+                <Box
+                  sx={{
+                    width: '15px',
+                    borderRadius: '2px',
+                    backgroundColor: '#323940',
+                    height: '2px',
+                    mb: 0.5
+                  }}
+                />
+                <Box
+                  sx={{
+                    width: '15px',
+                    borderRadius: '2px',
+                    backgroundColor: '#323940',
+                    height: '2px'
+                  }}
+                />
+              </Box>
+            </IconButton>
             <Box sx={{ display: 'flex', alignItems: 'center'}}>
-              <Avatar alt="Remy Sharp" src={storeInfo.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>
+              <Avatar alt="Remy Sharp" src={storeInfo.mainImageFilePath?.thumbUrl} sx={{ width: {xs: 27, md: 34}, height: {xs: 27, md: 34}, mr: 1 }}>
                 SL
               </Avatar>
-              <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
+              <Box component='span' sx={{ fontSize: {xs: '11px', md: '12px'}, lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
               {t('welcomeTo')}, <br />
                 {storeInfo.name}  {t('store')}
               </Box>
@@ -116,84 +153,34 @@ const Header = () => {
           </Box>
 
           <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
-            <Box sx={{ display: 'flex' }}>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <Box>
-                  <Box
-                    sx={{
-                      width: '15px',
-                      borderRadius: '2px',
-                      backgroundColor: '#323940',
-                      height: '2px',
-                      mb: 0.5
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: '15px',
-                      borderRadius: '2px',
-                      backgroundColor: '#323940',
-                      height: '2px',
-                      mb: 0.5
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: '15px',
-                      borderRadius: '2px',
-                      backgroundColor: '#323940',
-                      height: '2px'
-                    }}
-                  />
-                </Box>
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {pages.map(({page, link}) => (
-                  <Link href={link} key={page}>
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
-              </Menu>
-            </Box>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map(({page, link}) => (
+                <Link href={link} key={page}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </Link>
+              ))}
+            </Menu>
           </Box>
 
-          <Box pr={1} sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <Box sx={{ display: 'flex', alignItems: 'center'}}>
-              <Avatar alt="Remy Sharp" src={storeInfo.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>
-                SL
-              </Avatar>
-              <Box component='span' sx={{ fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.2px' }}>
-              {t('welcomeTo')}, <br />
-                {storeInfo.name}  {t('store')}
-              </Box>
-            </Box>
-          </Box>
-          
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mx: {xs: -1, xl: -2} }}>
             {pages.map(({page, link}) => (
               <Link

@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Image from 'next/image';
 import LangIocn from '../../assets/images//icons/lang-icon.svg';
+import saFlag from '../../assets/images//icons/sa-flag.svg';
+import usFlag from '../../assets/images//icons/us-flag.svg';
 import CheckedIcon from '../../assets/images/icons/checked-icon.svg';
 import useTranslation from 'next-translate/useTranslation';
 import Box from '@mui/material/Box';
@@ -42,25 +44,17 @@ const LanguageMenu = () => {
         sx={{
           position: 'relative',
           mr: {xs: 1, sm: 1.5, md: 4},
-          width: '20px',
-          height: '20px',
         }}
       >
         <Box
           sx={{
             cursor: 'pointer', color: 'primary.main',display: 'flex',
             alignItems: 'center',
-            width: '50px',
-            height: '46px',
-            position: 'absolute',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            top: '50%',
           }}
           // eslint-disable-next-line react/jsx-no-bind
           onClick={handleClick}
         >
-          <Image src={LangIocn} alt='lang icon' />
+          <Image src={lang === 'ar' ? saFlag : usFlag} alt='lang icon' width={32} height={22} />
         </Box>
       </Box>
       <Menu
@@ -81,7 +75,8 @@ const LanguageMenu = () => {
             'fontSize':'14px'
           }}
         >
-          English {lang === 'en' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
+          <Image src={usFlag} alt='lang icon' width={32} height={22} /> 
+          {lang === 'en' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
         </MenuItem>
         <Divider sx={{ mx: 2 }} />
         <MenuItem
@@ -95,7 +90,8 @@ const LanguageMenu = () => {
             'fontSize':'14px'
           }}
         >
-          العربية {lang === 'ar' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
+          <Image src={saFlag} alt='lang icon' width={32} height={22} /> 
+          {lang === 'ar' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
         </MenuItem>
       </Menu>
     </>
