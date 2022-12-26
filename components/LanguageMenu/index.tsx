@@ -55,6 +55,7 @@ const LanguageMenu = () => {
           onClick={handleClick}
         >
           <Image src={lang === 'ar' ? saFlag : usFlag} alt='lang icon' width={32} height={22} />
+          <Box sx={{ ml: 0.75, color: 'text.primary', fontSize: '12px' }}>{lang === 'ar' ? 'Ar' : 'En'}</Box>
         </Box>
       </Box>
       <Menu

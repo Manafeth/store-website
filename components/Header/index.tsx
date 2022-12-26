@@ -110,7 +110,7 @@ const Header = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              sx={{ display: { md: 'none' } }}
+              sx={{ display: { md: 'none' }, pl: 0 }}
             >
               <Box>
                 <Box
@@ -329,8 +329,8 @@ const Header = () => {
                     cursor: 'pointer'
                   }}
                 >
-                  <Avatar alt="Remy Sharp" src={profileData.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: 1 }}>U</Avatar>
-                  {profileData.fullName}
+                  <Avatar alt="Remy Sharp" src={profileData.mainImageFilePath?.thumbUrl} sx={{ width: 34, height: 34, mr: { md: 1 } }}>U</Avatar>
+                  <Box sx={{ display: { xs: 'none', md: 'flex' } }}>{profileData.fullName}</Box>
                 </Box>
               </Link>
             ) : (

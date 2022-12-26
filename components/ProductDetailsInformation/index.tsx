@@ -197,7 +197,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
       <Box sx={{ my: 2 }}>
         {storeInfo.isTabbyActive && <TabyPromo sar="SAR" price={productDetials.salePrice || productDetials.priceAfterDiscount} selector='tabby-product' />}
       </Box>
-      <Box sx={{ display: 'flex', gap: '10px', mb: 4 }}>
+      {/* <Box sx={{ display: 'flex', gap: '10px', mb: 4 }}>
         <Typography
           variant='h6'
           component='h1'
@@ -212,7 +212,7 @@ const ProductDetailsInformation: FC<Props> = ({ productDetials, handleTogglingPr
         >
           {productDetials.quantity > 0 ? t('inStock') : t('outStock')}
         </Typography>
-      </Box>
+      </Box> */}
       <Typography
         variant='h6'
         component='h1'
