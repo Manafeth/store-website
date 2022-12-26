@@ -95,6 +95,7 @@ export type ProfileModalState = {
   fetchEmailNotificationData:() => Promise<void>,
   triggerUpdateEmailNotification: (data:emailNotificationData) => Promise<void>,
   updateProfileData: (data: customerData) => Promise<void>,
+  clearCitiesStatus: () => void,
   wishListData: wishListData[],
   activeOrderData:activeOrderData[],
   archiveedOrderData:activeOrderData[],
@@ -110,5 +111,6 @@ export type ProfileModalState = {
   removeStatus:string,
   updateAddressStatus:string,
   status:string,
-  hasMoreCities: boolean
+  hasMoreCities: boolean,
+  citiesStatus: string
 }

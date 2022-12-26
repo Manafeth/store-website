@@ -4,7 +4,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Image from 'next/image';
-import LangIocn from '../../assets/images//icons/lang-icon.svg';
 import saFlag from '../../assets/images//icons/sa-flag.svg';
 import usFlag from '../../assets/images//icons/us-flag.svg';
 import CheckedIcon from '../../assets/images/icons/checked-icon.svg';
