@@ -57,8 +57,8 @@ const CitiesDropDown: FC<Props> = ({ countryId, isInValid, cityId, sx, setState,
   } = useProfile();
 
   function fetchData(params?: { page?: number; searchKey?: string }) {
-    if (countryId) fetchAllCityData({ countryId, searchKey: params?.searchKey /* page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey */ } );
-    else fetchAllCityData({searchKey: params?.searchKey}/* { page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey } */);
+    if (countryId) fetchAllCityData({ countryId, searchKey: params?.searchKey || searchKey /* page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey */ } );
+    else fetchAllCityData({searchKey: params?.searchKey || searchKey}/* { page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey } */);
   }
   useEffect(() => {
     setPage(1);
