@@ -39,8 +39,8 @@ const Footer = () => {
                 </Typography>
               </Grid>
               <Grid item xs={8} sm={9}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600, mr: 6 }} component='span'>
+                <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600, mr: { xs: 2, md: 6 } }} component='span'>
                     {storeInfo.complaintNumber}
                   </Typography>
                   <Typography sx={{ fontSize: '12px', lineHeight: '16px', letterSpacing: '0.2px', fontWeight: 600 }} component='span'>

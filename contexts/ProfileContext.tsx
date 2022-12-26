@@ -31,9 +31,10 @@ export const ProfileModalProvider: FC<Props> = ({ children }) => {
   const [createAddressStatus, setCreateAddressStatus] = useState('');
   const [removeStatus, setRemoveStatus] = useState('');
   const [hasMoreCities, setHasMoreCities] = useState(false);
+  const [citiesStatus, setCitiesStatus] = useState('');
   const [status, setStatus] = useState('');
   const { sendAlert } = useAlert();
-
+  
 
 const [customerData, setCustomerData] = useState<customerData>({
   imageFilePath: {
@@ -103,6 +104,7 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
     }
   }
   async function  fetchAllCityData(params?: { page?: number; pageSize?: number; searchKey?: string; countryId?: number }) {
+    setCitiesStatus(LOADING)
     try {
       const response = await getAllCities(params);
       if ((params?.page || 0) > 1) {
@@ -111,9 +113,15 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
         setCityData(response.data.data.data);
       }
       setHasMoreCities(response.data.data.data.length === params?.pageSize)
+      setCitiesStatus(SUCCESS)
     } catch (error) {
       Promise.reject(error);
+      setCitiesStatus(ERROR)
     }
+  }
+
+  function clearCitiesStatus() {
+    setCitiesStatus('');
   }
   async function fetchAllCountryData() {
     try {
@@ -229,6 +237,7 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
     addressDetails,
     status,
     hasMoreCities,
+    citiesStatus,
     fetchWishListData,
     fetchActiveOrderData,
     fetchArchiveedOrderData,
@@ -242,8 +251,8 @@ const [addressDetails, setAddressDetails] = useState<AddressData>({
     fetchEmailNotificationData,
     triggerUpdateEmailNotification,
     updateProfileData,
-    getAddressDetails
-   
+    getAddressDetails,
+    clearCitiesStatus
   };
 
   return (

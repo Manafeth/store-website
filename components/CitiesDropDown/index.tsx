@@ -1,9 +1,12 @@
 import React, { Dispatch, FC, SetStateAction, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { SUCCESS } from '../../constants';
+import CircularProgress from '@mui/material/CircularProgress';
+import { LOADING, SUCCESS } from '../../constants';
 import { cityData } from '../../types/profile';
 import { useProfile } from '../../contexts/ProfileContext';
+import { styled } from '@mui/system';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface Props {
   countryId?: number;
@@ -18,20 +21,44 @@ interface Props {
 }
 let timer: ReturnType<typeof setTimeout>;
 
+
+const Listbox = styled('ul')(({ theme }) => ({
+  width: '100%',
+  margin: 0,
+  padding: 0,
+  zIndex: 1,
+  position: 'absolute',
+  listStyle: 'none',
+  backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#000',
+  overflow: 'auto',
+  border: '1px solid rgba(0,0,0,.25)',
+  '& li.Mui-focused': {
+    backgroundColor: '#4a8df6',
+    color: 'white',
+    cursor: 'pointer',
+  },
+  '& li:active': {
+    backgroundColor: '#2977f5',
+    color: 'white',
+  },
+  borderRadius: 4
+}));
+
 const CitiesDropDown: FC<Props> = ({ countryId, isInValid, cityId, sx, setState, disabled, disableUnderline, inputXs }) => {
   const [page, setPage] = useState(1);
   const [searchKey, setSearchKey] = useState('');
-  const [currentScrollPosition, setCurrentScrollPosition] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
   const {
     fetchAllCityData,
     cityData,
-    hasMoreCities
+    hasMoreCities,
+    citiesStatus,
+    clearCitiesStatus
   } = useProfile();
 
   function fetchData(params?: { page?: number; searchKey?: string }) {
-    if (countryId) fetchAllCityData({ countryId, page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey });
-    else fetchAllCityData({ page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey });
+    if (countryId) fetchAllCityData({ countryId, searchKey: params?.searchKey /* page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey */ } );
+    else fetchAllCityData({searchKey: params?.searchKey}/* { page: params?.page || page, pageSize: 10, searchKey: params?.searchKey || searchKey } */);
   }
   useEffect(() => {
     setPage(1);
@@ -49,8 +76,7 @@ const CitiesDropDown: FC<Props> = ({ countryId, isInValid, cityId, sx, setState,
 
   function fetchMoreData() {
     setPage((prevState) => prevState + 1);
-    if (hasMoreCities)
-      fetchData({ page: page + 1 });
+    fetchData({ page: page + 1 });
   }
 
   function handleSearch(ev: SyntheticEvent, value: string) {
@@ -70,51 +96,65 @@ const CitiesDropDown: FC<Props> = ({ countryId, isInValid, cityId, sx, setState,
   }
 
   useEffect(() => {
-    if (status === SUCCESS && menuRef?.current) menuRef?.current?.scrollTo({ top: currentScrollPosition, behavior: 'smooth' });
-  }, [menuRef, status, currentScrollPosition]);
+    if (citiesStatus === SUCCESS && menuRef?.current) {
+      clearCitiesStatus()
+    }
+  }, [menuRef, citiesStatus]);
+
+
   return (
-    <Autocomplete
-      disablePortal
-      options={cityData}
-      getOptionLabel={getOptionlabel}
-      sx={sx}
-      // eslint-disable-next-line react/jsx-no-bind
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          variant="standard"
-          sx={{ mb: 0 }}
-          error={isInValid && !cityId}
-          fullWidth
-          InputProps={{
-            ...params.InputProps,
-            disableUnderline,
-            sx: {
-              ...inputXs,
-            },
-          }}
-        />
-      )}
-      onInputChange={handleSearch}
-      onChange={handleSelectInput}
-      value={cityId ? selectedCity : null}
-      ListboxProps={{
-        style: {
-          maxHeight: 250,
-        },
-        onScroll(ev: any) {
-          const element = ev.target;
-          if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-            fetchMoreData();
-            setCurrentScrollPosition(element.scrollTop);
-          }
-        },
-        // @ts-ignore
-        ref: menuRef,
-      }}
-      inputValue={searchKey}
-      disabled={disabled}
-    />
+    <>
+      <Autocomplete
+        disablePortal
+        options={cityData}
+        getOptionLabel={getOptionlabel}
+        sx={sx}
+        // eslint-disable-next-line react/jsx-no-bind
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="standard"
+            sx={{ mb: 0 }}
+            error={isInValid && !cityId}
+            fullWidth
+            InputProps={{
+              ...params.InputProps,
+              disableUnderline,
+              sx: {
+                ...inputXs,
+              },
+            }}
+          />
+        )}
+        onInputChange={handleSearch}
+        onChange={handleSelectInput}
+        value={cityId ? selectedCity : null}
+        ListboxProps={{
+          style: {
+            maxHeight: 300,
+          },
+          id: "cities-list"
+        }}
+        inputValue={searchKey}
+        disabled={disabled}
+        ListboxComponent={({children, ...props}) => {
+          return (
+            // @ts-ignore
+            <Listbox {...props} ref={menuRef}>
+              <InfiniteScroll
+                dataLength={cityData.length}
+                next={fetchMoreData}
+                hasMore={hasMoreCities}
+                loader={<CircularProgress />}
+                scrollableTarget="cities-list"
+              >
+                {children}
+              </InfiniteScroll>
+            </Listbox>
+          )
+        }}
+      />
+    </>
   );
 };
 
