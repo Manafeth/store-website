@@ -75,7 +75,7 @@ const LanguageMenu = () => {
             'fontSize':'14px'
           }}
         >
-          <Image src={usFlag} alt='lang icon' width={32} height={22} /> 
+          <Image src={usFlag} alt='lang icon' width={32} height={22} /> <Box sx={{ ml: 0.75, color: 'text.primary', fontSize: '12px' }}>En</Box>
           {lang === 'en' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
         </MenuItem>
         <Divider sx={{ mx: 2 }} />
@@ -90,7 +90,7 @@ const LanguageMenu = () => {
             'fontSize':'14px'
           }}
         >
-          <Image src={saFlag} alt='lang icon' width={32} height={22} /> 
+          <Image src={saFlag} alt='lang icon' width={32} height={22} /> <Box sx={{ ml: 0.75, color: 'text.primary', fontSize: '12px' }}>Ar</Box>
           {lang === 'ar' && <Typography sx={{ ml: 4 }}><Image src={CheckedIcon} alt='checked icon' /></Typography>}
         </MenuItem>
       </Menu>

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, FC, FocusEvent, KeyboardEvent, SetStateAction } from 'react';
+import React, { ChangeEvent, Dispatch, FC, FocusEvent, KeyboardEvent, SetStateAction, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
@@ -121,6 +121,12 @@ const VerifyPhoneNumber: FC<Props> = ({ setCode, code, isInvalid, login, loginDa
             }
         }
     }
+
+    useEffect(() => {
+        // @ts-ignore: Unreachable code error
+        document?.querySelector(`input[name=field-1]`)?.focus();
+    }, [document])
+    
 
     return (
         <Box>
