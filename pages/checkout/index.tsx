@@ -108,13 +108,13 @@ const Checkout = () => {
               ))}
             </Stepper>
             </Container>
-            <Grid container spacing='40px' mt={5} justifyContent='space-between'>
+            <Grid container spacing={{ xs: 2, md: 5 }} mt={5} justifyContent='space-between'>
               <Grid item xs={12} md={5.7}>
               {activeStep === 0 && (
                 <DeliveryAddress
-                handleNext={handleNext}
-                handleBack={handleBack}/>
-                
+                  handleNext={handleNext}
+                  handleBack={handleBack}
+                />
               )}
 
               {activeStep === 1 && (

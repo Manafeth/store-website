@@ -114,7 +114,7 @@ const Footer = () => {
                     </ListItem>
                     <ListItem sx={{ p: 0, mb: 1.25, whiteSpace: 'nowrap', textAlign: {xs: 'center', md: 'left'}, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                       <Link href={paths.privacyPolicy}>
-                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', color: 'text.secondary', mr: 3 }}>
+                        <MuiLink sx={{ fontSize: '12px', lineHeight: '16px', color: 'text.secondary' }}>
                         {t('privacyPolicy')}
                         </MuiLink>
                       </Link>

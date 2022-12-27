@@ -38,7 +38,7 @@ const OrderTimeline: FC<Props> = ({ data }) => {
             <TimelineConnector sx={{backgroundColor:'buttons.shippedDarker'}} />
           </TimelineSeparator>
           <TimelineContent>
-            <Grid container spacing='40px'>
+            <Grid container spacing={{ xs: 2, md: 5 }}>
               <Grid item xs={6}>
                 <Typography
                   variant='h6'

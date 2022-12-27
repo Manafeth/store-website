@@ -64,7 +64,7 @@ const PaymentDetail: FC<Props> = ({ handleNext, handleBack }) => {
         name='cardNumber'
         sx={{ mb: 3 }}
       />
-      <Grid container spacing='40px'>
+      <Grid container spacing={{ xs: 2, md: 5 }}>
         <Grid item xs={6}>
           <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             MM/YY
