@@ -174,7 +174,7 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
               )}
             </Box>
           </Box>
-          <Typography variant='h2' component='h1'>
+          <Typography variant='h2' component='h1' sx={{ fontSize: { xs: '16px', md: '24px'} }}>
           {t('sar')} {data.salePrice}
           </Typography>
         </Box>
@@ -185,8 +185,8 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
             <Grid container spacing={{xs: 2, md: 3.75}}>
               {data.checkOutAttributes.map((item) => {
                 return (
-                  <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Grid item xs={6} key={item?.checkOutAttribute?.id} mb={1}>
+                    <Box sx={{ display: 'flex' }}>
                         <Typography variant='h5' component='label' sx={{ color: 'text.secondary', mr: 1 }}>{item?.checkOutAttribute?.name}:</Typography>
                         <Typography variant='h5' component='span' sx={{ fontWeight: 600 }}>{item?.value}</Typography>
                     </Box>
@@ -198,8 +198,8 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
           <Grid container spacing={{xs: 2, md: 3.75}}>
             {data.checkOutAttributes.filter((_, index) => index < 2).map((item) => {
               return (
-                <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid item xs={6} key={item?.checkOutAttribute?.id} mb={1}>
+                  <Box sx={{ display: 'flex' }}>
                       <Typography variant='h5' component='label' sx={{ color: 'text.secondary', mr: 1 }}>{item?.checkOutAttribute?.name}:</Typography>
                       <Typography variant='h5' component='span' sx={{ fontWeight: 600 }}>{item?.value}</Typography>
                   </Box>
@@ -219,8 +219,8 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
         <Grid container spacing={{xs: 2, md: 3.75}}>
           {data.checkOutAttributes.map((item) => {
             return (
-              <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Grid item xs={6} key={item?.checkOutAttribute?.id} mb={1}>
+                <Box sx={{ display: 'flex' }}>
                     <Typography variant='h5' component='label' sx={{ color: 'text.secondary', mr: 1 }}>{item?.checkOutAttribute?.name}:</Typography>
                     <Typography variant='h5' component='span' sx={{ fontWeight: 600 }}>{item?.value}</Typography>
                 </Box>

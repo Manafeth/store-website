@@ -90,7 +90,7 @@ const Checkout = () => {
       <MainLayout>
         <Box component='section'>
           <Container maxWidth={false} sx={{ px: { xs: 2, lg: 7.5 }, mt: 5, maxWidth: 1050 }}>
-          <Container maxWidth={false} sx={{ maxWidth: 800 }}>
+          <Container maxWidth={false} sx={{ maxWidth: 800, mb: 10 }}>
             <Stepper  activeStep={activeStep}>
               {steps.map((step, index) => (
                 <Step key={step.id}>
@@ -108,7 +108,7 @@ const Checkout = () => {
               ))}
             </Stepper>
             </Container>
-            <Grid container spacing={{ xs: 2, md: 5 }} mt={5} justifyContent='space-between'>
+            <Grid container spacing={{ xs: 2, md: 5 }} justifyContent='space-between'>
               <Grid item xs={12} md={5.7}>
               {activeStep === 0 && (
                 <DeliveryAddress
@@ -144,7 +144,7 @@ const Checkout = () => {
                   return(
                   <Box key={item.id}>
                     <CartItem data={item} />
-                    {index < cartData.length -1 && <Divider sx={{mb:1}}/>}
+                    {index < cartData.length -1 && <Divider sx={{my: 2}}/>}
                   </Box>
                 );
               })}
