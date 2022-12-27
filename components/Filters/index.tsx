@@ -1,11 +1,10 @@
-import React, { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
+import React, { ChangeEvent, Dispatch, FC, SetStateAction, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FilterUtils from './components/SerachFilter';
 import MenuItemFilter from './components/MenuItemFilter';
 import CheckboxFilter from './components/CheckboxFilter';
 import ColorFilter from './components/ColorFilter';
-import RadioButtonFilter from './components/RadioButtonFilter';
 import FilterByPrice from './components/PriceFilter';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
@@ -26,9 +25,7 @@ interface Props {
 
 const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, params }) => {
   const {t} = useTranslation('common');
-  const { storeInfo } = useCommon();
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
-    getProducts({generalSearch: ev.target.value, page: 1});
     setParams((prevState) => ({
       ...prevState,
       generalSearch: ev.target.value,
@@ -67,6 +64,11 @@ const Filters: FC<Props> = ({ getProducts, setParams, attributes, categories, pa
   function handleFilterSubmit() {
     getProducts({})
   }
+
+  useEffect(() => {
+    getProducts({generalSearch: params.generalSearch, page: 1});
+  }, [params.generalSearch])
+  
   
   return (
     <>

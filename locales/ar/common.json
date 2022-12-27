@@ -24,7 +24,7 @@
     "saveChanges":"حفظ التغييرات",
     "edit":"تعديل",
     "language":"لغة",
-    "items":"العناصر",
+    "items":"الكمية",
     "optional":"اختياري",
     "next":"التالي",
     "allCategories":"جميع التصنيفات",
@@ -105,7 +105,7 @@
     "paymentDescription":"شكرا لاختيارك تابي ، سنقوم بإعلامك بتحديثات طلبك.",
     "viewOrders":"مشاهدة الطلب",
     "continueShopping":"مواصلة التسوق",
-    "orderBy":"ترتيب حسب",
+    "orderBy":"صنف من خلال",
     "forComplaints": "للشكاوي",
     "followUs": "تابعنا",
     "general": "عام",
@@ -113,5 +113,6 @@
     "viewLess": "عرض أقل",
     "viewMore": "عرض المزيد",
     "currentLocation": "موقعك الحالي",
-    "addToCart": "أضف إلى السلة"
+    "addToCart": "أضف إلى السلة",
+    "noSorting": "بدون تصنيف"
 }

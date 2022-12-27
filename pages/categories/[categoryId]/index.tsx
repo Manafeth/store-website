@@ -103,7 +103,6 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
       productStatus: +ev.target.value,
       page: 1
     }))
-    getProducts({ productStatus: +ev.target.value, page: 1 });
   }
 
   useEffect(() => {
@@ -125,6 +124,11 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
       });
     }
   }, [categoryDetails])
+
+  useEffect(() => {
+    getProducts({ productStatus: params.productStatus, page: 1 });
+  }, [params.productStatus])
+  
   
   return (
     <MainLayout>
@@ -161,6 +165,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
                   select
                   variant='outlined'
                   margin='normal'
+                  label={t('orderBy')}
                   sx={{ mb: 4, width: '141px', fontSize:'14px',
                   '& .MuiSelect-select':{
                     fontSize: '14px',
@@ -169,7 +174,7 @@ const CategoryDetails: NextPage<Props> = ({ categoryData, categoryDetails, banne
                   value={params.productStatus || 0}
                 >
                   <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-                   {t('orderBy')}
+                   {t('noSorting')}
                   </MenuItem>
                   {productStatusMenu.map((item) => {
                     return (
