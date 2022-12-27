@@ -99,7 +99,6 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
       productStatus: +ev.target.value,
       page: 1
     }))
-    getProducts({ productStatus: +ev.target.value, page: 1 });
   }
 
   useEffect(() => {
@@ -121,6 +120,10 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
       });
     }
   }, [productsData])
+
+  useEffect(() => {
+    getProducts({ productStatus: params.productStatus, page: 1 });
+  }, [params.productStatus])
 
   return (
     <MainLayout>
@@ -156,8 +159,8 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
                   id='outlined-basic'
                   select
                   variant='outlined'
-                  label={t('popularity')}
                   margin='normal'
+                  label={t('orderBy')}
                   sx={{ mb: 4, width: '141px', fontSize:'14px',
                   '& .MuiSelect-select':{
                     fontSize: '14px',
@@ -165,7 +168,9 @@ const ProductsPage: NextPage<Props> = ({ productsData, bannerData }) => {
                   onChange={handleSort}
                   value={params.productStatus || 0}
                 >
-                  <MenuItem value={0} disabled />
+                  <MenuItem value={0} sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+                   {t('noSorting')}
+                  </MenuItem>
                   {productStatusMenu.map((item) => {
                     return (
                       <MenuItem value={item.value} key={item.value}>{t(item.label)}</MenuItem>
