@@ -41,7 +41,7 @@ const InvoiceDetails = () => {
             >
               {t('viewInvoice')}
             </Typography>
-            <Grid container spacing='40px'>
+            <Grid container spacing={{ xs: 2, md: 5 }}>
               <Grid item xs={4}>
                 <Typography
                   variant='h5'

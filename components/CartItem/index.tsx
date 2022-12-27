@@ -182,7 +182,7 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
       {data.checkOutAttributes.length > 2 ? (
         <>
           {viewAllCheckoutAttributes ? (
-            <Grid container spacing={3.75}>
+            <Grid container spacing={{xs: 2, md: 3.75}}>
               {data.checkOutAttributes.map((item) => {
                 return (
                   <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
@@ -195,7 +195,7 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
               })}
             </Grid>
           ) : (
-          <Grid container spacing={3.75}>
+          <Grid container spacing={{xs: 2, md: 3.75}}>
             {data.checkOutAttributes.filter((_, index) => index < 2).map((item) => {
               return (
                 <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>
@@ -216,7 +216,7 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
           </Box>
         </>
       ) : (
-        <Grid container spacing={3.75}>
+        <Grid container spacing={{xs: 2, md: 3.75}}>
           {data.checkOutAttributes.map((item) => {
             return (
               <Grid item xs={12} sm={6} key={item?.checkOutAttribute?.id} mb={1}>

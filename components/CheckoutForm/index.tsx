@@ -26,7 +26,7 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
       {t('checkOut')}
       </Typography>
 
-      <Grid container spacing='40px' sx={{ mb: 3 }}>
+      <Grid container spacing={{xs: 2, md: 5}} sx={{ mb: 3 }}>
         <Grid item xs={6}>
           <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             First Name
@@ -65,7 +65,7 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
         name='address'
         sx={{ mb: 3 }}
       />
-      <Grid container spacing='40px' sx={{ mb: 3 }}>
+      <Grid container spacing={{xs: 2, md: 5}} sx={{ mb: 3 }}>
         <Grid item xs={6}>
           <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             Postal Code
@@ -90,7 +90,7 @@ const CheckoutForm: FC<Props> = ({ handleNext }) => {
           />
         </Grid>
       </Grid>
-      <Grid container spacing='40px' sx={{ mb: 3 }}>
+      <Grid container spacing={{xs: 2, md: 5}} sx={{ mb: 3 }}>
         <Grid item xs={6}>
           <Box component='label' sx={{ color: 'primary.dark', fontWeight: '500' }}>
             Province/State

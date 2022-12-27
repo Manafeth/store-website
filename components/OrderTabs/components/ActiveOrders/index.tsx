@@ -42,7 +42,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
           alignItems: 'center',
           padding: '10px',
           gap: '10px',
-          width: '400px',
+          maxWidth: '400px',
           height: '47px',
           backgroundColor: 'grey.1600',
           justifyContent: 'space-between',
@@ -68,7 +68,7 @@ const ActiveOrders: FC<Props> = ({ data }) => {
       <Typography variant='h2' sx={{ mb: 2, fontWeight: '600' }}>
       {CT('sar')} {data.total}
       </Typography>
-      <Divider sx={{ mb: 2, width:'400px' }} />
+      <Divider sx={{ mb: 2, maxWidth:'400px' }} />
     </Box>
   );
 };

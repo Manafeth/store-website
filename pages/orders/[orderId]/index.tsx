@@ -73,7 +73,7 @@ const OrderDetails = () => {
               >
                 {t('inovice')} {orderData.invoiceId}
               </Typography>
-              <Grid container spacing='40px'>
+              <Grid container spacing={{xs: 2, md: 5}}>
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
@@ -103,7 +103,7 @@ const OrderDetails = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid container spacing='40px'>
+              <Grid container spacing={{xs: 2, md: 5}}>
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
@@ -132,7 +132,7 @@ const OrderDetails = () => {
                   />
                 </Grid>
               </Grid>
-              <Grid container spacing='40px'>
+              <Grid container spacing={{xs: 2, md: 5}}>
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
@@ -164,7 +164,7 @@ const OrderDetails = () => {
                 </Grid>
               </Grid>
               <Divider sx={{ width: '70%', mb: 4 }} />
-              <Grid container spacing='40px'>
+              <Grid container spacing={{xs: 2, md: 5}}>
                 <Grid item xs={6}>
                   <Typography
                     variant='h5'
@@ -190,7 +190,7 @@ const OrderDetails = () => {
                  {t('payConfirmPayment')}
                 </LoadingButton>
               )}
-              <Divider sx={{ width: '70%', mb: 4, mt: 4 }} />
+              <Divider sx={{ width: '70%', mb: 2, mt: 4 }} />
             </Grid>
             {!isInActive && (orderData.providerType === 2 && orderData.providerCategory === 3) && orderData.transactionStatus !== 2 && (
               <Grid item xs={12} md={6} sx={{ borderLeft: '1px solid #E7E7E7' }}>
@@ -213,7 +213,7 @@ const OrderDetails = () => {
           
           <Typography
             variant='h5'
-            sx={{ fontWeight: '600', mb: 2,fontFamily: lang === 'en' ? 'Urbanist' : '' }}
+            sx={{ fontWeight: '600', my: 2,fontFamily: lang === 'en' ? 'Urbanist' : '' }}
           >
             {t('orderTimeline')}
           </Typography>

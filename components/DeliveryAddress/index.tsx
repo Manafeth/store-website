@@ -51,7 +51,7 @@ const DeliveryAddress: FC<Props> = ({ handleNext, handleBack, loading }) => {
     >
       <>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 5 }}>
-        <Typography variant='h1' component='h1'>
+        <Typography variant='h1' component='h1' sx={{ fontSize: { xs: '24px', md: '32px' } }}>
           {COT('deliveryAddress')}
         </Typography>
         <Button

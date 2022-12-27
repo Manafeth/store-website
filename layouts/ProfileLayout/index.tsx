@@ -14,7 +14,7 @@ const SettingLayout: FC<Props> = ({ children }) => {
     <AuthComponent>
       <Box sx={{mt:5}}>
         <Container maxWidth={false} sx={{ maxWidth: 1050 }}>
-          <Grid container spacing="40px">
+          <Grid container spacing={{ xs: 2, md: 5 }}>
             <Grid item xs={12} md={6}>
              <SideMenu />
             </Grid>
