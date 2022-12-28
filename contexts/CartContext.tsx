@@ -212,15 +212,13 @@ export const CartModalProvider: FC<Props> = ({ children }) => {
 
   async function createPayment(data: PaymentData) {
     setPaymentStatus(LOADING)
+    var windowReference = window.open();
     try {
       const response = await createPaymentGateway(data);
       const result = response.data.data
       if ([1, 2, 4].includes(result.category)) {
-        const link = document.createElement("a")
-        link.href = result.result
-        link.target = "_blank"
-        link.click()
-        document.removeChild(link)
+        if (windowReference)
+          windowReference.location = result.result;
       }
       setPaymentRes(result.result.directPaymentAuthorizeV4ResponseMessage)
       sendAlert(response.data?.message, SUCCESS);
