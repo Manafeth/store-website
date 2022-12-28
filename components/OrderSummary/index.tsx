@@ -13,7 +13,7 @@ const OrderSummary = () => {
 
   const { cartData } = useCart();
   const result = cartData.reduce((total, currentValue) => total = total + (currentValue.total || 0), 0);
-  const subTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.subTotal || 0), 0);
+  const subTotal = result - (result  * 0.15);
   const checkoutAttributsTotal = cartData.reduce((total, currentValue) => total = total + (currentValue.checkoutAttributsTotal || 0), 0);
 
   return (
@@ -45,6 +45,20 @@ const OrderSummary = () => {
         </Typography>
         <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
           {CT('sar')} {checkoutAttributsTotal}
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          mb: 3,
+          justifyContent: 'space-between'
+        }}
+      >
+        <Typography variant='h5' component='h1' sx={{ color: 'text.secondary' }}>
+          {CAT('vat')}
+        </Typography>
+        <Typography variant='h5' component='h1' sx={{ fontWeight: '700' }}>
+          15%
         </Typography>
       </Box>
       <Box

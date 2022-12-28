@@ -2,7 +2,8 @@
     "myBag":"My bag",
     "continueShopping":"Continue shopping",
     "continueToPayment":"Continue to payment",
-    "subTotal":"Subtotal",
+    "subTotal":"Total without VAT",
     "checkoutAttributsTotal":"Checkout Attributes Total",
-    "total":"Total"
+    "total":"Total",
+    "vat": "VAT"
 }

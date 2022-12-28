@@ -174,7 +174,7 @@ const CartItem: FC<Props> = ({data, isDrawerItem}) => {
               )}
             </Box>
           </Box>
-          <Typography variant='h2' component='h1' sx={{ fontSize: { xs: '16px', md: '24px'} }}>
+          <Typography variant='h2' component='h1' sx={{ fontSize: { xs: '16px', md: '18px'} }}>
           {t('sar')} {data.salePrice}
           </Typography>
         </Box>
