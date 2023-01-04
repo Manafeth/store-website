@@ -1,0 +1,24 @@
+{
+    "locales": ["en", "ar"],
+    "defaultLocale": "en",
+    "pages": {
+      "*": ["common", "cart", "auth"],
+      "/": ["heroSection"],
+      "/wishList": ["settings"],
+      "/termsOfUse": ["settings", "terms"],
+      "/products": ["heroSection"],
+      "/products/[productId]": ["settings"],
+      "/privacyPolicy": ["settings", "terms", "privacy"],
+      "/orders": ["settings"],
+      "/orders/[orderId]": ["settings", "checkout"],
+      "/invoice/[invoiceId]": ["settings", "checkout"],
+      "/checkout": ["settings", "checkout"],
+      "/categories": ["heroSection"],
+      "/categories/[categoryId]": ["heroSection"],
+      "/notificationsSettings": ["settings"],
+      "/addressManagment": ["settings"],
+      "/accountSettings": ["settings"],
+      "/contactUs": ["settings", "contact"],
+      "/404": ["settings"]
+    }
+}

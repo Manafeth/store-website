@@ -1,0 +1,9 @@
+{
+    "myBag":"My bag",
+    "continueShopping":"Continue shopping",
+    "continueToPayment":"Continue to payment",
+    "subTotal":"Total without VAT",
+    "checkoutAttributsTotal":"Checkout Attributes Total",
+    "total":"Total",
+    "vat": "VAT"
+}
